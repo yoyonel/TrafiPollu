@@ -1,5 +1,3 @@
-__author__ = 'latty'
-
 from PyQt4.QtCore import SIGNAL
 #
 from signalsmanager_actions import ISignalsManagerActionConnect
@@ -12,11 +10,19 @@ class ISignalsManager(ISignalsManagerActionConnect,
                       ISignalsManagerActionDisconnect,
                       ISignalsManagerActionStart,
                       ISignalsManagerActionStop):
-    """
 
     """
 
-    def add(self, qobject, signal_signature, slot, s_group="all", b_connect_signal=True):
+    """
+
+    def add(
+        self,
+        qobject,
+        signal_signature,
+        slot,
+        s_group="all",
+        b_connect_signal=True
+    ):
         """
         Generic version to add a Qt signal into our manager
 
@@ -89,12 +95,11 @@ class ISignalsManager(ISignalsManagerActionConnect,
         return return_slot
 
 
-###################################################################################################
+##########################################################################
 
 
-class SignalsManager:
-    def __init__(self):
-        pass
-
+# class SignalsManager:
+#     def __init__(self):
+#         pass
 
 SignalsManager = ISignalsManager
