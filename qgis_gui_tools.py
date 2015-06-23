@@ -41,9 +41,11 @@ def push_state_tool_edit(_s, _name_in_setting, _action):
     :return:
     """
     if _action.isChecked():
-        _s.setValue("interactive_map_tracking_plugin/" + _name_in_setting, "true")
+        _s.setValue(
+            "interactive_map_tracking_plugin/" + _name_in_setting, "true")
     else:
-        _s.setValue("interactive_map_tracking_plugin/" + _name_in_setting, "false")
+        _s.setValue(
+            "interactive_map_tracking_plugin/" + _name_in_setting, "false")
 
 
 def pop_state_tool_edit(_s, _name_in_setting, _action):
