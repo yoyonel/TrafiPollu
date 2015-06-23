@@ -13,6 +13,8 @@ SELECT
   e_s.edge_id,
   lane.lane_side,
   lane.lane_position,
+  lane.lane_direction,
+  lane.lane_ordinality,
   ST_AsEWKB(lane.lane_center_axis) AS lane_center_axis
 FROM
   test.edges_selected AS e_s

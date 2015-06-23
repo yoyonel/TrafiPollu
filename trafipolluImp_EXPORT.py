@@ -1,10 +1,12 @@
 __author__ = 'latty'
 
+import os
+
 import pyxb
+
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 import trafipolluImp_PYXB as module_pyxb_parser
 
-import os
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #
 infilename_for_symuvia = qgis_plugins_directory + '/' + "project_empty_from_symunet" + "_xsd_" + "2_04" + ".xml"
@@ -181,7 +183,7 @@ class trafipolluImp_EXPORT(object):
             self.update_SYMUVIA()
             #
             b_add_trafics = False
-            if self.module_topo.list_pyxb_symutroncons:
+            if self.module_topo.dict_pyxb_symutroncons:
                 self.symu_ROOT.RESEAUX.RESEAU[0].TRONCONS = self.symu_ROOT_RESEAU_TRONCONS
                 b_add_trafics = True
             if self.list_symu_connexions != []:
@@ -301,8 +303,9 @@ class trafipolluImp_EXPORT(object):
         # print 'TRAFICS - self.list_troncons: ', self.list_troncons
         # sym_TRAFICS.append(export_TRAFIC(self.list_symu_troncons, self.list_symu_connexions, str_path_to_child))
         sym_TRAFICS.append(
-            # export_TRAFIC(self.module_topo.list_pyxb_symutroncons, self.list_symu_connexions, str_path_to_child)
-            export_TRAFIC(self.module_topo.list_pyxb_symutroncons.values(), self.list_symu_connexions, str_path_to_child)
+            # export_TRAFIC(self.module_topo.dict_pyxb_symutroncons, self.list_symu_connexions, str_path_to_child)
+            export_TRAFIC(self.module_topo.dict_pyxb_symutroncons.values(), self.list_symu_connexions,
+                          str_path_to_child)
         )
         return sym_TRAFICS
 
@@ -389,6 +392,7 @@ class trafipolluImp_EXPORT(object):
         :return:
         """
         str_path_to_child = pyxbDecorator.get_path(*args)
+
         list_mouvement_autorise = []
 
         # CAF - IN
@@ -405,6 +409,7 @@ class trafipolluImp_EXPORT(object):
                 sym_MOUVEMENT_AUTORISE.MOUVEMENT_SORTIES = self.export_MOUVEMENT_SORTIES(str_path_to_child)
                 #
                 list_mouvement_autorise.append(sym_MOUVEMENT_AUTORISE)
+
                 # [TOPO] - Link between TRONCON & CAF
                 sym_troncon.id_eltaval = self.get_CAF().id
         return list_mouvement_autorise
@@ -522,11 +527,12 @@ class trafipolluImp_EXPORT(object):
 
         """
         # TODO: construction TOPO ici !
+        print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
         self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
 
         sym_TRONCONS = pyxbDecorator.get_instance(*args)
-        # for pyxb_symuTRONCON in self.module_topo.list_pyxb_symutroncons:
-        for pyxb_symuTRONCON in self.module_topo.list_pyxb_symutroncons.values():
+        # for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons:
+        for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
             sym_TRONCONS.append(pyxb_symuTRONCON)
         #
         return sym_TRONCONS

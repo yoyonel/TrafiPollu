@@ -17,18 +17,39 @@ class trafipolluImp_SQL(object):
         """
 
         """
-        self.__mapCanvas = iface.mapCanvas()
+        self._map_canvas = iface.mapCanvas()
         #
         self.dict_edges = dict_edges
         self.dict_lanes = dict_lanes
         self.dict_nodes = dict_nodes
         #
-        self.__dict_sql_methods = {
+        self._dict_sql_methods = {
             'update_table_edges_from_qgis': self._update_tables_from_qgis,
-            'dump_informations_from_edges': self.__request_for_edges,
-            'dump_sides_from_edges': self.__request_for_lanes,
-            'dump_informations_from_nodes': self.__request_for_nodes,
+            #
+            'dump_informations_from_edges': self._request_for_edges,
+            'dump_sides_from_edges': self._request_for_lanes,
+            'dump_informations_from_nodes': self._request_for_nodes,
         }
+
+        self._dict_params_server = {
+            #
+            'IGN': {
+                'host': "172.16.3.50",
+                'port': "5432",
+                'user': "streetgen",
+                'password': "streetgen",
+            },
+            #
+            'LOCAL': {
+                'host': "localhost",
+                'port': "5433",
+                'user': "postgres",
+                'password': "postgres"
+            }
+        }
+        #
+        self._name_server = 'IGN'
+        # self.__name_server = 'LOCAL'
 
     @staticmethod
     def _update_tables_from_qgis(*args, **kwargs):
@@ -49,12 +70,13 @@ class trafipolluImp_SQL(object):
             except:
                 pass
 
-    def execute_SQL_commands(self, sqlFile, sql_choice_combobox):
+    def build_sql_parameters_with_map_extent(self):
         """
 
         :return:
         """
-        mapCanvas = self.__mapCanvas
+
+        mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
         # get the list points from the current extent (from QGIS MapCanvas)
         list_points_from_mapcanvas = imt_tools.construct_listpoints_from_extent(mapCanvas_extent)
@@ -86,40 +108,30 @@ class trafipolluImp_SQL(object):
         # print "* extent_src_crs.postgisSrid: ", extent_src_crs.postgisSrid()
         # print ""
 
-        dict_params_server = {
-            'IGN': {
-                'host': "172.16.3.50",
-                'port': "5432",
-                'user': "streetgen",
-                'password': "streetgen",
-            },
-            'LOCAL': {
-                'host': "localhost",
-                'port': "5433",
-                'user': "postgres",
-                'password': "postgres"
-            }
-        }
-        connection = psycopg2.connect(database="bdtopo_topological",
-                                      dbname="street_gen_3",
-                                      # **dict_params_server['LOCAL'])
-                                      **dict_params_server['IGN'])
+        return dict_parameters
+
+    def execute_sql_commands(self, sql_file, id_sql_method):
+        """
+
+        :return:
+        """
+
+        dict_parameters = self.build_sql_parameters_with_map_extent()
+
+        connection = psycopg2.connect(
+            dbname="street_gen_3",
+            database="bdtopo_topological",
+            **self._dict_params_server[self._name_server]
+        )
 
         # cursor = connection.cursor()
         # cursor = connection.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
         cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-        # sql_filename = imt_tools.get_itemData(self.__dlg.combobox_sql_scripts)
-        # fd = open(sql_filename)
-        # sqlFile = fd.read()
-        # fd.close()
-        # sql_choice_combobox = imt_tools.get_itemText(self.__dlg.combobox_sql_scripts)
-        # self.__dlg.plainTextEdit_sql_script.setPlainText(sqlFile)
-
-        sql_method = self.__dict_sql_methods[sql_choice_combobox]
+        sql_method = self._dict_sql_methods[id_sql_method]
 
         # all SQL commands (split on ';')
-        sqlCommands = sqlFile.split(';')
+        sqlCommands = sql_file.split(';')
 
         # Execute every command from the input file
         for command in sqlCommands:
@@ -139,10 +151,11 @@ class trafipolluImp_SQL(object):
                     sql_method(connection=connection, cursor=cursor)
             except psycopg2.OperationalError, msg:
                 print "Command skipped: ", msg
+        #
         cursor.close()
         connection.close()
 
-    def __request_for_edges(self, **kwargs):
+    def _request_for_edges(self, **kwargs):
         """
 
         :param kwargs:
@@ -163,7 +176,7 @@ class trafipolluImp_SQL(object):
                 # tpi_DUMP.dump_for_edges(objects_from_sql_request, self.dict_edges)
                 self.dict_edges.update(tpi_DUMP.dump_for_edges(objects_from_sql_request))
 
-    def __request_for_nodes(self, **kwargs):
+    def _request_for_nodes(self, **kwargs):
         """
 
         :param kwargs:
@@ -184,7 +197,7 @@ class trafipolluImp_SQL(object):
                 # construct TOPO here
                 # tpi_DUMP.build_topo_for_nodes(self.dict_nodes, self.dict_edges, self.dict_lanes)
 
-    def __request_for_lanes(self, **kwargs):
+    def _request_for_lanes(self, **kwargs):
         """
 
         :param objects_from_sql_request:

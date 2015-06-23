@@ -46,9 +46,9 @@ class TrafiPolluImp(object):
         self.signals_manager.add_clicked(self.dlg.tf_clear, self.slot_clear, "GUI")
         #
         self.signals_manager.add(self.dlg.combobox_sql_scripts,
-                                  "currentIndexChanged (int)",
-                                  self.slot_currentIndexChanged_SQL,
-                                  "GUI")
+                                 "currentIndexChanged (int)",
+                                 self.slot_currentIndexChanged_SQL,
+                                 "GUI")
 
     def _clear_(self):
         """
@@ -97,7 +97,7 @@ class TrafiPolluImp(object):
 
         :return:
         """
-        self.module_SQL.execute_SQL_commands(sqlFile, sql_choice_combobox)
+        self.module_SQL.execute_sql_commands(sqlFile, sql_choice_combobox)
 
     def slot_refreshSqlScriptList(self):
         """

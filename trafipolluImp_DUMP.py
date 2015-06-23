@@ -11,12 +11,13 @@ import imt_tools
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANESIDE_OUTCOMING = imt_tools.CreateNamedOnGlobals(
     'NAMEDTUPLE_LANESIDE_OUTCOMING',
     [
         'lane_side',
-        'oncoming'
+        'lane_direction'
     ]
 )
 
@@ -124,19 +125,26 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         lane_center_axis = object_from_sql_request['lane_center_axis']
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
         dict_lanes[edge_id].setdefault('lane_center_axis', []).append(lane_center_axis)
-        oncoming = edges_is_same_orientation(
-            dict_edges[edge_id]['np_amont_to_aval'],
-            compute_direction_linestring(lane_center_axis)
-        )
+
+        # oncoming = edges_is_same_orientation(
+        # dict_edges[edge_id]['np_amont_to_aval'],
+        #     compute_direction_linestring(lane_center_axis)
+        # )
+        lane_direction = object_from_sql_request['lane_direction']
+
         # update list sides for (grouping)
-        position = object_from_sql_request['lane_position']
-        lambda_generate_id = lambdas_generate_id[lane_side]
-        nb_lanes_by_2 = nb_lanes >> 1
-        # test si l'entier est pair ?
-        # revient a tester le bit de point faible
-        even = not(nb_lanes & 1)
-        id_in_list = lambda_generate_id(nb_lanes_by_2, position, even)
-        dict_lanes[edge_id]['id_list'][id_in_list] = NT_LANESIDE_OUTCOMING(lane_side, oncoming)
+        # position = object_from_sql_request['lane_position']
+        # lambda_generate_id = lambdas_generate_id[lane_side]
+        # nb_lanes_by_2 = nb_lanes >> 1
+        # # test si l'entier est pair ?
+        # # revient a tester le bit de point faible
+        # even = not(nb_lanes & 1)
+        # id_in_list = lambda_generate_id(nb_lanes_by_2, position, even)
+        id_in_list = object_from_sql_request['lane_ordinality'] - 1
+
+        # dict_lanes[edge_id]['id_list'][id_in_list] = NT_LANESIDE_OUTCOMING(lane_side, oncoming)
+        dict_lanes[edge_id]['id_list'][id_in_list] = NT_LANESIDE_OUTCOMING(lane_side, lane_direction)
+
         #
         # print 'position: ', position
         # print 'id: ', id
@@ -148,11 +156,13 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
     map(lambda x, y: dict_grouped_lanes.__setitem__(x, {'grouped_lanes': y}),
         dict_lanes,
         [
-            [sum(1 for i in g) for edge_id, g in
-             groupby(dict_lanes[edge_id]['id_list'], lambda x: x.oncoming)]
+            [
+                sum(1 for i in g) for edge_id, g in
+                groupby(dict_lanes[edge_id]['id_list'], lambda x: x.lane_direction)
+            ]
             for edge_id in dict_lanes
         ])
-    # print "** self._dict_grouped_lanes:", dict_grouped_lanes
+    print "** self._dict_grouped_lanes:", dict_grouped_lanes
 
     # update dict_edges with lanes grouped informations
     # map(lambda x, y: dict_edges.__setitem__(y,
