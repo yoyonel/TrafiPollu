@@ -57,6 +57,7 @@ SOURCES = \
 	trafipolluImp_SQL.py \
 	trafipolluImp_DUMP.py \
 	trafipolluImp_EXPORT.py \
+	trafipolluImp_EXPORT_CONNEXIONS.py \
 	trafipolluImp_PYXB.py \
 	trafipolluImp_TOPO.py \
 	decorators.py
@@ -83,6 +84,7 @@ PY_FILES = \
 	trafipolluImp_SQL.py \
 	trafipolluImp_DUMP.py \
 	trafipolluImp_EXPORT.py \
+	trafipolluImp_EXPORT_CONNEXIONS.py \
 	trafipolluImp_PYXB.py \
 	trafipolluImp_TOPO.py \
 	decorators.py \

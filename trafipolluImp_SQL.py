@@ -29,6 +29,7 @@ class trafipolluImp_SQL(object):
             'dump_informations_from_edges': self._request_for_edges,
             'dump_sides_from_edges': self._request_for_lanes,
             'dump_informations_from_nodes': self._request_for_nodes,
+            'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
         }
 
         self._dict_params_server = {
@@ -173,7 +174,6 @@ class trafipolluImp_SQL(object):
             except:
                 pass
             else:
-                # tpi_DUMP.dump_for_edges(objects_from_sql_request, self.dict_edges)
                 self.dict_edges.update(tpi_DUMP.dump_for_edges(objects_from_sql_request))
 
     def _request_for_nodes(self, **kwargs):
@@ -194,8 +194,28 @@ class trafipolluImp_SQL(object):
                 pass
             else:
                 self.dict_nodes.update(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
-                # construct TOPO here
-                # tpi_DUMP.build_topo_for_nodes(self.dict_nodes, self.dict_edges, self.dict_lanes)
+
+    def _request_for_interconnexions(self, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+        """
+        try:
+            cursor = kwargs['cursor']
+        except:
+            pass
+        else:
+            try:
+                print "[SQL] - try to cursor.fetchall ..."
+                objects_from_sql_request = cursor.fetchall()
+            except:
+                pass
+            else:
+                # ajouter les informations d'interconnexions au noeud
+                dict_interconnexions = tpi_DUMP.dump_for_interconnexions(objects_from_sql_request)
+                for node_id, interconnexions in dict_interconnexions.iteritems():
+                    self.dict_nodes[node_id].update({'interconnexions': interconnexions})
 
     def _request_for_lanes(self, **kwargs):
         """

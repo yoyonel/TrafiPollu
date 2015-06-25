@@ -1,9 +1,13 @@
 __author__ = 'atty'
 
+import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
+
+
 class trafipolluImp_PYXB(object):
     """
 
     """
+
     def __init__(self, parser):
         """
 
@@ -15,7 +19,7 @@ class trafipolluImp_PYXB(object):
         ctd_root_node = parser.ROOT_SYMUBRUIT
         self.dump_pyxb_tree(('ROOT_SYMUBRUIT', ctd_root_node))
         # for k, v in self.pyxb_tree_ctd.iteritems():
-        #     print "path: %s -> CTD: %s" % (k, v)
+        # print "path: %s -> CTD: %s" % (k, v)
 
     def dump_pyxb_tree(self, tuple_Name_CTD, prefix=""):
         """
@@ -82,3 +86,77 @@ class trafipolluImp_PYXB(object):
             return CTD(**kwargs)
         except:
             return None
+
+
+pyxb_parser = trafipolluImp_PYXB(symuvia_parser)
+
+
+class pyxbDecorator(object):
+    """
+
+    """
+
+    def __init__(self, parser_pyxb):
+        self.parser_pyxb = parser_pyxb
+        self.pyxb_result = ()
+
+    def __call__(self, f):
+        """
+        """
+
+        def wrapped_f(*args):
+            """
+            """
+            if self.pyxb_result == ():
+                str_child_name = f.__name__[7:]  # 7 = len('export_')
+                # print 'pyxbDecorator - str_child_name: ', str_child_name
+                str_parent = args[-1]
+                if type(str_parent) is tuple:
+                    str_parent = str_parent[0]
+                str_path_to_child = str_parent + '/' + str_child_name
+                sym_NODE = self.parser_pyxb.get_instance(str_path_to_child)
+                # print 'pyxbDecorator - str_parent: ', str_parent
+                # print 'pyxbDecorator - str_path_to_child: ', str_path_to_child
+                # print 'sym_NODE: ', sym_NODE
+                self.pyxb_result = (str_child_name, sym_NODE)
+            # print 'pyxbDecorator - before update, args: ', args
+            # update de la liste des arguments
+            # on rajoute en fin de liste le tuple : (nom du child, instance de l'element)
+            args = list(args)
+            args.append(self.pyxb_result)
+            # print 'pyxbDecorator - after update, args: ', args
+            args = iter(args)
+            return f(*args)
+
+        return wrapped_f
+
+    @staticmethod
+    def get_path(*args):
+        """
+        """
+        return args[-2] + '/' + args[-1][0]
+
+    @staticmethod
+    def get_instance(*args, **kwargs):
+        """
+        """
+        return pyxb_parser.get_instance(pyxbDecorator.get_path(*args), **kwargs)
+
+    @staticmethod
+    def get_path_instance(*args, **kwargs):
+        """
+        """
+        # print 'get_path_instance - args: ', args
+        str_parent = args[-2]
+        str_child = args[-1][0]
+        str_path_to_child = str_parent + '/' + str_child
+        sym_NODE = pyxb_parser.get_instance(str_path_to_child, **kwargs)
+        # print 'str_parent :', str_parent
+        # print 'str_child :', str_child
+        return str_path_to_child, sym_NODE
+
+    @staticmethod
+    def get_path_from_args(*args):
+        """
+        """
+        return args[-1]
