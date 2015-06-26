@@ -26,13 +26,23 @@ class TrafiPolluImp(object):
         self.__dict_lanes = {}
         self.__dict_nodes = {}
         #
-        self.module_SQL = trafipolluImp_SQL(iface, self.__dict_edges, self.__dict_lanes, self.__dict_nodes)
-        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(self.__dict_edges, self.__dict_lanes, self.__dict_nodes)
-        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(
+        self.module_SQL = trafipolluImp_SQL(
+            iface,
             self.__dict_edges,
             self.__dict_lanes,
-            self.__dict_nodes,
-            self.module_topo)
+            self.__dict_nodes
+        )
+        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(
+            self.__dict_edges,
+            self.__dict_lanes,
+            self.__dict_nodes
+        )
+        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(
+            dict_edges=self.__dict_edges,
+            dict_lanes=self.__dict_lanes,
+            dict_nodes=self.__dict_nodes,
+            module_topo=self.module_topo
+        )
 
     def _init_signals_(self):
         """

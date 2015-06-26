@@ -14,6 +14,7 @@ from trafipolluImp_PYXB import symuvia_parser
 from trafipolluImp_PYXB import pyxbDecorator
 
 from trafipolluImp_EXPORT_CONNEXIONS import trafipolluImp_EXPORT_CONNEXIONS
+from trafipolluImp_EXPORT_TRAFICS import trafipolluImp_EXPORT_TRAFICS
 
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #
@@ -21,29 +22,23 @@ infilename_for_symuvia = qgis_plugins_directory + '/' + "project_empty_from_symu
 outfilename_for_symuvia = qgis_plugins_directory + '/' + "export_from_sg3_to_symuvia" + "_xsd_" + "2_04" + ".xml"
 
 
-class trafipolluImp_EXPORT(trafipolluImp_EXPORT_CONNEXIONS):
+class trafipolluImp_EXPORT(
+    trafipolluImp_EXPORT_CONNEXIONS,
+    trafipolluImp_EXPORT_TRAFICS
+):
     """
 
     """
-    def __init__(self, dict_edges, dict_lanes, dict_nodes, module_topo, infilename=infilename_for_symuvia):
+    # def __init__(self, dict_edges, dict_lanes, dict_nodes, module_topo, infilename=infilename_for_symuvia):
+    def __init__(self, **kwargs):
         """
 
         """
-        self.dict_edges = dict_edges
-        self.dict_lanes = dict_lanes
-        self.dict_nodes = dict_nodes
-        #
         self.pyxb_parser = pyxb_parser
-        #
-        self.cursor_symuvia = {
-            'sg3_node': None,
-            'node_id': 0,
-            'sym_CAF': None,
-            'id_amont_troncon_lane': ""
-        }
         #
         self.list_symu_connexions = []
         #
+        infilename = kwargs.setdefault('infilename_for_symuvia', infilename_for_symuvia)
         print "trafipolluImp_EXPORT - Open file: ", infilename, "..."
         xml = open(infilename).read()
         self.symu_ROOT = symuvia_parser.CreateFromDocument(xml)
@@ -53,38 +48,10 @@ class trafipolluImp_EXPORT(trafipolluImp_EXPORT_CONNEXIONS):
         self.symu_ROOT_RESEAU_CONNEXIONS = None
         self.symu_ROOT_TRAFICS = None
 
-        self.module_topo = module_topo
+        self.module_topo = kwargs['module_topo']
 
-        super(trafipolluImp_EXPORT, self).__init__(
-            dict_edges,
-            dict_lanes,
-            dict_nodes,
-            module_topo,
-            self.list_symu_connexions
-        )
-
-    def select_node(self, node_id):
-        """
-
-        :param node_id:
-        """
-        self.cursor_symuvia['node_id'] = node_id
-        self.cursor_symuvia['sg3_node'] = self.dict_nodes[node_id]
-
-    def select_CAF(self, sym_CAF):
-        """
-
-        :param sym_CAF:
-        :return:
-        """
-        self.cursor_symuvia['sym_CAF'] = sym_CAF
-
-    def get_CAF(self):
-        """
-
-        :return:
-        """
-        return self.cursor_symuvia['sym_CAF']
+        kwargs.update({'list_symu_connexions': self.list_symu_connexions})
+        super(trafipolluImp_EXPORT, self).__init__(**kwargs)
 
     def update_TRONCONS(self):
         """
@@ -114,7 +81,7 @@ class trafipolluImp_EXPORT(trafipolluImp_EXPORT_CONNEXIONS):
         """
         print "Update SYMUVIA ..."
         self.update_TRONCONS()
-        # self.update_CONNEXIONS()
+        self.update_CONNEXIONS()
         self.update_TRAFICS()
         #
         print "Update SYMUVIA [DONE]"
@@ -179,87 +146,6 @@ class trafipolluImp_EXPORT(trafipolluImp_EXPORT_CONNEXIONS):
         print "Write in file: ", outfilename, "[DONE]"
 
     @pyxbDecorator(pyxb_parser)
-    def export_TRAFICS(self, *args):
-        """
-
-        :param args:
-        :return:
-
-        """
-        @pyxbDecorator(pyxb_parser)
-        def export_TRAFIC(list_troncons, list_connexions, *args):
-            #
-            @pyxbDecorator(pyxb_parser)
-            def export_TRONCONS(list_troncons, *args):
-                @pyxbDecorator(pyxb_parser)
-                def export_TRONCON(arg_sym_TRONCON, *args):
-                    sym_TRONCON = pyxbDecorator.get_instance(*args)
-                    # print 'TRAFIC/TRONCONS/TRONCON - sym_TRONCON: ', sym_TRONCON
-                    self.update_pyxb_node(
-                        sym_TRONCON,
-                        id=arg_sym_TRONCON.id,
-                        agressivite='true'
-                    )
-                    return sym_TRONCON
-                #
-                # print 'TRAFIC/TRONCONS - args: ', args1
-                str_path_to_child, sym_TRONCONS = pyxbDecorator.get_path_instance(*args)
-                # print 'TRAFIC/TRONCONS - sym_TRONCONS: ', sym_TRONCONS
-                # print 'TRAFIC/TRONCONS - str_path_to_child: ', str_path_to_child
-                # print 'TRAFIC/TRONCONS - list_troncons: ', list_troncons
-                for sym_TRONCON in list_troncons:
-                    sym_TRONCONS.append(export_TRONCON(sym_TRONCON, str_path_to_child))
-                return sym_TRONCONS
-            #
-            @pyxbDecorator(pyxb_parser)
-            def export_CONNEXIONS_INTERNES(list_connexions, *args):
-                @pyxbDecorator(pyxb_parser)
-                def export_CONNEXION_INTERNE(sym_CAF, *args):
-                    sym_CONNEXION_INTERNE = pyxbDecorator.get_instance(*args)
-                    # print 'TRAFIC/TRONCONS/TRONCON - sym_TRONCON: ', sym_TRONCON
-                    self.update_pyxb_node(
-                        sym_CONNEXION_INTERNE,
-                        id=sym_CAF.id
-                    )
-                    return sym_CONNEXION_INTERNE
-                str_path_to_child, sym_CONNEXIONS_INTERNES = pyxbDecorator.get_path_instance(*args)
-                for sym_CAF in list_connexions:
-                    sym_CONNEXIONS_INTERNES.append(export_CONNEXION_INTERNE(sym_CAF, str_path_to_child))
-                return sym_CONNEXIONS_INTERNES
-            #
-            # print 'TRAFIC - args: ', args
-            str_path_to_child, sym_TRAFIC = pyxbDecorator.get_path_instance(*args)
-            # print 'TRAFIC - str_path_to_child: ', str_path_to_child
-            # print 'TRAFIC - sym_TRAFIC: ', sym_TRAFIC
-            self.update_pyxb_node(
-                sym_TRAFIC,
-                id="trafID",
-                accbornee="true",
-                coeffrelax="0.55"
-            )
-            if list_troncons != []:
-                sym_TRAFIC.TRONCONS = export_TRONCONS(list_troncons, str_path_to_child)
-            if list_connexions != []:
-                # print 'list_connexions: ', list_connexions
-                sym_TRAFIC.CONNEXIONS_INTERNES = export_CONNEXIONS_INTERNES(list_connexions, str_path_to_child)
-            return sym_TRAFIC
-
-        str_path_to_child, sym_TRAFICS = pyxbDecorator.get_path_instance(*args)
-        # print 'TRAFICS - str_path_to_child: ', str_path_to_child
-        # print 'TRAFICS - sym_TRAFICS: ', sym_TRAFICS
-        # print 'TRAFICS - self.list_troncons: ', self.list_troncons
-        # sym_TRAFICS.append(export_TRAFIC(self.list_symu_troncons, self.list_symu_connexions, str_path_to_child))
-        sym_TRAFICS.append(
-            # export_TRAFIC(self.module_topo.dict_pyxb_symutroncons, self.list_symu_connexions, str_path_to_child)
-            export_TRAFIC(
-                self.module_topo.dict_pyxb_symutroncons.values(),
-                self.list_symu_connexions,
-                str_path_to_child
-            )
-        )
-        return sym_TRAFICS
-
-    @pyxbDecorator(pyxb_parser)
     def export_TRONCONS(self, *args):
         """
 
@@ -271,28 +157,11 @@ class trafipolluImp_EXPORT(trafipolluImp_EXPORT_CONNEXIONS):
         self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
 
         sym_TRONCONS = pyxbDecorator.get_instance(*args)
-        # for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons:
-        for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
-            sym_TRONCONS.append(pyxb_symuTRONCON)
+        try:
+            for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
+                print 'type(pyxb_symuTRONCON): ', type(pyxb_symuTRONCON)
+                sym_TRONCONS.append(pyxb_symuTRONCON)
+        except pyxb.ValidationError as e:
+            print(e.details())
         #
         return sym_TRONCONS
-
-    @staticmethod
-    def update_pyxb_node(node, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-        """
-        # print 'update_pyxb_node - kwargs: ', kwargs
-        for k, v in kwargs.iteritems():
-            node._setAttribute(k, v)
-
-    @staticmethod
-    def build_id_for_CAF(node_id):
-        """
-
-        :param node_id:
-        :return:
-        """
-        return 'CAF_' + str(node_id)

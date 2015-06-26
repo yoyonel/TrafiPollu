@@ -8,11 +8,6 @@ from shapely.wkb import loads as sp_wkb_loads
 import imt_tools
 
 
-
-
-
-
-
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -91,15 +86,26 @@ def dump_for_interconnexions(objects_from_sql_request):
         #
         node_id = object_from_sql_request['str_node_id']
         #
-        dict_interconnexions.setdefault(node_id, []).append(
-            {
-                'edge_id1': object_from_sql_request['str_edge_id1'],
-                'edge_id2': object_from_sql_request['str_edge_id2'],
-                'lane_ordinality1': object_from_sql_request['str_lane_ordinality1'],
-                'lane_ordinality2': object_from_sql_request['str_lane_ordinality2'],
-                'np_interconnexion': np.asarray(object_from_sql_request['wkb_interconnexion'])
-            }
+        dict_sql_request = {
+            'edge_id1': object_from_sql_request['str_edge_id1'],
+            'edge_id2': object_from_sql_request['str_edge_id2'],
+            'lane_ordinality1': object_from_sql_request['str_lane_ordinality1'],
+            'lane_ordinality2': object_from_sql_request['str_lane_ordinality2'],
+            'wkb_interconnexion': object_from_sql_request['wkb_interconnexion']
+        }
+        #
+        dict_sql_request.update(load_geom_buffers_with_shapely(dict_sql_request))
+        #
+        dict_sql_request.update(
+            load_arrays_with_numpely(
+                dict_sql_request,
+                [
+                    ('wkb_interconnexion', 'np_interconnexion')
+                ]
+            )
         )
+        dict_interconnexions.setdefault(node_id, []).append(dict_sql_request)
+        #
         nb_total_interconnexion += 1
     #
     print '# dump_for_interconnexions - nb CAF added: ', len(dict_interconnexions.keys())
@@ -164,37 +170,50 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
 
 def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
+    """
+
+    :param objects_from_sql_request:
+    :param dict_edges:
+    :param dict_lanes:
+    :return:
+
+    """
     # get sides informations for each 'edge'/'troncon'
     for object_from_sql_request in objects_from_sql_request:
-        #
-        edge_id = object_from_sql_request['edge_id']
+        # retieve informations/values from the SQL request
+        sg3_edge_id = object_from_sql_request['edge_id']
         lane_side = object_from_sql_request['lane_side']
+        lane_direction = object_from_sql_request['lane_direction']
+        lane_center_axis = object_from_sql_request['lane_center_axis']
+        sg3_lane_id = object_from_sql_request['lane_ordinality']
         #
-        nb_lanes = dict_edges[edge_id]['ui_lane_number']
-        dict_lanes.setdefault(edge_id,
+        nb_lanes = dict_edges[sg3_edge_id]['ui_lane_number']
+        dict_lanes.setdefault(sg3_edge_id,
                               {
                                   'informations': [None] * nb_lanes,  # pre-allocate size for list,
                                   'sg3_to_symuvia': [None] * nb_lanes,  # pre-allocate size for list,
-                                  'sg3_to_python': {}
+                                  'sg3_to_python': {},
+                                  'lane_center_axis': [None] * nb_lanes,
                               })
         #
-        lane_center_axis = object_from_sql_request['lane_center_axis']
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
-        dict_lanes[edge_id].setdefault('lane_center_axis', []).append(lane_center_axis)
 
-        lane_direction = object_from_sql_request['lane_direction']
-
-        # id_in_list = object_from_sql_request['lane_ordinality'] - 1
-        id_in_list = generate_id_for_lane(object_from_sql_request, nb_lanes)
+        python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)
         # print 'edge_id: %s id_in_list: %s' % (edge_id, id_in_list)
 
-        dict_lanes[edge_id]['informations'][id_in_list] = NT_LANE_INFORMATIONS(
+        # Attention ici !
+        # on places les lanes dans des listes pythons (avec ordre python) et non dans l'ordre fournit par la requete
+        # SQL (ce qui etait avant) et/ou l'ordre fournit par SG3 (ordonality id)
+        dict_lanes[sg3_edge_id]['lane_center_axis'][python_lane_id] = lane_center_axis
+
+        dict_lanes[sg3_edge_id]['informations'][python_lane_id] = NT_LANE_INFORMATIONS(
             lane_side,
             lane_direction,
             nb_lanes
         )
 
-        dict_lanes[edge_id]['sg3_to_python'].update({object_from_sql_request['lane_ordinality']: id_in_list})
+        dict_lanes[sg3_edge_id]['sg3_to_python'][sg3_lane_id] = python_lane_id
+
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
         # find a key with value
 
@@ -208,16 +227,16 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         dict_lanes,
         [
             [
-                sum(1 for i in g) for edge_id, g in
-                groupby(dict_lanes[edge_id]['informations'], lambda x: x.lane_direction)
+                sum(1 for i in g) for sg3_edge_id, g in
+                groupby(dict_lanes[sg3_edge_id]['informations'], lambda x: x.lane_direction)
             ]
-            for edge_id in dict_lanes
+            for sg3_edge_id in dict_lanes
         ])
     print "** self._dict_grouped_lanes:", dict_grouped_lanes
 
     # update dict_edges with lanes grouped informations
-    for edge_id, grouped_lanes in dict_grouped_lanes.items():
-        dict_edges[edge_id].update(grouped_lanes)
+    for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
+        dict_edges[sg3_edge_id].update(grouped_lanes)
         # print "** self._dict_edges: ", dict_edges
 
 
