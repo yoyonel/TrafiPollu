@@ -8,12 +8,14 @@ from shapely.wkb import loads as sp_wkb_loads
 import imt_tools
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
     [
         'lane_side',
         'lane_direction',
+        'lane_center_axis',
         'nb_lanes'
     ]
 )
@@ -188,12 +190,12 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         sg3_lane_id = object_from_sql_request['lane_ordinality']
         #
         nb_lanes = dict_edges[sg3_edge_id]['ui_lane_number']
+        #
         dict_lanes.setdefault(sg3_edge_id,
                               {
                                   'informations': [None] * nb_lanes,  # pre-allocate size for list,
                                   'sg3_to_symuvia': [None] * nb_lanes,  # pre-allocate size for list,
-                                  'sg3_to_python': {},
-                                  'lane_center_axis': [None] * nb_lanes,
+                                  'sg3_to_python': [None] * (nb_lanes + 1),  # pre-allocate size for list,
                               })
         #
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
@@ -201,18 +203,19 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)
         # print 'edge_id: %s id_in_list: %s' % (edge_id, id_in_list)
 
+        sg3_lane = dict_lanes[sg3_edge_id]
+
         # Attention ici !
         # on places les lanes dans des listes pythons (avec ordre python) et non dans l'ordre fournit par la requete
         # SQL (ce qui etait avant) et/ou l'ordre fournit par SG3 (ordonality id)
-        dict_lanes[sg3_edge_id]['lane_center_axis'][python_lane_id] = lane_center_axis
-
-        dict_lanes[sg3_edge_id]['informations'][python_lane_id] = NT_LANE_INFORMATIONS(
+        sg3_lane['informations'][python_lane_id] = NT_LANE_INFORMATIONS(
             lane_side,
             lane_direction,
-            nb_lanes
+            lane_center_axis,
+            nb_lanes,
         )
 
-        dict_lanes[sg3_edge_id]['sg3_to_python'][sg3_lane_id] = python_lane_id
+        sg3_lane['sg3_to_python'][sg3_lane_id] = python_lane_id
 
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
         # find a key with value
@@ -238,26 +241,3 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
     for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
         dict_edges[sg3_edge_id].update(grouped_lanes)
         # print "** self._dict_edges: ", dict_edges
-
-
-def edges_is_same_orientation(edge0, edge1):
-    """
-
-    :param edge0:
-    :param edge1:
-    :return:
-
-    """
-    return edge0.dot(edge1) > 0
-
-
-def compute_direction_linestring(np_linestring):
-    """
-
-    :param linestring:
-    :return:
-
-    """
-    amont = np_linestring[0]
-    aval = np_linestring[-1]
-    return amont - aval

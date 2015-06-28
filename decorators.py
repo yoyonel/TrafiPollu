@@ -23,7 +23,7 @@ class DecoratorsForQt(object):
             :param func:
             :return:
             """
-            _s_bool_ = ['False', 'True']
+            _str_bool_ = ['False', 'True']
 
             def _save_state(dlg, dict_qobj):
                 """
@@ -37,7 +37,7 @@ class DecoratorsForQt(object):
                     #
                     s = QSettings()
                     s.beginGroup(group_name)
-                    s.setValue(key, _s_bool_[qobj_sender.isChecked()])
+                    s.setValue(key, _str_bool_[qobj_sender.isChecked()])
                     s.endGroup()
                     #
                     # print "* dictionnary: " + str(dict_qobj)
@@ -57,4 +57,3 @@ class DecoratorsForQt(object):
             return wrapper
 
         return decorated_qt_slots
-

@@ -1,7 +1,6 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
-
 import psycopg2
 import psycopg2.extras
 
@@ -49,8 +48,8 @@ class trafipolluImp_SQL(object):
             }
         }
         #
-        self._name_server = 'IGN'
-        # self.__name_server = 'LOCAL'
+        # self._name_server = 'IGN'
+        self._name_server = 'LOCAL'
 
     @staticmethod
     def _update_tables_from_qgis(*args, **kwargs):
