@@ -25,6 +25,7 @@ __author__ = 'latty'
 
 from qgis.core import *
 import os
+import collections
 # from socket import gethostbyname, gethostname
 import socket
 
@@ -625,7 +626,10 @@ def create_named_tuple_from_names(name, list_names):
 # url: http://stackoverflow.com/questions/16377215/how-to-pickle-a-namedtuple-instance-correctly
 # url: https://docs.python.org/2/library/functions.html#globals
 def CreateNamedTupleOnGlobals(*args):
-    import collections
     namedtupleClass = collections.namedtuple(*args)
     globals()[namedtupleClass.__name__] = namedtupleClass
     return namedtupleClass
+
+
+def CreateNamedTuple(*args):
+    return collections.namedtuple(*args)
