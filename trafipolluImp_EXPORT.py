@@ -153,15 +153,14 @@ class trafipolluImp_EXPORT(
 
         """
         # TODO: construction TOPO ici !
-        print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
+        # print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
         self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
 
         sym_TRONCONS = pyxbDecorator.get_instance(*args)
         try:
             for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
-                print 'type(pyxb_symuTRONCON): ', type(pyxb_symuTRONCON)
                 sym_TRONCONS.append(pyxb_symuTRONCON)
         except pyxb.ValidationError as e:
-            print(e.details())
+            print("Exception in 'export_TRONCONS' - details: ", e.details())
         #
         return sym_TRONCONS
