@@ -9,6 +9,7 @@ import imt_tools
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -46,7 +47,7 @@ def dump_for_edges(objects_from_sql_request):
             )
         )
 
-        dict_sql_request['np_amont_to_aval'] = dict_sql_request['np_aval'] - dict_sql_request['np_amont']
+        # dict_sql_request['np_amont_to_aval'] = dict_sql_request['np_aval'] - dict_sql_request['np_amont']
 
         edge_id = object_from_sql_request['str_edge_id']
         dict_edges.update({edge_id: dict_sql_request})
@@ -83,6 +84,7 @@ def dump_for_interconnexions(objects_from_sql_request):
 
     """
     dict_interconnexions = {}
+    dict_set_id_edges = {}
     nb_total_interconnexion = 0
     for object_from_sql_request in objects_from_sql_request:
         #
@@ -106,14 +108,21 @@ def dump_for_interconnexions(objects_from_sql_request):
                 ]
             )
         )
+        #
         dict_interconnexions.setdefault(node_id, []).append(dict_sql_request)
         #
+        dict_set_id_edges.setdefault(node_id, set()).add(dict_sql_request['edge_id1'])
+        dict_set_id_edges[node_id].add(dict_sql_request['edge_id2'])
+        #
         nb_total_interconnexion += 1
+
     #
-    print '# dump_for_interconnexions - nb CAF added: ', len(dict_interconnexions.keys())
+    print '# dump_for_interconnexions - nb interconnexions added: ', len(dict_interconnexions.keys())
     print '# dump_for_interconnexions - total interconnexions added: ', nb_total_interconnexion
+    print ''
+    print '# dump_for_interconnexions - dict_set_id_edges: ', dict_set_id_edges
     #
-    return dict_interconnexions
+    return dict_interconnexions, dict_set_id_edges
 
 
 def load_arrays_with_numpely(dict_sql_request, list_params_to_convert):

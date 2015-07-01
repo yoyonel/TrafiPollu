@@ -58,6 +58,10 @@ class trafipolluImp_EXPORT(
 
         :return:
         """
+        # TODO: construction TOPO ici !
+        # print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
+        self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
+        #
         self.symu_ROOT_RESEAU_TRONCONS = self.export_TRONCONS('RESEAU')
 
     def update_CONNEXIONS(self):
@@ -65,6 +69,9 @@ class trafipolluImp_EXPORT(
 
         :return:
         """
+        # TODO: construction TOPO ici !
+        self.module_topo.build_topo_for_interconnexions()
+        #
         self.symu_ROOT_RESEAU_CONNEXIONS = self.export_CONNEXIONS('RESEAU')
 
     def update_TRAFICS(self):
@@ -152,10 +159,6 @@ class trafipolluImp_EXPORT(
         :return:
 
         """
-        # TODO: construction TOPO ici !
-        # print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
-        self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
-
         sym_TRONCONS = pyxbDecorator.get_instance(*args)
         try:
             for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():

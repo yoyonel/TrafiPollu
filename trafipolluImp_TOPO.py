@@ -22,8 +22,8 @@ NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
 NT_INTERCONNEXION = CreateNamedTupleOnGlobals(
     'NT_INTERCONNEXION',
     [
-        'amont',
-        'aval',
+        'lane_amont',
+        'lane_aval',
         'geometry'
     ]
 )
@@ -237,7 +237,7 @@ class trafipolluImp_TOPO(object):
             list_1D_coefficients = list(set(list_1D_coefficients))
             # sort the list of 1D coefficients
             list_1D_coefficients.sort()
-            print '-> after set & sort - list_1D_coefficients: {}'.format(list_1D_coefficients)
+            # print '-> after set & sort - list_1D_coefficients: {}'.format(list_1D_coefficients)
             # ##########################
         except Exception, e:
             print 'Exception: ', e
@@ -325,23 +325,29 @@ class trafipolluImp_TOPO(object):
         cur_id_lane = 0
         lane_direction = self.dict_lanes[sg3_edge_id]['informations'][cur_id_lane].lane_direction
         NT_LANE_INFORMATIONS = CreateNamedTuple('NT_LANE_INFORMATIONS', ['amont', 'aval'])
-        b_need_to_inverse_lane = lane_direction != (coef_amont == list_amont_aval_proj[0])
-        print ('b_need_to_inverse_lane: {}\n'
-               'lane_direction: {}\n'
-               'coef_amont == list_amont_aval_proj[0]: {}').format(
-            b_need_to_inverse_lane,
-            lane_direction,
-            coef_amont == list_amont_aval_proj[0])
 
+        # b_need_to_inverse_lane = lane_direction != (coef_amont == list_amont_aval_proj[0])
+        # print ('b_need_to_inverse_lane: {}\n'
+        # 'lane_direction: {}\n'
+        #        'coef_amont == list_amont_aval_proj[0]: {}').format(
+        #     b_need_to_inverse_lane,
+        #     lane_direction,
+        #     coef_amont == list_amont_aval_proj[0])
+
+        b_same_direction_for_amont_aval_and_edge = coef_amont == list_amont_aval_proj[0]
         if lane_direction:
+            #
             lane_geometry = sg3_edge_center_axis[::-1]
-            if coef_amont == list_amont_aval_proj[0]:
+            #
+            if b_same_direction_for_amont_aval_and_edge:
                 lane_oriented = NT_LANE_INFORMATIONS(sg3_edge['np_aval'], sg3_edge['np_amont'])
             else:
                 lane_oriented = NT_LANE_INFORMATIONS(sg3_edge['np_amont'], sg3_edge['np_aval'])
         else:
+            #
             lane_geometry = sg3_edge_center_axis
-            if coef_amont == list_amont_aval_proj[0]:
+            #
+            if b_same_direction_for_amont_aval_and_edge:
                 lane_oriented = NT_LANE_INFORMATIONS(sg3_edge['np_amont'], sg3_edge['np_aval'])
             else:
                 lane_oriented = NT_LANE_INFORMATIONS(sg3_edge['np_aval'], sg3_edge['np_amont'])
@@ -455,14 +461,24 @@ class trafipolluImp_TOPO(object):
         for node_id, dict_values in self.dict_nodes.iteritems():
             try:
                 list_interconnexions = dict_values['interconnexions']
+                set_id_edges = dict_values['set_id_edges']
             except Exception, e:
-                pass
+                print 'build_topo_for_interconnexions - Exception: ', e
             else:
+                str_type_connexion = ''
+                nb_edges_connected_on_this_node = len(set_id_edges)
+                if nb_edges_connected_on_this_node == 2:
+                    str_type_connexion = 'REPARTITEUR'
+                elif nb_edges_connected_on_this_node > 2:
+                    # potentiellement un CAF
+                    str_type_connexion = 'CAF'
+
                 # pour chaque interconnexion
                 for interconnexion in list_interconnexions:
-                    sg3_lane_geometry = interconnexion['np_interconnexion']
+                    sg3_interconnexion_geometry = interconnexion['np_interconnexion']
                     symu_troncons = []
                     symu_troncons_lane_id = []
+                    # parcours sur les elements interconnectes (connexion entre 2 elements)
                     for python_id in range(2):
                         str_sg3_id = str(python_id + 1)
                         #
@@ -475,32 +491,43 @@ class trafipolluImp_TOPO(object):
                             sg3_group_lanes_start_id = symu_lane.start_id_lane
                         except Exception, e:
                             print '# build_topo_for_nodes - Find Symu_Troncon - EXCEPTION: ', e
-                            # remove this node
-                            list_remove_nodes.append(node_id)
                         else:
                             #
                             symu_troncons.append(symu_lane.symu_troncon)
                             symu_troncons_lane_id.append(python_lane_id - sg3_group_lanes_start_id)
 
-                    self.dict_nodes[node_id].setdefault('CAF_interconnexions', {})
-                    CAF_interconnexions = self.dict_nodes[node_id]['CAF_interconnexions']
-
-                    #
-                    # INVERSION du sens amont/aval
-                    #
-                    id_amont, id_aval = 1, 0
-                    # build key with id symu_troncon and the id lane
-                    key_for_troncon_lane = symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
-                    CAF_interconnexions.setdefault(key_for_troncon_lane, []).append(
-                        NT_INTERCONNEXION(
-                            amont=NT_LANE_SYMU(symu_troncons[id_amont], symu_troncons_lane_id[id_amont]),
-                            aval=NT_LANE_SYMU(symu_troncons[id_aval], symu_troncons_lane_id[id_aval]),
-                            # url: http://docs.scipy.org/doc/numpy/reference/generated/numpy.flipud.html
-                            geometry=np.flipud(sg3_lane_geometry)
+                    if len(symu_troncons) == 2:
+                        self.dict_nodes[node_id].setdefault(
+                            'sg3_to_symuvia',
+                            {
+                                'type_connexion': str_type_connexion,
+                                'list_interconnexions': {}
+                            }
                         )
-                    )
 
-                nodes_removed = [self.dict_nodes.pop(k, None) for k in list_remove_nodes]
-                if nodes_removed:
-                    print '# build_topo_for_nodes - nb nodes_removed: ', len(nodes_removed)
-                    print '# build_topo_for_nodes - nb nodes : ', len(self.dict_nodes.keys())
+                        list_interconnexions = self.dict_nodes[node_id]['sg3_to_symuvia']['list_interconnexions']
+
+                        #
+                        # INVERSION du sens amont/aval
+                        #
+                        id_amont, id_aval = 1, 0
+                        #
+                        # build key with id symu_troncon and the id lane
+                        key_for_interconnexion = symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
+                        list_interconnexions.setdefault(key_for_interconnexion, []).append(
+                            NT_INTERCONNEXION(
+                                lane_amont=NT_LANE_SYMU(symu_troncons[id_amont], symu_troncons_lane_id[id_amont]),
+                                lane_aval=NT_LANE_SYMU(symu_troncons[id_aval], symu_troncons_lane_id[id_aval]),
+                                # url: http://docs.scipy.org/doc/numpy/reference/generated/numpy.flipud.html
+                                geometry=np.flipud(sg3_interconnexion_geometry)
+                            )
+                        )
+            # si il n'y a aucune interconnexion associee au node
+            if not self.dict_nodes[node_id]['sg3_to_symuvia']['list_interconnexions']:
+                # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
+                self.dict_nodes.pop(node_id)
+                #
+                list_remove_nodes.append(node_id)
+
+        if list_remove_nodes:
+            print '# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes)

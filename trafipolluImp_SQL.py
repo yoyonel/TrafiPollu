@@ -214,9 +214,14 @@ class trafipolluImp_SQL(object):
                 pass
             else:
                 # ajouter les informations d'interconnexions au noeud
-                dict_interconnexions = tpi_DUMP.dump_for_interconnexions(objects_from_sql_request)
+                (dict_interconnexions, dict_set_id_edges) = tpi_DUMP.dump_for_interconnexions(objects_from_sql_request)
                 for node_id, interconnexions in dict_interconnexions.iteritems():
-                    self.dict_nodes[node_id].update({'interconnexions': interconnexions})
+                    self.dict_nodes[node_id].update(
+                        {
+                            'interconnexions': interconnexions,
+                            'set_id_edges': dict_set_id_edges[node_id]
+                        }
+                    )
 
     def _request_for_lanes(self, **kwargs):
         """

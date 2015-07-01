@@ -151,8 +151,10 @@ class pyxbDecorator(object):
         str_child = args[-1][0]
         str_path_to_child = str_parent + '/' + str_child
         sym_NODE = pyxb_parser.get_instance(str_path_to_child, **kwargs)
+
         # print 'str_parent :', str_parent
         # print 'str_child :', str_child
+
         return str_path_to_child, sym_NODE
 
     @staticmethod
