@@ -32,7 +32,6 @@ import socket
 from PyQt4.QtCore import QSettings
 from PyQt4.QtGui import QAbstractButton, QCheckBox
 
-
 try:
     import cPickle as pickle
 except:
@@ -115,7 +114,6 @@ def get_os_username():
 
 
 def get_timestamp():
-    import time
     # Python time
     return time.time()
 
@@ -633,3 +631,43 @@ def CreateNamedTupleOnGlobals(*args):
 
 def CreateNamedTuple(*args):
     return collections.namedtuple(*args)
+
+
+class Timer:
+    def __enter__(self):
+        self.start = time.clock()
+        return self
+
+    def __exit__(self, *args):
+        self.end = time.clock()
+        self.interval = self.end - self.start
+
+
+class timerDecorator(object):
+    """
+
+    """
+
+    def __init__(self, prefix="-> TIMER\n\t", postfix=""):
+        self.__prefix = prefix
+        self.__postfix = postfix
+
+    def __call__(self, f):
+        """
+        """
+
+        def wrapped_f(*args):
+            """
+            """
+            try:
+                with Timer() as t:
+                    return f(*args)
+            finally:
+                print '%s%s took %.03f sec.%s' % (
+                    self.__prefix,
+                    f.__name__,
+                    t.interval,
+                    self.__postfix
+                )
+
+        return wrapped_f

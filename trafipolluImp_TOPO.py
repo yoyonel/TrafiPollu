@@ -8,6 +8,7 @@ import pyxb
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 from imt_tools import CreateNamedTupleOnGlobals
 from imt_tools import CreateNamedTuple
+from imt_tools import timerDecorator
 
 
 NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
@@ -71,6 +72,7 @@ class trafipolluImp_TOPO(object):
         self.dict_pyxb_symutroncons = {}
         self.dict_pyxb_symuconnexions = {}
 
+    @timerDecorator()
     def convert_sg3_edges_to_pyxb_symutroncons(self):
         """
 
@@ -178,7 +180,7 @@ class trafipolluImp_TOPO(object):
             try:
                 for nb_lanes in grouped_lanes:
                     #
-                    id_function = b_several_groups + (b_several_groups & nb_lanes > 1)
+                    id_function = b_several_groups + (b_several_groups & (nb_lanes > 1))
                     #
                     pyxb_symuTRONCON = self._build_pyxb_symutroncon_from_sg3_edge_lane(
                         sg3_edge, sg3_edge_id, sg3_lane_id, nb_lanes,
@@ -216,6 +218,7 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
+        # print '### build_pyxb_symuTroncon_with_lanes_in_groups ...'
         #
         sg3_edge_id = kwargs['sg3_edge_id']
         cur_id_lane = kwargs['sg3_lane_id']
@@ -225,8 +228,8 @@ class trafipolluImp_TOPO(object):
         # transfert lane_center_axis for each lane in 2D
         list_1D_coefficients = []
         # on parcourt le groupe de 'voies' dans le meme sens
-        for id_lane in range(cur_id_lane, cur_id_lane + nb_lanes):
-            try:
+        try:
+            for id_lane in range(cur_id_lane, cur_id_lane + nb_lanes):
                 # get the linestring of the current lane
                 sg3_lane_geometry = self.dict_lanes[sg3_edge_id]['informations'][id_lane].lane_center_axis
                 shp_lane = LineString(sg3_lane_geometry)
@@ -243,24 +246,21 @@ class trafipolluImp_TOPO(object):
                 # print ''
                 # print('id_lane: {}\n'
                 # '- sg3_lane: {}\n'
-                #       '- shp_lane: {}\n'
+                # '- shp_lane: {}\n'
                 #       '- linestring_proj_1D_coefficients: {}\n').format(id_lane, sg3_lane, shp_lane.wkt,
                 #                                                         linestring_proj_1D_coefficients)
-            except Exception, e:
-                print 'Exception: ', e
-
-        try:
-            # ##########################
-            # clean the list of 1D coefficients
-            # remove duplicate values
-            # url: http://stackoverflow.com/questions/480214/how-do-you-remove-duplicates-from-a-list-in-python-whilst-preserving-order
-            list_1D_coefficients = list(set(list_1D_coefficients))
-            # sort the list of 1D coefficients
-            list_1D_coefficients.sort()
-            # print '-> after set & sort - list_1D_coefficients: {}'.format(list_1D_coefficients)
-            # ##########################
         except Exception, e:
             print 'Exception: ', e
+
+        # ##########################
+        # clean the list of 1D coefficients
+        # remove duplicate values
+        # url: http://stackoverflow.com/questions/480214/how-do-you-remove-duplicates-from-a-list-in-python-whilst-preserving-order
+        list_1D_coefficients = list(set(list_1D_coefficients))
+        # sort the list of 1D coefficients
+        list_1D_coefficients.sort()
+        # print '-> after set & sort - list_1D_coefficients: {}'.format(list_1D_coefficients)
+        # ##########################
 
         # Compute the troncon center axis
         # Methode: on utilise les coefficients 1D de chaque voie qui va composer ce troncon.
@@ -318,6 +318,8 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
+        # print '### build_pyxb_symuTroncon_with_lanes_in_one_group ...'
+        #
         sg3_edge = kwargs['sg3_edge']
         sg3_edge_id = kwargs['sg3_edge_id']
         #
@@ -406,6 +408,8 @@ class trafipolluImp_TOPO(object):
         :param nb_lanes:
         :return:
         """
+        # print '### build_pyxb_symuTroncon_with_lane_in_groups ...'
+        #
         sg3_edge_id = kwargs['sg3_edge_id']
         cur_id_lane = kwargs['sg3_lane_id']
         #
@@ -467,6 +471,7 @@ class trafipolluImp_TOPO(object):
         [pyxb_symuPOINTS_INTERNES.append(pyxb.BIND(coordonnees=[x[0], x[1]])) for x in list_points]
         return pyxb_symuPOINTS_INTERNES
 
+    @timerDecorator()
     def build_topo_for_interconnexions(self):
         """
 
@@ -479,7 +484,10 @@ class trafipolluImp_TOPO(object):
                 list_interconnexions = dict_values['interconnexions']
                 set_id_edges = dict_values['set_id_edges']
             except Exception, e:
+                print ''
+                print 'node_id: ', node_id
                 print 'build_topo_for_interconnexions - Exception: ', e
+                # print 'dict_values: ', dict_values
             else:
                 str_type_connexion = ''
                 nb_edges_connected_on_this_node = len(set_id_edges)
@@ -543,12 +551,13 @@ class trafipolluImp_TOPO(object):
                                 geometry=sg3_interconnexion_geometry
                             )
                         )
-            # si il n'y a aucune interconnexion associee au node
-            if not self.dict_nodes[node_id]['sg3_to_symuvia']['list_interconnexions']:
-                # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
-                self.dict_nodes.pop(node_id)
-                #
-                list_remove_nodes.append(node_id)
+
+                # si il n'y a aucune interconnexion associee au node
+                if not self.dict_nodes[node_id]['sg3_to_symuvia']['list_interconnexions']:
+                    # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
+                    self.dict_nodes.pop(node_id)
+                    #
+                    list_remove_nodes.append(node_id)
 
         if list_remove_nodes:
             print '# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes)

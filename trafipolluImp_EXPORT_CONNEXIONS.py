@@ -48,18 +48,24 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             'REPARTITEUR': []
         }
         for node_id in self.dict_nodes:
-            type_connexion = self.dict_nodes[node_id]['sg3_to_symuvia']['type_connexion']
-            list_id_nodes_for_CONNEXIONS[type_connexion].append(node_id)
+            try:
+                type_connexion = self.dict_nodes[node_id]['sg3_to_symuvia']['type_connexion']
+            except Exception, e:
+                print 'export_CONNEXIONS - Exception: ', e
+            else:
+                list_id_nodes_for_CONNEXIONS[type_connexion].append(node_id)
 
-        sym_CONNEXIONS.CARREFOURSAFEUX = self.export_CARREFOURSAFEUX(
-            list_id_nodes_for_CONNEXIONS['CAF'],
-            str_path_to_child
-        )
+        if len(list_id_nodes_for_CONNEXIONS['CAF']):
+            sym_CONNEXIONS.CARREFOURSAFEUX = self.export_CARREFOURSAFEUX(
+                list_id_nodes_for_CONNEXIONS['CAF'],
+                str_path_to_child
+            )
 
-        sym_CONNEXIONS.REPARTITEURS = self.export_REPARTITEURS(
-            list_id_nodes_for_CONNEXIONS['REPARTITEUR'],
-            str_path_to_child
-        )
+        if len(list_id_nodes_for_CONNEXIONS['REPARTITEUR']):
+            sym_CONNEXIONS.REPARTITEURS = self.export_REPARTITEURS(
+                list_id_nodes_for_CONNEXIONS['REPARTITEUR'],
+                str_path_to_child
+            )
 
         return sym_CONNEXIONS
 

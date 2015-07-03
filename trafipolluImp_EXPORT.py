@@ -15,6 +15,7 @@ from trafipolluImp_PYXB import pyxbDecorator
 
 from trafipolluImp_EXPORT_CONNEXIONS import trafipolluImp_EXPORT_CONNEXIONS
 from trafipolluImp_EXPORT_TRAFICS import trafipolluImp_EXPORT_TRAFICS
+from imt_tools import timerDecorator
 
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #
@@ -81,6 +82,7 @@ class trafipolluImp_EXPORT(
         """
         self.symu_ROOT_TRAFICS = self.export_TRAFICS('ROOT_SYMUBRUIT')
 
+    @timerDecorator()
     def update_SYMUVIA(self):
         """
 
@@ -93,6 +95,7 @@ class trafipolluImp_EXPORT(
         #
         print "Update SYMUVIA [DONE]"
 
+    @timerDecorator()
     def export(self, update_symu=False, outfilename=outfilename_for_symuvia):
         """
 

@@ -6,6 +6,8 @@ from itertools import groupby
 from shapely.wkb import loads as sp_wkb_loads
 
 import imt_tools
+from imt_tools import timerDecorator
+
 
 
 
@@ -22,6 +24,7 @@ NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
 )
 
 
+@timerDecorator()
 def dump_for_edges(objects_from_sql_request):
     """
 
@@ -57,6 +60,7 @@ def dump_for_edges(objects_from_sql_request):
     return dict_edges
 
 
+@timerDecorator()
 def dump_for_nodes(objects_from_sql_request):
     """
 
@@ -76,6 +80,7 @@ def dump_for_nodes(objects_from_sql_request):
     return dict_nodes
 
 
+@timerDecorator()
 def dump_for_interconnexions(objects_from_sql_request):
     """
 
@@ -86,6 +91,9 @@ def dump_for_interconnexions(objects_from_sql_request):
     dict_interconnexions = {}
     dict_set_id_edges = {}
     nb_total_interconnexion = 0
+
+    # print 'objects_from_sql_request: ', objects_from_sql_request
+
     for object_from_sql_request in objects_from_sql_request:
         #
         node_id = object_from_sql_request['str_node_id']
@@ -120,7 +128,7 @@ def dump_for_interconnexions(objects_from_sql_request):
     print '# dump_for_interconnexions - nb interconnexions added: ', len(dict_interconnexions.keys())
     print '# dump_for_interconnexions - total interconnexions added: ', nb_total_interconnexion
     print ''
-    print '# dump_for_interconnexions - dict_set_id_edges: ', dict_set_id_edges
+    # print '# dump_for_interconnexions - dict_set_id_edges: ', dict_set_id_edges
     #
     return dict_interconnexions, dict_set_id_edges
 
@@ -180,6 +188,7 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
     return lambda_generate_id(nb_lanes_by_2, lane_position, even)
 
 
+@timerDecorator()
 def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
     """
 
