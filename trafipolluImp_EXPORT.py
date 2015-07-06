@@ -54,15 +54,32 @@ class trafipolluImp_EXPORT(
         kwargs.update({'list_symu_connexions': self.list_symu_connexions})
         super(trafipolluImp_EXPORT, self).__init__(**kwargs)
 
+    @timerDecorator()
+    def update_SYMUVIA(self):
+        """
+
+        :return:
+        """
+        # TODO: construction TOPO ici ! un peu merdique car il faut faire attention a l'ordre entre la construction
+        # topologique et l'export (qui a aussi des parties de constructions topologiques, c'est la ou c'est (encore)
+        # foireux). Faudra penser a decomposer tout ca, pour lever la dependance et la contrainte d'ordonnancement !
+        # Ce type de dependance pourra 'bloquer' par exemple le parallellisme (multi-threads computation) !
+
+        self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
+        self.module_topo.build_topo_for_interconnexions()
+        #
+        self.update_TRONCONS()
+        #
+        self.module_topo.build_topo_extrimites()
+        #
+        self.update_CONNEXIONS()
+        self.update_TRAFICS()
+
     def update_TRONCONS(self):
         """
 
         :return:
         """
-        # TODO: construction TOPO ici !
-        # print '****** self.module_topo.convert_sg3_edges_to_pyxb_symutroncons() *****'
-        self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
-        #
         self.symu_ROOT_RESEAU_TRONCONS = self.export_TRONCONS('RESEAU')
 
     def update_CONNEXIONS(self):
@@ -70,9 +87,6 @@ class trafipolluImp_EXPORT(
 
         :return:
         """
-        # TODO: construction TOPO ici !
-        self.module_topo.build_topo_for_interconnexions()
-        #
         self.symu_ROOT_RESEAU_CONNEXIONS = self.export_CONNEXIONS('RESEAU')
 
     def update_TRAFICS(self):
@@ -81,19 +95,6 @@ class trafipolluImp_EXPORT(
         :return:
         """
         self.symu_ROOT_TRAFICS = self.export_TRAFICS('ROOT_SYMUBRUIT')
-
-    @timerDecorator()
-    def update_SYMUVIA(self):
-        """
-
-        :return:
-        """
-        print "Update SYMUVIA ..."
-        self.update_TRONCONS()
-        self.update_CONNEXIONS()
-        self.update_TRAFICS()
-        #
-        print "Update SYMUVIA [DONE]"
 
     @timerDecorator()
     def export(self, update_symu=False, outfilename=outfilename_for_symuvia):

@@ -28,19 +28,21 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         :return:
 
         """
-
         @pyxbDecorator(pyxb_parser)
-        def export_TRAFIC(list_troncons, list_connexions, *args):
+        def export_TRAFIC(
+                list_troncons,
+                list_connexions,
+                list_extrimites,
+                *args
+        ):
             """
 
             """
-
             @pyxbDecorator(pyxb_parser)
             def export_TRONCONS(list_troncons, *args):
                 """
 
                 """
-
                 @pyxbDecorator(pyxb_parser)
                 def export_TRONCON(arg_sym_TRONCON, *args):
                     """
@@ -54,7 +56,6 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                         agressivite='true'
                     )
                     return sym_TRONCON
-
                 #
                 # print 'TRAFIC/TRONCONS - args: ', args1
                 str_path_to_child, sym_TRONCONS = pyxbDecorator.get_path_instance(*args)
@@ -64,14 +65,12 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                 for sym_TRONCON in list_troncons:
                     sym_TRONCONS.append(export_TRONCON(sym_TRONCON, str_path_to_child))
                 return sym_TRONCONS
-
             #
             @pyxbDecorator(pyxb_parser)
             def export_CONNEXIONS_INTERNES(list_connexions, *args):
                 """
 
                 """
-
                 @pyxbDecorator(pyxb_parser)
                 def export_CONNEXION_INTERNE(sym_CAF, *args):
                     """
@@ -85,11 +84,36 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                     )
                     return sym_CONNEXION_INTERNE
 
+                #
                 str_path_to_child, sym_CONNEXIONS_INTERNES = pyxbDecorator.get_path_instance(*args)
                 for sym_CAF in list_connexions:
                     sym_CONNEXIONS_INTERNES.append(export_CONNEXION_INTERNE(sym_CAF, str_path_to_child))
                 return sym_CONNEXIONS_INTERNES
 
+            #
+            @pyxbDecorator(pyxb_parser)
+            def export_EXTREMITES(list_extrimites, *args):
+                """
+
+                """
+
+                @pyxbDecorator(pyxb_parser)
+                def export_EXTREMITE(id_extremite, *args):
+                    """
+
+                    """
+                    sym_EXTREMITE = pyxbDecorator.get_instance(*args)
+                    self.update_pyxb_node(
+                        sym_EXTREMITE,
+                        id=id_extremite
+                    )
+                    return sym_EXTREMITE
+
+                #
+                str_path_to_child, sym_EXTREMITES = pyxbDecorator.get_path_instance(*args)
+                for id_extremite in list_extrimites:
+                    sym_EXTREMITES.append(export_EXTREMITE(id_extremite, str_path_to_child))
+                return sym_EXTREMITES
             #
             # print 'TRAFIC - args: ', args
             str_path_to_child, sym_TRAFIC = pyxbDecorator.get_path_instance(*args)
@@ -104,8 +128,10 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
             if list_troncons != []:
                 sym_TRAFIC.TRONCONS = export_TRONCONS(list_troncons, str_path_to_child)
             if list_connexions != []:
-                # print 'list_connexions: ', list_connexions
                 sym_TRAFIC.CONNEXIONS_INTERNES = export_CONNEXIONS_INTERNES(list_connexions, str_path_to_child)
+            if list_extrimites != ():
+                sym_TRAFIC.EXTREMITES = export_EXTREMITES(list_extrimites, str_path_to_child)
+
             return sym_TRAFIC
 
         str_path_to_child, sym_TRAFICS = pyxbDecorator.get_path_instance(*args)
@@ -113,11 +139,17 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         # print 'TRAFICS - sym_TRAFICS: ', sym_TRAFICS
         # print 'TRAFICS - self.list_troncons: ', self.list_troncons
         # sym_TRAFICS.append(export_TRAFIC(self.list_symu_troncons, self.list_symu_connexions, str_path_to_child))
+        list_extrimites = self.module_topo.dict_extremites['ENTREES']
+        list_extrimites.extend(self.module_topo.dict_extremites['SORTIES'])
+        # print "self.module_topo.dict_extremites['ENTREES']: ", self.module_topo.dict_extremites['ENTREES']
+        # print "self.module_topo.dict_extremites['SORTIES']: ", self.module_topo.dict_extremites['SORTIES']
+        # print "list_extrimites :", list_extrimites
         sym_TRAFICS.append(
             # export_TRAFIC(self.module_topo.dict_pyxb_symutroncons, self.list_symu_connexions, str_path_to_child)
             export_TRAFIC(
                 self.module_topo.dict_pyxb_symutroncons.values(),
                 self.list_symu_connexions,
+                list_extrimites,
                 str_path_to_child
             )
         )

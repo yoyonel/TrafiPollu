@@ -61,7 +61,11 @@ class trafipolluImp_TOPO(object):
         self.dict_nodes = dict_nodes
         #
         self.dict_pyxb_symutroncons = {}
-        self.dict_pyxb_symuconnexions = {}
+        #
+        self.dict_extremites = {
+            'ENTREES': [],
+            'SORTIES': [],
+        }
         #
 
     def clear(self):
@@ -70,7 +74,17 @@ class trafipolluImp_TOPO(object):
         :return:
         """
         self.dict_pyxb_symutroncons = {}
-        self.dict_pyxb_symuconnexions = {}
+
+    @timerDecorator()
+    def build_topo(self):
+        """
+
+        :return:
+        """
+        self.convert_sg3_edges_to_pyxb_symutroncons()
+        self.build_topo_for_interconnexions()
+        #
+        self.build_topo_extrimites()
 
     @timerDecorator()
     def convert_sg3_edges_to_pyxb_symutroncons(self):
@@ -79,7 +93,7 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
-        # self.dict_edges: cle sur les id des edges
+        # self.dict_edges: clee sur les id des edges
         # on parcourt l'ensemble des id des edges disponibles
         for sg3_edge_id in self.dict_edges:
             self.dict_pyxb_symutroncons.update(self.build_pyxb_symutroncon_from_sg3_edge(sg3_edge_id))
@@ -535,12 +549,16 @@ class trafipolluImp_TOPO(object):
                         id_amont, id_aval = 1, 0
                         #
 
+                        # #################################################
+                        # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
+                        ##################################################
                         sg3_interconnexion_geometry = interconnexion['np_interconnexion'][::-1]  # inverse list
                         shp_interconnexion = LineString(sg3_interconnexion_geometry)
                         # print 'shp_interconnexion - nb points: ', len(shp_interconnexion.coords)
                         shp_interconnexion = shp_interconnexion.simplify(0.10, preserve_topology=False)
                         # print 'after simplify -> shp_interconnexion - nb points: ', len(shp_interconnexion.coords)
                         sg3_interconnexion_geometry = np.array(shp_interconnexion)
+                        ##################################################
 
                         # build key with id symu_troncon and the id lane
                         key_for_interconnexion = symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
@@ -552,6 +570,11 @@ class trafipolluImp_TOPO(object):
                             )
                         )
 
+                        # TODO -> [TOPO] : FAKE TOPO pour CONNEXIONS/EXTREMITES
+                        symu_troncons[id_amont].id_eltaval = symu_troncons[id_aval]
+                        symu_troncons[id_aval].id_eltamont = symu_troncons[id_amont]
+
+
                 # si il n'y a aucune interconnexion associee au node
                 if not self.dict_nodes[node_id]['sg3_to_symuvia']['list_interconnexions']:
                     # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
@@ -561,3 +584,39 @@ class trafipolluImp_TOPO(object):
 
         if list_remove_nodes:
             print '# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes)
+
+    @timerDecorator()
+    def build_topo_extrimites(self):
+        """
+
+        :return:
+        """
+        try:
+            for symu_troncon in self.dict_pyxb_symutroncons.values():
+                # AVAL -> SORTIE
+                b_aval_not_connected = symu_troncon.id_eltaval == "-1"
+                if b_aval_not_connected:
+                    id_for_extrimite = self.build_id_for_extremite(symu_troncon, 'S_')
+                    self.dict_extremites['SORTIES'].append(id_for_extrimite)
+                    # update troncon id for aval
+                    # TOPO : Link between TRONCON and EXTREMITE
+                    symu_troncon.id_eltaval = id_for_extrimite
+                # AMONtT -> ENTREE
+                b_amont_not_connected = symu_troncon.id_eltamont == "-1"
+                if b_amont_not_connected:
+                    id_for_extrimite = self.build_id_for_extremite(symu_troncon, 'E_')
+                    self.dict_extremites['ENTREES'].append(id_for_extrimite)
+                    # update troncon id for aval
+                    # TOPO : Link between TRONCON and EXTREMITE
+                    symu_troncon.id_eltamont = id_for_extrimite
+        except Exception, e:
+            print 'build_topo_extrimites - Exception: ', e
+
+    def build_id_for_extremite(self, symu_troncon, prefix=""):
+        """
+
+        :param symu_troncon:
+        :return:
+        """
+        id_extremite = prefix + symu_troncon.id
+        return id_extremite

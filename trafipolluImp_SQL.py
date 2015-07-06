@@ -1,15 +1,12 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
+
 import psycopg2
 import psycopg2.extras
-import logging
 
-import imt_tools
 import trafipolluImp_DUMP as tpi_DUMP
-
-# from logging.handlers import RotatingFileHandler
-from logging import FileHandler
+import imt_tools
 
 
 class trafipolluImp_SQL(object):
@@ -37,55 +34,70 @@ class trafipolluImp_SQL(object):
         }
 
         self._dict_params_server = {
-            #
+            'LOCAL': {
+                'host': "localhost",
+                'port': "5433",
+                'user': "postgres",
+                'password': "postgres"
+            },
             'IGN': {
                 'host': "172.16.3.50",
                 'port': "5432",
                 'user': "streetgen",
                 'password': "streetgen",
             },
-            #
-            'LOCAL': {
-                'host': "localhost",
-                'port': "5433",
-                'user': "postgres",
-                'password': "postgres"
-            }
         }
-        #
-        # self._name_server = 'IGN'
-        self._name_server = 'LOCAL'
+
+        self.connection = None
+        self.cursor = None
+        self.b_connection_to_postgres_server = False
+
+        self.connect_sql_server()
 
         # creation de l'objet logger qui va nous servir a ecrire dans les logs
-        self.logger = logging.getLogger(__name__)
-        self.init_log()
+        self.logger = imt_tools.init_logger(__name__)
 
-    def init_log(self):
+    def __del__(self):
         """
 
         :return:
         """
-        # on met le niveau du logger a DEBUG, comme ca il ecrit tout
-        self.logger.setLevel(logging.DEBUG)
+        self.disconnect_sql_server()
 
-        # creation d'un formateur qui va ajouter le temps, le niveau
-        # de chaque message quand on ecrira un message dans le log
-        formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s')
-        # creation d'un handler qui va rediriger une ecriture du log vers
-        # un fichier en mode 'append', avec 1 backup et une taille max de 1Mo
-        # file_handler = FileHandler('%s.log' % __name__, 'a', 1000000, 1)
-        file_handler = FileHandler('%s.log' % __name__, 'a')
-        # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
-        # cree precedement et on ajoute ce handler au logger
-        file_handler.setLevel(logging.DEBUG)
-        file_handler.setFormatter(formatter)
-        self.logger.addHandler(file_handler)
+    def disconnect_sql_server(self):
+        """
 
-        # creation d'un second handler qui va rediriger chaque ecriture de log
-        # sur la console
-        steam_handler = logging.StreamHandler()
-        steam_handler.setLevel(logging.DEBUG)
-        self.logger.addHandler(steam_handler)
+        :return:
+        """
+        if self.b_connection_to_postgres_server:
+            self.cursor.close()
+            self.connection.close()
+
+    def connect_sql_server(self):
+        """
+
+        :return:
+        """
+        #
+        for name_server in self._dict_params_server:
+            try:
+                self.connection = psycopg2.connect(
+                    dbname="street_gen_3",
+                    database="bdtopo_topological",
+                    **self._dict_params_server[name_server]
+                )
+            except Exception, e:
+                print 'PostGres : problem de connexion -> ', e
+            else:
+                try:
+                    self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                except Exception, e:
+                    print 'PostGres : problem pour recuperer un cursor -> ', e
+                else:
+                    print 'PostGres: connected with %s server' % name_server
+                    self.b_connection_to_postgres_server = True
+                    break
+        return self.b_connection_to_postgres_server
 
     def _update_tables_from_qgis(self, *args, **kwargs):
         """
@@ -147,45 +159,36 @@ class trafipolluImp_SQL(object):
 
         :return:
         """
+        if not self.b_connection_to_postgres_server:
+            self.connect_sql_server()
 
-        dict_parameters = self.build_sql_parameters_with_map_extent()
+        if self.b_connection_to_postgres_server:
+            dict_parameters = self.build_sql_parameters_with_map_extent()
 
-        connection = psycopg2.connect(
-            dbname="street_gen_3",
-            database="bdtopo_topological",
-            **self._dict_params_server[self._name_server]
-        )
+            sql_method = self._dict_sql_methods[id_sql_method]
 
-        # cursor = connection.cursor()
-        # cursor = connection.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
-        cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+            # all SQL commands (split on ';')
+            sqlCommands = sql_file.split(';')
 
-        sql_method = self._dict_sql_methods[id_sql_method]
+            # Execute every command from the input file
+            for command in sqlCommands:
+                # This will skip and report errors
+                # For example, if the tables do not yet exist, this will skip over
+                # the DROP TABLE commands
+                try:
+                    # command = command.format(gPolylineWkt, extent_postgisSrid)
+                    # https://docs.python.org/2/library/string.html#string.Formatter
+                    # todo : look here for more advanced features on string formatter
+                    # command = command.format(**dict_parameters)
 
-        # all SQL commands (split on ';')
-        sqlCommands = sql_file.split(';')
-
-        # Execute every command from the input file
-        for command in sqlCommands:
-            # This will skip and report errors
-            # For example, if the tables do not yet exist, this will skip over
-            # the DROP TABLE commands
-            try:
-                # command = command.format(gPolylineWkt, extent_postgisSrid)
-                # https://docs.python.org/2/library/string.html#string.Formatter
-                # todo : look here for more advanced features on string formatter
-                # command = command.format(**dict_parameters)
-
-                if not command.isspace():
-                    # url: http://initd.org/psycopg/docs/usage.html#query-parameters
-                    # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
-                    cursor.execute(command, dict_parameters)
-                    sql_method(connection=connection, cursor=cursor)
-            except psycopg2.OperationalError, msg:
-                self.logger.warning("Command skipped: %s", msg)
-        #
-        cursor.close()
-        connection.close()
+                    if not command.isspace():
+                        # url: http://initd.org/psycopg/docs/usage.html#query-parameters
+                        # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
+                        self.cursor.execute(command, dict_parameters)
+                        sql_method(connection=self.connection, cursor=self.cursor)
+                except psycopg2.OperationalError, msg:
+                    self.logger.warning("Command skipped: %s", msg)
+                    # #
 
     def _request_for_edges(self, **kwargs):
         """

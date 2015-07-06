@@ -17,6 +17,8 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         self.dict_edges = kwargs['dict_edges']
         self.dict_lanes = kwargs['dict_lanes']
         self.dict_nodes = kwargs['dict_nodes']
+        self.module_topo = kwargs['module_topo']
+        self.list_symu_connexions = kwargs['list_symu_connexions']
         #
         self.pyxb_parser = pyxb_parser
         #
@@ -26,11 +28,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             'sym_CONNEXION': None,
             'id_amont_troncon_lane': ""
         }
-        #
-        self.list_symu_connexions = kwargs['list_symu_connexions']
-        #
-        self.module_topo = kwargs['module_topo']
-
         #
         super(trafipolluImp_EXPORT_CONNEXIONS, self).__init__(**kwargs)
 
@@ -64,6 +61,14 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         if len(list_id_nodes_for_CONNEXIONS['REPARTITEUR']):
             sym_CONNEXIONS.REPARTITEURS = self.export_REPARTITEURS(
                 list_id_nodes_for_CONNEXIONS['REPARTITEUR'],
+                str_path_to_child
+            )
+
+        list_extrimites = self.module_topo.dict_extremites['ENTREES']
+        list_extrimites.extend(self.module_topo.dict_extremites['SORTIES'])
+        if len(list_extrimites):
+            sym_CONNEXIONS.EXTREMITES = self.export_EXTREMITES(
+                list_extrimites,
                 str_path_to_child
             )
 
@@ -340,7 +345,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                     num_voie_amont=symu_lane_id
                 )
 
-                # [TOPO] - Link between TRONCON & CAF
+                # # [TOPO] - Link between TRONCON & CAF
                 caf_amont_symu_troncon.id_eltaval = self.get_CONNEXION().id
 
                 # MOUVEMENT_SORTIES
@@ -390,6 +395,33 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                 list_MOUVEMENT.append(sym_MOUVEMENT)
 
         return list_MOUVEMENT
+
+    @pyxbDecorator(pyxb_parser)
+    def export_EXTREMITES(self, list_extremites, *args):
+        """
+
+        :param list_extremites:
+        :param args:
+        :return:
+
+        """
+        str_path_to_child, sym_EXTREMITES = pyxbDecorator.get_path_instance(*args)
+        for id_extremite in list_extremites:
+            sym_EXTREMITES.append(self.export_EXTREMITE(id_extremite, str_path_to_child))
+        return sym_EXTREMITES
+
+    @pyxbDecorator(pyxb_parser)
+    def export_EXTREMITE(self, id_extremite, *args):
+        """
+
+        :param args:
+        :return:
+
+        """
+        return pyxbDecorator.get_instance(
+            *args,
+            id=id_extremite
+        )
 
     def select_node(self, node_id):
         """

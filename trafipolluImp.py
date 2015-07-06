@@ -90,7 +90,7 @@ class TrafiPolluImp(object):
         """
         Disconnection with QGIS interface
         """
-        pass
+        self.module_SQL.disconnect_sql_server()
 
     def slot_execute_SQL_commands(self):
         """

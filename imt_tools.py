@@ -39,6 +39,10 @@ except:
 import qgis_log_tools
 from collections import namedtuple
 
+import logging
+from logging import FileHandler
+
+
 defaultQtDateFormatString = "yyyy-MM-ddThh:mm:ss.zzz"
 
 #
@@ -142,7 +146,7 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
 
 
 # def get_timestamp_from_qt_string_format(QtDateFormat):
-#     """ Retrieve timestamp from the system and convert into a ISO QString/QDateTime format.
+# """ Retrieve timestamp from the system and convert into a ISO QString/QDateTime format.
 #
 #     urls:
 #     - https://docs.python.org/2/library/datetime.html
@@ -671,3 +675,44 @@ class timerDecorator(object):
                 )
 
         return wrapped_f
+
+
+def init_logger(logger_name):
+    """
+
+    :return:
+    """
+    logger = logging.getLogger(logger_name)
+
+    # on met le niveau du logger a DEBUG, comme ca il ecrit tout
+    logger.setLevel(logging.DEBUG)
+
+    # creation d'un formateur qui va ajouter le temps, le niveau
+    # de chaque message quand on ecrira un message dans le log
+    formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s')
+
+    # creation d'un handler qui va rediriger une ecriture du log vers
+    # un fichier en mode 'append'
+    import os
+
+    pathname = os.path.normcase(os.path.dirname(__file__))
+    filename = pathname + '/' + '%s.log' % logger_name
+    file_handler = FileHandler(filename, 'a')
+
+    # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
+    # cree precedement et on ajoute ce handler au logger
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    # creation d'un second handler qui va rediriger chaque ecriture de log
+    # sur la console
+    steam_handler = logging.StreamHandler()
+    steam_handler.setLevel(logging.DEBUG)
+    logger.addHandler(steam_handler)
+
+    print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
+
+    logger.info('\n\n################## NEW SESSION ##################\n\n')
+
+    return logger
