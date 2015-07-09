@@ -22,6 +22,7 @@ qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 infilename_for_symuvia = qgis_plugins_directory + '/' + "project_empty_from_symunet" + "_xsd_" + "2_04" + ".xml"
 outfilename_for_symuvia = qgis_plugins_directory + '/' + "export_from_sg3_to_symuvia" + "_xsd_" + "2_04" + ".xml"
 
+b_export_connexion = True
 
 class trafipolluImp_EXPORT(
     trafipolluImp_EXPORT_CONNEXIONS,
@@ -30,11 +31,13 @@ class trafipolluImp_EXPORT(
     """
 
     """
-    # def __init__(self, dict_edges, dict_lanes, dict_nodes, module_topo, infilename=infilename_for_symuvia):
     def __init__(self, **kwargs):
         """
 
         """
+        #
+        self.module_topo = kwargs['module_topo']
+        #
         self.pyxb_parser = pyxb_parser
         #
         self.list_symu_connexions = []
@@ -49,31 +52,39 @@ class trafipolluImp_EXPORT(
         self.symu_ROOT_RESEAU_CONNEXIONS = None
         self.symu_ROOT_TRAFICS = None
 
-        self.module_topo = kwargs['module_topo']
-
         kwargs.update({'list_symu_connexions': self.list_symu_connexions})
         super(trafipolluImp_EXPORT, self).__init__(**kwargs)
+
+    def clear(self):
+        """
+
+        :return:
+        """
+        self.list_symu_connexions = []
 
     @timerDecorator()
     def update_SYMUVIA(self):
         """
 
         :return:
-        """
-        # TODO: construction TOPO ici ! un peu merdique car il faut faire attention a l'ordre entre la construction
-        # topologique et l'export (qui a aussi des parties de constructions topologiques, c'est la ou c'est (encore)
-        # foireux). Faudra penser a decomposer tout ca, pour lever la dependance et la contrainte d'ordonnancement !
-        # Ce type de dependance pourra 'bloquer' par exemple le parallellisme (multi-threads computation) !
 
-        self.module_topo.convert_sg3_edges_to_pyxb_symutroncons()
-        self.module_topo.build_topo_for_interconnexions()
+        """
+        # TODO: construction TOPO ici !
+        # Ya une feinte presente dans la construction topologique liee a une contrainte d'ordonnancement.
+        # Actuellement pour determiner les extremites, on doit examiner les TRONCONS qui n'ont pas un lieu amont ou
+        # aval. Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (
+        # CONNEXIONS).
+        # Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes
+        # ids aux amonts/avals des interconnexions pour que le module extremites ne les prennent pas en compte.
+        # Dans l'export des CONNEXIONS par la suite, ces ids amonts/avals d'interconnexions sont reattribuees pour
+        # coincider au vrai lien topologiques (avec un CAF/REPARTITEUR ou un TRONCON)
+        self.module_topo.build_topo()
         #
         self.update_TRONCONS()
-        #
-        self.module_topo.build_topo_extrimites()
-        #
-        self.update_CONNEXIONS()
-        self.update_TRAFICS()
+
+        if b_export_connexion:
+            self.update_CONNEXIONS()
+            self.update_TRAFICS()
 
     def update_TRONCONS(self):
         """
@@ -111,12 +122,13 @@ class trafipolluImp_EXPORT(
             if self.module_topo.dict_pyxb_symutroncons:
                 self.symu_ROOT.RESEAUX.RESEAU[0].TRONCONS = self.symu_ROOT_RESEAU_TRONCONS
                 b_add_trafics = True
-            if self.list_symu_connexions != []:
-                self.symu_ROOT.RESEAUX.RESEAU[0].CONNEXIONS = self.symu_ROOT_RESEAU_CONNEXIONS
-                b_add_trafics = True
-            if b_add_trafics:
-                self.symu_ROOT.TRAFICS = self.symu_ROOT_TRAFICS
 
+            if b_export_connexion:
+                if self.list_symu_connexions != []:
+                    self.symu_ROOT.RESEAUX.RESEAU[0].CONNEXIONS = self.symu_ROOT_RESEAU_CONNEXIONS
+                    b_add_trafics = True
+                if b_add_trafics:
+                    self.symu_ROOT.TRAFICS = self.symu_ROOT_TRAFICS
         #
         self.save_ROOT(self.symu_ROOT, outfilename)
 

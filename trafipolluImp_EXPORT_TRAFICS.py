@@ -14,12 +14,21 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         """
 
         """
-        self.list_symu_connexions = kwargs['list_symu_connexions']
-        #
-        self.module_topo = kwargs['module_topo']
+        self.transfer_arguments(['module_topo', 'list_symu_connexions'], **kwargs)
         #
         super(trafipolluImp_EXPORT_TRAFICS, self).__init__(**kwargs)
 
+    # Le decorator pyxbDecorator utilise les noms des methodes export_<Type_PYXB> pour retrouver les paths des types
+    # (complexes, ...) XML a construire/instancien.
+    # Le probleme c'est que certains types comme: TRONCONS, TRONCON sont des homonimies pour d'autres structures:
+    # RESEAUX/RESEAU par exemple.
+    # Le probleme (homonimie) vient aussi de notre strategie d'heritage utilisee pour transmettre les methodes d'export
+    # a la classe mere trafipolluImp_EXPORT.
+    # Du coup dans le meme namespace de la classe mere (trafipolluImp_EXPORT) on a des conflits sur les methodes:
+    # export_TRONCONS, export_TRONCON, ...
+    # La methode de resolution utilisee a ete de recreer un nouveau namespace 'local' lie au noeud racine 'TRAFICS'
+    # d'ou l'utilisation des methodes imbriquees (qui revient au meme en terme de namespace que l'utilisation d'un
+    # system de classes imbriquees.
     @pyxbDecorator(pyxb_parser)
     def export_TRAFICS(self, *args):
         """
@@ -28,6 +37,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         :return:
 
         """
+
         @pyxbDecorator(pyxb_parser)
         def export_TRAFIC(
                 list_troncons,
@@ -38,11 +48,13 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
             """
 
             """
+
             @pyxbDecorator(pyxb_parser)
             def export_TRONCONS(list_troncons, *args):
                 """
 
                 """
+
                 @pyxbDecorator(pyxb_parser)
                 def export_TRONCON(arg_sym_TRONCON, *args):
                     """
@@ -56,6 +68,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                         agressivite='true'
                     )
                     return sym_TRONCON
+
                 #
                 # print 'TRAFIC/TRONCONS - args: ', args1
                 str_path_to_child, sym_TRONCONS = pyxbDecorator.get_path_instance(*args)
@@ -65,12 +78,14 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                 for sym_TRONCON in list_troncons:
                     sym_TRONCONS.append(export_TRONCON(sym_TRONCON, str_path_to_child))
                 return sym_TRONCONS
+
             #
             @pyxbDecorator(pyxb_parser)
             def export_CONNEXIONS_INTERNES(list_connexions, *args):
                 """
 
                 """
+
                 @pyxbDecorator(pyxb_parser)
                 def export_CONNEXION_INTERNE(sym_CAF, *args):
                     """
@@ -114,6 +129,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                 for id_extremite in list_extrimites:
                     sym_EXTREMITES.append(export_EXTREMITE(id_extremite, str_path_to_child))
                 return sym_EXTREMITES
+
             #
             # print 'TRAFIC - args: ', args
             str_path_to_child, sym_TRAFIC = pyxbDecorator.get_path_instance(*args)
@@ -155,13 +171,13 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         )
         return sym_TRAFICS
 
-    @staticmethod
-    def update_pyxb_node(node, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-        """
-        # print 'update_pyxb_node - kwargs: ', kwargs
-        for k, v in kwargs.iteritems():
-            node._setAttribute(k, v)
+        # @staticmethod
+        # def update_pyxb_node(node, **kwargs):
+        # """
+        #
+        #     :param kwargs:
+        #     :return:
+        #     """
+        #     # print 'update_pyxb_node - kwargs: ', kwargs
+        #     for k, v in kwargs.iteritems():
+        #         node._setAttribute(k, v)

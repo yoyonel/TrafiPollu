@@ -72,6 +72,7 @@ class TrafiPolluImp(object):
         self.__dict_nodes.clear()
         #
         self.module_topo.clear()
+        self.module_export.clear()
 
     def slot_clear(self):
         """

@@ -10,10 +10,12 @@
 SELECT
   DISTINCT
   nodes_selected.node_id         AS str_node_id,
+
   vrli.edge_id1                  AS str_edge_id1,
   vrli.edge_id2                  AS str_edge_id2,
   vrli.lane_ordinality1          AS str_lane_ordinality1,
   vrli.lane_ordinality2          AS str_lane_ordinality2,
+
   ST_AsEWKB(vrli.interconnexion) AS wkb_interconnexion
 FROM
   street_amp.visu_result_lane_interconnexion AS vrli

@@ -1,7 +1,7 @@
 # ./parser_symuvia_xsd_2_04_pyxb.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-06-29 15:07:50.046091 by PyXB version 1.2.4 using Python 2.7.6.final.0
+# Generated 2015-07-08 18:02:02.691031 by PyXB version 1.2.4 using Python 2.7.6.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -16,7 +16,7 @@ import pyxb.utils.six as _six
 
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d7bb326c-1e5f-11e5-b12c-60a44c5c87bf')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:abb94e60-258a-11e5-bd87-60a44c5c87bf')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -78,7 +78,6 @@ def CreateFromDOM(node, default_namespace=None):
 
 # Atomic simple type: typeFloatStrictPositif
 class typeFloatStrictPositif(pyxb.binding.datatypes.float):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloatStrictPositif')
@@ -94,7 +93,6 @@ Namespace.addCategoryObject('typeBinding', 'typeFloatStrictPositif', typeFloatSt
 
 # Atomic simple type: typeFloatPositif
 class typeFloatPositif(pyxb.binding.datatypes.float):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloatPositif')
@@ -110,7 +108,6 @@ Namespace.addCategoryObject('typeBinding', 'typeFloatPositif', typeFloatPositif)
 
 # Atomic simple type: typeFloatNegatif
 class typeFloatNegatif(pyxb.binding.datatypes.float):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloatNegatif')
@@ -126,7 +123,6 @@ Namespace.addCategoryObject('typeBinding', 'typeFloatNegatif', typeFloatNegatif)
 
 # Atomic simple type: typeFloat01
 class typeFloat01(pyxb.binding.datatypes.float):
-
     """Réel compris entre 0 et 1"""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloat01')
@@ -145,7 +141,6 @@ Namespace.addCategoryObject('typeBinding', 'typeFloat01', typeFloat01)
 
 # Atomic simple type: typeIntStrictPositif
 class typeIntStrictPositif(pyxb.binding.datatypes.positiveInteger):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeIntStrictPositif')
@@ -162,7 +157,6 @@ Namespace.addCategoryObject('typeBinding', 'typeIntStrictPositif', typeIntStrict
 
 # Atomic simple type: typeTouteLaSimulation
 class typeTouteLaSimulation(pyxb.binding.datatypes.string, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTouteLaSimulation')
@@ -180,25 +174,27 @@ Namespace.addCategoryObject('typeBinding', 'typeTouteLaSimulation', typeTouteLaS
 
 # Atomic simple type: typeDuree
 class typeDuree(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeDuree')
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 56, 2)
     _Documentation = None
+
+
 typeDuree._InitializeFacetMap()
 Namespace.addCategoryObject('typeBinding', 'typeDuree', typeDuree)
 
 # Atomic simple type: typeInfini
 class typeInfini(pyxb.binding.datatypes.string, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeInfini')
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 62, 2)
     _Documentation = None
+
+
 typeInfini._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeInfini, enum_prefix=None)
 typeInfini.infini = typeInfini._CF_enumeration.addEnumeration(unicode_value='infini', tag='infini')
 typeInfini._InitializeFacetMap(typeInfini._CF_enumeration)
@@ -207,7 +203,6 @@ Namespace.addCategoryObject('typeBinding', 'typeInfini', typeInfini)
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.float."""
 
     _ExpandedName = None
@@ -216,28 +211,32 @@ class STD_ANON(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.float
+
+
 STD_ANON._InitializeFacetMap()
 
 # Atomic simple type: [anonymous]
 class STD_ANON_(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 114, 6)
     _Documentation = None
+
+
 STD_ANON_._InitializeFacetMap()
 
 # Atomic simple type: [anonymous]
 class STD_ANON_2(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 543, 12)
     _Documentation = None
+
+
 STD_ANON_2._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_2, enum_prefix=None)
 STD_ANON_2.normal = STD_ANON_2._CF_enumeration.addEnumeration(unicode_value='normal', tag='normal')
 STD_ANON_2.light = STD_ANON_2._CF_enumeration.addEnumeration(unicode_value='light', tag='light')
@@ -245,13 +244,14 @@ STD_ANON_2._InitializeFacetMap(STD_ANON_2._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_3(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 661, 6)
     _Documentation = None
+
+
 STD_ANON_3._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_3, enum_prefix=None)
 STD_ANON_3.C = STD_ANON_3._CF_enumeration.addEnumeration(unicode_value='C', tag='C')
 STD_ANON_3.P = STD_ANON_3._CF_enumeration.addEnumeration(unicode_value='P', tag='P')
@@ -259,13 +259,14 @@ STD_ANON_3._InitializeFacetMap(STD_ANON_3._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_4(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 680, 6)
     _Documentation = None
+
+
 STD_ANON_4._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_4, enum_prefix=None)
 STD_ANON_4.exacte = STD_ANON_4._CF_enumeration.addEnumeration(unicode_value='exacte', tag='exacte')
 STD_ANON_4.estimee = STD_ANON_4._CF_enumeration.addEnumeration(unicode_value='estimee', tag='estimee')
@@ -273,13 +274,14 @@ STD_ANON_4._InitializeFacetMap(STD_ANON_4._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_5(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 699, 6)
     _Documentation = None
+
+
 STD_ANON_5._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_5, enum_prefix=None)
 STD_ANON_5.dir = STD_ANON_5._CF_enumeration.addEnumeration(unicode_value='dir', tag='dir')
 STD_ANON_5.des = STD_ANON_5._CF_enumeration.addEnumeration(unicode_value='des', tag='des')
@@ -288,13 +290,14 @@ STD_ANON_5._InitializeFacetMap(STD_ANON_5._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_6(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 766, 6)
     _Documentation = None
+
+
 STD_ANON_6._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_6, enum_prefix=None)
 STD_ANON_6.statique = STD_ANON_6._CF_enumeration.addEnumeration(unicode_value='statique', tag='statique')
 STD_ANON_6.dynamique = STD_ANON_6._CF_enumeration.addEnumeration(unicode_value='dynamique', tag='dynamique')
@@ -302,13 +305,14 @@ STD_ANON_6._InitializeFacetMap(STD_ANON_6._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_7(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 783, 6)
     _Documentation = None
+
+
 STD_ANON_7._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_7, enum_prefix=None)
 STD_ANON_7.NE = STD_ANON_7._CF_enumeration.addEnumeration(unicode_value='NE', tag='NE')
 STD_ANON_7.ENM = STD_ANON_7._CF_enumeration.addEnumeration(unicode_value='ENM', tag='ENM')
@@ -317,13 +321,14 @@ STD_ANON_7._InitializeFacetMap(STD_ANON_7._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_8(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 807, 6)
     _Documentation = None
+
+
 STD_ANON_8._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_8, enum_prefix=None)
 STD_ANON_8.R = STD_ANON_8._CF_enumeration.addEnumeration(unicode_value='R', tag='R')
 STD_ANON_8.PN = STD_ANON_8._CF_enumeration.addEnumeration(unicode_value='PN', tag='PN')
@@ -332,13 +337,14 @@ STD_ANON_8._InitializeFacetMap(STD_ANON_8._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_9(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 849, 6)
     _Documentation = None
+
+
 STD_ANON_9._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_9, enum_prefix=None)
 STD_ANON_9.logit = STD_ANON_9._CF_enumeration.addEnumeration(unicode_value='logit', tag='logit')
 STD_ANON_9.wardrop = STD_ANON_9._CF_enumeration.addEnumeration(unicode_value='wardrop', tag='wardrop')
@@ -346,13 +352,14 @@ STD_ANON_9._InitializeFacetMap(STD_ANON_9._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_10(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 879, 6)
     _Documentation = None
+
+
 STD_ANON_10._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_10, enum_prefix=None)
 STD_ANON_10.basique = STD_ANON_10._CF_enumeration.addEnumeration(unicode_value='basique', tag='basique')
 STD_ANON_10.Dijkstra = STD_ANON_10._CF_enumeration.addEnumeration(unicode_value='Dijkstra', tag='Dijkstra')
@@ -360,13 +367,14 @@ STD_ANON_10._InitializeFacetMap(STD_ANON_10._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_11(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 909, 6)
     _Documentation = None
+
+
 STD_ANON_11._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_11, enum_prefix=None)
 STD_ANON_11.M = STD_ANON_11._CF_enumeration.addEnumeration(unicode_value='M', tag='M')
 STD_ANON_11.H = STD_ANON_11._CF_enumeration.addEnumeration(unicode_value='H', tag='H')
@@ -375,13 +383,14 @@ STD_ANON_11._InitializeFacetMap(STD_ANON_11._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_12(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 963, 6)
     _Documentation = None
+
+
 STD_ANON_12._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_12, enum_prefix=None)
 STD_ANON_12.peripherique = STD_ANON_12._CF_enumeration.addEnumeration(unicode_value='peripherique', tag='peripherique')
 STD_ANON_12.surfacique = STD_ANON_12._CF_enumeration.addEnumeration(unicode_value='surfacique', tag='surfacique')
@@ -389,13 +398,14 @@ STD_ANON_12._InitializeFacetMap(STD_ANON_12._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_13(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 982, 6)
     _Documentation = None
+
+
 STD_ANON_13._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_13, enum_prefix=None)
 STD_ANON_13.peripherique = STD_ANON_13._CF_enumeration.addEnumeration(unicode_value='peripherique', tag='peripherique')
 STD_ANON_13.surfacique = STD_ANON_13._CF_enumeration.addEnumeration(unicode_value='surfacique', tag='surfacique')
@@ -403,13 +413,14 @@ STD_ANON_13._InitializeFacetMap(STD_ANON_13._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_14(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1212, 6)
     _Documentation = None
+
+
 STD_ANON_14._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_14, enum_prefix=None)
 STD_ANON_14.U = STD_ANON_14._CF_enumeration.addEnumeration(unicode_value='U', tag='U')
 STD_ANON_14.D = STD_ANON_14._CF_enumeration.addEnumeration(unicode_value='D', tag='D')
@@ -417,13 +428,14 @@ STD_ANON_14._InitializeFacetMap(STD_ANON_14._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_15(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1231, 6)
     _Documentation = None
+
+
 STD_ANON_15._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_15, enum_prefix=None)
 STD_ANON_15.S = STD_ANON_15._CF_enumeration.addEnumeration(unicode_value='S', tag='S')
 STD_ANON_15.A = STD_ANON_15._CF_enumeration.addEnumeration(unicode_value='A', tag='A')
@@ -431,13 +443,14 @@ STD_ANON_15._InitializeFacetMap(STD_ANON_15._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_16(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1250, 6)
     _Documentation = None
+
+
 STD_ANON_16._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_16, enum_prefix=None)
 STD_ANON_16.GD = STD_ANON_16._CF_enumeration.addEnumeration(unicode_value='GD', tag='GD')
 STD_ANON_16.DG = STD_ANON_16._CF_enumeration.addEnumeration(unicode_value='DG', tag='DG')
@@ -446,13 +459,14 @@ STD_ANON_16._InitializeFacetMap(STD_ANON_16._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_17(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1551, 6)
     _Documentation = None
+
+
 STD_ANON_17._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_17, enum_prefix=None)
 STD_ANON_17.M = STD_ANON_17._CF_enumeration.addEnumeration(unicode_value='M', tag='M')
 STD_ANON_17.H = STD_ANON_17._CF_enumeration.addEnumeration(unicode_value='H', tag='H')
@@ -461,13 +475,14 @@ STD_ANON_17._InitializeFacetMap(STD_ANON_17._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_18(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2109, 10)
     _Documentation = None
+
+
 STD_ANON_18._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_18, enum_prefix=None)
 STD_ANON_18.ponctuel = STD_ANON_18._CF_enumeration.addEnumeration(unicode_value='ponctuel', tag='ponctuel')
 STD_ANON_18.insertion = STD_ANON_18._CF_enumeration.addEnumeration(unicode_value='insertion', tag='insertion')
@@ -475,13 +490,14 @@ STD_ANON_18._InitializeFacetMap(STD_ANON_18._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_19(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2270, 10)
     _Documentation = None
+
+
 STD_ANON_19._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_19, enum_prefix=None)
 STD_ANON_19.D = STD_ANON_19._CF_enumeration.addEnumeration(unicode_value='D', tag='D')
 STD_ANON_19.U = STD_ANON_19._CF_enumeration.addEnumeration(unicode_value='U', tag='U')
@@ -490,19 +506,19 @@ STD_ANON_19._InitializeFacetMap(STD_ANON_19._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_20(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2332, 34)
     _Documentation = None
+
+
 STD_ANON_20._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(128))
 STD_ANON_20._InitializeFacetMap(STD_ANON_20._CF_maxLength)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_21(pyxb.binding.datatypes.integer):
-
     """An atomic simple type."""
 
     _ExpandedName = None
@@ -517,25 +533,27 @@ STD_ANON_21._InitializeFacetMap(STD_ANON_21._CF_minInclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_22(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2405, 34)
     _Documentation = None
+
+
 STD_ANON_22._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(512))
 STD_ANON_22._InitializeFacetMap(STD_ANON_22._CF_maxLength)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_23(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2455, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2458, 22)
     _Documentation = None
+
+
 STD_ANON_23._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_23, enum_prefix=None)
 STD_ANON_23.defaut = STD_ANON_23._CF_enumeration.addEnumeration(unicode_value='defaut', tag='defaut')
 STD_ANON_23.cedez_le_passage = STD_ANON_23._CF_enumeration.addEnumeration(unicode_value='cedez_le_passage',
@@ -545,25 +563,27 @@ STD_ANON_23._InitializeFacetMap(STD_ANON_23._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_24(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2515, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2518, 34)
     _Documentation = None
+
+
 STD_ANON_24._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(128))
 STD_ANON_24._InitializeFacetMap(STD_ANON_24._CF_maxLength)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_25(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2653, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2657, 18)
     _Documentation = None
+
+
 STD_ANON_25._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_25, enum_prefix=None)
 STD_ANON_25.G = STD_ANON_25._CF_enumeration.addEnumeration(unicode_value='G', tag='G')
 STD_ANON_25.M = STD_ANON_25._CF_enumeration.addEnumeration(unicode_value='M', tag='M')
@@ -572,53 +592,55 @@ STD_ANON_25._InitializeFacetMap(STD_ANON_25._CF_enumeration)
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_26(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2681, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2685, 22)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_26._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_27(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2827, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2831, 22)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_27._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_28(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.nonNegativeInteger."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2839, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2843, 22)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.nonNegativeInteger
+
+
 STD_ANON_28._InitializeFacetMap()
 
 # Atomic simple type: [anonymous]
 class STD_ANON_29(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2970, 42)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2974, 42)
     _Documentation = None
 
 
@@ -628,12 +650,11 @@ STD_ANON_29._InitializeFacetMap(STD_ANON_29._CF_minInclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_30(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2981, 42)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2985, 42)
     _Documentation = None
 
 
@@ -643,12 +664,11 @@ STD_ANON_30._InitializeFacetMap(STD_ANON_30._CF_minInclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_31(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2993, 42)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2997, 42)
     _Documentation = None
 
 
@@ -658,12 +678,11 @@ STD_ANON_31._InitializeFacetMap(STD_ANON_31._CF_minInclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_32(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3023, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3027, 30)
     _Documentation = None
 
 
@@ -673,38 +692,39 @@ STD_ANON_32._InitializeFacetMap(STD_ANON_32._CF_minExclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_33(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3039, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3043, 18)
     _Documentation = None
+
+
 STD_ANON_33._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(80))
 STD_ANON_33._InitializeFacetMap(STD_ANON_33._CF_maxLength)
 
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_34(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3073, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3077, 22)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_34._InitializeFacetMap()
 
 # Atomic simple type: [anonymous]
 class STD_ANON_35(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3119, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3123, 18)
     _Documentation = None
 
 
@@ -714,24 +734,24 @@ STD_ANON_35._InitializeFacetMap(STD_ANON_35._CF_minInclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_36(pyxb.binding.datatypes.string):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3161, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3165, 6)
     _Documentation = None
+
+
 STD_ANON_36._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(80))
 STD_ANON_36._InitializeFacetMap(STD_ANON_36._CF_maxLength)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_37(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3172, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3176, 6)
     _Documentation = None
 
 
@@ -741,12 +761,11 @@ STD_ANON_37._InitializeFacetMap(STD_ANON_37._CF_minExclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_38(pyxb.binding.datatypes.int):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3183, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3187, 6)
     _Documentation = None
 
 
@@ -756,13 +775,14 @@ STD_ANON_38._InitializeFacetMap(STD_ANON_38._CF_minExclusive)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_39(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3195, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3199, 6)
     _Documentation = None
+
+
 STD_ANON_39._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_39, enum_prefix=None)
 STD_ANON_39.aucune = STD_ANON_39._CF_enumeration.addEnumeration(unicode_value='aucune', tag='aucune')
 STD_ANON_39.vecteurs = STD_ANON_39._CF_enumeration.addEnumeration(unicode_value='vecteurs', tag='vecteurs')
@@ -770,13 +790,14 @@ STD_ANON_39._InitializeFacetMap(STD_ANON_39._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_40(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3417, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3421, 6)
     _Documentation = None
+
+
 STD_ANON_40._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_40, enum_prefix=None)
 STD_ANON_40.demande = STD_ANON_40._CF_enumeration.addEnumeration(unicode_value='demande', tag='demande')
 STD_ANON_40.distributionExponentielle = STD_ANON_40._CF_enumeration.addEnumeration(
@@ -787,13 +808,14 @@ STD_ANON_40._InitializeFacetMap(STD_ANON_40._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_41(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3767, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3771, 10)
     _Documentation = None
+
+
 STD_ANON_41._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_41, enum_prefix=None)
 STD_ANON_41.peripherique = STD_ANON_41._CF_enumeration.addEnumeration(unicode_value='peripherique', tag='peripherique')
 STD_ANON_41.surfacique = STD_ANON_41._CF_enumeration.addEnumeration(unicode_value='surfacique', tag='surfacique')
@@ -801,13 +823,14 @@ STD_ANON_41._InitializeFacetMap(STD_ANON_41._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_42(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3786, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3790, 10)
     _Documentation = None
+
+
 STD_ANON_42._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_42, enum_prefix=None)
 STD_ANON_42.peripherique = STD_ANON_42._CF_enumeration.addEnumeration(unicode_value='peripherique', tag='peripherique')
 STD_ANON_42.surfacique = STD_ANON_42._CF_enumeration.addEnumeration(unicode_value='surfacique', tag='surfacique')
@@ -815,13 +838,14 @@ STD_ANON_42._InitializeFacetMap(STD_ANON_42._CF_enumeration)
 
 # Atomic simple type: [anonymous]
 class STD_ANON_43(pyxb.binding.datatypes.NMTOKEN, pyxb.binding.basis.enumeration_mixin):
-
     """An atomic simple type."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4004, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4008, 14)
     _Documentation = None
+
+
 STD_ANON_43._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=STD_ANON_43, enum_prefix=None)
 STD_ANON_43.profil = STD_ANON_43._CF_enumeration.addEnumeration(unicode_value='profil', tag='profil')
 STD_ANON_43.horaire = STD_ANON_43._CF_enumeration.addEnumeration(unicode_value='horaire', tag='horaire')
@@ -830,7 +854,6 @@ STD_ANON_43._InitializeFacetMap(STD_ANON_43._CF_enumeration)
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_44(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloat01."""
 
     _ExpandedName = None
@@ -839,12 +862,13 @@ class STD_ANON_44(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = typeFloat01
+
+
 STD_ANON_44._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_45(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloat01."""
 
     _ExpandedName = None
@@ -853,12 +877,13 @@ class STD_ANON_45(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = typeFloat01
+
+
 STD_ANON_45._InitializeFacetMap()
 
 # Union simple type: typeVitesses
 # superclasses pyxb.binding.datatypes.anySimpleType
 class typeVitesses(pyxb.binding.basis.STD_union):
-
     """Simple type that is a union of typeFloatStrictPositif."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeVitesses')
@@ -867,6 +892,8 @@ class typeVitesses(pyxb.binding.basis.STD_union):
     _Documentation = None
 
     _MemberTypes = ( typeFloatStrictPositif, )
+
+
 typeVitesses._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitesses)
 typeVitesses._CF_pattern = pyxb.binding.facets.CF_pattern()
 typeVitesses._InitializeFacetMap(typeVitesses._CF_enumeration,
@@ -876,7 +903,6 @@ Namespace.addCategoryObject('typeBinding', 'typeVitesses', typeVitesses)
 # Union simple type: typeVitMax
 # superclasses pyxb.binding.datatypes.anySimpleType
 class typeVitMax(pyxb.binding.basis.STD_union):
-
     """Simple type that is a union of typeFloatStrictPositif, typeInfini."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeVitMax')
@@ -885,6 +911,8 @@ class typeVitMax(pyxb.binding.basis.STD_union):
     _Documentation = ''
 
     _MemberTypes = ( typeFloatStrictPositif, typeInfini, )
+
+
 typeVitMax._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitMax)
 typeVitMax._CF_pattern = pyxb.binding.facets.CF_pattern()
 typeVitMax.infini = 'infini'  # originally typeInfini.infini
@@ -895,7 +923,6 @@ Namespace.addCategoryObject('typeBinding', 'typeVitMax', typeVitMax)
 # List simple type: typeCoordonnees
 # superclasses STD_ANON
 class typeCoordonnees(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.float."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCoordonnees')
@@ -904,23 +931,26 @@ class typeCoordonnees(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.float
+
+
+typeCoordonnees._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
 typeCoordonnees._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
 typeCoordonnees._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-typeCoordonnees._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
-typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_whiteSpace,
-                                    typeCoordonnees._CF_minLength,
-                                    typeCoordonnees._CF_maxLength)
+typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_maxLength,
+                                    typeCoordonnees._CF_whiteSpace,
+                                    typeCoordonnees._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'typeCoordonnees', typeCoordonnees)
 
 # Atomic simple type: typeString256
 class typeString256(STD_ANON_):
-
     """An atomic simple type."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeString256')
     _XSDLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 112, 2)
     _Documentation = None
+
+
 typeString256._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(256))
 typeString256._InitializeFacetMap(typeString256._CF_maxLength)
 Namespace.addCategoryObject('typeBinding', 'typeString256', typeString256)
@@ -928,77 +958,81 @@ Namespace.addCategoryObject('typeBinding', 'typeString256', typeString256)
 # List simple type: [anonymous]
 # superclasses pyxb.binding.datatypes.anySimpleType
 class STD_ANON_46(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloatPositif."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2603, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2607, 34)
     _Documentation = None
 
     _ItemType = typeFloatPositif
+
+
 STD_ANON_46._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses STD_ANON_26
 class STD_ANON_47(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2679, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2683, 18)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_47._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses STD_ANON_27
 class STD_ANON_48(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2825, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2829, 18)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_48._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses STD_ANON_28
 class STD_ANON_49(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.nonNegativeInteger."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2837, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2841, 18)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.nonNegativeInteger
+
+
 STD_ANON_49._InitializeFacetMap()
 
 # List simple type: [anonymous]
 # superclasses STD_ANON_34
 class STD_ANON_50(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of pyxb.binding.datatypes.string."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3071, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3075, 18)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.string
+
+
 STD_ANON_50._InitializeFacetMap()
 
 # List simple type: typeFloat01List
 # superclasses STD_ANON_44
 class typeFloat01List(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloat01."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloat01List')
@@ -1007,13 +1041,14 @@ class typeFloat01List(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = typeFloat01
+
+
 typeFloat01List._InitializeFacetMap()
 Namespace.addCategoryObject('typeBinding', 'typeFloat01List', typeFloat01List)
 
 # List simple type: typeFloat01NormedList
 # superclasses STD_ANON_45
 class typeFloat01NormedList(pyxb.binding.basis.STD_list):
-
     """La somme des coefficients doit être égale à 1"""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFloat01NormedList')
@@ -1022,27 +1057,29 @@ class typeFloat01NormedList(pyxb.binding.basis.STD_list):
     _Documentation = 'La somme des coefficients doit \xeatre \xe9gale \xe0 1'
 
     _ItemType = typeFloat01
+
+
 typeFloat01NormedList._InitializeFacetMap()
 Namespace.addCategoryObject('typeBinding', 'typeFloat01NormedList', typeFloat01NormedList)
 
 # List simple type: [anonymous]
 # superclasses STD_ANON_46
 class STD_ANON_51(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloatPositif."""
 
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2601, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2605, 30)
     _Documentation = None
 
     _ItemType = typeFloatPositif
+
+
 STD_ANON_51._InitializeFacetMap()
 
 # List simple type: typeRGBAColor
 # superclasses typeFloat01List
 class typeRGBAColor(pyxb.binding.basis.STD_list):
-
     """Simple type that is a list of typeFloat01."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeRGBAColor')
@@ -1051,12 +1088,14 @@ class typeRGBAColor(pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = typeFloat01
+
+
+typeRGBAColor._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
 typeRGBAColor._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
 typeRGBAColor._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
-typeRGBAColor._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_whiteSpace,
-                                  typeRGBAColor._CF_minLength,
-                                  typeRGBAColor._CF_maxLength)
+typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_maxLength,
+                                  typeRGBAColor._CF_whiteSpace,
+                                  typeRGBAColor._CF_minLength)
 Namespace.addCategoryObject('typeBinding', 'typeRGBAColor', typeRGBAColor)
 
 # Complex type typeAny with content type ELEMENT_ONLY
@@ -1080,6 +1119,8 @@ class typeAny(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeAny', typeAny)
 
 
@@ -1112,6 +1153,8 @@ class typePointsInternes(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typePointsInternes', typePointsInternes)
 
 
@@ -1144,6 +1187,8 @@ class typeCoeffDir(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCoeffDir', typeCoeffDir)
 
 
@@ -1254,7 +1299,7 @@ class CTD_ANON_2(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 194, 22)
     __id_amont._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 194, 22)
-    
+
     id_amont = property(__id_amont.value, __id_amont.set, None, 'Identifiant du tron\xe7on amont')
 
     _ElementMap.update({
@@ -1358,6 +1403,8 @@ class typeAffectation(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeAffectation', typeAffectation)
 
 
@@ -1439,7 +1486,7 @@ class CTD_ANON_6(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 269, 22)
     __id_destination._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 269, 22)
-    
+
     id_destination = property(__id_destination.value, __id_destination.set, None, 'Identifiant de la destination')
 
     _ElementMap.update({
@@ -1512,6 +1559,8 @@ class typeMouvementAutorise(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeMouvementAutorise', typeMouvementAutorise)
 
 
@@ -1589,6 +1638,8 @@ class typeConnexionInterne(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
         __z_level_crossing.name(): __z_level_crossing
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeConnexionInterne', typeConnexionInterne)
 
 
@@ -2463,7 +2514,7 @@ class CTD_ANON_34(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1804, 16)
     __num_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1804, 16)
-    
+
     num_voie = property(__num_voie.value, __num_voie.set, None, 'Num\xe9ro de la voie interdite sur le tron\xe7on')
 
 
@@ -2632,7 +2683,7 @@ class typeEntree(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2029, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2029, 4)
-    
+
     id = property(__id.value, __id.set, None, "Identifiant de l'entr\xe9e")
 
     _ElementMap.update({
@@ -2641,6 +2692,8 @@ class typeEntree(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
         __id.name(): __id
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeEntree', typeEntree)
 
 
@@ -2665,7 +2718,7 @@ class typeSortie(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2036, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2036, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant de la sortie')
 
     _ElementMap.update({
@@ -2674,6 +2727,8 @@ class typeSortie(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
         __id.name(): __id
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeSortie', typeSortie)
 
 
@@ -2808,7 +2863,7 @@ class CTD_ANON_42(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2214, 20)
     __num_voie_entree._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2214, 20)
-    
+
     num_voie_entree = property(__num_voie_entree.value, __num_voie_entree.set, None, "Num\xe9ro de la voie d'entr\xe9e")
 
 
@@ -2821,7 +2876,7 @@ class CTD_ANON_42(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2220, 20)
     __troncon_sortie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2220, 20)
-    
+
     troncon_sortie = property(__troncon_sortie.value, __troncon_sortie.set, None, 'Identifiant du tron\xe7on de sortie')
 
 
@@ -2979,7 +3034,7 @@ class CTD_ANON_47(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2484, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2487, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -2988,7 +3043,7 @@ class CTD_ANON_47(pyxb.binding.basis.complexTypeDefinition):
     __SORTIE_CAF = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'SORTIE_CAF'),
                                                            'SORTIE_CAF', '__AbsentNamespace0_CTD_ANON_47_SORTIE_CAF',
                                                            True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2486, 16), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2489, 16), )
 
     SORTIE_CAF = property(__SORTIE_CAF.value, __SORTIE_CAF.set, None,
                           "Description d'une sortie du carrefour \xe0 feu (une sortie est d\xe9finie par un tron\xe7on et un num\xe9ro de voie)")
@@ -3009,7 +3064,7 @@ class CTD_ANON_48(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2496, 24)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2499, 24)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3018,7 +3073,7 @@ class CTD_ANON_48(pyxb.binding.basis.complexTypeDefinition):
     __CONVERGENT = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CONVERGENT'),
                                                            'CONVERGENT', '__AbsentNamespace0_CTD_ANON_48_CONVERGENT',
                                                            True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2498, 28), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2501, 28), )
 
     CONVERGENT = property(__CONVERGENT.value, __CONVERGENT.set, None,
                           "Description d'un divergent d'un tron\xe7on d'entr\xe9e")
@@ -3039,7 +3094,7 @@ class typeLTG(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeLTG')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2567, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2571, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3049,7 +3104,7 @@ class typeLTG(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'LIGNES_TRANSPORT_GUIDEES'), 'LIGNES_TRANSPORT_GUIDEES',
         '__AbsentNamespace0_typeLTG_LIGNES_TRANSPORT_GUIDEES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2569, 6), )
+                                    2573, 6), )
 
     LIGNES_TRANSPORT_GUIDEES = property(__LIGNES_TRANSPORT_GUIDEES.value, __LIGNES_TRANSPORT_GUIDEES.set, None,
                                         'Liste des lignes de transport guid\xe9e du r\xe9seau')
@@ -3060,7 +3115,7 @@ class typeLTG(pyxb.binding.basis.complexTypeDefinition):
                                                        '__AbsentNamespace0_typeLTG_ARRETS', False,
                                                        pyxb.utils.utility.Location(
                                                            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                           2703, 6), )
+                                                           2707, 6), )
 
     ARRETS = property(__ARRETS.value, __ARRETS.set, None, 'Liste des arr\xeats de la ligne')
 
@@ -3071,6 +3126,8 @@ class typeLTG(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeLTG', typeLTG)
 
 
@@ -3082,7 +3139,7 @@ class CTD_ANON_49(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2573, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2577, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3092,7 +3149,7 @@ class CTD_ANON_49(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'LIGNE_TRANSPORT_GUIDEE'), 'LIGNE_TRANSPORT_GUIDEE',
         '__AbsentNamespace0_CTD_ANON_49_LIGNE_TRANSPORT_GUIDEE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2575, 12), )
+                                    2579, 12), )
 
     LIGNE_TRANSPORT_GUIDEE = property(__LIGNE_TRANSPORT_GUIDEE.value, __LIGNE_TRANSPORT_GUIDEE.set, None,
                                       "Description d'une ligne de transport guid\xe9e")
@@ -3113,7 +3170,7 @@ class CTD_ANON_50(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2585, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2589, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3123,7 +3180,7 @@ class CTD_ANON_50(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_50_HORAIRE', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            2587, 24), )
+                                                            2591, 24), )
 
     HORAIRE = property(__HORAIRE.value, __HORAIRE.set, None,
                        "Description d'un horaire de v\xe9hicule guid\xe9 (heure de d\xe9part et dur\xe9e des arr\xeats>")
@@ -3144,7 +3201,7 @@ class CTD_ANON_51(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2618, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2622, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3154,7 +3211,7 @@ class CTD_ANON_51(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_51_FREQUENCE', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              2620, 24), )
+                                                              2624, 24), )
 
     FREQUENCE = property(__FREQUENCE.value, __FREQUENCE.set, None, None)
 
@@ -3174,7 +3231,7 @@ class CTD_ANON_52(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2707, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2711, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3184,7 +3241,7 @@ class CTD_ANON_52(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_52_ARRET', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          2709, 12), )
+                                                          2713, 12), )
 
     ARRET = property(__ARRET.value, __ARRET.set, None, "Description d'un arr\xeat")
 
@@ -3204,7 +3261,7 @@ class CTD_ANON_53(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2719, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2723, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3214,7 +3271,7 @@ class CTD_ANON_53(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_53_LIGNE', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          2721, 24), )
+                                                          2725, 24), )
 
     LIGNE = property(__LIGNE.value, __LIGNE.set, None,
                      'D\xe9finition des param\xe8tres de mont\xe9e pour une ligne donn\xe9e')
@@ -3235,7 +3292,7 @@ class CTD_ANON_54(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2725, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2729, 26)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3245,7 +3302,7 @@ class CTD_ANON_54(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_54_DEMANDE', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            2727, 30), )
+                                                            2731, 30), )
 
     DEMANDE = property(__DEMANDE.value, __DEMANDE.set, None,
                        "D\xe9finition d'une variante temporelle de demande pour la ligne consid\xe9r\xe9e")
@@ -3256,10 +3313,10 @@ class CTD_ANON_54(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_54_ligne', pyxb.binding.datatypes.string,
                                                 required=True)
     __ligne._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2746, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2750, 28)
     __ligne._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2746, 28)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2750, 28)
+
     ligne = property(__ligne.value, __ligne.set, None, 'Identifiant de la ligne concern\xe9e')
 
 
@@ -3268,9 +3325,9 @@ class CTD_ANON_54(pyxb.binding.basis.complexTypeDefinition):
                                                         'stock_initial', '__AbsentNamespace0_CTD_ANON_54_stock_initial',
                                                         pyxb.binding.datatypes.nonNegativeInteger, unicode_default='0')
     __stock_initial._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2751, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2755, 28)
     __stock_initial._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2751, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2755, 28)
 
     stock_initial = property(__stock_initial.value, __stock_initial.set, None,
                              "Stock initial des pi\xe9tons \xe0 l'arr\xeat pour la ligne consid\xe9r\xe9e")
@@ -3292,7 +3349,7 @@ class CTD_ANON_55(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2766, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2770, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3302,7 +3359,7 @@ class CTD_ANON_55(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_55_LIGNE', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          2768, 24), )
+                                                          2772, 24), )
 
     LIGNE = property(__LIGNE.value, __LIGNE.set, None,
                      "D\xe9finition des param\xe8tres de descente \xe0 l'arr\xeat et pour la ligne consid\xe9r\xe9e")
@@ -3323,7 +3380,7 @@ class CTD_ANON_56(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2772, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2776, 26)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3333,10 +3390,10 @@ class CTD_ANON_56(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_56_ligne', pyxb.binding.datatypes.string,
                                                 required=True)
     __ligne._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2773, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2777, 28)
     __ligne._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2773, 28)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2777, 28)
+
     ligne = property(__ligne.value, __ligne.set, None, 'Identifiant de la ligne concern\xe9e')
 
 
@@ -3346,9 +3403,9 @@ class CTD_ANON_56(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_56_duree_descente',
                                                          pyxb.binding.datatypes.nonNegativeInteger, unicode_default='0')
     __duree_descente._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2778, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2782, 28)
     __duree_descente._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2778, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2782, 28)
 
     duree_descente = property(__duree_descente.value, __duree_descente.set, None,
                               "Dur\xe9e n\xe9cessaire \xe0 la descente pour l'arr\xeat et la ligne consid\xe9r\xe9s")
@@ -3370,7 +3427,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2858, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2862, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3380,7 +3437,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_57_CAPTEUR', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            2860, 12), )
+                                                            2864, 12), )
 
     CAPTEUR = property(__CAPTEUR.value, __CAPTEUR.set, None, None)
 
@@ -3390,7 +3447,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'CAPTEUR_LONGITUDINAL'), 'CAPTEUR_LONGITUDINAL',
         '__AbsentNamespace0_CTD_ANON_57_CAPTEUR_LONGITUDINAL', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2862, 12), )
+                                    2866, 12), )
 
     CAPTEUR_LONGITUDINAL = property(__CAPTEUR_LONGITUDINAL.value, __CAPTEUR_LONGITUDINAL.set, None, None)
 
@@ -3401,7 +3458,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_57_CAPTEUR_EDIE', True,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 2864, 12), )
+                                                                 2868, 12), )
 
     CAPTEUR_EDIE = property(__CAPTEUR_EDIE.value, __CAPTEUR_EDIE.set, None, None)
 
@@ -3410,7 +3467,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
     __CAPTEUR_MFD = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CAPTEUR_MFD'),
                                                             'CAPTEUR_MFD', '__AbsentNamespace0_CTD_ANON_57_CAPTEUR_MFD',
                                                             True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2866, 12), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2870, 12), )
 
     CAPTEUR_MFD = property(__CAPTEUR_MFD.value, __CAPTEUR_MFD.set, None, None)
 
@@ -3420,7 +3477,7 @@ class CTD_ANON_57(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'CAPTEUR_BLUETOOTH'), 'CAPTEUR_BLUETOOTH',
         '__AbsentNamespace0_CTD_ANON_57_CAPTEUR_BLUETOOTH', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2868, 12), )
+                                    2872, 12), )
 
     CAPTEUR_BLUETOOTH = property(__CAPTEUR_BLUETOOTH.value, __CAPTEUR_BLUETOOTH.set, None, None)
 
@@ -3444,7 +3501,7 @@ class CTD_ANON_58(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2934, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2938, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3455,7 +3512,7 @@ class CTD_ANON_58(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_58_PLAN_DE_FEUX', True,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 2936, 12), )
+                                                                 2940, 12), )
 
     PLAN_DE_FEUX = property(__PLAN_DE_FEUX.value, __PLAN_DE_FEUX.set, None, "Noeud de description d'un plan de feux")
 
@@ -3475,7 +3532,7 @@ class CTD_ANON_59(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2946, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2950, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3485,7 +3542,7 @@ class CTD_ANON_59(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_59_SEQUENCE', True,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             2948, 24), )
+                                                             2952, 24), )
 
     SEQUENCE = property(__SEQUENCE.value, __SEQUENCE.set, None,
                         "Noeud de description d'une s\xe9quence du plan de feux\n")
@@ -3507,7 +3564,7 @@ class CTD_ANON_60(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2960, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2964, 32)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3518,7 +3575,7 @@ class CTD_ANON_60(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_60_SIGNAL_ACTIF', True,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 2962, 36), )
+                                                                 2966, 36), )
 
     SIGNAL_ACTIF = property(__SIGNAL_ACTIF.value, __SIGNAL_ACTIF.set, None, None)
 
@@ -3539,7 +3596,7 @@ class CTD_ANON_61(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3060, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3064, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3549,7 +3606,7 @@ class CTD_ANON_61(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'LIGNE_GUIDEE_PRIORITAIRE'), 'LIGNE_GUIDEE_PRIORITAIRE',
         '__AbsentNamespace0_CTD_ANON_61_LIGNE_GUIDEE_PRIORITAIRE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3062, 12), )
+                                    3066, 12), )
 
     LIGNE_GUIDEE_PRIORITAIRE = property(__LIGNE_GUIDEE_PRIORITAIRE.value, __LIGNE_GUIDEE_PRIORITAIRE.set, None, '')
 
@@ -3569,7 +3626,7 @@ class CTD_ANON_62(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3134, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3138, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3580,7 +3637,7 @@ class CTD_ANON_62(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_62_POSITION_FEU', True,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 3136, 12), )
+                                                                 3140, 12), )
 
     POSITION_FEU = property(__POSITION_FEU.value, __POSITION_FEU.set, None,
                             "Description de la position d'un feu pour une entr\xe9e du contr\xf4leur")
@@ -3601,7 +3658,7 @@ class typeCapteur(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCapteur')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3217, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3221, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3611,10 +3668,10 @@ class typeCapteur(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeCapteur_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3221, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3225, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3221, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3225, 4)
+
     id = property(__id.value, __id.set, None, 'Identifiant du capteur')
 
 
@@ -3623,10 +3680,10 @@ class typeCapteur(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_typeCapteur_troncon',
                                                   pyxb.binding.datatypes.string, required=True)
     __troncon._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3226, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3230, 4)
     __troncon._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3226, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3230, 4)
+
     troncon = property(__troncon.value, __troncon.set, None, 'Tron\xe7on sur lequel est positionn\xe9 le capteur')
 
     _ElementMap.update({
@@ -3636,6 +3693,8 @@ class typeCapteur(pyxb.binding.basis.complexTypeDefinition):
         __id.name(): __id,
         __troncon.name(): __troncon
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCapteur', typeCapteur)
 
 
@@ -3647,7 +3706,7 @@ class typeCapteurMFD(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCapteurMFD')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3275, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3279, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3657,7 +3716,7 @@ class typeCapteurMFD(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeCapteurMFD_TRONCONS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             3280, 6), )
+                                                             3284, 6), )
 
     TRONCONS = property(__TRONCONS.value, __TRONCONS.set, None,
                         'Liste des tron\xe7ons constituant la zone du capteur MFD')
@@ -3668,10 +3727,10 @@ class typeCapteurMFD(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeCapteurMFD_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3302, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3306, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3302, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3306, 4)
+
     id = property(__id.value, __id.set, None, 'Identifiant du capteur')
 
     _ElementMap.update({
@@ -3680,6 +3739,8 @@ class typeCapteurMFD(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
         __id.name(): __id
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCapteurMFD', typeCapteurMFD)
 
 
@@ -3691,7 +3752,7 @@ class CTD_ANON_63(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3284, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3288, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3701,7 +3762,7 @@ class CTD_ANON_63(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_63_TRONCON', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3286, 12), )
+                                                            3290, 12), )
 
     TRONCON = property(__TRONCON.value, __TRONCON.set, None, 'Troncon appartenant \xe0 la zone MFD')
 
@@ -3721,7 +3782,7 @@ class CTD_ANON_64(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3290, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3294, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3731,10 +3792,10 @@ class CTD_ANON_64(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_64_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3291, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3295, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3291, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3295, 16)
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on')
 
     _ElementMap.update({
@@ -3753,7 +3814,7 @@ class typeCapteurBlueTooth(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCapteurBlueTooth')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3308, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3312, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3763,7 +3824,7 @@ class typeCapteurBlueTooth(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeCapteurBlueTooth_POSITION', True,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             3313, 6), )
+                                                             3317, 6), )
 
     POSITION = property(__POSITION.value, __POSITION.set, None,
                         'Permet de sp\xe9cifier la positione des capteurs ponctuels d\xe9tectant les v\xe9hicules entrants et sortants du noeud (Par d\xe9faut, ces capteurs sont situ\xe9s aux extr\xe9mit\xe9s des tron\xe7ons amont et aval, au niveau du noeud)')
@@ -3774,10 +3835,10 @@ class typeCapteurBlueTooth(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeCapteurBlueTooth_id',
                                              pyxb.binding.datatypes.string, required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3336, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3340, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3336, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3340, 4)
+
     id = property(__id.value, __id.set, None, 'Identifiant du capteur')
 
 
@@ -3786,9 +3847,9 @@ class typeCapteurBlueTooth(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_typeCapteurBlueTooth_connexion',
                                                     pyxb.binding.datatypes.string, required=True)
     __connexion._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3341, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3345, 4)
     __connexion._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3341, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3345, 4)
 
     connexion = property(__connexion.value, __connexion.set, None,
                          'Identifiant du CAF ou r\xe9partiteur associ\xe9 au capteur')
@@ -3800,6 +3861,8 @@ class typeCapteurBlueTooth(pyxb.binding.basis.complexTypeDefinition):
         __id.name(): __id,
         __connexion.name(): __connexion
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCapteurBlueTooth', typeCapteurBlueTooth)
 
 
@@ -3811,7 +3874,7 @@ class CTD_ANON_65(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3362, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3822,7 +3885,7 @@ class CTD_ANON_65(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_65_FLUX_TYPEVEH', True,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 3360, 12), )
+                                                                 3364, 12), )
 
     FLUX_TYPEVEH = property(__FLUX_TYPEVEH.value, __FLUX_TYPEVEH.set, None, None)
 
@@ -3842,7 +3905,7 @@ class CTD_ANON_66(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3361, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3365, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3852,7 +3915,7 @@ class CTD_ANON_66(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_66_FLUX', False,
                                                      pyxb.utils.utility.Location(
                                                          '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                         3363, 18), )
+                                                         3367, 18), )
 
     FLUX = property(__FLUX.value, __FLUX.set, None,
                     "Description du flux pour un type de v\xe9hicule pour l'extr\xe9mit\xe9 courante")
@@ -3864,9 +3927,9 @@ class CTD_ANON_66(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_66_id_typevehicule',
                                                           pyxb.binding.datatypes.string, required=True)
     __id_typevehicule._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3369, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3373, 16)
     __id_typevehicule._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3369, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3373, 16)
 
     id_typevehicule = property(__id_typevehicule.value, __id_typevehicule.set, None,
                                'Identifiant de type de v\xe9hicule associ\xe9 \xe0 la description du flux')
@@ -3887,7 +3950,7 @@ class CTD_ANON_67(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3387, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3896,7 +3959,7 @@ class CTD_ANON_67(pyxb.binding.basis.complexTypeDefinition):
     __AGRESSIVITE = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'AGRESSIVITE'),
                                                             'AGRESSIVITE', '__AbsentNamespace0_CTD_ANON_67_AGRESSIVITE',
                                                             True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3385, 12), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3389, 12), )
 
     AGRESSIVITE = property(__AGRESSIVITE.value, __AGRESSIVITE.set, None,
                            "Description du caract\xe8re agressif d'une classe de v\xe9hicule pour cette entr\xe9e (par d\xe9faut, le taux de v\xe9hicule agressif d'une classe est 0)\n")
@@ -3917,7 +3980,7 @@ class CTD_ANON_68(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3446, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3450, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3927,7 +3990,7 @@ class CTD_ANON_68(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE'), 'CREATION_VEHICULE',
         '__AbsentNamespace0_CTD_ANON_68_CREATION_VEHICULE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3448, 16), )
+                                    3452, 16), )
 
     CREATION_VEHICULE = property(__CREATION_VEHICULE.value, __CREATION_VEHICULE.set, None,
                                  "D\xe9finition d'une cr\xe9ation")
@@ -3948,7 +4011,7 @@ class CTD_ANON_69(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3490, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3494, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3958,7 +4021,7 @@ class CTD_ANON_69(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_69_CAPACITE', True,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             3492, 16), )
+                                                             3496, 16), )
 
     CAPACITE = property(__CAPACITE.value, __CAPACITE.set, None, "Description d'une variante de la capacit\xe9")
 
@@ -3978,7 +4041,7 @@ class CTD_ANON_70(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3522, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3526, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -3988,10 +4051,10 @@ class CTD_ANON_70(pyxb.binding.basis.complexTypeDefinition):
                                                '__AbsentNamespace0_CTD_ANON_70_type', pyxb.binding.datatypes.string,
                                                required=True)
     __type._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3523, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3527, 10)
     __type._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3523, 10)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3527, 10)
+
     type = property(__type.value, __type.set, None, 'Type de v\xe9hicule interdit')
 
     _ElementMap.update({
@@ -4010,7 +4073,7 @@ class CTD_ANON_71(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3580, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3584, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4020,7 +4083,7 @@ class CTD_ANON_71(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_71_TRONCON', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3582, 16), )
+                                                            3586, 16), )
 
     TRONCON = property(__TRONCON.value, __TRONCON.set, None, 'Tron\xe7on appartenant \xe0 la zone')
 
@@ -4040,7 +4103,7 @@ class CTD_ANON_72(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3586, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3590, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4050,10 +4113,10 @@ class CTD_ANON_72(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_72_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3587, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3591, 20)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3587, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3591, 20)
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on')
 
 
@@ -4062,9 +4125,9 @@ class CTD_ANON_72(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'capacite_stationnement'), 'capacite_stationnement',
         '__AbsentNamespace0_CTD_ANON_72_capacite_stationnement', pyxb.binding.datatypes.double, unicode_default='0')
     __capacite_stationnement._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3592, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3596, 20)
     __capacite_stationnement._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3592, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3596, 20)
 
     capacite_stationnement = property(__capacite_stationnement.value, __capacite_stationnement.set, None,
                                       'Capacit\xe9 de stationnement en m\xe8tres. (0 par d\xe9faut, -1 : capacit\xe9 illimit\xe9e)')
@@ -4075,9 +4138,9 @@ class CTD_ANON_72(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'stationnement_initial'), 'stationnement_initial',
         '__AbsentNamespace0_CTD_ANON_72_stationnement_initial', pyxb.binding.datatypes.double, unicode_default='0')
     __stationnement_initial._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3598, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3602, 20)
     __stationnement_initial._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3598, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3602, 20)
 
     stationnement_initial = property(__stationnement_initial.value, __stationnement_initial.set, None,
                                      'Valeur de stationnement initiale en m\xe8tres.')
@@ -4100,7 +4163,7 @@ class CTD_ANON_73(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3612, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3616, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4110,7 +4173,7 @@ class CTD_ANON_73(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_73_PARKING', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3614, 16), )
+                                                            3618, 16), )
 
     PARKING = property(__PARKING.value, __PARKING.set, None, 'Parking appartenant \xe0 la zone')
 
@@ -4120,10 +4183,10 @@ class CTD_ANON_73(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_73_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3620, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3624, 14)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3620, 14)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3624, 14)
+
     id = property(__id.value, __id.set, None, 'Identifiant du groupe de parking')
 
     _ElementMap.update({
@@ -4142,7 +4205,7 @@ class CTD_ANON_74(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3631, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3635, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4152,7 +4215,7 @@ class CTD_ANON_74(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'MATRICE_OD_INTERNE'), 'MATRICE_OD_INTERNE',
         '__AbsentNamespace0_CTD_ANON_74_MATRICE_OD_INTERNE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3633, 16), )
+                                    3637, 16), )
 
     MATRICE_OD_INTERNE = property(__MATRICE_OD_INTERNE.value, __MATRICE_OD_INTERNE.set, None,
                                   "Description d'une variante de la matrice OD (la somme des coefficients d'affectation pour l'ensemble des destinations d\xe9clar\xe9es doit \xeatre \xe9gale \xe0 1, si une destination n'est pas d\xe9clar\xe9e son coefficient d'affectation est 0 par d\xe9faut)")
@@ -4173,7 +4236,7 @@ class CTD_ANON_75(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3668, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3672, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4183,7 +4246,7 @@ class CTD_ANON_75(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE'), 'CREATION_VEHICULE',
         '__AbsentNamespace0_CTD_ANON_75_CREATION_VEHICULE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3670, 16), )
+                                    3674, 16), )
 
     CREATION_VEHICULE = property(__CREATION_VEHICULE.value, __CREATION_VEHICULE.set, None,
                                  "D\xe9finition d'une cr\xe9ation")
@@ -4204,7 +4267,7 @@ class CTD_ANON_76(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3674, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3678, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4214,10 +4277,10 @@ class CTD_ANON_76(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_76_instant',
                                                   pyxb.binding.datatypes.float)
     __instant._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3675, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3679, 20)
     __instant._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3675, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3679, 20)
+
     instant = property(__instant.value, __instant.set, None, 'Instant de cr\xe9ation du v\xe9hicule')
 
 
@@ -4226,10 +4289,10 @@ class CTD_ANON_76(pyxb.binding.basis.complexTypeDefinition):
                                                        'typeVehicule', '__AbsentNamespace0_CTD_ANON_76_typeVehicule',
                                                        pyxb.binding.datatypes.string)
     __typeVehicule._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3680, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3684, 20)
     __typeVehicule._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3680, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3684, 20)
+
     typeVehicule = property(__typeVehicule.value, __typeVehicule.set, None, 'Type du v\xe9hicule \xe0 cr\xe9er')
 
 
@@ -4238,9 +4301,9 @@ class CTD_ANON_76(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_76_destination',
                                                       pyxb.binding.datatypes.string)
     __destination._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3685, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3689, 20)
     __destination._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3685, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3689, 20)
 
     destination = property(__destination.value, __destination.set, None,
                            'Destination du v\xe9hicule cr\xe9\xe9 du v\xe9hicule')
@@ -4263,7 +4326,7 @@ class CTD_ANON_77(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3699, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3703, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4273,7 +4336,7 @@ class CTD_ANON_77(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'REPARTITION_TYPEVEHICULE'), 'REPARTITION_TYPEVEHICULE',
         '__AbsentNamespace0_CTD_ANON_77_REPARTITION_TYPEVEHICULE', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3701, 16), )
+                                    3705, 16), )
 
     REPARTITION_TYPEVEHICULE = property(__REPARTITION_TYPEVEHICULE.value, __REPARTITION_TYPEVEHICULE.set, None,
                                         "Description d'une variante d'une r\xe9partition des types de v\xe9hicule")
@@ -4294,7 +4357,7 @@ class CTD_ANON_78(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3725, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3729, 12)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4304,7 +4367,7 @@ class CTD_ANON_78(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_78_ORIGINE', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3727, 16), )
+                                                            3731, 16), )
 
     ORIGINE = property(__ORIGINE.value, __ORIGINE.set, None,
                        "D\xe9finition du coefficient d'affectation associ\xe9 \xe0 une origine")
@@ -4325,7 +4388,7 @@ class CTD_ANON_79(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3810, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3814, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4335,7 +4398,7 @@ class CTD_ANON_79(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_79_CAPTEUR', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3812, 12), )
+                                                            3816, 12), )
 
     CAPTEUR = property(__CAPTEUR.value, __CAPTEUR.set, None, 'Capteur associ\xe9 \xe0 la brique de r\xe9gulation')
 
@@ -4355,7 +4418,7 @@ class CTD_ANON_80(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3816, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3820, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4364,7 +4427,7 @@ class CTD_ANON_80(pyxb.binding.basis.complexTypeDefinition):
     __PARAMETRES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'PARAMETRES'),
                                                            'PARAMETRES', '__AbsentNamespace0_CTD_ANON_80_PARAMETRES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3818, 18), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3822, 18), )
 
     PARAMETRES = property(__PARAMETRES.value, __PARAMETRES.set, None,
                           'D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour le capteur')
@@ -4375,10 +4438,10 @@ class CTD_ANON_80(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_80_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3824, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3828, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3824, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3828, 16)
+
     id = property(__id.value, __id.set, None, 'Identifiant du capteur')
 
 
@@ -4387,10 +4450,10 @@ class CTD_ANON_80(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_80_fonction',
                                                    pyxb.binding.datatypes.string, required=True)
     __fonction._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3829, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3833, 16)
     __fonction._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3829, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3833, 16)
+
     fonction = property(__fonction.value, __fonction.set, None, 'Fonction du capteur')
 
 
@@ -4398,9 +4461,9 @@ class CTD_ANON_80(pyxb.binding.basis.complexTypeDefinition):
     __module = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'module'), 'module',
                                                  '__AbsentNamespace0_CTD_ANON_80_module', pyxb.binding.datatypes.string)
     __module._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3834, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3838, 16)
     __module._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3834, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3838, 16)
 
     module = property(__module.value, __module.set, None,
                       "Chemin du fichier python contenant la fonction, uniquement s'il s'agit d'une fonction non incluse dans les scripts fournis avec symubruit")
@@ -4423,7 +4486,7 @@ class CTD_ANON_81(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3848, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3852, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4433,7 +4496,7 @@ class CTD_ANON_81(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_81_CONDITION', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              3850, 12), )
+                                                              3854, 12), )
 
     CONDITION = property(__CONDITION.value, __CONDITION.set, None,
                          "Condition de d\xe9clenchement d'actions associ\xe9e \xe0 la brique de r\xe9gulation")
@@ -4454,7 +4517,7 @@ class CTD_ANON_82(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3854, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3858, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4463,7 +4526,7 @@ class CTD_ANON_82(pyxb.binding.basis.complexTypeDefinition):
     __PARAMETRES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'PARAMETRES'),
                                                            'PARAMETRES', '__AbsentNamespace0_CTD_ANON_82_PARAMETRES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3856, 18), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3860, 18), )
 
     PARAMETRES = property(__PARAMETRES.value, __PARAMETRES.set, None,
                           'D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour la condition')
@@ -4474,10 +4537,10 @@ class CTD_ANON_82(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_82_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3862, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3866, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3862, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3866, 16)
+
     id = property(__id.value, __id.set, None, 'Identifiant de la condition')
 
 
@@ -4486,10 +4549,10 @@ class CTD_ANON_82(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_82_fonction',
                                                    pyxb.binding.datatypes.string, required=True)
     __fonction._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3867, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3871, 16)
     __fonction._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3867, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3871, 16)
+
     fonction = property(__fonction.value, __fonction.set, None, 'Fonction de la condition')
 
 
@@ -4497,9 +4560,9 @@ class CTD_ANON_82(pyxb.binding.basis.complexTypeDefinition):
     __module = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'module'), 'module',
                                                  '__AbsentNamespace0_CTD_ANON_82_module', pyxb.binding.datatypes.string)
     __module._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3872, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3876, 16)
     __module._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3872, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3876, 16)
 
     module = property(__module.value, __module.set, None,
                       "Chemin du fichier python contenant la fonction, uniquement s'il s'agit d'une fonction non incluse dans les scripts fournis avec symubruit")
@@ -4522,7 +4585,7 @@ class CTD_ANON_83(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3886, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3890, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4532,7 +4595,7 @@ class CTD_ANON_83(pyxb.binding.basis.complexTypeDefinition):
                                                        '__AbsentNamespace0_CTD_ANON_83_ACTION', True,
                                                        pyxb.utils.utility.Location(
                                                            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                           3888, 12), )
+                                                           3892, 12), )
 
     ACTION = property(__ACTION.value, __ACTION.set, None, 'Action associ\xe9e \xe0 la brique de r\xe9gulation')
 
@@ -4552,7 +4615,7 @@ class CTD_ANON_84(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3892, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3896, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4561,7 +4624,7 @@ class CTD_ANON_84(pyxb.binding.basis.complexTypeDefinition):
     __PARAMETRES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'PARAMETRES'),
                                                            'PARAMETRES', '__AbsentNamespace0_CTD_ANON_84_PARAMETRES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3894, 18), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3898, 18), )
 
     PARAMETRES = property(__PARAMETRES.value, __PARAMETRES.set, None,
                           "D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour l'action")
@@ -4572,9 +4635,9 @@ class CTD_ANON_84(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_84_conditions',
                                                      pyxb.binding.datatypes.string)
     __conditions._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3900, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3904, 16)
     __conditions._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3900, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3904, 16)
 
     conditions = property(__conditions.value, __conditions.set, None,
                           "Liste des identifiants des conditions n\xe9cessaires \xe0 l'ex\xe9cution de l'action")
@@ -4585,10 +4648,10 @@ class CTD_ANON_84(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_84_fonction',
                                                    pyxb.binding.datatypes.string, required=True)
     __fonction._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3905, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3909, 16)
     __fonction._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3905, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3909, 16)
+
     fonction = property(__fonction.value, __fonction.set, None, "Fonction de l'action")
 
 
@@ -4596,9 +4659,9 @@ class CTD_ANON_84(pyxb.binding.basis.complexTypeDefinition):
     __module = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'module'), 'module',
                                                  '__AbsentNamespace0_CTD_ANON_84_module', pyxb.binding.datatypes.string)
     __module._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3910, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3914, 16)
     __module._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3910, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3914, 16)
 
     module = property(__module.value, __module.set, None,
                       "Chemin du fichier python contenant la fonction, uniquement s'il s'agit d'une fonction non incluse dans les scripts fournis avec symubruit")
@@ -4621,7 +4684,7 @@ class CTD_ANON_85(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3924, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3928, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4630,7 +4693,7 @@ class CTD_ANON_85(pyxb.binding.basis.complexTypeDefinition):
     __RESTITUTION = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'RESTITUTION'),
                                                             'RESTITUTION', '__AbsentNamespace0_CTD_ANON_85_RESTITUTION',
                                                             True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3926, 12), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3930, 12), )
 
     RESTITUTION = property(__RESTITUTION.value, __RESTITUTION.set, None,
                            'D\xe9finition des sorties \xe0 produire dans le fichier de sortie poru la brique de r\xe9gulation')
@@ -4651,7 +4714,7 @@ class CTD_ANON_86(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3930, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3934, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4660,7 +4723,7 @@ class CTD_ANON_86(pyxb.binding.basis.complexTypeDefinition):
     __PARAMETRES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'PARAMETRES'),
                                                            'PARAMETRES', '__AbsentNamespace0_CTD_ANON_86_PARAMETRES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3932, 18), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3936, 18), )
 
     PARAMETRES = property(__PARAMETRES.value, __PARAMETRES.set, None,
                           'D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour la restitution')
@@ -4671,10 +4734,10 @@ class CTD_ANON_86(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_86_fonction',
                                                    pyxb.binding.datatypes.string, required=True)
     __fonction._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3938, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3942, 16)
     __fonction._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3938, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3942, 16)
+
     fonction = property(__fonction.value, __fonction.set, None, 'Fonction de la resitution')
 
 
@@ -4682,9 +4745,9 @@ class CTD_ANON_86(pyxb.binding.basis.complexTypeDefinition):
     __module = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'module'), 'module',
                                                  '__AbsentNamespace0_CTD_ANON_86_module', pyxb.binding.datatypes.string)
     __module._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3943, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3947, 16)
     __module._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3943, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3947, 16)
 
     module = property(__module.value, __module.set, None,
                       "Chemin du fichier python contenant la fonction, uniquement s'il s'agit d'une fonction non incluse dans les scripts fournis avec symubruit")
@@ -4706,7 +4769,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3969, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3973, 4)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4716,7 +4779,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'PLAGES_TEMPORELLES'), 'PLAGES_TEMPORELLES',
         '__AbsentNamespace0_CTD_ANON_87_PLAGES_TEMPORELLES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3971, 8), )
+                                    3975, 8), )
 
     PLAGES_TEMPORELLES = property(__PLAGES_TEMPORELLES.value, __PLAGES_TEMPORELLES.set, None,
                                   'Ensemble des plages temporelles d\xe9finies pour l\'ensemble de la ou des simulations, dont l\'ID peut \xeatre utilis\xe9 pour renseigner la plage de validit\xe9 des variantes temporelles (attributs "duree" de certains \xe9l\xe9ments)')
@@ -4726,7 +4789,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
     __SIMULATIONS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'SIMULATIONS'),
                                                             'SIMULATIONS', '__AbsentNamespace0_CTD_ANON_87_SIMULATIONS',
                                                             False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4026, 8), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4030, 8), )
 
     SIMULATIONS = property(__SIMULATIONS.value, __SIMULATIONS.set, None,
                            'Liste des d\xe9finitions de param\xe8tres de simulation')
@@ -4737,7 +4800,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_87_TRAFICS', False,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4045, 8), )
+                                                            4049, 8), )
 
     TRAFICS = property(__TRAFICS.value, __TRAFICS.set, None, 'Liste des d\xe9finitions de param\xe8tres de trafic')
 
@@ -4747,7 +4810,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_87_RESEAUX', False,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4064, 8), )
+                                                            4068, 8), )
 
     RESEAUX = property(__RESEAUX.value, __RESEAUX.set, None, 'Liste des d\xe9finitions de r\xe9seaux')
 
@@ -4757,7 +4820,7 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_87_SCENARIOS', False,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4417, 8), )
+                                                              4421, 8), )
 
     SCENARIOS = property(__SCENARIOS.value, __SCENARIOS.set, None, 'Liste des d\xe9finitions de sc\xe9narios')
 
@@ -4767,9 +4830,9 @@ class CTD_ANON_87(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_87_version',
                                                   pyxb.binding.datatypes.string, required=True)
     __version._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4464, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4468, 6)
     __version._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4464, 6)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4468, 6)
 
     version = property(__version.value, __version.set, None,
                        'Num\xe9ro de version de format des donn\xe9es initiales de Symubruit')
@@ -4794,7 +4857,7 @@ class CTD_ANON_88(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3981, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3985, 16)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4804,10 +4867,10 @@ class CTD_ANON_88(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_88_id', pyxb.binding.datatypes.ID,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3982, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3986, 18)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3982, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3986, 18)
+
     id = property(__id.value, __id.set, None, 'identifiant de la plage temporelle')
 
 
@@ -4816,10 +4879,10 @@ class CTD_ANON_88(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_88_debut', pyxb.binding.datatypes.time,
                                                 required=True)
     __debut._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3987, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3991, 18)
     __debut._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3987, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3991, 18)
+
     debut = property(__debut.value, __debut.set, None, 'date de d\xe9but de la plage temporelle (hh:mm:ss)')
 
 
@@ -4828,10 +4891,10 @@ class CTD_ANON_88(pyxb.binding.basis.complexTypeDefinition):
                                               '__AbsentNamespace0_CTD_ANON_88_fin', pyxb.binding.datatypes.time,
                                               required=True)
     __fin._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3992, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3996, 18)
     __fin._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3992, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3996, 18)
+
     fin = property(__fin.value, __fin.set, None, 'date de fin de la plage temporelle (hh:mm:ss)')
 
     _ElementMap.update({
@@ -4852,7 +4915,7 @@ class CTD_ANON_89(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4030, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4034, 10)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4861,7 +4924,7 @@ class CTD_ANON_89(pyxb.binding.basis.complexTypeDefinition):
     __SIMULATION = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'SIMULATION'),
                                                            'SIMULATION', '__AbsentNamespace0_CTD_ANON_89_SIMULATION',
                                                            True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4032, 14), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4036, 14), )
 
     SIMULATION = property(__SIMULATION.value, __SIMULATION.set, None, 'Param\xe9trage de la simulation')
 
@@ -4881,7 +4944,7 @@ class CTD_ANON_90(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4049, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4053, 10)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4891,7 +4954,7 @@ class CTD_ANON_90(pyxb.binding.basis.complexTypeDefinition):
                                                        '__AbsentNamespace0_CTD_ANON_90_TRAFIC', True,
                                                        pyxb.utils.utility.Location(
                                                            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                           4051, 14), )
+                                                           4055, 14), )
 
     TRAFIC = property(__TRAFIC.value, __TRAFIC.set, None, 'Param\xe9trage du trafic')
 
@@ -4911,7 +4974,7 @@ class CTD_ANON_91(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4068, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4072, 10)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4921,7 +4984,7 @@ class CTD_ANON_91(pyxb.binding.basis.complexTypeDefinition):
                                                        '__AbsentNamespace0_CTD_ANON_91_RESEAU', True,
                                                        pyxb.utils.utility.Location(
                                                            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                           4070, 14), )
+                                                           4074, 14), )
 
     RESEAU = property(__RESEAU.value, __RESEAU.set, None, 'Donn\xe9es du r\xe9seau')
 
@@ -4941,7 +5004,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4074, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4078, 16)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -4951,7 +5014,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_92_TRONCONS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4076, 20), )
+                                                             4080, 20), )
 
     TRONCONS = property(__TRONCONS.value, __TRONCONS.set, None, 'Liste des tron\xe7ons')
 
@@ -4960,7 +5023,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
     __CONNEXIONS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CONNEXIONS'),
                                                            'CONNEXIONS', '__AbsentNamespace0_CTD_ANON_92_CONNEXIONS',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4090, 20), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4094, 20), )
 
     CONNEXIONS = property(__CONNEXIONS.value, __CONNEXIONS.set, None, 'Noeud ')
 
@@ -4970,7 +5033,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'ZONES_DE_TERMINAISON'), 'ZONES_DE_TERMINAISON',
         '__AbsentNamespace0_CTD_ANON_92_ZONES_DE_TERMINAISON', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4201, 20), )
+                                    4205, 20), )
 
     ZONES_DE_TERMINAISON = property(__ZONES_DE_TERMINAISON.value, __ZONES_DE_TERMINAISON.set, None,
                                     'Liste des zones de terminaison')
@@ -4981,7 +5044,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_VEHICULES_GUIDES'), 'PARAMETRAGE_VEHICULES_GUIDES',
         '__AbsentNamespace0_CTD_ANON_92_PARAMETRAGE_VEHICULES_GUIDES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4223, 20), )
+                                    4227, 20), )
 
     PARAMETRAGE_VEHICULES_GUIDES = property(__PARAMETRAGE_VEHICULES_GUIDES.value, __PARAMETRAGE_VEHICULES_GUIDES.set,
                                             None, 'Param\xe9trage des v\xe9hicules guid\xe9s du r\xe9seau')
@@ -4992,7 +5055,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
                                                        '__AbsentNamespace0_CTD_ANON_92_ROUTES', False,
                                                        pyxb.utils.utility.Location(
                                                            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                           4228, 20), )
+                                                           4232, 20), )
 
     ROUTES = property(__ROUTES.value, __ROUTES.set, None, "Liste d'itin\xe9raires du r\xe9seau")
 
@@ -5001,7 +5064,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
     __COORD_REFS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'COORD_REFS'),
                                                            'COORD_REFS', '__AbsentNamespace0_CTD_ANON_92_COORD_REFS',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4277, 20), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4281, 20), )
 
     COORD_REFS = property(__COORD_REFS.value, __COORD_REFS.set, None,
                           'Liste des r\xe9f\xe9rentiels de coordonn\xe9es g\xe9ographiques utilis\xe9s\n')
@@ -5012,7 +5075,7 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_92_INIT', False,
                                                      pyxb.utils.utility.Location(
                                                          '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                         4331, 20), )
+                                                         4335, 20), )
 
     INIT = property(__INIT.value, __INIT.set, None,
                     "Initialisation du r\xe9seau par une liste de v\xe9hicule pr\xe9sent sur le r\xe9seau \xe0 l'instant 0")
@@ -5023,10 +5086,10 @@ class CTD_ANON_92(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_92_id', pyxb.binding.datatypes.ID,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4407, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4411, 18)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4407, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4411, 18)
+
     id = property(__id.value, __id.set, None, 'Identifiant de la section RESEAU')
 
     _ElementMap.update({
@@ -5051,7 +5114,7 @@ class CTD_ANON_93(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4080, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4084, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5061,7 +5124,7 @@ class CTD_ANON_93(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_93_TRONCON', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4082, 26), )
+                                                            4086, 26), )
 
     TRONCON = property(__TRONCON.value, __TRONCON.set, None, "Description d'un tron\xe7on")
 
@@ -5081,7 +5144,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4094, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4098, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5090,7 +5153,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
     __EXTREMITES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'EXTREMITES'),
                                                            'EXTREMITES', '__AbsentNamespace0_CTD_ANON_94_EXTREMITES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4096, 26), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4100, 26), )
 
     EXTREMITES = property(__EXTREMITES.value, __EXTREMITES.set, None,
                           'Liste des extr\xe9mit\xe9s (anciennement entr\xe9es et sorties)')
@@ -5101,7 +5164,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_94_PARKINGS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4117, 26), )
+                                                             4121, 26), )
 
     PARKINGS = property(__PARKINGS.value, __PARKINGS.set, None, 'Liste des parkings')
 
@@ -5112,7 +5175,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_CTD_ANON_94_REPARTITEURS', False,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 4138, 26), )
+                                                                 4142, 26), )
 
     REPARTITEURS = property(__REPARTITEURS.value, __REPARTITEURS.set, None, 'Liste des r\xe9partiteurs')
 
@@ -5121,7 +5184,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
     __CONVERGENTS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CONVERGENTS'),
                                                             'CONVERGENTS', '__AbsentNamespace0_CTD_ANON_94_CONVERGENTS',
                                                             False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4153, 26), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4157, 26), )
 
     CONVERGENTS = property(__CONVERGENTS.value, __CONVERGENTS.set, None, 'Liste des convergents')
 
@@ -5130,7 +5193,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
     __GIRATOIRES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'GIRATOIRES'),
                                                            'GIRATOIRES', '__AbsentNamespace0_CTD_ANON_94_GIRATOIRES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4168, 26), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4172, 26), )
 
     GIRATOIRES = property(__GIRATOIRES.value, __GIRATOIRES.set, None, 'Liste des giratoires')
 
@@ -5141,7 +5204,7 @@ class CTD_ANON_94(pyxb.binding.basis.complexTypeDefinition):
                                                                 '__AbsentNamespace0_CTD_ANON_94_CARREFOURSAFEUX', False,
                                                                 pyxb.utils.utility.Location(
                                                                     '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                    4183, 26), )
+                                                                    4187, 26), )
 
     CARREFOURSAFEUX = property(__CARREFOURSAFEUX.value, __CARREFOURSAFEUX.set, None, 'Liste des carrefours \xe0 feux')
 
@@ -5166,7 +5229,7 @@ class CTD_ANON_95(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4100, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4104, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5176,7 +5239,7 @@ class CTD_ANON_95(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_95_EXTREMITE', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4102, 32), )
+                                                              4106, 32), )
 
     EXTREMITE = property(__EXTREMITE.value, __EXTREMITE.set, None, "Description d'une extremit\xe9 du r\xe9seau")
 
@@ -5196,7 +5259,7 @@ class CTD_ANON_96(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4106, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4110, 34)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5206,10 +5269,10 @@ class CTD_ANON_96(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_96_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4107, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4111, 36)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4107, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4111, 36)
+
     id = property(__id.value, __id.set, None, "Identifiant de l'extremit\xe9")
 
     _ElementMap.update({
@@ -5228,7 +5291,7 @@ class CTD_ANON_97(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4121, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4125, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5238,7 +5301,7 @@ class CTD_ANON_97(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_97_PARKING', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4123, 32), )
+                                                            4127, 32), )
 
     PARKING = property(__PARKING.value, __PARKING.set, None, "Description d'un parking du r\xe9seau")
 
@@ -5258,7 +5321,7 @@ class CTD_ANON_98(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4127, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4131, 34)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5268,10 +5331,10 @@ class CTD_ANON_98(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_98_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4128, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4132, 36)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4128, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4132, 36)
+
     id = property(__id.value, __id.set, None, 'Identifiant du parking')
 
     _ElementMap.update({
@@ -5290,7 +5353,7 @@ class CTD_ANON_99(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4142, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4146, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5299,7 +5362,7 @@ class CTD_ANON_99(pyxb.binding.basis.complexTypeDefinition):
     __REPARTITEUR = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'REPARTITEUR'),
                                                             'REPARTITEUR', '__AbsentNamespace0_CTD_ANON_99_REPARTITEUR',
                                                             True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4144, 32), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4148, 32), )
 
     REPARTITEUR = property(__REPARTITEUR.value, __REPARTITEUR.set, None, "Description d'un r\xe9partiteur")
 
@@ -5319,7 +5382,7 @@ class CTD_ANON_100(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4157, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4161, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5328,7 +5391,7 @@ class CTD_ANON_100(pyxb.binding.basis.complexTypeDefinition):
     __CONVERGENT = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CONVERGENT'),
                                                            'CONVERGENT', '__AbsentNamespace0_CTD_ANON_100_CONVERGENT',
                                                            True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4159, 32), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4163, 32), )
 
     CONVERGENT = property(__CONVERGENT.value, __CONVERGENT.set, None, "Description d'un convergent")
 
@@ -5348,7 +5411,7 @@ class CTD_ANON_101(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4172, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4176, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5358,7 +5421,7 @@ class CTD_ANON_101(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_101_GIRATOIRE', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4174, 32), )
+                                                              4178, 32), )
 
     GIRATOIRE = property(__GIRATOIRE.value, __GIRATOIRE.set, None, "Description d'un r\xe9partiteur")
 
@@ -5378,7 +5441,7 @@ class CTD_ANON_102(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4187, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4191, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5389,7 +5452,7 @@ class CTD_ANON_102(pyxb.binding.basis.complexTypeDefinition):
                                                                '__AbsentNamespace0_CTD_ANON_102_CARREFOURAFEUX', True,
                                                                pyxb.utils.utility.Location(
                                                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                   4189, 32), )
+                                                                   4193, 32), )
 
     CARREFOURAFEUX = property(__CARREFOURAFEUX.value, __CARREFOURAFEUX.set, None,
                               "Description d'un carrefour \xe0 feux")
@@ -5410,7 +5473,7 @@ class CTD_ANON_103(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4205, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4209, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5420,7 +5483,7 @@ class CTD_ANON_103(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'ZONE_DE_TERMINAISON'), 'ZONE_DE_TERMINAISON',
         '__AbsentNamespace0_CTD_ANON_103_ZONE_DE_TERMINAISON', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4207, 26), )
+                                    4211, 26), )
 
     ZONE_DE_TERMINAISON = property(__ZONE_DE_TERMINAISON.value, __ZONE_DE_TERMINAISON.set, None,
                                    "Description d'une zone de terminaison")
@@ -5441,7 +5504,7 @@ class CTD_ANON_104(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4212, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4216, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5451,10 +5514,10 @@ class CTD_ANON_104(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_104_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4213, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4217, 30)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4213, 30)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4217, 30)
+
     id = property(__id.value, __id.set, None, 'Identifiant de la zone de terminaison')
 
     _ElementMap.update({
@@ -5473,7 +5536,7 @@ class CTD_ANON_105(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4232, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4236, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5483,7 +5546,7 @@ class CTD_ANON_105(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_105_ROUTE', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          4234, 26), )
+                                                          4238, 26), )
 
     ROUTE = property(__ROUTE.value, __ROUTE.set, None, "Description d'un itin\xe9raire du r\xe9seau")
 
@@ -5503,7 +5566,7 @@ class CTD_ANON_106(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4238, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4242, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5513,7 +5576,7 @@ class CTD_ANON_106(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_106_TRONCONS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4240, 32), )
+                                                             4244, 32), )
 
     TRONCONS = property(__TRONCONS.value, __TRONCONS.set, None,
                         "Liste ordonn\xe9e des tron\xe7ons composant l'itin\xe9raire")
@@ -5524,10 +5587,10 @@ class CTD_ANON_106(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_106_id', pyxb.binding.datatypes.ID,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4262, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4266, 30)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4262, 30)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4266, 30)
+
     id = property(__id.value, __id.set, None, "Identifiant unique de l'itin\xe9raire")
 
 
@@ -5536,10 +5599,10 @@ class CTD_ANON_106(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_106_description',
                                                       pyxb.binding.datatypes.string)
     __description._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4267, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4271, 30)
     __description._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4267, 30)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4271, 30)
+
     description = property(__description.value, __description.set, None, "Description de l'itin\xe9raire")
 
     _ElementMap.update({
@@ -5559,7 +5622,7 @@ class CTD_ANON_107(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4244, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4248, 34)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5569,7 +5632,7 @@ class CTD_ANON_107(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_107_TRONCON', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4246, 38), )
+                                                            4250, 38), )
 
     TRONCON = property(__TRONCON.value, __TRONCON.set, None, "Tron\xe7on de l'itin\xe9raire")
 
@@ -5589,7 +5652,7 @@ class CTD_ANON_108(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4250, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4254, 40)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5599,10 +5662,10 @@ class CTD_ANON_108(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_108_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4251, 42)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4255, 42)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4251, 42)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4255, 42)
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on')
 
     _ElementMap.update({
@@ -5622,7 +5685,7 @@ class CTD_ANON_109(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4282, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4286, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5632,7 +5695,7 @@ class CTD_ANON_109(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_109_COORD_REF', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4284, 26), )
+                                                              4288, 26), )
 
     COORD_REF = property(__COORD_REF.value, __COORD_REF.set, None,
                          "Description d'un r\xe9f\xe9renciel g\xe9ographiqe\n")
@@ -5654,7 +5717,7 @@ class CTD_ANON_110(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4289, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4293, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5664,7 +5727,7 @@ class CTD_ANON_110(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_110_COORD_MAP', True,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4291, 32), )
+                                                              4295, 32), )
 
     COORD_MAP = property(__COORD_MAP.value, __COORD_MAP.set, None,
                          "Description d'un point du r\xe9seau dans le rep\xe8re r\xe9f\xe9rence et dans le rep\xe8re du r\xe9seau")
@@ -5675,9 +5738,9 @@ class CTD_ANON_110(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_110_application',
                                                       pyxb.binding.datatypes.string)
     __application._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4310, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4314, 30)
     __application._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4310, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4314, 30)
 
     application = property(__application.value, __application.set, None,
                            "Nom de l'application utilisant ce r\xe9f\xe9rentiel de coordonn\xe9es")
@@ -5687,10 +5750,10 @@ class CTD_ANON_110(pyxb.binding.basis.complexTypeDefinition):
     __proj = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'proj'), 'proj',
                                                '__AbsentNamespace0_CTD_ANON_110_proj', pyxb.binding.datatypes.string)
     __proj._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4315, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4319, 30)
     __proj._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4315, 30)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4319, 30)
+
     proj = property(__proj.value, __proj.set, None, 'Identifiant de la projection utilis\xe9 (ex : WGS84)')
 
 
@@ -5698,10 +5761,10 @@ class CTD_ANON_110(pyxb.binding.basis.complexTypeDefinition):
     __north = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'north'), 'north',
                                                 '__AbsentNamespace0_CTD_ANON_110_north', pyxb.binding.datatypes.float)
     __north._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4320, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4324, 30)
     __north._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4320, 30)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4324, 30)
+
     north = property(__north.value, __north.set, None, 'Angle de la zone de r\xe9f\xe9rence\n')
 
     _ElementMap.update({
@@ -5722,7 +5785,7 @@ class CTD_ANON_111(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4295, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4299, 34)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5732,10 +5795,10 @@ class CTD_ANON_111(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_111_internal',
                                                    pyxb.binding.datatypes.string, required=True)
     __internal._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4296, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4300, 36)
     __internal._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4296, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4300, 36)
+
     internal = property(__internal.value, __internal.set, None, 'Coordonn\xe9es r\xe9seau')
 
 
@@ -5744,10 +5807,10 @@ class CTD_ANON_111(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_111_external',
                                                    pyxb.binding.datatypes.string, required=True)
     __external._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4301, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4305, 36)
     __external._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4301, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4305, 36)
+
     external = property(__external.value, __external.set, None, 'Coordonn\xe9es r\xe9f\xe9rence\n')
 
     _ElementMap.update({
@@ -5767,7 +5830,7 @@ class CTD_ANON_112(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4335, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4339, 22)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5777,7 +5840,7 @@ class CTD_ANON_112(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_112_TRAJS', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          4337, 26), )
+                                                          4341, 26), )
 
     TRAJS = property(__TRAJS.value, __TRAJS.set, None,
                      "Liste des v\xe9hicules pr\xe9sents \xe0 l'instant 0\n\t\t\t\t\t\t")
@@ -5799,7 +5862,7 @@ class CTD_ANON_113(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4342, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4346, 28)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5809,7 +5872,7 @@ class CTD_ANON_113(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_113_TRAJ', True,
                                                      pyxb.utils.utility.Location(
                                                          '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                         4344, 32), )
+                                                         4348, 32), )
 
     TRAJ = property(__TRAJ.value, __TRAJ.set, None,
                     "Description d'un v\xe9hicule pr\xe9sent sur le r\xe9seau \xe0 l'instant 0")
@@ -5830,7 +5893,7 @@ class CTD_ANON_114(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4421, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4425, 10)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5840,7 +5903,7 @@ class CTD_ANON_114(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_114_SCENARIO', True,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4423, 14), )
+                                                             4427, 14), )
 
     SCENARIO = property(__SCENARIO.value, __SCENARIO.set, None, "D\xe9finition d'un sc\xe9nario \xe0 simuler.")
 
@@ -5860,7 +5923,7 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4427, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4431, 16)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5870,10 +5933,10 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_115_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4428, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4432, 18)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4428, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4432, 18)
+
     id = property(__id.value, __id.set, None, 'identifiant du sc\xe9nario')
 
 
@@ -5883,9 +5946,9 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_115_simulation_id',
                                                         pyxb.binding.datatypes.string, required=True)
     __simulation_id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4433, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4437, 18)
     __simulation_id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4433, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4437, 18)
 
     simulation_id = property(__simulation_id.value, __simulation_id.set, None,
                              'identifiant de la section SIMULATION associ\xe9e')
@@ -5896,10 +5959,10 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_CTD_ANON_115_trafic_id',
                                                     pyxb.binding.datatypes.string, required=True)
     __trafic_id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4438, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4442, 18)
     __trafic_id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4438, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4442, 18)
+
     trafic_id = property(__trafic_id.value, __trafic_id.set, None, 'identifiant de la section TRAFIC associ\xe9e')
 
 
@@ -5908,10 +5971,10 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_CTD_ANON_115_reseau_id',
                                                     pyxb.binding.datatypes.string, required=True)
     __reseau_id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4443, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4447, 18)
     __reseau_id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4443, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4447, 18)
+
     reseau_id = property(__reseau_id.value, __reseau_id.set, None, 'identifiant de la section RESEAU associ\xe9e')
 
 
@@ -5920,10 +5983,10 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_CTD_ANON_115_dirout',
                                                  pyxb.binding.datatypes.string)
     __dirout._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4448, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4452, 18)
     __dirout._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4448, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4452, 18)
+
     dirout = property(__dirout.value, __dirout.set, None, 'R\xe9pertoire de sortie des r\xe9sultats de la simulation')
 
 
@@ -5932,10 +5995,10 @@ class CTD_ANON_115(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_115_prefout',
                                                   pyxb.binding.datatypes.string, required=True)
     __prefout._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4453, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4457, 18)
     __prefout._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4453, 18)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4457, 18)
+
     prefout = property(__prefout.value, __prefout.set, None, 'Pr\xe9fixe des fichiers de sortie')
 
     _ElementMap.update({
@@ -5959,7 +6022,7 @@ class CTD_ANON_116(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4867, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4871, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5969,7 +6032,7 @@ class CTD_ANON_116(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_116_TRONCON', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4869, 12), )
+                                                            4873, 12), )
 
     TRONCON = property(__TRONCON.value, __TRONCON.set, None, None)
 
@@ -5989,7 +6052,7 @@ class CTD_ANON_117(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4870, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4874, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -5999,10 +6062,10 @@ class CTD_ANON_117(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_117_libelle',
                                                   pyxb.binding.datatypes.string, required=True)
     __libelle._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4871, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4875, 16)
     __libelle._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4871, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4875, 16)
+
     libelle = property(__libelle.value, __libelle.set, None, 'Identifiant du tron\xe7on')
 
     _ElementMap.update({
@@ -6021,7 +6084,7 @@ class typeFLUX(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFLUX')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4893, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4897, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6031,7 +6094,7 @@ class typeFLUX(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeFLUX_DEMANDES', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4895, 6), )
+                                                             4899, 6), )
 
     DEMANDES = property(__DEMANDES.value, __DEMANDES.set, None,
                         "Noeud d'acc\xe8s aux variantes temporelles de la demande pour l'extr\xe9mit\xe9 courante")
@@ -6043,7 +6106,7 @@ class typeFLUX(pyxb.binding.basis.complexTypeDefinition):
                                                                  '__AbsentNamespace0_typeFLUX_REP_DESTINATIONS', False,
                                                                  pyxb.utils.utility.Location(
                                                                      '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                     4922, 6), )
+                                                                     4926, 6), )
 
     REP_DESTINATIONS = property(__REP_DESTINATIONS.value, __REP_DESTINATIONS.set, None,
                                 "Noeud d'acc\xe8s aux variantes temporelles de la r\xe9partition vers les destinations pour l'extr\xe9mit\xe9 courante")
@@ -6054,7 +6117,7 @@ class typeFLUX(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_typeFLUX_REP_VOIES', False,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              4997, 6), )
+                                                              5001, 6), )
 
     REP_VOIES = property(__REP_VOIES.value, __REP_VOIES.set, None,
                          "Noeud d'acc\xe8s aux variantes temporelles de la r\xe9partition par voie du flux provenant de l'extr\xe9mit\xe9 (origine) courante")
@@ -6067,6 +6130,8 @@ class typeFLUX(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeFLUX', typeFLUX)
 
 
@@ -6078,7 +6143,7 @@ class CTD_ANON_118(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4899, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4903, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6088,7 +6153,7 @@ class CTD_ANON_118(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_CTD_ANON_118_DEMANDE', True,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            4901, 12), )
+                                                            4905, 12), )
 
     DEMANDE = property(__DEMANDE.value, __DEMANDE.set, None,
                        "Description d'une variante temporelle de demande de l'extr\xe9mit\xe9 courante")
@@ -6109,7 +6174,7 @@ class CTD_ANON_119(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4926, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4930, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6120,7 +6185,7 @@ class CTD_ANON_119(pyxb.binding.basis.complexTypeDefinition):
                                                                 '__AbsentNamespace0_CTD_ANON_119_REP_DESTINATION', True,
                                                                 pyxb.utils.utility.Location(
                                                                     '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                    4928, 12), )
+                                                                    4932, 12), )
 
     REP_DESTINATION = property(__REP_DESTINATION.value, __REP_DESTINATION.set, None,
                                'Description de la variante temporelle de la r\xe9partition vers les destinations')
@@ -6141,7 +6206,7 @@ class CTD_ANON_120(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5001, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5005, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6151,7 +6216,7 @@ class CTD_ANON_120(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_120_REP_VOIE', True,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             5003, 12), )
+                                                             5007, 12), )
 
     REP_VOIE = property(__REP_VOIE.value, __REP_VOIE.set, None,
                         "Description d'une variante temporelle de la r\xe9partition par voie du flux provenant de l'extr\xe9mit\xe9 (origine) courante")
@@ -6172,7 +6237,7 @@ class typeFLUX_GLOBAL(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFLUX_GLOBAL')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5025, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5029, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6182,7 +6247,7 @@ class typeFLUX_GLOBAL(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_typeFLUX_GLOBAL_FLUX', False,
                                                      pyxb.utils.utility.Location(
                                                          '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                         5027, 6), )
+                                                         5031, 6), )
 
     FLUX = property(__FLUX.value, __FLUX.set, None, 'Description du flux ')
 
@@ -6192,7 +6257,7 @@ class typeFLUX_GLOBAL(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'REP_TYPEVEHICULES'), 'REP_TYPEVEHICULES',
         '__AbsentNamespace0_typeFLUX_GLOBAL_REP_TYPEVEHICULES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    5032, 6), )
+                                    5036, 6), )
 
     REP_TYPEVEHICULES = property(__REP_TYPEVEHICULES.value, __REP_TYPEVEHICULES.set, None,
                                  'Description des variantes temporelles de la r\xe9partition du flux par type de v\xe9hicule (cette r\xe9partition est utilis\xe9e pour calculer le type de v\xe9hicule lors de sa cr\xe9ation)')
@@ -6204,6 +6269,8 @@ class typeFLUX_GLOBAL(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeFLUX_GLOBAL', typeFLUX_GLOBAL)
 
 
@@ -6215,7 +6282,7 @@ class CTD_ANON_121(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5036, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5040, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6225,7 +6292,7 @@ class CTD_ANON_121(pyxb.binding.basis.complexTypeDefinition):
                                                                  'REP_TYPEVEHICULE',
                                                                  '__AbsentNamespace0_CTD_ANON_121_REP_TYPEVEHICULE',
                                                                  True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5038, 12), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5042, 12), )
 
     REP_TYPEVEHICULE = property(__REP_TYPEVEHICULE.value, __REP_TYPEVEHICULE.set, None,
                                 "Description d'une variante temporelle de la r\xe9partition du flux par type de v\xe9hicule")
@@ -6246,7 +6313,7 @@ class typeFLUX_TYPEVEHS(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeFLUX_TYPEVEHS')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5060, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5064, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -6256,6 +6323,8 @@ class typeFLUX_TYPEVEHS(pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeFLUX_TYPEVEHS', typeFLUX_TYPEVEHS)
 
 
@@ -6291,7 +6360,7 @@ class CTD_ANON_122(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 182, 34)
     __numvoie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 182, 34)
-    
+
     numvoie = property(__numvoie.value, __numvoie.set, None, 'Num\xe9ro de voie du tron\xe7on amont consid\xe9r\xe9')
 
     _ElementMap.update({
@@ -6381,7 +6450,7 @@ class CTD_ANON_124(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 252, 34)
     __coeff._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 252, 34)
-    
+
     coeff = property(__coeff.value, __coeff.set, None, "Coefficient d'affectation de la sortie")
 
     _ElementMap.update({
@@ -6475,7 +6544,7 @@ class CTD_ANON_126(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 308, 22)
     __id_troncon_aval._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 308, 22)
-    
+
     id_troncon_aval = property(__id_troncon_aval.value, __id_troncon_aval.set, None, 'Identifiant du tron\xe7on aval')
 
 
@@ -6488,7 +6557,7 @@ class CTD_ANON_126(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 313, 22)
     __num_voie_aval._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 313, 22)
-    
+
     num_voie_aval = property(__num_voie_aval.value, __num_voie_aval.set, None, 'Num\xe9ro de la voie aval')
 
 
@@ -6514,7 +6583,7 @@ class CTD_ANON_126(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 325, 22)
     __libelle._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 325, 22)
-    
+
     libelle = property(__libelle.value, __libelle.set, None, 'Libell\xe9 du mouvement')
 
 
@@ -6648,7 +6717,7 @@ class typeTraficConnexionInterne(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 452, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 452, 4)
-    
+
     id = property(__id.value, __id.set, None, "Identifiant de l'\xe9l\xe9ment du r\xe9seau associ\xe9")
 
 
@@ -6673,7 +6742,7 @@ class typeTraficConnexionInterne(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 462, 4)
     __Gamma._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 462, 4)
-    
+
     Gamma = property(__Gamma.value, __Gamma.set, None, 'Rapport Gamma')
 
 
@@ -6684,7 +6753,7 @@ class typeTraficConnexionInterne(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 467, 4)
     __Mu._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 467, 4)
-    
+
     Mu = property(__Mu.value, __Mu.set, None, 'Coefficient de priorit\xe9')
 
 
@@ -6753,6 +6822,8 @@ class typeTraficConnexionInterne(pyxb.binding.basis.complexTypeDefinition):
         __pos_cpt_Av.name(): __pos_cpt_Av,
         __traversees.name(): __traversees
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficConnexionInterne', typeTraficConnexionInterne)
 
 
@@ -6791,7 +6862,7 @@ class CTD_ANON_127(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 436, 16)
     __ti._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 436, 16)
-    
+
     ti = property(__ti.value, __ti.set, None, "Temps (en seconde) d'insertion")
 
 
@@ -6802,7 +6873,7 @@ class CTD_ANON_127(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 441, 16)
     __tt._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 441, 16)
-    
+
     tt = property(__tt.value, __tt.set, None, 'Temps (en seconde) de travers\xe9e. Inutilis\xe9 pour les convergents.')
 
     _ElementMap.update({
@@ -6901,7 +6972,7 @@ class CTD_ANON_128(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 555, 10)
     __chgt_voie_debug._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 555, 10)
-    
+
     chgt_voie_debug = property(__chgt_voie_debug.value, __chgt_voie_debug.set, None, None)
 
 
@@ -7167,7 +7238,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1188, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1188, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant de la section TRAFIC')
 
 
@@ -7179,7 +7250,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1193, 4)
     __accbornee._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1193, 4)
-    
+
     accbornee = property(__accbornee.value, __accbornee.set, None, "Simulation de l'acc\xe9l\xe9ration born\xe9e ")
 
 
@@ -7191,7 +7262,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1198, 4)
     __chgtvoie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1198, 4)
-    
+
     chgtvoie = property(__chgtvoie.value, __chgtvoie.set, None, 'Simulation du changement de voie')
 
 
@@ -7257,7 +7328,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1270, 4)
     __coeffrelax._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1270, 4)
-    
+
     coeffrelax = property(__coeffrelax.value, __coeffrelax.set, None, 'Coefficient de relaxation du r\xe9seau')
 
 
@@ -7363,7 +7434,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1312, 4)
     __Gamma._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1312, 4)
-    
+
     Gamma = property(__Gamma.value, __Gamma.set, None, 'Rapport Gamma')
 
 
@@ -7375,7 +7446,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1317, 4)
     __Mu._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1317, 4)
-    
+
     Mu = property(__Mu.value, __Mu.set, None, 'Coefficient de priorit\xe9')
 
 
@@ -7426,7 +7497,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1337, 4)
     __ti._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1337, 4)
-    
+
     ti = property(__ti.value, __ti.set, None, "Temps (en seconde) d'insertion")
 
 
@@ -7438,7 +7509,7 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1342, 4)
     __tt._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1342, 4)
-    
+
     tt = property(__tt.value, __tt.set, None, 'Temps (en seconde) de travers\xe9e')
 
 
@@ -7504,6 +7575,8 @@ class typeParametrageTrafic(pyxb.binding.basis.complexTypeDefinition):
         __depassement.name(): __depassement,
         __traversees.name(): __traversees
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeParametrageTrafic', typeParametrageTrafic)
 
 
@@ -7528,7 +7601,7 @@ class typeSimulationElement(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1542, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1542, 4)
-    
+
     id = property(__id.value, __id.set, None, "Identifiant de l'\xe9l\xe9ment du r\xe9seau associ\xe9")
 
 
@@ -7579,6 +7652,8 @@ class typeSimulationElement(pyxb.binding.basis.complexTypeDefinition):
         __nb_cell_acoustique.name(): __nb_cell_acoustique,
         __longueur_cell_acoustique.name(): __longueur_cell_acoustique
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeSimulationElement', typeSimulationElement)
 
 
@@ -7603,7 +7678,7 @@ class typeTraficTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1583, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1583, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on associ\xe9')
 
 
@@ -7641,6 +7716,8 @@ class typeTraficTroncon(pyxb.binding.basis.complexTypeDefinition):
         __agressivite.name(): __agressivite,
         __penalisation.name(): __penalisation
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficTroncon', typeTraficTroncon)
 
 
@@ -7665,7 +7742,7 @@ class CTD_ANON_129(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1612, 16)
     __numvoie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1612, 16)
-    
+
     numvoie = property(__numvoie.value, __numvoie.set, None, 'Num\xe9ro de voie r\xe9duite')
 
 
@@ -7808,7 +7885,7 @@ class CTD_ANON_131(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1672, 28)
     __vitesse._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1672, 28)
-    
+
     vitesse = property(__vitesse.value, __vitesse.set, None, 'Vitesse r\xe9glementaire (en m/s)')
 
     _ElementMap.update({
@@ -7857,7 +7934,7 @@ class CTD_ANON_132(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1734, 28)
     __tf._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1734, 28)
-    
+
     tf = property(__tf.value, __tf.set, None, 'Temps (en seconde) de travers\xe9e')
 
     _ElementMap.update({
@@ -7890,7 +7967,7 @@ class CTD_ANON_133(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1766, 16)
     __num_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1766, 16)
-    
+
     num_voie = property(__num_voie.value, __num_voie.set, None, 'Num\xe9ro de la voie r\xe9serv\xe9e sur le tron\xe7on')
 
 
@@ -7902,7 +7979,7 @@ class CTD_ANON_133(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1771, 16)
     __largeur_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1771, 16)
-    
+
     largeur_voie = property(__largeur_voie.value, __largeur_voie.set, None, 'Largeur de la voie r\xe9serv\xe9e')
 
 
@@ -8259,7 +8336,7 @@ class typeRepartiteur(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2045, 8)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2045, 8)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du r\xe9partiteur')
 
 
@@ -8283,6 +8360,8 @@ class typeRepartiteur(typeConnexionInterne):
         __id.name(): __id,
         __controleur_de_feux.name(): __controleur_de_feux
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeRepartiteur', typeRepartiteur)
 
 
@@ -8322,7 +8401,7 @@ class typeConvergent(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2095, 8)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2095, 8)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du convergent')
 
 
@@ -8334,7 +8413,7 @@ class typeConvergent(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2100, 8)
     __id_TAv._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2100, 8)
-    
+
     id_TAv = property(__id_TAv.value, __id_TAv.set, None, 'Identifiant du tron\xe7on aval')
 
 
@@ -8386,6 +8465,8 @@ class typeConvergent(typeConnexionInterne):
         __nb_voies_insertion_droite.name(): __nb_voies_insertion_droite,
         __nb_voies_insertion_gauche.name(): __nb_voies_insertion_gauche
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeConvergent', typeConvergent)
 
 
@@ -8410,7 +8491,7 @@ class CTD_ANON_139(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2073, 20)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2073, 20)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on amont')
 
 
@@ -8496,7 +8577,7 @@ class typeGiratoire(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2236, 8)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2236, 8)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant unique du giratoire')
 
 
@@ -8534,7 +8615,7 @@ class typeGiratoire(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2251, 8)
     __vit_max._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2251, 8)
-    
+
     vit_max = property(__vit_max.value, __vit_max.set, None, "Vitesse maximale sur l'anneau du giratoire (en m/s)")
 
 
@@ -8546,7 +8627,7 @@ class typeGiratoire(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2256, 8)
     __nb_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2256, 8)
-    
+
     nb_voie = property(__nb_voie.value, __nb_voie.set, None, "Nombre de voie sur l'anneau")
 
 
@@ -8558,7 +8639,7 @@ class typeGiratoire(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2261, 8)
     __LargeurVoie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2261, 8)
-    
+
     LargeurVoie = property(__LargeurVoie.value, __LargeurVoie.set, None, 'Largeur de la voie (en m\xe8tre)')
 
 
@@ -8570,7 +8651,7 @@ class typeGiratoire(typeConnexionInterne):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2266, 8)
     __type._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2266, 8)
-    
+
     type = property(__type.value, __type.set, None, 'Type de tron\xe7on')
 
     _ElementMap.update({
@@ -8586,6 +8667,8 @@ class typeGiratoire(typeConnexionInterne):
         __LargeurVoie.name(): __LargeurVoie,
         __type.name(): __type
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeGiratoire', typeGiratoire)
 
 
@@ -8622,7 +8705,7 @@ class typeCarrefourAFeux(typeConnexionInterne):
                                                             '__AbsentNamespace0_typeCarrefourAFeux_SORTIES_CAF', False,
                                                             pyxb.utils.utility.Location(
                                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                2480, 10), )
+                                                                2483, 10), )
 
     SORTIES_CAF = property(__SORTIES_CAF.value, __SORTIES_CAF.set, None,
                            "Liste des sorties du CAF dans le cas o\xf9 les convergents de rattachement au sortie ont besoin d'\xeatre pr\xe9cis\xe9s (sinon tous les mouvements se rattachent a l'extr\xe9mit\xe9 aval de la sortie)")
@@ -8635,10 +8718,10 @@ class typeCarrefourAFeux(typeConnexionInterne):
                                              '__AbsentNamespace0_typeCarrefourAFeux_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2549, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2553, 8)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2549, 8)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2553, 8)
+
     id = property(__id.value, __id.set, None, 'Identifiant unique du carrefour \xe0 feu')
 
 
@@ -8647,9 +8730,9 @@ class typeCarrefourAFeux(typeConnexionInterne):
                                                   '__AbsentNamespace0_typeCarrefourAFeux_vit_max',
                                                   typeFloatStrictPositif, required=True)
     __vit_max._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2554, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2558, 8)
     __vit_max._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2554, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2558, 8)
 
     vit_max = property(__vit_max.value, __vit_max.set, None,
                        "Vitesse maximale \xe0 l'int\xe9rieur du carrefour (en m/s)")
@@ -8661,9 +8744,9 @@ class typeCarrefourAFeux(typeConnexionInterne):
                                                              '__AbsentNamespace0_typeCarrefourAFeux_controleur_de_feux',
                                                              pyxb.binding.datatypes.string)
     __controleur_de_feux._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2559, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2563, 8)
     __controleur_de_feux._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2559, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2563, 8)
 
     controleur_de_feux = property(__controleur_de_feux.value, __controleur_de_feux.set, None,
                                   'Identifiant du contr\xf4leur de feux du carrefour (il doit \xeatre d\xe9fini dans la liste des contr\xf4leurs de feux)')
@@ -8677,6 +8760,8 @@ class typeCarrefourAFeux(typeConnexionInterne):
         __vit_max.name(): __vit_max,
         __controleur_de_feux.name(): __controleur_de_feux
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCarrefourAFeux', typeCarrefourAFeux)
 
 
@@ -8719,9 +8804,9 @@ class CTD_ANON_140(pyxb.binding.basis.complexTypeDefinition):
                                                            '__AbsentNamespace0_CTD_ANON_140_id_troncon_amont',
                                                            pyxb.binding.datatypes.string, required=True)
     __id_troncon_amont._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2440, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2442, 20)
     __id_troncon_amont._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2440, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2442, 20)
 
     id_troncon_amont = property(__id_troncon_amont.value, __id_troncon_amont.set, None,
                                 "Identifiant du tron\xe7on amont de l'entr\xe9e consid\xe9r\xe9e")
@@ -8731,11 +8816,11 @@ class CTD_ANON_140(pyxb.binding.basis.complexTypeDefinition):
     __num_voie_amont = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'num_voie_amont'),
                                                          'num_voie_amont',
                                                          '__AbsentNamespace0_CTD_ANON_140_num_voie_amont',
-                                                         typeFloatStrictPositif, unicode_default='1')
+                                                         typeIntStrictPositif, unicode_default='1')
     __num_voie_amont._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2445, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2448, 20)
     __num_voie_amont._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2445, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2448, 20)
 
     num_voie_amont = property(__num_voie_amont.value, __num_voie_amont.set, None,
                               "Num\xe9ro de voie de l'entr\xe9e consid\xe9r\xe9e")
@@ -8746,10 +8831,10 @@ class CTD_ANON_140(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_140_priorite', STD_ANON_23,
                                                    unicode_default='defaut')
     __priorite._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2451, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2454, 20)
     __priorite._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2451, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2454, 20)
+
     priorite = property(__priorite.value, __priorite.set, None, "Type de priorit\xe9 de l'entr\xe9e du carrefour")
 
     _ElementMap.update({
@@ -8805,7 +8890,7 @@ class CTD_ANON_141(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2401, 32)
     __libelle._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2401, 32)
-    
+
     libelle = property(__libelle.value, __libelle.set, None, 'Libell\xe9 du mouvement')
 
 
@@ -8827,11 +8912,11 @@ class CTD_ANON_141(pyxb.binding.basis.complexTypeDefinition):
     __num_voie_aval = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'num_voie_aval'),
                                                         'num_voie_aval',
                                                         '__AbsentNamespace0_CTD_ANON_141_num_voie_aval',
-                                                        typeFloatStrictPositif, unicode_default='1')
+                                                        typeIntStrictPositif, unicode_default='1')
     __num_voie_aval._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2417, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2419, 32)
     __num_voie_aval._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2417, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2419, 32)
 
     num_voie_aval = property(__num_voie_aval.value, __num_voie_aval.set, None,
                              'Num\xe9ro de voie de la sortie du mouvement consid\xe9r\xe9')
@@ -8842,9 +8927,9 @@ class CTD_ANON_141(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_CTD_ANON_141_divergent',
                                                     pyxb.binding.datatypes.string)
     __divergent._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2423, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2425, 32)
     __divergent._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2423, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2425, 32)
 
     divergent = property(__divergent.value, __divergent.set, None,
                          "Identifiant du divergent du mouvement (si il n'existe pas le mouvement est rattach\xe9 \xe0 l'extr\xe9mit\xe9 aval du tron\xe7on d'entr\xe9e)\n")
@@ -8855,9 +8940,9 @@ class CTD_ANON_141(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_141_convergent',
                                                      pyxb.binding.datatypes.string)
     __convergent._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2429, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2431, 32)
     __convergent._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2429, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2431, 32)
 
     convergent = property(__convergent.value, __convergent.set, None,
                           "Identifiant du convergent du mouvement vers la sortie (si il n'existe pas le mouvement est rattach\xe9 \xe0 l'extr\xe9mit\xe9 amont du tron\xe7on de sortie)")
@@ -8930,7 +9015,7 @@ class CTD_ANON_143(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2490, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2493, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -8941,7 +9026,7 @@ class CTD_ANON_143(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_143_CONVERGENTS', False,
                                                             pyxb.utils.utility.Location(
                                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                2492, 22), )
+                                                                2495, 22), )
 
     CONVERGENTS = property(__CONVERGENTS.value, __CONVERGENTS.set, None,
                            "Liste des convergents de la sortie. Ils sont ordonn\xe9s \xe0 partir de la fin (du dernier au 1er rencontr\xe9). Si cette liste n'existe pas, l'ensemble des mouvements arrivant sur cette sortie convergent  imm\xe9diatement \xe0 l'extr\xe9mit\xe9 amont du tron\xe7on de sortie.")
@@ -8953,9 +9038,9 @@ class CTD_ANON_143(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_143_id_troncon_aval',
                                                           pyxb.binding.datatypes.string, required=True)
     __id_troncon_aval._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2532, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2535, 20)
     __id_troncon_aval._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2532, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2535, 20)
 
     id_troncon_aval = property(__id_troncon_aval.value, __id_troncon_aval.set, None,
                                'Identifiant du tron\xe7on aval de la sortie consid\xe9r\xe9e')
@@ -8965,11 +9050,11 @@ class CTD_ANON_143(pyxb.binding.basis.complexTypeDefinition):
     __num_voie_aval = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'num_voie_aval'),
                                                         'num_voie_aval',
                                                         '__AbsentNamespace0_CTD_ANON_143_num_voie_aval',
-                                                        typeFloatStrictPositif, unicode_default='1')
+                                                        typeIntStrictPositif, unicode_default='1')
     __num_voie_aval._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2537, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2541, 20)
     __num_voie_aval._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2537, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2541, 20)
 
     num_voie_aval = property(__num_voie_aval.value, __num_voie_aval.set, None,
                              'Num\xe9ro de voie de la sortie consid\xe9r\xe9e')
@@ -8991,7 +9076,7 @@ class CTD_ANON_144(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2621, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2625, 26)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9001,9 +9086,9 @@ class CTD_ANON_144(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_144_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2622, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2626, 28)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2622, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2626, 28)
 
     duree = property(__duree.value, __duree.set, None,
                      'Identifiant de la plage temporelle associ\xe9e, ou dur\xe9e (en seconde) de la variante de la fr\xe9quence')
@@ -9014,9 +9099,9 @@ class CTD_ANON_144(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_CTD_ANON_144_frequence', typeIntStrictPositif,
                                                     required=True)
     __frequence._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2627, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2631, 28)
     __frequence._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2627, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2631, 28)
 
     frequence = property(__frequence.value, __frequence.set, None,
                          'Fr\xe9quence en seconde entre le lancement de 2 v\xe9hicules (\xe0 d\xe9finir uniquement si le type de param\xe9trage est global)')
@@ -9038,7 +9123,7 @@ class CTD_ANON_145(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2731, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2735, 32)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9048,9 +9133,9 @@ class CTD_ANON_145(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_145_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2732, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2736, 34)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2732, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2736, 34)
 
     duree = property(__duree.value, __duree.set, None,
                      "Identifiant de la plage temporelle associ\xe9e, ou dur\xe9e (en seconde) de la variante de la demande pour l'arr\xeat")
@@ -9061,9 +9146,9 @@ class CTD_ANON_145(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_145_demande', typeFloatPositif,
                                                   required=True)
     __demande._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2737, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2741, 34)
     __demande._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2737, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2741, 34)
 
     demande = property(__demande.value, __demande.set, None,
                        "Valeur de demande (en pi\xe9ton / s) pour l'arr\xeat et la ligne s\xe9lectionn\xe9e")
@@ -9085,7 +9170,7 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeParametrageCapteurs')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2852, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2856, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9095,7 +9180,7 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeParametrageCapteurs_CAPTEURS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             2854, 6), )
+                                                             2858, 6), )
 
     CAPTEURS = property(__CAPTEURS.value, __CAPTEURS.set, None, 'Liste des capteurs du r\xe9seau')
 
@@ -9106,9 +9191,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_typeParametrageCapteurs_periodeagregation',
                                                             typeFloatStrictPositif, required=True)
     __periodeagregation._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2874, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2878, 4)
     __periodeagregation._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2874, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2878, 4)
 
     periodeagregation = property(__periodeagregation.value, __periodeagregation.set, None,
                                  "P\xe9riode d'agr\xe9gation (en s) pour les calculs")
@@ -9119,9 +9204,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeParametrageCapteurs_t0', typeFloatPositif,
                                              unicode_default='0')
     __t0._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2879, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2883, 4)
     __t0._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2879, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2883, 4)
 
     t0 = property(__t0.value, __t0.set, None,
                   "instant (en s) \xe0 partir duquel d\xe9marrer la premi\xe8re p\xe9riode d'acquisition des capteurs")
@@ -9132,9 +9217,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'periodeagregationEdie'), 'periodeagregationEdie',
         '__AbsentNamespace0_typeParametrageCapteurs_periodeagregationEdie', typeFloatStrictPositif)
     __periodeagregationEdie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2884, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2888, 4)
     __periodeagregationEdie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2884, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2888, 4)
 
     periodeagregationEdie = property(__periodeagregationEdie.value, __periodeagregationEdie.set, None,
                                      'P\xe9riode d\'agr\xe9gation \xe0 utiliser pour les capteurs d\'Edie si diff\xe9rente de la p\xe9riode d\'agr\xe9gation "periodeagregation"')
@@ -9145,9 +9230,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_typeParametrageCapteurs_t0Edie', typeFloatPositif,
                                                  unicode_default='0')
     __t0Edie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2889, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2893, 4)
     __t0Edie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2889, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2893, 4)
 
     t0Edie = property(__t0Edie.value, __t0Edie.set, None,
                       "instant (en s) \xe0 partir duquel d\xe9marrer la premi\xe8re p\xe9riode d'acquisition des capteurs d'Edie, si diff\xe9rent du t0 global")
@@ -9158,9 +9243,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'periodeagregationLongitudinale'), 'periodeagregationLongitudinale',
         '__AbsentNamespace0_typeParametrageCapteurs_periodeagregationLongitudinale', typeFloatStrictPositif)
     __periodeagregationLongitudinale._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2894, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2898, 4)
     __periodeagregationLongitudinale._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2894, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2898, 4)
 
     periodeagregationLongitudinale = property(__periodeagregationLongitudinale.value,
                                               __periodeagregationLongitudinale.set, None,
@@ -9173,9 +9258,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeParametrageCapteurs_t0Longitudinal',
                                                          typeFloatPositif, unicode_default='0')
     __t0Longitudinal._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2899, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2903, 4)
     __t0Longitudinal._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2899, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2903, 4)
 
     t0Longitudinal = property(__t0Longitudinal.value, __t0Longitudinal.set, None,
                               "instant (en s) \xe0 partir duquel d\xe9marrer la premi\xe8re p\xe9riode d'acquisition des capteurs longitudinaux, si diff\xe9rent du t0 global")
@@ -9186,9 +9271,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'periodeagregationMFD'), 'periodeagregationMFD',
         '__AbsentNamespace0_typeParametrageCapteurs_periodeagregationMFD', typeFloatStrictPositif)
     __periodeagregationMFD._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2904, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2908, 4)
     __periodeagregationMFD._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2904, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2908, 4)
 
     periodeagregationMFD = property(__periodeagregationMFD.value, __periodeagregationMFD.set, None,
                                     'P\xe9riode d\'agr\xe9gation \xe0 utiliser pour les capteurs MFD si diff\xe9rente de la p\xe9riode d\'agr\xe9gation "periodeagregation"')
@@ -9199,9 +9284,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_typeParametrageCapteurs_t0MFD', typeFloatPositif,
                                                 unicode_default='0')
     __t0MFD._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2909, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2913, 4)
     __t0MFD._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2909, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2913, 4)
 
     t0MFD = property(__t0MFD.value, __t0MFD.set, None,
                      "instant (en s) \xe0 partir duquel d\xe9marrer la premi\xe8re p\xe9riode d'acquisition des capteurs MFD, si diff\xe9rent du t0 global")
@@ -9212,9 +9297,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'periodeagregationBlueTooth'), 'periodeagregationBlueTooth',
         '__AbsentNamespace0_typeParametrageCapteurs_periodeagregationBlueTooth', typeFloatStrictPositif)
     __periodeagregationBlueTooth._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2914, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2918, 4)
     __periodeagregationBlueTooth._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2914, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2918, 4)
 
     periodeagregationBlueTooth = property(__periodeagregationBlueTooth.value, __periodeagregationBlueTooth.set, None,
                                           'P\xe9riode d\'agr\xe9gation \xe0 utiliser pour les capteurs BlueTooth si diff\xe9rente de la p\xe9riode d\'agr\xe9gation "periodeagregation"')
@@ -9225,9 +9310,9 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_typeParametrageCapteurs_t0BlueTooth',
                                                       typeFloatPositif, unicode_default='0')
     __t0BlueTooth._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2919, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2923, 4)
     __t0BlueTooth._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2919, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2923, 4)
 
     t0BlueTooth = property(__t0BlueTooth.value, __t0BlueTooth.set, None,
                            "instant (en s) \xe0 partir duquel d\xe9marrer la premi\xe8re p\xe9riode d'acquisition des capteurs BlueTooth, si diff\xe9rent du t0 global")
@@ -9247,6 +9332,8 @@ class typeParametrageCapteurs(pyxb.binding.basis.complexTypeDefinition):
         __periodeagregationBlueTooth.name(): __periodeagregationBlueTooth,
         __t0BlueTooth.name(): __t0BlueTooth
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeParametrageCapteurs', typeParametrageCapteurs)
 
 
@@ -9258,7 +9345,7 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeControleurDeFeux')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2925, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2929, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9268,7 +9355,7 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
                                                               'PLANS_DE_FEUX',
                                                               '__AbsentNamespace0_typeControleurDeFeux_PLANS_DE_FEUX',
                                                               False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2930, 6), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2934, 6), )
 
     PLANS_DE_FEUX = property(__PLANS_DE_FEUX.value, __PLANS_DE_FEUX.set, None,
                              "Noeud d'acc\xe8s \xe0 la liste des plans de feux")
@@ -9279,7 +9366,7 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'LIGNES_GUIDEES_PRIORITAIRES'), 'LIGNES_GUIDEES_PRIORITAIRES',
         '__AbsentNamespace0_typeControleurDeFeux_LIGNES_GUIDEES_PRIORITAIRES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3055, 6), )
+                                    3059, 6), )
 
     LIGNES_GUIDEES_PRIORITAIRES = property(__LIGNES_GUIDEES_PRIORITAIRES.value, __LIGNES_GUIDEES_PRIORITAIRES.set, None,
                                            "Noeud d'acc\xe8s \xe0 la liste des lignes guid\xe9es prioritaires g\xe9r\xe9es par le contr\xf4leur de feux parent\n")
@@ -9290,7 +9377,7 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
                                                               'POSITION_FEUX',
                                                               '__AbsentNamespace0_typeControleurDeFeux_POSITION_FEUX',
                                                               False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3130, 6), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3134, 6), )
 
     POSITION_FEUX = property(__POSITION_FEUX.value, __POSITION_FEUX.set, None,
                              "Noeud sp\xe9cifique \xe0 l'outils de visualisation Symuplayer permettant de param\xe9trer la position des feux du contr\xf4leur")
@@ -9300,10 +9387,10 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'id'), 'id',
                                              '__AbsentNamespace0_typeControleurDeFeux_id', STD_ANON_36, required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3157, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3161, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3157, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3161, 4)
+
     id = property(__id.value, __id.set, None, 'Identifiant unique du contr\xf4leur de feu')
 
 
@@ -9313,9 +9400,9 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeControleurDeFeux_duree_vert_min',
                                                          STD_ANON_37, unicode_default='6')
     __duree_vert_min._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3167, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3171, 4)
     __duree_vert_min._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3167, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3171, 4)
 
     duree_vert_min = property(__duree_vert_min.value, __duree_vert_min.set, None,
                               'Dur\xe9e (en seconde) minimale de vert du contr\xf4leur de feu. Symubruit v\xe9rifie que pour chaque signal actif des s\xe9quences des plans de feux du contr\xf4leur de feux, la dur\xe9e de vert est sup\xe9rieure \xe0 la dur\xe9e minimale du vert du contr\xf4leur (sinon avertissement).\n')
@@ -9326,9 +9413,9 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'duree_rouge_degagement'), 'duree_rouge_degagement',
         '__AbsentNamespace0_typeControleurDeFeux_duree_rouge_degagement', STD_ANON_38, unicode_default='5')
     __duree_rouge_degagement._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3178, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3182, 4)
     __duree_rouge_degagement._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3178, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3182, 4)
 
     duree_rouge_degagement = property(__duree_rouge_degagement.value, __duree_rouge_degagement.set, None,
                                       "Dur\xe9e en seconde du rouge de d\xe9gagement. Symubruit v\xe9rifie que pour chaque signa actif des s\xe9quences des plans de feux du contr\xf4leur de feux, la dur\xe9e de rouge restante (dur\xe9e de la s\xe9quence - dur\xe9e du vert du signal - retard \xe0 l'allumage du signal) est sup\xe9rieure \xe0 la dur\xe9e du rouge de d\xe9gagement (sinon avertissement).\n")
@@ -9339,9 +9426,9 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_typeControleurDeFeux_regulation', STD_ANON_39,
                                                      unicode_default='aucune')
     __regulation._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3189, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3193, 4)
     __regulation._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3189, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3193, 4)
 
     regulation = property(__regulation.value, __regulation.set, None,
                           'Type de r\xe9gulation du contr\xf4leur de feux :\n- aucune\n- m\xe9thode des vecteurs')
@@ -9353,9 +9440,9 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeControleurDeFeux_regulation_periode',
                                                              typeIntStrictPositif, unicode_default='180')
     __regulation_periode._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3210, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3214, 4)
     __regulation_periode._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3210, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3214, 4)
 
     regulation_periode = property(__regulation_periode.value, __regulation_periode.set, None,
                                   "P\xe9riode de r\xe9gulation d'un contr\xf4leur de feux en seconde. Cet attribut est utilis\xe9 uniquement dans le cas d'un contr\xf4leur de feux r\xe9gul\xe9. Au d\xe9but de chaque p\xe9riode, le plan de feux optimal est calcul\xe9 puis appliqu\xe9 durant toute la p\xe9riode de r\xe9gulation suivant.\n")
@@ -9372,6 +9459,8 @@ class typeControleurDeFeux(pyxb.binding.basis.complexTypeDefinition):
         __regulation.name(): __regulation,
         __regulation_periode.name(): __regulation_periode
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeControleurDeFeux', typeControleurDeFeux)
 
 
@@ -9383,7 +9472,7 @@ class CTD_ANON_146(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2940, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2944, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9393,7 +9482,7 @@ class CTD_ANON_146(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_146_SEQUENCES', False,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              2942, 18), )
+                                                              2946, 18), )
 
     SEQUENCES = property(__SEQUENCES.value, __SEQUENCES.set, None,
                          "Noeud d'acc\xe8s \xe0 la liste des s\xe9quences du plan de feux")
@@ -9403,9 +9492,9 @@ class CTD_ANON_146(pyxb.binding.basis.complexTypeDefinition):
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'id'), 'id',
                                              '__AbsentNamespace0_CTD_ANON_146_id', STD_ANON_33, required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3035, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3039, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3035, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3039, 16)
 
     id = property(__id.value, __id.set, None,
                   "Identifiant unique du plan de feux (il permet notamment de lancer son d\xe9roulement dans le cas d'un pilotage ou d'identifier le plan de feux utilis\xe9 lors de la r\xe9gulation)")
@@ -9415,9 +9504,9 @@ class CTD_ANON_146(pyxb.binding.basis.complexTypeDefinition):
     __debut = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'debut'), 'debut',
                                                 '__AbsentNamespace0_CTD_ANON_146_debut', pyxb.binding.datatypes.time)
     __debut._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3045, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3049, 16)
     __debut._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3045, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3049, 16)
 
     debut = property(__debut.value, __debut.set, None,
                      'Heure exacte du d\xe9but du plan de feux \xe0 pr\xe9ciser uniquement pour un contr\xf4leur de feux non r\xe9gul\xe9 et si plusieurs plans de feux sont d\xe9finis')
@@ -9440,7 +9529,7 @@ class CTD_ANON_147(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2953, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2957, 26)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9451,7 +9540,7 @@ class CTD_ANON_147(pyxb.binding.basis.complexTypeDefinition):
                                                                '__AbsentNamespace0_CTD_ANON_147_SIGNAUX_ACTIFS', False,
                                                                pyxb.utils.utility.Location(
                                                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                   2955, 30), )
+                                                                   2959, 30), )
 
     SIGNAUX_ACTIFS = property(__SIGNAUX_ACTIFS.value, __SIGNAUX_ACTIFS.set, None,
                               "Noeud d'acc\xe8s \xe0 la liste de description des signaux actifs de la s\xe9quence\n")
@@ -9462,9 +9551,9 @@ class CTD_ANON_147(pyxb.binding.basis.complexTypeDefinition):
                                                        'duree_totale', '__AbsentNamespace0_CTD_ANON_147_duree_totale',
                                                        STD_ANON_32, required=True)
     __duree_totale._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3019, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3023, 28)
     __duree_totale._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3019, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3023, 28)
 
     duree_totale = property(__duree_totale.value, __duree_totale.set, None,
                             'Dur\xe9e totale de la s\xe9quence en seconde')
@@ -9485,7 +9574,7 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2964, 38)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2968, 38)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9495,9 +9584,9 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'duree_retard_allumage'), 'duree_retard_allumage',
         '__AbsentNamespace0_CTD_ANON_148_duree_retard_allumage', STD_ANON_29, required=True)
     __duree_retard_allumage._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2965, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2969, 40)
     __duree_retard_allumage._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2965, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2969, 40)
 
     duree_retard_allumage = property(__duree_retard_allumage.value, __duree_retard_allumage.set, None,
                                      "Dur\xe9e en seconde du retard \xe0 l'allumage  (cette dur\xe9e doit \xeatre telle que la diff\xe9rence entre la dur\xe9e de la s\xe9quence et la somme du temps de vert et du retard \xe0 l'allumage doit \xeatre sup\xe9rieure \xe0 la dur\xe9e de rouge de d\xe9gagement d\xe9finie au niveau du controleur de feux).\n")
@@ -9508,9 +9597,9 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_148_duree_vert', STD_ANON_30,
                                                      required=True)
     __duree_vert._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2976, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2980, 40)
     __duree_vert._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2976, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2980, 40)
 
     duree_vert = property(__duree_vert.value, __duree_vert.set, None,
                           'Dur\xe9e en seconde du temps de vert (cette dur\xe9e doit \xeatre sup\xe9rieure au temps de vert minimale d\xe9fini au niveau du contr\xf4leur de feux).\n')
@@ -9521,9 +9610,9 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
                                                        'duree_orange', '__AbsentNamespace0_CTD_ANON_148_duree_orange',
                                                        STD_ANON_31, unicode_default='0')
     __duree_orange._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2987, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2991, 40)
     __duree_orange._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2987, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2991, 40)
 
     duree_orange = property(__duree_orange.value, __duree_orange.set, None,
                             "Dur\xe9e en seconde du temps d'orange(cette dur\xe9e peut \xeatre nulle).\n")
@@ -9535,9 +9624,9 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_148_troncon_entree',
                                                          pyxb.binding.datatypes.string, required=True)
     __troncon_entree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2999, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3003, 40)
     __troncon_entree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2999, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3003, 40)
 
     troncon_entree = property(__troncon_entree.value, __troncon_entree.set, None,
                               "Identifiant unique du tron\xe7on d'entr\xe9e du signal\n")
@@ -9549,9 +9638,9 @@ class CTD_ANON_148(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_148_troncon_sortie',
                                                          pyxb.binding.datatypes.string, required=True)
     __troncon_sortie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3006, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3010, 40)
     __troncon_sortie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3006, 40)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3010, 40)
 
     troncon_sortie = property(__troncon_sortie.value, __troncon_sortie.set, None,
                               "Identifiant unique du tron\xe7on d'entr\xe9e du signal\n")
@@ -9576,7 +9665,7 @@ class typeCapteurPonctuel(typeCapteur):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCapteurPonctuel')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3232, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3236, 2)
     _ElementMap = typeCapteur._ElementMap.copy()
     _AttributeMap = typeCapteur._AttributeMap.copy()
     # Base type is typeCapteur
@@ -9590,9 +9679,9 @@ class typeCapteurPonctuel(typeCapteur):
                                                    '__AbsentNamespace0_typeCapteurPonctuel_position', typeFloatPositif,
                                                    required=True)
     __position._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3238, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3242, 8)
     __position._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3238, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3242, 8)
 
     position = property(__position.value, __position.set, None,
                         'Position du capteur sur le tron\xe7on (en m ou en % si position_relative vaut true)')
@@ -9604,9 +9693,9 @@ class typeCapteurPonctuel(typeCapteur):
                                                             '__AbsentNamespace0_typeCapteurPonctuel_position_relative',
                                                             pyxb.binding.datatypes.boolean)
     __position_relative._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3243, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3247, 8)
     __position_relative._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3243, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3247, 8)
 
     position_relative = property(__position_relative.value, __position_relative.set, None,
                                  "Indique si la position du capteur est exprim\xe9e en pourcentage de la longueur du tron\xe7on plut\xf4t qu'en m\xe8tres")
@@ -9618,6 +9707,8 @@ class typeCapteurPonctuel(typeCapteur):
         __position.name(): __position,
         __position_relative.name(): __position_relative
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCapteurPonctuel', typeCapteurPonctuel)
 
 
@@ -9629,7 +9720,7 @@ class typeCapteurLongitudinal(typeCapteur):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeCapteurLongitudinal')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3251, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3255, 2)
     _ElementMap = typeCapteur._ElementMap.copy()
     _AttributeMap = typeCapteur._AttributeMap.copy()
     # Base type is typeCapteur
@@ -9644,9 +9735,9 @@ class typeCapteurLongitudinal(typeCapteur):
                                                          '__AbsentNamespace0_typeCapteurLongitudinal_position_debut',
                                                          typeFloatPositif, required=True)
     __position_debut._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3257, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3261, 8)
     __position_debut._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3257, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3261, 8)
 
     position_debut = property(__position_debut.value, __position_debut.set, None,
                               'Position du d\xe9but du capteur sur le tron\xe7on (en m ou en % si position_relative vaut true)')
@@ -9658,9 +9749,9 @@ class typeCapteurLongitudinal(typeCapteur):
                                                        '__AbsentNamespace0_typeCapteurLongitudinal_position_fin',
                                                        typeFloatPositif, unicode_default='INF')
     __position_fin._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3262, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3266, 8)
     __position_fin._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3262, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3266, 8)
 
     position_fin = property(__position_fin.value, __position_fin.set, None,
                             'Position de la fin du capteur sur le tron\xe7on (en m ou en % si position_relative vaut true). par d\xe9faut, la fin du capteur est la fin du tron\xe7on.')
@@ -9672,9 +9763,9 @@ class typeCapteurLongitudinal(typeCapteur):
                                                             '__AbsentNamespace0_typeCapteurLongitudinal_position_relative',
                                                             pyxb.binding.datatypes.boolean)
     __position_relative._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3267, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3271, 8)
     __position_relative._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3267, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3271, 8)
 
     position_relative = property(__position_relative.value, __position_relative.set, None,
                                  "Indique si la position du capteur est exprim\xe9e en pourcentage de la longueur du tron\xe7on plut\xf4t qu'en m\xe8tres")
@@ -9687,6 +9778,8 @@ class typeCapteurLongitudinal(typeCapteur):
         __position_fin.name(): __position_fin,
         __position_relative.name(): __position_relative
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeCapteurLongitudinal', typeCapteurLongitudinal)
 
 
@@ -9698,7 +9791,7 @@ class CTD_ANON_149(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3317, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3321, 8)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9708,10 +9801,10 @@ class CTD_ANON_149(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_149_troncon',
                                                   pyxb.binding.datatypes.string, required=True)
     __troncon._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3318, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3322, 10)
     __troncon._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3318, 10)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3322, 10)
+
     troncon = property(__troncon.value, __troncon.set, None, 'Tron\xe7on sur lequel est positionn\xe9 le capteur')
 
 
@@ -9720,9 +9813,9 @@ class CTD_ANON_149(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_149_position', typeFloatPositif,
                                                    required=True)
     __position._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3323, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3327, 10)
     __position._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3323, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3327, 10)
 
     position = property(__position.value, __position.set, None,
                         'Position du capteur sur le tron\xe7on (en m ou en % si position_relative vaut true)')
@@ -9734,9 +9827,9 @@ class CTD_ANON_149(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_149_position_relative',
                                                             pyxb.binding.datatypes.boolean)
     __position_relative._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3328, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3332, 10)
     __position_relative._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3328, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3332, 10)
 
     position_relative = property(__position_relative.value, __position_relative.set, None,
                                  "Indique si la position du capteur est exprim\xe9e en pourcentage de la longueur du tron\xe7on plut\xf4t qu'en m\xe8tres")
@@ -9759,7 +9852,7 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTraficOrigine')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3347, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3351, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9770,7 +9863,7 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_typeTraficOrigine_FLUX_GLOBAL', False,
                                                             pyxb.utils.utility.Location(
                                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                3349, 6), )
+                                                                3353, 6), )
 
     FLUX_GLOBAL = property(__FLUX_GLOBAL.value, __FLUX_GLOBAL.set, None,
                            "Noeud d'acc\xe8s \xe0 la description d'un flux global ayant pour origine l'extr\xe9mit\xe9 courante (pour tous les types de v\xe9hicule)")
@@ -9781,7 +9874,7 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
                                                               'FLUX_TYPEVEHS',
                                                               '__AbsentNamespace0_typeTraficOrigine_FLUX_TYPEVEHS',
                                                               False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6), )
 
     FLUX_TYPEVEHS = property(__FLUX_TYPEVEHS.value, __FLUX_TYPEVEHS.set, None,
                              "Noeud d'acc\xe8s \xe0 la collection des flux par type de v\xe9hicule pour l'extr\xe9mit\xe9 courante")
@@ -9793,7 +9886,7 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeTraficOrigine_AGRESSIVITES', False,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 3379, 6), )
+                                                                 3383, 6), )
 
     AGRESSIVITES = property(__AGRESSIVITES.value, __AGRESSIVITES.set, None,
                             "Description du caract\xe8re agressif des v\xe9hicules issus de l'entr\xe9e")
@@ -9804,10 +9897,10 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeTraficOrigine_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3408, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3412, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3408, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3412, 4)
+
     id = property(__id.value, __id.set, None, "Identifiant de l'\xe9l\xe9ment")
 
 
@@ -9816,9 +9909,9 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'typeCreationVehicule'), 'typeCreationVehicule',
         '__AbsentNamespace0_typeTraficOrigine_typeCreationVehicule', STD_ANON_40, unicode_default='demande')
     __typeCreationVehicule._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3413, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3417, 4)
     __typeCreationVehicule._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3413, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3417, 4)
 
     typeCreationVehicule = property(__typeCreationVehicule.value, __typeCreationVehicule.set, None,
                                     "Pr\xe9cise le mode de cr\xe9ation de v\xe9hicules (liste de v\xe9hicule avec l'heure d'entr\xe9e sur le r\xe9seau ou demande)")
@@ -9832,6 +9925,8 @@ class typeTraficOrigine(pyxb.binding.basis.complexTypeDefinition):
         __id.name(): __id,
         __typeCreationVehicule.name(): __typeCreationVehicule
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficOrigine', typeTraficOrigine)
 
 
@@ -9844,7 +9939,7 @@ class CTD_ANON_150(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3390, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3394, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9853,10 +9948,10 @@ class CTD_ANON_150(pyxb.binding.basis.complexTypeDefinition):
     __taux = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'taux'), 'taux',
                                                '__AbsentNamespace0_CTD_ANON_150_taux', typeFloat01, required=True)
     __taux._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3391, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3395, 16)
     __taux._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3391, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3395, 16)
+
     taux = property(__taux.value, __taux.set, None, 'Taux de v\xe9hicule agressif au sein de la classe \n')
 
 
@@ -9865,10 +9960,10 @@ class CTD_ANON_150(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_150_type_veh',
                                                    pyxb.binding.datatypes.string, required=True)
     __type_veh._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3397, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3401, 16)
     __type_veh._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3397, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3401, 16)
+
     type_veh = property(__type_veh.value, __type_veh.set, None, 'Identifiant de la classe de v\xe9hicule')
 
     _ElementMap.update({
@@ -9888,7 +9983,7 @@ class CTD_ANON_151(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3452, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3456, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9898,10 +9993,10 @@ class CTD_ANON_151(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_151_instant',
                                                   pyxb.binding.datatypes.float)
     __instant._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3453, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3457, 20)
     __instant._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3453, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3457, 20)
+
     instant = property(__instant.value, __instant.set, None, 'Instant de cr\xe9ation du v\xe9hicule')
 
 
@@ -9910,10 +10005,10 @@ class CTD_ANON_151(pyxb.binding.basis.complexTypeDefinition):
                                                        'typeVehicule', '__AbsentNamespace0_CTD_ANON_151_typeVehicule',
                                                        pyxb.binding.datatypes.string)
     __typeVehicule._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3458, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3462, 20)
     __typeVehicule._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3458, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3462, 20)
+
     typeVehicule = property(__typeVehicule.value, __typeVehicule.set, None, 'Type du v\xe9hicule \xe0 cr\xe9er')
 
 
@@ -9922,9 +10017,9 @@ class CTD_ANON_151(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_151_destination',
                                                       pyxb.binding.datatypes.string)
     __destination._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3463, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3467, 20)
     __destination._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3463, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3467, 20)
 
     destination = property(__destination.value, __destination.set, None,
                            'Destination du v\xe9hicule cr\xe9\xe9 du v\xe9hicule')
@@ -9935,10 +10030,10 @@ class CTD_ANON_151(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_151_num_voie', typeIntStrictPositif,
                                                    unicode_default='1')
     __num_voie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3468, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3472, 20)
     __num_voie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3468, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3472, 20)
+
     num_voie = property(__num_voie.value, __num_voie.set, None, 'Num\xe9ro de voie du v\xe9hicule \xe0 cr\xe9er')
 
     _ElementMap.update({
@@ -9960,7 +10055,7 @@ class CTD_ANON_152(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3496, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3500, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -9970,9 +10065,9 @@ class CTD_ANON_152(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_152_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3497, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3501, 20)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3497, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3501, 20)
 
     duree = property(__duree.value, __duree.set, None,
                      'Identifiant de la plage temporelle associ\xe9e, ou dur\xe9e de la variante')
@@ -9983,9 +10078,9 @@ class CTD_ANON_152(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_CTD_ANON_152_valeur', typeFloatPositif,
                                                  required=True)
     __valeur._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3502, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3506, 20)
     __valeur._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3502, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3506, 20)
 
     valeur = property(__valeur.value, __valeur.set, None,
                       "Valeur en veh/sec de la capacit\xe9 de la sortie pour l'ensemble des voies")
@@ -10007,7 +10102,7 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeParkingParameters')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3516, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3520, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10017,7 +10112,7 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'TYPE_VEHICULE_INTERDIT'), 'TYPE_VEHICULE_INTERDIT',
         '__AbsentNamespace0_typeParkingParameters_TYPE_VEHICULE_INTERDIT', True,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3518, 6), )
+                                    3522, 6), )
 
     TYPE_VEHICULE_INTERDIT = property(__TYPE_VEHICULE_INTERDIT.value, __TYPE_VEHICULE_INTERDIT.set, None,
                                       'Permet la d\xe9finition de types de v\xe9hicules interdits dans le parking')
@@ -10028,9 +10123,9 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
                                                     '__AbsentNamespace0_typeParkingParameters_stock_max',
                                                     pyxb.binding.datatypes.int, unicode_default='-1')
     __stock_max._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3531, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3535, 4)
     __stock_max._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3531, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3535, 4)
 
     stock_max = property(__stock_max.value, __stock_max.set, None,
                          'Stock maximum de v\xe9hicules propos\xe9 par le parking. -1 : pas de limite (par d\xe9faut).')
@@ -10042,9 +10137,9 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_typeParkingParameters_stock_initial',
                                                         pyxb.binding.datatypes.nonNegativeInteger, unicode_default='0')
     __stock_initial._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3536, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3540, 4)
     __stock_initial._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3536, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3540, 4)
 
     stock_initial = property(__stock_initial.value, __stock_initial.set, None,
                              'Stock initial de v\xe9hiules dans le parking')
@@ -10056,9 +10151,9 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeParkingParameters_inter_temps_sortie',
                                                              typeFloatPositif, unicode_default='0')
     __inter_temps_sortie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3541, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3545, 4)
     __inter_temps_sortie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3541, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3545, 4)
 
     inter_temps_sortie = property(__inter_temps_sortie.value, __inter_temps_sortie.set, None,
                                   'Temps minimum entre deux sorties de v\xe9hicules')
@@ -10070,9 +10165,9 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeParkingParameters_inter_temps_entree',
                                                              typeFloatPositif, unicode_default='0')
     __inter_temps_entree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3546, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3550, 4)
     __inter_temps_entree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3546, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3550, 4)
 
     inter_temps_entree = property(__inter_temps_entree.value, __inter_temps_entree.set, None,
                                   'Temps minimum entre deux entr\xe9es de v\xe9hicules')
@@ -10086,6 +10181,8 @@ class typeParkingParameters(pyxb.binding.basis.complexTypeDefinition):
         __inter_temps_sortie.name(): __inter_temps_sortie,
         __inter_temps_entree.name(): __inter_temps_entree
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeParkingParameters', typeParkingParameters)
 
 
@@ -10097,7 +10194,7 @@ class CTD_ANON_153(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3637, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3641, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10108,7 +10205,7 @@ class CTD_ANON_153(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_153_DESTINATION', True,
                                                             pyxb.utils.utility.Location(
                                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                3639, 22), )
+                                                                3643, 22), )
 
     DESTINATION = property(__DESTINATION.value, __DESTINATION.set, None, None)
 
@@ -10118,9 +10215,9 @@ class CTD_ANON_153(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_153_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3654, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3658, 20)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3654, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3658, 20)
 
     duree = property(__duree.value, __duree.set, None,
                      'Identifiant de la plage temporelle associ\xe9e, ou dur\xe9e (en seconde) de la variante de la matrice OD')
@@ -10141,7 +10238,7 @@ class CTD_ANON_154(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3640, 24)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3644, 24)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10151,10 +10248,10 @@ class CTD_ANON_154(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_CTD_ANON_154_sortie',
                                                  pyxb.binding.datatypes.string, required=True)
     __sortie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3641, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3645, 26)
     __sortie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3641, 26)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3645, 26)
+
     sortie = property(__sortie.value, __sortie.set, None, 'Identifiant de la sortie destination')
 
 
@@ -10162,10 +10259,10 @@ class CTD_ANON_154(pyxb.binding.basis.complexTypeDefinition):
     __coeff = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coeff'), 'coeff',
                                                 '__AbsentNamespace0_CTD_ANON_154_coeff', typeFloat01, required=True)
     __coeff._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3646, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3650, 26)
     __coeff._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3646, 26)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3650, 26)
+
     coeff = property(__coeff.value, __coeff.set, None, "Coefficient d'affectation pour la destination consid\xe9r\xe9e")
 
     _ElementMap.update({
@@ -10185,7 +10282,7 @@ class CTD_ANON_155(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3731, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3735, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10195,10 +10292,10 @@ class CTD_ANON_155(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_155_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3732, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3736, 20)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3732, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3736, 20)
+
     id = property(__id.value, __id.set, None, "Identifiant de l'origine (groupe de parking)")
 
 
@@ -10206,10 +10303,10 @@ class CTD_ANON_155(pyxb.binding.basis.complexTypeDefinition):
     __coeff = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coeff'), 'coeff',
                                                 '__AbsentNamespace0_CTD_ANON_155_coeff', typeFloat01, required=True)
     __coeff._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3737, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3741, 20)
     __coeff._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3737, 20)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3741, 20)
+
     coeff = property(__coeff.value, __coeff.set, None, "Coefficient d'affectation \xe0 l'origine consid\xe9r\xe9e")
 
     _ElementMap.update({
@@ -10229,7 +10326,7 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeRegulation')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3804, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3808, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10238,7 +10335,7 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
     __DETECTEURS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'DETECTEURS'),
                                                            'DETECTEURS', '__AbsentNamespace0_typeRegulation_DETECTEURS',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3806, 6), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3810, 6), )
 
     DETECTEURS = property(__DETECTEURS.value, __DETECTEURS.set, None,
                           'Ensemble des d\xe9tecteurs associ\xe9s \xe0 la brique de r\xe9gulation')
@@ -10250,7 +10347,7 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeRegulation_DECLENCHEURS', False,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 3844, 6), )
+                                                                 3848, 6), )
 
     DECLENCHEURS = property(__DECLENCHEURS.value, __DECLENCHEURS.set, None,
                             'Ensemble des d\xe9clencheurs associ\xe9s \xe0 la brique de r\xe9gulation')
@@ -10261,7 +10358,7 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
                                                         '__AbsentNamespace0_typeRegulation_ACTIONS', False,
                                                         pyxb.utils.utility.Location(
                                                             '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                            3882, 6), )
+                                                            3886, 6), )
 
     ACTIONS = property(__ACTIONS.value, __ACTIONS.set, None,
                        'Ensemble des actions associ\xe9es \xe0 la brique de r\xe9gulation')
@@ -10273,7 +10370,7 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
                                                              '__AbsentNamespace0_typeRegulation_RESTITUTIONS', False,
                                                              pyxb.utils.utility.Location(
                                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                 3920, 6), )
+                                                                 3924, 6), )
 
     RESTITUTIONS = property(__RESTITUTIONS.value, __RESTITUTIONS.set, None,
                             'Ensemble des d\xe9finitions de restitution dans le fichier de sortie pour la brique de r\xe9gulation')
@@ -10284,10 +10381,10 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_typeRegulation_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3954, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3958, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3954, 4)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3958, 4)
+
     id = property(__id.value, __id.set, None, 'Identifiant de la brique de r\xe9gulation')
 
 
@@ -10296,9 +10393,9 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'taux_respect_consigne'), 'taux_respect_consigne',
         '__AbsentNamespace0_typeRegulation_taux_respect_consigne', typeFloat01, unicode_default='1')
     __taux_respect_consigne._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3959, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3963, 4)
     __taux_respect_consigne._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3959, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3963, 4)
 
     taux_respect_consigne = property(__taux_respect_consigne.value, __taux_respect_consigne.set, None,
                                      'Taux de respect de la consigne')
@@ -10313,6 +10410,8 @@ class typeRegulation(pyxb.binding.basis.complexTypeDefinition):
         __id.name(): __id,
         __taux_respect_consigne.name(): __taux_respect_consigne
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeRegulation', typeRegulation)
 
 
@@ -10324,7 +10423,7 @@ class CTD_ANON_156(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3975, 10)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3979, 10)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10334,7 +10433,7 @@ class CTD_ANON_156(pyxb.binding.basis.complexTypeDefinition):
                                                                  'PLAGE_TEMPORELLE',
                                                                  '__AbsentNamespace0_CTD_ANON_156_PLAGE_TEMPORELLE',
                                                                  True, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3977, 14), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3981, 14), )
 
     PLAGE_TEMPORELLE = property(__PLAGE_TEMPORELLE.value, __PLAGE_TEMPORELLE.set, None,
                                 'Plage temporelle pouvant \xeatre utilis\xe9e en mode "horaire" pour renseigner la plage de validit\xe9 des variantes temporelles (attributs "duree" de certains \xe9l\xe9ments)')
@@ -10345,9 +10444,9 @@ class CTD_ANON_156(pyxb.binding.basis.complexTypeDefinition):
                                                '__AbsentNamespace0_CTD_ANON_156_type', STD_ANON_43,
                                                unicode_default='profil')
     __type._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4000, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4004, 12)
     __type._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4000, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4004, 12)
 
     type = property(__type.value, __type.set, None,
                     "Type de d\xe9finition des variations temporelles ('profil' ou 'horaire')")
@@ -10357,9 +10456,9 @@ class CTD_ANON_156(pyxb.binding.basis.complexTypeDefinition):
     __debut = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'debut'), 'debut',
                                                 '__AbsentNamespace0_CTD_ANON_156_debut', pyxb.binding.datatypes.time)
     __debut._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4019, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4023, 12)
     __debut._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4019, 12)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4023, 12)
 
     debut = property(__debut.value, __debut.set, None,
                      "Heure de d\xe9marrage des premi\xe8res variantes temporelles en mode 'profil'")
@@ -10381,7 +10480,7 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4348, 34)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4352, 34)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10391,10 +10490,10 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_157_id',
                                              pyxb.binding.datatypes.positiveInteger, required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4349, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4353, 36)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4349, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4353, 36)
+
     id = property(__id.value, __id.set, None, 'Identifiant du v\xe9hicule')
 
 
@@ -10403,10 +10502,10 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_157_type_veh',
                                                    pyxb.binding.datatypes.string, required=True)
     __type_veh._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4355, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4359, 36)
     __type_veh._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4355, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4359, 36)
+
     type_veh = property(__type_veh.value, __type_veh.set, None, 'Identifiant de la classe de v\xe9hicule')
 
 
@@ -10415,9 +10514,9 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                                '__AbsentNamespace0_CTD_ANON_157_tron', pyxb.binding.datatypes.string,
                                                required=True)
     __tron._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4360, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4364, 36)
     __tron._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4360, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4364, 36)
 
     tron = property(__tron.value, __tron.set, None,
                     "Tron\xe7on sur lequel se trouve le v\xe9hicule (il peut ne pas \xeatre d\xe9fini au niveau de la liste des tron\xe7ons notamment dans le cas o\xf9 le v\xe9hicule est positionn\xe9 sur un tron\xe7on interne d'une brique. La v\xe9rification de l'existence du tron\xe7on sera effectu\xe9e apr\xe8s l'initialisation compl\xe8te du r\xe9seau par SymuVia. Si le tron\xe7on n'existe pas, le v\xe9hicule ne sera pas cr\xe9\xe9.\n\t\t\t\t\t\t\t\t")
@@ -10428,9 +10527,9 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                                '__AbsentNamespace0_CTD_ANON_157_voie', typeIntStrictPositif,
                                                unicode_default='1')
     __voie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4366, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4370, 36)
     __voie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4366, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4370, 36)
 
     voie = property(__voie.value, __voie.set, None,
                     "Num\xe9ro de voie sur laquelle se trouve le v\xe9hicule (la v\xe9rification de l'existence de la voie sera effectu\xe9e apr\xe8s l'initialisation compl\xe8te du r\xe9seau par SymuVia. Si le tron\xe7on n'existe pas, le v\xe9hicule ne sera pas cr\xe9\xe9.\n\t\t\t\t\t\t\t\t")
@@ -10441,9 +10540,9 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                               '__AbsentNamespace0_CTD_ANON_157_dst', pyxb.binding.datatypes.float,
                                               required=True)
     __dst._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4373, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4377, 36)
     __dst._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4373, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4377, 36)
 
     dst = property(__dst.value, __dst.set, None,
                    "Position curviligne du v\xe9hicule sur le tron\xe7on \xe0 l'instant 0 (la v\xe9rification de la valeur de la position sera effectu\xe9e apr\xe8s l'initialisation compl\xe8te du r\xe9seau par SymuVia. Si la position est erron\xe9e, le v\xe9hicule ne sera pas cr\xe9\xe9.\n\t\t\t\t\t\t\t\t")
@@ -10453,10 +10552,10 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
     __vit = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'vit'), 'vit',
                                               '__AbsentNamespace0_CTD_ANON_157_vit', typeFloatPositif, required=True)
     __vit._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4379, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4383, 36)
     __vit._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4379, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4383, 36)
+
     vit = property(__vit.value, __vit.set, None, "Vitesse du v\xe9hicule \xe0 l'instant 0\n\t\t\t\t\t\t\t\t")
 
 
@@ -10465,10 +10564,10 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                               '__AbsentNamespace0_CTD_ANON_157_acc', pyxb.binding.datatypes.float,
                                               required=True)
     __acc._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4385, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4389, 36)
     __acc._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4385, 36)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4389, 36)
+
     acc = property(__acc.value, __acc.set, None, "Acc\xe9l\xe9ration du v\xe9hicule \xe0 l'instant 0\n\t\t\t\t\t\t\t\t")
 
 
@@ -10477,9 +10576,9 @@ class CTD_ANON_157(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_157_destination',
                                                       pyxb.binding.datatypes.string)
     __destination._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4391, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4395, 36)
     __destination._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4391, 36)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4395, 36)
 
     destination = property(__destination.value, __destination.set, None,
                            "Destination du v\xe9hicule (identifiant de la sortie). Cet attribut doit \xeatre obligatoirement pr\xe9sent dans le cas d'une simulation avec un flux de type 'destination' ou 'itineraire'.\n\t\t\t\t\t\t\t\t")
@@ -10507,7 +10606,7 @@ class typeITINERAIRE(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeITINERAIRE')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4861, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4865, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10517,7 +10616,7 @@ class typeITINERAIRE(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_typeITINERAIRE_TRONCONS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             4863, 6), )
+                                                             4867, 6), )
 
     TRONCONS = property(__TRONCONS.value, __TRONCONS.set, None, "Liste des tron\xe7ons constituant l'itin\xe9raire")
 
@@ -10528,9 +10627,9 @@ class typeITINERAIRE(pyxb.binding.basis.complexTypeDefinition):
                                                            '__AbsentNamespace0_typeITINERAIRE_coeffAffectation',
                                                            typeFloat01, required=True)
     __coeffAffectation._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4882, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4886, 4)
     __coeffAffectation._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4882, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4886, 4)
 
     coeffAffectation = property(__coeffAffectation.value, __coeffAffectation.set, None,
                                 "Coefficient d'affectation des vahicules \xe0 cet itin\xe9raire. La somme des coefficients des itin\xe9raires doit \xeatre \xe9gale \xe0 1.")
@@ -10540,9 +10639,9 @@ class typeITINERAIRE(pyxb.binding.basis.complexTypeDefinition):
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'id'), 'id',
                                              '__AbsentNamespace0_typeITINERAIRE_id', pyxb.binding.datatypes.string)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4887, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4891, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4887, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4891, 4)
 
     id = property(__id.value, __id.set, None,
                   "Identifiant de l'itin\xe9raire d\xe9fini au niveau du noeud RESEAU/ROUTES. Si cet identifiant n'est pas d\xe9fini, l'utilisateur doit list\xe9 les tron\xe7ons de l'itin\xe9raire au niveau du noeud enfant TRONCONS_")
@@ -10554,6 +10653,8 @@ class typeITINERAIRE(pyxb.binding.basis.complexTypeDefinition):
         __coeffAffectation.name(): __coeffAffectation,
         __id.name(): __id
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeITINERAIRE', typeITINERAIRE)
 
 
@@ -10565,7 +10666,7 @@ class CTD_ANON_158(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4905, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4909, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10574,10 +10675,10 @@ class CTD_ANON_158(pyxb.binding.basis.complexTypeDefinition):
     __niveau = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'niveau'), 'niveau',
                                                  '__AbsentNamespace0_CTD_ANON_158_niveau', typeFloatPositif)
     __niveau._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4906, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4910, 16)
     __niveau._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4906, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4910, 16)
+
     niveau = property(__niveau.value, __niveau.set, None, 'Niveau de la demande en veh/s')
 
 
@@ -10586,10 +10687,10 @@ class CTD_ANON_158(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_158_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4911, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4915, 16)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4911, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4915, 16)
+
     duree = property(__duree.value, __duree.set, None, 'Dur\xe9e de la variante temporelle\n')
 
     _ElementMap.update({
@@ -10609,7 +10710,7 @@ class CTD_ANON_159(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4932, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4936, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10620,7 +10721,7 @@ class CTD_ANON_159(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_159_DESTINATION', True,
                                                             pyxb.utils.utility.Location(
                                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                4934, 18), )
+                                                                4938, 18), )
 
     DESTINATION = property(__DESTINATION.value, __DESTINATION.set, None,
                            "Description d'une destination de l'extr\xe9mit\xe9 courante\n")
@@ -10631,10 +10732,10 @@ class CTD_ANON_159(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_159_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4987, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4991, 16)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4987, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4991, 16)
+
     duree = property(__duree.value, __duree.set, None, 'Dur\xe9e de la variante temporelle')
 
     _ElementMap.update({
@@ -10654,7 +10755,7 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4939, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4943, 20)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -10664,7 +10765,7 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_160_ROUTE', True,
                                                       pyxb.utils.utility.Location(
                                                           '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                          4944, 24), )
+                                                          4948, 24), )
 
     ROUTE = property(__ROUTE.value, __ROUTE.set, None, None)
 
@@ -10674,10 +10775,10 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_CTD_ANON_160_sortie',
                                                  pyxb.binding.datatypes.string, required=True)
     __sortie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4947, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4951, 22)
     __sortie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4947, 22)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4951, 22)
+
     sortie = property(__sortie.value, __sortie.set, None, 'Identifiant de la sortie destination')
 
 
@@ -10685,9 +10786,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
     __coeffOD = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coeffOD'), 'coeffOD',
                                                   '__AbsentNamespace0_CTD_ANON_160_coeffOD', typeFloat01, required=True)
     __coeffOD._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4952, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4956, 22)
     __coeffOD._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4952, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4956, 22)
 
     coeffOD = property(__coeffOD.value, __coeffOD.set, None,
                        "Coefficient de la matrice OD pour l'origine (extr\xe9lit\xe9 courante) et la destination consid\xe9r\xe9e")
@@ -10698,9 +10799,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'affectation_teta_logit'), 'affectation_teta_logit',
         '__AbsentNamespace0_CTD_ANON_160_affectation_teta_logit', typeFloatStrictPositif)
     __affectation_teta_logit._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4957, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4961, 22)
     __affectation_teta_logit._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4957, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4961, 22)
 
     affectation_teta_logit = property(__affectation_teta_logit.value, __affectation_teta_logit.set, None,
                                       "Param\xe8tre teta du mod\xe8le logit de l'affectation sp\xe9cifique pour ce couple OD")
@@ -10711,9 +10812,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'nombre_pluscourtchemin'), 'nombre_pluscourtchemin',
         '__AbsentNamespace0_CTD_ANON_160_nombre_pluscourtchemin', typeIntStrictPositif)
     __nombre_pluscourtchemin._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4963, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4967, 22)
     __nombre_pluscourtchemin._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4963, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4967, 22)
 
     nombre_pluscourtchemin = property(__nombre_pluscourtchemin.value, __nombre_pluscourtchemin.set, None,
                                       "Nombre de plus court chemin \xe0 consid\xe9rer dans le cas d'un comportment de flux de type 'itineraire' pour ce couple OD")
@@ -10724,9 +10825,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'affectation_commonality_alpha'), 'affectation_commonality_alpha',
         '__AbsentNamespace0_CTD_ANON_160_affectation_commonality_alpha', pyxb.binding.datatypes.float)
     __affectation_commonality_alpha._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4969, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4973, 22)
     __affectation_commonality_alpha._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4969, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4973, 22)
 
     affectation_commonality_alpha = property(__affectation_commonality_alpha.value, __affectation_commonality_alpha.set,
                                              None,
@@ -10738,9 +10839,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'affectation_commonality_beta'), 'affectation_commonality_beta',
         '__AbsentNamespace0_CTD_ANON_160_affectation_commonality_beta', typeFloat01)
     __affectation_commonality_beta._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4974, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4978, 22)
     __affectation_commonality_beta._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4974, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4978, 22)
 
     affectation_commonality_beta = property(__affectation_commonality_beta.value, __affectation_commonality_beta.set,
                                             None,
@@ -10752,9 +10853,9 @@ class CTD_ANON_160(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'affectation_commonality_gamma'), 'affectation_commonality_gamma',
         '__AbsentNamespace0_CTD_ANON_160_affectation_commonality_gamma', typeFloat01)
     __affectation_commonality_gamma._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4979, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4983, 22)
     __affectation_commonality_gamma._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4979, 22)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4983, 22)
 
     affectation_commonality_gamma = property(__affectation_commonality_gamma.value, __affectation_commonality_gamma.set,
                                              None,
@@ -10852,7 +10953,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 622, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 622, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant de la section SIMULATION')
 
 
@@ -10864,7 +10965,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 627, 4)
     __pasdetemps._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 627, 4)
-    
+
     pasdetemps = property(__pasdetemps.value, __pasdetemps.set, None, 'Pas de temps de simulation')
 
 
@@ -10876,7 +10977,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 632, 4)
     __debut._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 632, 4)
-    
+
     debut = property(__debut.value, __debut.set, None, 'Heure de d\xe9but de la simulation (Heures:Minutes:Secondes)')
 
 
@@ -10888,7 +10989,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 637, 4)
     __fin._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 637, 4)
-    
+
     fin = property(__fin.value, __fin.set, None, 'Heure de fin de la simulation (Heures:Minutes:Secondes)')
 
 
@@ -10956,7 +11057,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 676, 4)
     __loipoursuite._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 676, 4)
-    
+
     loipoursuite = property(__loipoursuite.value, __loipoursuite.set, None, 'Indique la loi de poursuite utilis\xe9e')
 
 
@@ -10969,7 +11070,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 695, 4)
     __comportementflux._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 695, 4)
-    
+
     comportementflux = property(__comportementflux.value, __comportementflux.set, None, 'Comportement du flux')
 
 
@@ -11024,7 +11125,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 736, 4)
     __date._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 736, 4)
-    
+
     date = property(__date.value, __date.set, None, 'Date de la simulation')
 
 
@@ -11035,7 +11136,7 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 741, 4)
     __titre._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 741, 4)
-    
+
     titre = property(__titre.value, __titre.set, None, 'Titre de la simulation')
 
 
@@ -11599,6 +11700,8 @@ class typeParametrageSimulation(pyxb.binding.basis.complexTypeDefinition):
         __affectation_commonality_gamma.name(): __affectation_commonality_gamma,
         __EPSGinput.name(): __EPSGinput
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeParametrageSimulation', typeParametrageSimulation)
 
 
@@ -11645,7 +11748,7 @@ class typeTypeDeVehicule(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1413, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1413, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du type de v\xe9hicule')
 
 
@@ -11994,6 +12097,8 @@ class typeTypeDeVehicule(pyxb.binding.basis.complexTypeDefinition):
         __montee_descente_simultanee.name(): __montee_descente_simultanee,
         __temps_montee_individuelle.name(): __temps_montee_individuelle
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTypeDeVehicule', typeTypeDeVehicule)
 
 
@@ -12018,7 +12123,7 @@ class CTD_ANON_162(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1371, 16)
     __ax._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1371, 16)
-    
+
     ax = property(__ax.value, __ax.set, None, 'Acc\xe9l\xe9ration en m/s2')
 
 
@@ -12178,7 +12283,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1952, 4)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1952, 4)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on')
 
 
@@ -12190,7 +12295,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1957, 4)
     __nom_axe._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1957, 4)
-    
+
     nom_axe = property(__nom_axe.value, __nom_axe.set, None, "Nom de l'axe dont le tron\xe7on fait partie")
 
 
@@ -12202,7 +12307,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1962, 4)
     __id_eltamont._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1962, 4)
-    
+
     id_eltamont = property(__id_eltamont.value, __id_eltamont.set, None, "Identifiant de l'\xe9l\xe9ment amont")
 
 
@@ -12214,7 +12319,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1967, 4)
     __id_eltaval._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1967, 4)
-    
+
     id_eltaval = property(__id_eltaval.value, __id_eltaval.set, None, "Identifiant de l'\xe9l\xe9ment aval")
 
 
@@ -12280,7 +12385,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1992, 4)
     __nb_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1992, 4)
-    
+
     nb_voie = property(__nb_voie.value, __nb_voie.set, None, 'Nombre de voie du tron\xe7on')
 
 
@@ -12292,7 +12397,7 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1997, 4)
     __largeur_voie._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 1997, 4)
-    
+
     largeur_voie = property(__largeur_voie.value, __largeur_voie.set, None, "Largeur d'une voie (en m)")
 
 
@@ -12391,6 +12496,8 @@ class typeTroncon(pyxb.binding.basis.complexTypeDefinition):
         __id_troncon_oppose.name(): __id_troncon_oppose,
         __exclusion_types_vehicules.name(): __exclusion_types_vehicules
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTroncon', typeTroncon)
 
 
@@ -12426,7 +12533,7 @@ class CTD_ANON_163(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2162, 20)
     __id._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2162, 20)
-    
+
     id = property(__id.value, __id.set, None, 'Identifiant du tron\xe7on interne')
 
 
@@ -12553,7 +12660,7 @@ class CTD_ANON_164(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2338, 32)
     __coord._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2338, 32)
-    
+
     coord = property(__coord.value, __coord.set, None, 'Coordonn\xe9es du point de divergence')
 
     _ElementMap.update({
@@ -12573,7 +12680,7 @@ class CTD_ANON_165(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2502, 30)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2505, 30)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -12583,7 +12690,7 @@ class CTD_ANON_165(pyxb.binding.basis.complexTypeDefinition):
                                                                 'POINTS_INTERNES',
                                                                 '__AbsentNamespace0_CTD_ANON_165_POINTS_INTERNES',
                                                                 False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2504, 34), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2507, 34), )
 
     POINTS_INTERNES = property(__POINTS_INTERNES.value, __POINTS_INTERNES.set, None,
                                "Liste des points internes se situant entre le pr\xe9c\xe9dent convergent d\xe9fini et celui-ci (si c'est le premier convergent d\xe9fini, c'est entre l'extr\xe9mit\xe9 amont du tron\xe7on de sortie et celui-ci)")
@@ -12593,9 +12700,9 @@ class CTD_ANON_165(pyxb.binding.basis.complexTypeDefinition):
     __id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'id'), 'id',
                                              '__AbsentNamespace0_CTD_ANON_165_id', STD_ANON_24, required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2511, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2514, 32)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2511, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2514, 32)
 
     id = property(__id.value, __id.set, None,
                   "Identifiant du convergent (celui-ci va permettre pour chaque mouvement d'identifier son point de divergence sur la branche principale de l'entr\xe9e)")
@@ -12605,10 +12712,10 @@ class CTD_ANON_165(pyxb.binding.basis.complexTypeDefinition):
     __coord = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coord'), 'coord',
                                                 '__AbsentNamespace0_CTD_ANON_165_coord', typeCoordonnees, required=True)
     __coord._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2521, 32)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2524, 32)
     __coord._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2521, 32)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2524, 32)
+
     coord = property(__coord.value, __coord.set, None, 'Coordonn\xe9es du point de convergence')
 
     _ElementMap.update({
@@ -12628,7 +12735,7 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2713, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2717, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -12638,7 +12745,7 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_MONTEE'), 'PARAMETRAGE_MONTEE',
         '__AbsentNamespace0_CTD_ANON_166_PARAMETRAGE_MONTEE', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2715, 18), )
+                                    2719, 18), )
 
     PARAMETRAGE_MONTEE = property(__PARAMETRAGE_MONTEE.value, __PARAMETRAGE_MONTEE.set, None,
                                   "Liste des variantes temporelles de d\xe9finition du profil des demandes pour l'arr\xeat")
@@ -12649,7 +12756,7 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_DESCENTE'), 'PARAMETRAGE_DESCENTE',
         '__AbsentNamespace0_CTD_ANON_166_PARAMETRAGE_DESCENTE', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2762, 18), )
+                                    2766, 18), )
 
     PARAMETRAGE_DESCENTE = property(__PARAMETRAGE_DESCENTE.value, __PARAMETRAGE_DESCENTE.set, None,
                                     "D\xe9finition des param\xe8tres de descente des bus pour l'arr\xeat consid\xe9r\xe9")
@@ -12660,10 +12767,10 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_166_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2790, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2794, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2790, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2794, 16)
+
     id = property(__id.value, __id.set, None, "Identifiant de l'arr\xeat")
 
 
@@ -12672,10 +12779,10 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_166_troncon',
                                                   pyxb.binding.datatypes.string, required=True)
     __troncon._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2795, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2799, 16)
     __troncon._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2795, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2799, 16)
+
     troncon = property(__troncon.value, __troncon.set, None, "Tron\xe7on sur lequel est positionn\xe9 l'arr\xeat")
 
 
@@ -12684,9 +12791,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_166_position', typeFloatPositif,
                                                    required=True)
     __position._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2800, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2804, 16)
     __position._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2800, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2804, 16)
 
     position = property(__position.value, __position.set, None,
                         "Position de l'arr\xeat sur le tron\xe7on (en m ou en % de la longueur du tron\xe7on si position_relative vaut true)")
@@ -12698,9 +12805,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_166_position_relative',
                                                             pyxb.binding.datatypes.boolean, unicode_default='false')
     __position_relative._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2805, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2809, 16)
     __position_relative._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2805, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2809, 16)
 
     position_relative = property(__position_relative.value, __position_relative.set, None,
                                  "Indique que la position de l'arr\xeat est exprim\xe9e en pourcentage de la longueur du tron\xe7on sur lequel est positionn\xe9 l'arr\xeat.")
@@ -12711,9 +12818,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_166_dureearret',
                                                      pyxb.binding.datatypes.nonNegativeInteger)
     __dureearret._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2811, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2815, 16)
     __dureearret._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2811, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2815, 16)
 
     dureearret = property(__dureearret.value, __dureearret.set, None,
                           "Dur\xe9e de l'arr\xeat (en s) dans le cas d'un param\xe9trage de type global")
@@ -12724,9 +12831,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
                                                      '__AbsentNamespace0_CTD_ANON_166_pleinevoie',
                                                      pyxb.binding.datatypes.boolean, unicode_default='true')
     __pleinevoie._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2816, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2820, 16)
     __pleinevoie._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2816, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2820, 16)
 
     pleinevoie = property(__pleinevoie.value, __pleinevoie.set, None,
                           "Indique si le v\xe9hicule guid\xe9 s'arr\xeate sur la voie ou en dehors ")
@@ -12736,9 +12843,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
     __lignes = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'lignes'), 'lignes',
                                                  '__AbsentNamespace0_CTD_ANON_166_lignes', STD_ANON_48, required=True)
     __lignes._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2821, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2825, 16)
     __lignes._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2821, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2825, 16)
 
     lignes = property(__lignes.value, __lignes.set, None,
                       "Liste des lignes de transport guid\xe9e s'arr\xeatant \xe0 cet arr\xeat")
@@ -12748,9 +12855,9 @@ class CTD_ANON_166(pyxb.binding.basis.complexTypeDefinition):
     __num_voies = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'num_voies'), 'num_voies',
                                                     '__AbsentNamespace0_CTD_ANON_166_num_voies', STD_ANON_49)
     __num_voies._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2833, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2837, 16)
     __num_voies._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2833, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2837, 16)
 
     num_voies = property(__num_voies.value, __num_voies.set, None,
                          'Liste des num\xe9ros de voie sur lesquelles se trouve l\'arr\xeat pour chacune des lignes concern\xe9es par l\'arr\xeat. Le nombre de num\xe9ros de voie doit \xeatre \xe9gal au nombre de lignes passant par cet arr\xeat et d\xe9finies dans l\'attribut "lignes"')
@@ -12779,7 +12886,7 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3066, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3070, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -12788,9 +12895,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
     __lignes = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'lignes'), 'lignes',
                                                  '__AbsentNamespace0_CTD_ANON_167_lignes', STD_ANON_50, required=True)
     __lignes._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3067, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3071, 16)
     __lignes._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3067, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3071, 16)
 
     lignes = property(__lignes.value, __lignes.set, None,
                       'Liste des lignes de transport guid\xe9es circulant sur cette ligne prioritaire')
@@ -12801,9 +12908,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'troncon_capteur_amont'), 'troncon_capteur_amont',
         '__AbsentNamespace0_CTD_ANON_167_troncon_capteur_amont', pyxb.binding.datatypes.string, required=True)
     __troncon_capteur_amont._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3079, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3083, 16)
     __troncon_capteur_amont._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3079, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3083, 16)
 
     troncon_capteur_amont = property(__troncon_capteur_amont.value, __troncon_capteur_amont.set, None,
                                      "Identifiant du tron\xe7on sur lequel se trouve le capteur amont de la ligne prioritaire (ce capteur permet de d\xe9tecter l'arriv\xe9e d'un v\xe9hicule prioritaire au contr\xf4leur de feux)")
@@ -12814,9 +12921,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'position_capteur_amont'), 'position_capteur_amont',
         '__AbsentNamespace0_CTD_ANON_167_position_capteur_amont', typeFloatPositif, required=True)
     __position_capteur_amont._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3084, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3088, 16)
     __position_capteur_amont._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3084, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3088, 16)
 
     position_capteur_amont = property(__position_capteur_amont.value, __position_capteur_amont.set, None,
                                       "Position \xe0 laquelle se trouve le capteur amont de la ligne prioritaire (ce capteur permet de d\xe9tecter l'arriv\xe9e d'un v\xe9hicule prioritaire au contr\xf4leur de feux)")
@@ -12827,9 +12934,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'troncon_capteur_aval'), 'troncon_capteur_aval',
         '__AbsentNamespace0_CTD_ANON_167_troncon_capteur_aval', pyxb.binding.datatypes.string, required=True)
     __troncon_capteur_aval._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3089, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3093, 16)
     __troncon_capteur_aval._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3089, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3093, 16)
 
     troncon_capteur_aval = property(__troncon_capteur_aval.value, __troncon_capteur_aval.set, None,
                                     'Identifiant du tron\xe7on sur lequel se trouve le capteur aval de la ligne prioritaire (ce capteur permet de d\xe9tecter la sortie du v\xe9hicule prioritaire du contr\xf4leur de feux)')
@@ -12840,9 +12947,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'position_capteur_aval'), 'position_capteur_aval',
         '__AbsentNamespace0_CTD_ANON_167_position_capteur_aval', typeFloatPositif, required=True)
     __position_capteur_aval._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3094, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3098, 16)
     __position_capteur_aval._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3094, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3098, 16)
 
     position_capteur_aval = property(__position_capteur_aval.value, __position_capteur_aval.set, None,
                                      'Position \xe0 laquelle se trouve le capteur amont de la ligne prioritaire (ce capteur permet de d\xe9tecter la sortie du v\xe9hicule prioritaire du contr\xf4leur de feux)')
@@ -12854,9 +12961,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
                                                               '__AbsentNamespace0_CTD_ANON_167_troncon_entree_zone',
                                                               pyxb.binding.datatypes.string, required=True)
     __troncon_entree_zone._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3099, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3103, 16)
     __troncon_entree_zone._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3099, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3103, 16)
 
     troncon_entree_zone = property(__troncon_entree_zone.value, __troncon_entree_zone.set, None,
                                    "Identifiant du tron\xe7on permettant de d\xe9finir l'entr\xe9e de la zone du contr\xf4leur de feux")
@@ -12867,9 +12974,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
         pyxb.namespace.ExpandedName(None, 'position_entree_zone'), 'position_entree_zone',
         '__AbsentNamespace0_CTD_ANON_167_position_entree_zone', typeFloatPositif, required=True)
     __position_entree_zone._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3104, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3108, 16)
     __position_entree_zone._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3104, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3108, 16)
 
     position_entree_zone = property(__position_entree_zone.value, __position_entree_zone.set, None,
                                     'Position \xe0 laquelle se trouve le capteur amont de la ligne prioritaire (ce capteur permet de d\xe9tecter la sortie du v\xe9hicule prioritaire du contr\xf4leur de feux)')
@@ -12881,9 +12988,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
                                                           '__AbsentNamespace0_CTD_ANON_167_priorite_totale',
                                                           pyxb.binding.datatypes.boolean, unicode_default='true')
     __priorite_totale._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3109, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3113, 16)
     __priorite_totale._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3109, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3113, 16)
 
     priorite_totale = property(__priorite_totale.value, __priorite_totale.set, None,
                                'Indique si la priorit\xe9 des v\xe9hicules guid\xe9s d cette ligne est totale (ou partag\xe9e)')
@@ -12895,9 +13002,9 @@ class CTD_ANON_167(pyxb.binding.basis.complexTypeDefinition):
                                                             '__AbsentNamespace0_CTD_ANON_167_sequence_partagee',
                                                             STD_ANON_35, unicode_default='1')
     __sequence_partagee._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3114, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3118, 16)
     __sequence_partagee._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3114, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3118, 16)
 
     sequence_partagee = property(__sequence_partagee.value, __sequence_partagee.set, None,
                                  "Num\xe9ro d'odre de la s\xe9quence partag\xe9e dans le cas d'une ligne guid\xe9e prioritaire partag\xe9e\n")
@@ -12926,7 +13033,7 @@ class CTD_ANON_168(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3140, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3144, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -12937,9 +13044,9 @@ class CTD_ANON_168(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_168_troncon_entree',
                                                          pyxb.binding.datatypes.string, required=True)
     __troncon_entree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3141, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3145, 16)
     __troncon_entree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3141, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3145, 16)
 
     troncon_entree = property(__troncon_entree.value, __troncon_entree.set, None,
                               "Identifiant du tron\xe7on d'entr\xe9e du feu")
@@ -12949,10 +13056,10 @@ class CTD_ANON_168(pyxb.binding.basis.complexTypeDefinition):
     __coord = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coord'), 'coord',
                                                 '__AbsentNamespace0_CTD_ANON_168_coord', typeCoordonnees, required=True)
     __coord._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3146, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3150, 16)
     __coord._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3146, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3150, 16)
+
     coord = property(__coord.value, __coord.set, None, 'Coordonn\xe9es du feu')
 
     _ElementMap.update({
@@ -12972,7 +13079,7 @@ class typeTraficOriginePonctuelle(typeTraficOrigine):
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTraficOriginePonctuelle')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3438, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3442, 2)
     _ElementMap = typeTraficOrigine._ElementMap.copy()
     _AttributeMap = typeTraficOrigine._AttributeMap.copy()
     # Base type is typeTraficOrigine
@@ -12988,7 +13095,7 @@ class typeTraficOriginePonctuelle(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES'), 'CREATION_VEHICULES',
         '__AbsentNamespace0_typeTraficOriginePonctuelle_CREATION_VEHICULES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3442, 10), )
+                                    3446, 10), )
 
     CREATION_VEHICULES = property(__CREATION_VEHICULES.value, __CREATION_VEHICULES.set, None,
                                   'Liste des v\xe9hicules \xe0 cr\xe9er')
@@ -13003,6 +13110,8 @@ class typeTraficOriginePonctuelle(typeTraficOrigine):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficOriginePonctuelle', typeTraficOriginePonctuelle)
 
 
@@ -13014,7 +13123,7 @@ class typeParkingZone(typeParkingParameters):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeParkingZone')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3561, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3565, 2)
     _ElementMap = typeParkingParameters._ElementMap.copy()
     _AttributeMap = typeParkingParameters._AttributeMap.copy()
     # Base type is typeParkingParameters
@@ -13034,10 +13143,10 @@ class typeParkingZone(typeParkingParameters):
                                              '__AbsentNamespace0_typeParkingZone_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3564, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3568, 8)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3564, 8)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3568, 8)
+
     id = property(__id.value, __id.set, None, 'identifiant du parking de zone')
 
     _ElementMap.update({
@@ -13046,6 +13155,8 @@ class typeParkingZone(typeParkingParameters):
     _AttributeMap.update({
         __id.name(): __id
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeParkingZone', typeParkingZone)
 
 
@@ -13057,7 +13168,7 @@ class typeTraficZone(typeTraficOrigine):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTraficZone')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3572, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3576, 2)
     _ElementMap = typeTraficOrigine._ElementMap.copy()
     _AttributeMap = typeTraficOrigine._AttributeMap.copy()
     # Base type is typeTraficOrigine
@@ -13073,7 +13184,7 @@ class typeTraficZone(typeTraficOrigine):
                                                          '__AbsentNamespace0_typeTraficZone_TRONCONS', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             3576, 10), )
+                                                             3580, 10), )
 
     TRONCONS = property(__TRONCONS.value, __TRONCONS.set, None, 'Liste des tron\xe7ons d\xe9finissant la zone')
 
@@ -13084,7 +13195,7 @@ class typeTraficZone(typeTraficOrigine):
                                                                '__AbsentNamespace0_typeTraficZone_GROUPE_PARKING', True,
                                                                pyxb.utils.utility.Location(
                                                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                                   3608, 10), )
+                                                                   3612, 10), )
 
     GROUPE_PARKING = property(__GROUPE_PARKING.value, __GROUPE_PARKING.set, None,
                               'Liste des parkings compris dans la zone')
@@ -13095,7 +13206,7 @@ class typeTraficZone(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'MATRICES_OD_INTERNES'), 'MATRICES_OD_INTERNES',
         '__AbsentNamespace0_typeTraficZone_MATRICES_OD_INTERNES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3627, 10), )
+                                    3631, 10), )
 
     MATRICES_OD_INTERNES = property(__MATRICES_OD_INTERNES.value, __MATRICES_OD_INTERNES.set, None,
                                     'Liste des variantes temporelles de la matrice OD interne \xe0 la zone de terminaison')
@@ -13106,7 +13217,7 @@ class typeTraficZone(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES'), 'CREATION_VEHICULES',
         '__AbsentNamespace0_typeTraficZone_CREATION_VEHICULES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3664, 10), )
+                                    3668, 10), )
 
     CREATION_VEHICULES = property(__CREATION_VEHICULES.value, __CREATION_VEHICULES.set, None,
                                   'Liste des v\xe9hicules \xe0 cr\xe9er')
@@ -13117,7 +13228,7 @@ class typeTraficZone(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'REPARTITIONS_TYPEVEHICULE'), 'REPARTITIONS_TYPEVEHICULE',
         '__AbsentNamespace0_typeTraficZone_REPARTITIONS_TYPEVEHICULE', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3695, 10), )
+                                    3699, 10), )
 
     REPARTITIONS_TYPEVEHICULE = property(__REPARTITIONS_TYPEVEHICULE.value, __REPARTITIONS_TYPEVEHICULE.set, None,
                                          'Liste des variantes des r\xe9partitions des types de v\xe9hicule')
@@ -13128,7 +13239,7 @@ class typeTraficZone(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'REPARTITION_ORIGINES'), 'REPARTITION_ORIGINES',
         '__AbsentNamespace0_typeTraficZone_REPARTITION_ORIGINES', False,
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3721, 10), )
+                                    3725, 10), )
 
     REPARTITION_ORIGINES = property(__REPARTITION_ORIGINES.value, __REPARTITION_ORIGINES.set, None,
                                     "Liste des coefficients de r\xe9partition de la demande sur les diff\xe9rents \xe9l\xe9ments de la zone d'origine (groupes de parkings et tron\xe7ons avec stationnement)")
@@ -13142,10 +13253,10 @@ class typeTraficZone(typeTraficOrigine):
     __t0 = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 't0'), 't0',
                                              '__AbsentNamespace0_typeTraficZone_t0', typeFloatPositif, required=True)
     __t0._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3748, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3752, 8)
     __t0._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3748, 8)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3752, 8)
+
     t0 = property(__t0.value, __t0.set, None, 'Temps moyen de circulation en zone vide (en secondes)')
 
 
@@ -13154,9 +13265,9 @@ class typeTraficZone(typeTraficOrigine):
                                                 '__AbsentNamespace0_typeTraficZone_alpha', typeFloatPositif,
                                                 required=True)
     __alpha._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3753, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3757, 8)
     __alpha._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3753, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3757, 8)
 
     alpha = property(__alpha.value, __alpha.set, None,
                      'Temps suppl\xe9mentaire de parcours en zone par v\xe9hicule pr\xe9sent dans celle-ci (s / veh)')
@@ -13167,9 +13278,9 @@ class typeTraficZone(typeTraficOrigine):
                                                '__AbsentNamespace0_typeTraficZone_beta', typeFloatPositif,
                                                required=True)
     __beta._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3758, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3762, 8)
     __beta._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3758, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3762, 8)
 
     beta = property(__beta.value, __beta.set, None,
                     'Coefficient multiplicatif suppl\xe9mentaire appliqu\xe9 \xe0 alpha dans le mode surfacique')
@@ -13181,9 +13292,9 @@ class typeTraficZone(typeTraficOrigine):
                                                             '__AbsentNamespace0_typeTraficZone_mode_zone_origine',
                                                             STD_ANON_41)
     __mode_zone_origine._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3763, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3767, 8)
     __mode_zone_origine._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3763, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3767, 8)
 
     mode_zone_origine = property(__mode_zone_origine.value, __mode_zone_origine.set, None,
                                  'Mode de gestion de la cr\xe9ation des v\xe9hicules au d\xe9part de cette zone de terminaison')
@@ -13194,9 +13305,9 @@ class typeTraficZone(typeTraficOrigine):
         pyxb.namespace.ExpandedName(None, 'mode_zone_destination'), 'mode_zone_destination',
         '__AbsentNamespace0_typeTraficZone_mode_zone_destination', STD_ANON_42)
     __mode_zone_destination._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3782, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3786, 8)
     __mode_zone_destination._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3782, 8)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3786, 8)
 
     mode_zone_destination = property(__mode_zone_destination.value, __mode_zone_destination.set, None,
                                      "Mode de gestion des v\xe9hicules \xe0 l'arriv\xe9e \xe0 cette zone de destination")
@@ -13216,6 +13327,8 @@ class typeTraficZone(typeTraficOrigine):
         __mode_zone_origine.name(): __mode_zone_origine,
         __mode_zone_destination.name(): __mode_zone_destination
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficZone', typeTraficZone)
 
 
@@ -13227,7 +13340,7 @@ class CTD_ANON_169(typeParametrageTrafic):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4055, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4059, 16)
     _ElementMap = typeParametrageTrafic._ElementMap.copy()
     _AttributeMap = typeParametrageTrafic._AttributeMap.copy()
     # Base type is typeParametrageTrafic
@@ -13326,7 +13439,7 @@ class CTD_ANON_170(pyxb.binding.basis.complexTypeDefinition):
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 164, 46)
     __id_aval._UseLocation = pyxb.utils.utility.Location(
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 164, 46)
-    
+
     id_aval = property(__id_aval.value, __id_aval.set, None, 'Identifiant unique du tron\xe7on aval')
 
 
@@ -13433,7 +13546,7 @@ class CTD_ANON_172(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2591, 26)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2595, 26)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -13443,10 +13556,10 @@ class CTD_ANON_172(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_172_heuredepart',
                                                       pyxb.binding.datatypes.time, required=True)
     __heuredepart._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2592, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2596, 28)
     __heuredepart._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2592, 28)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2596, 28)
+
     heuredepart = property(__heuredepart.value, __heuredepart.set, None, 'Heure de d\xe9part du v\xe9hicule guid\xe9')
 
 
@@ -13455,9 +13568,9 @@ class CTD_ANON_172(pyxb.binding.basis.complexTypeDefinition):
                                                       '__AbsentNamespace0_CTD_ANON_172_dureearrets', STD_ANON_51,
                                                       unicode_default='0')
     __dureearrets._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2597, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2601, 28)
     __dureearrets._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2597, 28)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2601, 28)
 
     dureearrets = property(__dureearrets.value, __dureearrets.set, None,
                            "Liste des dur\xe9es aux arr\xeats (en seconde), les dur\xe9es sont list\xe9es dans l'ordre de parcours des arr\xeats")
@@ -13479,7 +13592,7 @@ class typeTraficExtremite(typeTraficOriginePonctuelle):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTraficExtremite')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3482, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3486, 2)
     _ElementMap = typeTraficOriginePonctuelle._ElementMap.copy()
     _AttributeMap = typeTraficOriginePonctuelle._AttributeMap.copy()
     # Base type is typeTraficOriginePonctuelle
@@ -13497,7 +13610,7 @@ class typeTraficExtremite(typeTraficOriginePonctuelle):
                                                           '__AbsentNamespace0_typeTraficExtremite_CAPACITES', False,
                                                           pyxb.utils.utility.Location(
                                                               '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                              3486, 10), )
+                                                              3490, 10), )
 
     CAPACITES = property(__CAPACITES.value, __CAPACITES.set, None,
                          "Liste des variantes de la capacit\xe9 de la sortie. Si cette liste n'existe pas, la sortie est libre.")
@@ -13512,6 +13625,8 @@ class typeTraficExtremite(typeTraficOriginePonctuelle):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficExtremite', typeTraficExtremite)
 
 
@@ -13523,7 +13638,7 @@ class typeTraficParking(typeTraficOriginePonctuelle):
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'typeTraficParking')
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3552, 2)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3556, 2)
     _ElementMap = typeTraficOriginePonctuelle._ElementMap.copy()
     _AttributeMap = typeTraficOriginePonctuelle._AttributeMap.copy()
     # Base type is typeTraficOriginePonctuelle
@@ -13542,7 +13657,7 @@ class typeTraficParking(typeTraficOriginePonctuelle):
                                                            '__AbsentNamespace0_typeTraficParking_PARAMETRES', False,
                                                            pyxb.utils.utility.Location(
                                                                '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                               3556, 10), )
+                                                               3560, 10), )
 
     PARAMETRES = property(__PARAMETRES.value, __PARAMETRES.set, None, None)
 
@@ -13556,6 +13671,8 @@ class typeTraficParking(typeTraficOriginePonctuelle):
     _AttributeMap.update({
 
     })
+
+
 Namespace.addCategoryObject('typeBinding', 'typeTraficParking', typeTraficParking)
 
 
@@ -13567,7 +13684,7 @@ class CTD_ANON_173(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3705, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3709, 18)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -13577,9 +13694,9 @@ class CTD_ANON_173(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_173_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3706, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3710, 20)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3706, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3710, 20)
 
     duree = property(__duree.value, __duree.set, None,
                      'Identifiant de la plage temporelle associ\xe9e, ou dur\xe9e (en seconde) de la variante de la r\xe9partition des types de v\xe9hicule')
@@ -13590,9 +13707,9 @@ class CTD_ANON_173(pyxb.binding.basis.complexTypeDefinition):
                                                   '__AbsentNamespace0_CTD_ANON_173_valeurs', typeFloat01NormedList,
                                                   required=True)
     __valeurs._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3711, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3715, 20)
     __valeurs._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3711, 20)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3715, 20)
 
     valeurs = property(__valeurs.value, __valeurs.set, None,
                        'Liste ordonn\xe9e (selon la d\xe9finition des types de v\xe9hicule)')
@@ -13614,7 +13731,7 @@ class CTD_ANON_174(typeParametrageSimulation):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4036, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4040, 16)
     _ElementMap = typeParametrageSimulation._ElementMap.copy()
     _AttributeMap = typeParametrageSimulation._AttributeMap.copy()
     # Base type is typeParametrageSimulation
@@ -13740,7 +13857,7 @@ class CTD_ANON_175(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5007, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5011, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -13750,10 +13867,10 @@ class CTD_ANON_175(pyxb.binding.basis.complexTypeDefinition):
                                                 '__AbsentNamespace0_CTD_ANON_175_duree', typeDuree,
                                                 unicode_default='always')
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5008, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5012, 16)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5008, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5012, 16)
+
     duree = property(__duree.value, __duree.set, None, 'Dur\xe9e de la variante temporelle')
 
 
@@ -13762,9 +13879,9 @@ class CTD_ANON_175(pyxb.binding.basis.complexTypeDefinition):
                                                  '__AbsentNamespace0_CTD_ANON_175_coeffs', typeFloat01NormedList,
                                                  unicode_default='1')
     __coeffs._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5013, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5017, 16)
     __coeffs._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5013, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5017, 16)
 
     coeffs = property(__coeffs.value, __coeffs.set, None,
                       "Liste ordonn\xe9e des coefficients de r\xe9partition sur les voies du tron\xe7on amont de l'extr\xe9mit\xe9 courante")
@@ -13786,7 +13903,7 @@ class CTD_ANON_176(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5042, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5046, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -13795,10 +13912,10 @@ class CTD_ANON_176(pyxb.binding.basis.complexTypeDefinition):
     __duree = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'duree'), 'duree',
                                                 '__AbsentNamespace0_CTD_ANON_176_duree', typeDuree)
     __duree._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5043, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5047, 16)
     __duree._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5043, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5047, 16)
+
     duree = property(__duree.value, __duree.set, None, 'Dur\xe9e de la variante temporelle')
 
 
@@ -13806,9 +13923,9 @@ class CTD_ANON_176(pyxb.binding.basis.complexTypeDefinition):
     __coeffs = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'coeffs'), 'coeffs',
                                                  '__AbsentNamespace0_CTD_ANON_176_coeffs', typeFloat01List)
     __coeffs._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5048, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5052, 16)
     __coeffs._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5048, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5052, 16)
 
     coeffs = property(__coeffs.value, __coeffs.set, None,
                       "Liste ordonn\xe9e des coefficients de r\xe9partition du flux selon le type de v\xe9hicule. La somme doit \xeatre \xe9gale \xe0 1, la liste doit contenir auntant d'\xe9l\xe9ment que de type de v\xe9hicule d\xe9fini, l'ordre des coefficients doit \xeatre identique \xe0 celui de la liste des types de v\xe9hicules.")
@@ -13830,7 +13947,7 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
     _Abstract = False
     _ExpandedName = None
     _XSDLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2579, 14)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2583, 14)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
@@ -13840,7 +13957,7 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
                                                          '__AbsentNamespace0_CTD_ANON_177_HORAIRES', False,
                                                          pyxb.utils.utility.Location(
                                                              '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                             2581, 18), )
+                                                             2585, 18), )
 
     HORAIRES = property(__HORAIRES.value, __HORAIRES.set, None,
                         "Liste des horaires des v\xe9hicules guid\xe9s (uniquement le premier v\xe9hicule guid\xe9 dans le cas d'un param\xe9trage de type global)")
@@ -13850,7 +13967,7 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
     __FREQUENCES = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'FREQUENCES'),
                                                            'FREQUENCES', '__AbsentNamespace0_CTD_ANON_177_FREQUENCES',
                                                            False, pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2614, 18), )
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2618, 18), )
 
     FREQUENCES = property(__FREQUENCES.value, __FREQUENCES.set, None,
                           'D\xe9finition des variations temporelles de fr\xe9quence des v\xe9hicules guid\xe9s sur la ligne, en cas de param\xe8trage de type \'Global\'. L\'attribut "fr\xe9quence" du NOEUD "LIGNE_TRANSPORT_GUIDEE" sera ignor\xe9 si des variations temporelles sotn d\xe9finies ici.')
@@ -13861,10 +13978,10 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
                                              '__AbsentNamespace0_CTD_ANON_177_id', pyxb.binding.datatypes.string,
                                              required=True)
     __id._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2639, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2643, 16)
     __id._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2639, 16)
-    
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2643, 16)
+
     id = property(__id.value, __id.set, None, 'Identifiant de la ligne')
 
 
@@ -13873,9 +13990,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_177_type_veh',
                                                    pyxb.binding.datatypes.string, required=True)
     __type_veh._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2644, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2648, 16)
     __type_veh._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2644, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2648, 16)
 
     type_veh = property(__type_veh.value, __type_veh.set, None,
                         'Type de v\xe9hicule utilis\xe9 sur la ligne guid\xe9e (il doit \xeatre un des types d\xe9fini dans la section TYPES_DE_VEHICULE)')
@@ -13887,9 +14004,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
                                                            '__AbsentNamespace0_CTD_ANON_177_type_parametrage',
                                                            STD_ANON_25, required=True)
     __type_parametrage._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2649, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2653, 16)
     __type_parametrage._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2649, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2653, 16)
 
     type_parametrage = property(__type_parametrage.value, __type_parametrage.set, None,
                                 'Type de param\xe9trage de la ligne')
@@ -13899,9 +14016,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
     __frequence = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'frequence'), 'frequence',
                                                     '__AbsentNamespace0_CTD_ANON_177_frequence', typeIntStrictPositif)
     __frequence._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2668, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2672, 16)
     __frequence._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2668, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2672, 16)
 
     frequence = property(__frequence.value, __frequence.set, None,
                          'Fr\xe9quence en seconde entre le lancement de 2 v\xe9hicules (\xe0 d\xe9finir uniquement si le type de param\xe9trage est global)')
@@ -13912,9 +14029,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
                                                    '__AbsentNamespace0_CTD_ANON_177_troncons', STD_ANON_47,
                                                    required=True)
     __troncons._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2673, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2677, 16)
     __troncons._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2673, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2677, 16)
 
     troncons = property(__troncons.value, __troncons.set, None,
                         'Itin\xe9raires de la ligne guid\xe9e (liste de tron\xe7ons successifs de la ligne)\nLe VGP est g\xe9n\xe9r\xe9 au niveau du premier arr\xeat de cette ligne (le premier arr\xeat doit donc se trouver sur le premier tron\xe7on list\xe9).\nLe VGP dispara\xeet du r\xe9seau apr\xe8s avoir parcouru le dernier tron\xe7on de la liste. Celui-ci doit donc avoir pour \xe9l\xe9ment aval une sortie.')
@@ -13926,9 +14043,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
         '__AbsentNamespace0_CTD_ANON_177_duree_arrets_dynamique', pyxb.binding.datatypes.boolean,
         unicode_default='false')
     __duree_arrets_dynamique._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2687, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2691, 16)
     __duree_arrets_dynamique._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2687, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2691, 16)
 
     duree_arrets_dynamique = property(__duree_arrets_dynamique.value, __duree_arrets_dynamique.set, None,
                                       'Indique si on utilise les param\xe8tres de mont\xe9e et de descente des passagers des bus pour calculer dynamiquement la dur\xe9e des arr\xeats.')
@@ -13938,9 +14055,9 @@ class CTD_ANON_177(pyxb.binding.basis.complexTypeDefinition):
     __couleur = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'couleur'), 'couleur',
                                                   '__AbsentNamespace0_CTD_ANON_177_couleur', typeRGBAColor)
     __couleur._DeclarationLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2692, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2696, 16)
     __couleur._UseLocation = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2692, 16)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2696, 16)
 
     couleur = property(__couleur.value, __couleur.set, None,
                        'Indique le couleur utilis\xe9e pour repr\xe9senter la Ligne de transport guid\xe9e\n')
@@ -13964,7 +14081,7 @@ ROOT_SYMUBRUIT = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespac
                                             documentation="Noeud racine des donn\xe9es d'entr\xe9e de la plateforme SymuVia",
                                             location=pyxb.utils.utility.Location(
                                                 '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                3965, 2))
+                                                3969, 2))
 Namespace.addCategoryObject('elementBinding', ROOT_SYMUBRUIT.name().localName(), ROOT_SYMUBRUIT)
 
 
@@ -15564,7 +15681,7 @@ CTD_ANON_47._AddElement(
                                documentation="Description d'une sortie du carrefour \xe0 feu (une sortie est d\xe9finie par un tron\xe7on et un num\xe9ro de voie)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2486, 16)))
+                                   2489, 16)))
 
 
 def _BuildAutomaton_49():
@@ -15579,7 +15696,7 @@ def _BuildAutomaton_49():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_47._UseForTag(pyxb.namespace.ExpandedName(None, 'SORTIE_CAF')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2486, 16))
+                                                 2489, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15596,7 +15713,7 @@ CTD_ANON_48._AddElement(
                                documentation="Description d'un divergent d'un tron\xe7on d'entr\xe9e",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2498, 28)))
+                                   2501, 28)))
 
 
 def _BuildAutomaton_50():
@@ -15611,7 +15728,7 @@ def _BuildAutomaton_50():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_48._UseForTag(pyxb.namespace.ExpandedName(None, 'CONVERGENT')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2498, 28))
+                                                 2501, 28))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15628,13 +15745,13 @@ typeLTG._AddElement(
                                scope=typeLTG, documentation='Liste des lignes de transport guid\xe9e du r\xe9seau',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2569, 6)))
+                                   2573, 6)))
 
 typeLTG._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ARRETS'), CTD_ANON_52, scope=typeLTG,
                                                documentation='Liste des arr\xeats de la ligne',
                                                location=pyxb.utils.utility.Location(
                                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                   2703, 6)))
+                                                   2707, 6)))
 
 
 def _BuildAutomaton_52():
@@ -15645,7 +15762,7 @@ def _BuildAutomaton_52():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2569, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2573, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -15653,7 +15770,7 @@ def _BuildAutomaton_52():
     symbol = pyxb.binding.content.ElementUse(
         typeLTG._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNES_TRANSPORT_GUIDEES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2569, 6))
+                                    2573, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15671,7 +15788,7 @@ def _BuildAutomaton_53():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2703, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2707, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -15679,7 +15796,7 @@ def _BuildAutomaton_53():
     symbol = pyxb.binding.content.ElementUse(typeLTG._UseForTag(pyxb.namespace.ExpandedName(None, 'ARRETS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2703, 6))
+                                                 2707, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15697,10 +15814,10 @@ def _BuildAutomaton_51():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2569, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2573, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2703, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2707, 6))
     counters.add(cc_1)
     states = []
     sub_automata = []
@@ -15708,7 +15825,7 @@ def _BuildAutomaton_51():
     sub_automata.append(_BuildAutomaton_53())
     final_update = set()
     symbol = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2568, 4)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2572, 4)
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=True)
     st_0._set_subAutomata(*sub_automata)
     states.append(st_0)
@@ -15724,7 +15841,7 @@ CTD_ANON_49._AddElement(
                                scope=CTD_ANON_49, documentation="Description d'une ligne de transport guid\xe9e",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2575, 12)))
+                                   2579, 12)))
 
 
 def _BuildAutomaton_54():
@@ -15739,7 +15856,7 @@ def _BuildAutomaton_54():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_49._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNE_TRANSPORT_GUIDEE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2575, 12))
+                                    2579, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15756,7 +15873,7 @@ CTD_ANON_50._AddElement(
                                documentation="Description d'un horaire de v\xe9hicule guid\xe9 (heure de d\xe9part et dur\xe9e des arr\xeats>",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2587, 24)))
+                                   2591, 24)))
 
 
 def _BuildAutomaton_55():
@@ -15771,7 +15888,7 @@ def _BuildAutomaton_55():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_50._UseForTag(pyxb.namespace.ExpandedName(None, 'HORAIRE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2587, 24))
+                                                 2591, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15787,7 +15904,7 @@ CTD_ANON_51._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'FREQUENCE'), CTD_ANON_144, scope=CTD_ANON_51,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2620, 24)))
+                                   2624, 24)))
 
 
 def _BuildAutomaton_56():
@@ -15802,7 +15919,7 @@ def _BuildAutomaton_56():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_51._UseForTag(pyxb.namespace.ExpandedName(None, 'FREQUENCE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2620, 24))
+                                                 2624, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15817,7 +15934,7 @@ CTD_ANON_51._Automaton = _BuildAutomaton_56()
 CTD_ANON_52._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ARRET'), CTD_ANON_166, scope=CTD_ANON_52,
                                documentation="Description d'un arr\xeat", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2709, 12)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2713, 12)))
 
 
 def _BuildAutomaton_57():
@@ -15832,7 +15949,7 @@ def _BuildAutomaton_57():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_52._UseForTag(pyxb.namespace.ExpandedName(None, 'ARRET')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2709, 12))
+                                                 2713, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15849,7 +15966,7 @@ CTD_ANON_53._AddElement(
                                documentation='D\xe9finition des param\xe8tres de mont\xe9e pour une ligne donn\xe9e',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2721, 24)))
+                                   2725, 24)))
 
 
 def _BuildAutomaton_58():
@@ -15864,7 +15981,7 @@ def _BuildAutomaton_58():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_53._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2721, 24))
+                                                 2725, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15881,7 +15998,7 @@ CTD_ANON_54._AddElement(
                                documentation="D\xe9finition d'une variante temporelle de demande pour la ligne consid\xe9r\xe9e",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2727, 30)))
+                                   2731, 30)))
 
 
 def _BuildAutomaton_59():
@@ -15896,7 +16013,7 @@ def _BuildAutomaton_59():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_54._UseForTag(pyxb.namespace.ExpandedName(None, 'DEMANDE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2727, 30))
+                                                 2731, 30))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15913,7 +16030,7 @@ CTD_ANON_55._AddElement(
                                documentation="D\xe9finition des param\xe8tres de descente \xe0 l'arr\xeat et pour la ligne consid\xe9r\xe9e",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2768, 24)))
+                                   2772, 24)))
 
 
 def _BuildAutomaton_60():
@@ -15928,7 +16045,7 @@ def _BuildAutomaton_60():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_55._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2768, 24))
+                                                 2772, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -15944,28 +16061,28 @@ CTD_ANON_57._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CAPTEUR'), typeCapteurPonctuel, scope=CTD_ANON_57,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2860, 12)))
+                                   2864, 12)))
 
 CTD_ANON_57._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CAPTEUR_LONGITUDINAL'), typeCapteurLongitudinal,
                                scope=CTD_ANON_57, location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2862, 12)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2866, 12)))
 
 CTD_ANON_57._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CAPTEUR_EDIE'), typeCapteurLongitudinal,
                                scope=CTD_ANON_57, location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2864, 12)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2868, 12)))
 
 CTD_ANON_57._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CAPTEUR_MFD'), typeCapteurMFD, scope=CTD_ANON_57,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2866, 12)))
+                                   2870, 12)))
 
 CTD_ANON_57._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CAPTEUR_BLUETOOTH'), typeCapteurBlueTooth,
                                scope=CTD_ANON_57, location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2868, 12)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2872, 12)))
 
 
 def _BuildAutomaton_61():
@@ -15976,19 +16093,19 @@ def _BuildAutomaton_61():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2860, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2864, 12))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2862, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2866, 12))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2864, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2868, 12))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2866, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2870, 12))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2868, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2872, 12))
     counters.add(cc_4)
     states = []
     final_update = set()
@@ -15996,7 +16113,7 @@ def _BuildAutomaton_61():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_57._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2860, 12))
+                                                 2864, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -16004,7 +16121,7 @@ def _BuildAutomaton_61():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_57._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR_LONGITUDINAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2862, 12))
+                                    2866, 12))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -16012,7 +16129,7 @@ def _BuildAutomaton_61():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_57._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR_EDIE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2864, 12))
+                                                 2868, 12))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
@@ -16020,7 +16137,7 @@ def _BuildAutomaton_61():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_57._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR_MFD')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2866, 12))
+                                                 2870, 12))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
@@ -16028,7 +16145,7 @@ def _BuildAutomaton_61():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_57._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR_BLUETOOTH')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2868, 12))
+                                    2872, 12))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     transitions = []
@@ -16081,7 +16198,7 @@ CTD_ANON_58._AddElement(
                                documentation="Noeud de description d'un plan de feux",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2936, 12)))
+                                   2940, 12)))
 
 
 def _BuildAutomaton_62():
@@ -16092,7 +16209,7 @@ def _BuildAutomaton_62():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2936, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2940, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16100,7 +16217,7 @@ def _BuildAutomaton_62():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_58._UseForTag(pyxb.namespace.ExpandedName(None, 'PLAN_DE_FEUX')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2936, 12))
+                                                 2940, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16117,7 +16234,7 @@ CTD_ANON_59._AddElement(
                                documentation="Noeud de description d'une s\xe9quence du plan de feux\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2948, 24)))
+                                   2952, 24)))
 
 
 def _BuildAutomaton_63():
@@ -16132,7 +16249,7 @@ def _BuildAutomaton_63():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_59._UseForTag(pyxb.namespace.ExpandedName(None, 'SEQUENCE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2948, 24))
+                                                 2952, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16148,7 +16265,7 @@ CTD_ANON_60._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'SIGNAL_ACTIF'), CTD_ANON_148, scope=CTD_ANON_60,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2962, 36)))
+                                   2966, 36)))
 
 
 def _BuildAutomaton_64():
@@ -16163,7 +16280,7 @@ def _BuildAutomaton_64():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_60._UseForTag(pyxb.namespace.ExpandedName(None, 'SIGNAL_ACTIF')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2962, 36))
+                                                 2966, 36))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16178,7 +16295,7 @@ CTD_ANON_60._Automaton = _BuildAutomaton_64()
 CTD_ANON_61._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'LIGNE_GUIDEE_PRIORITAIRE'), CTD_ANON_167,
                                scope=CTD_ANON_61, documentation='', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3062, 12)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3066, 12)))
 
 
 def _BuildAutomaton_65():
@@ -16189,7 +16306,7 @@ def _BuildAutomaton_65():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3062, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3066, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16197,7 +16314,7 @@ def _BuildAutomaton_65():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_61._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNE_GUIDEE_PRIORITAIRE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3062, 12))
+                                    3066, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16214,7 +16331,7 @@ CTD_ANON_62._AddElement(
                                documentation="Description de la position d'un feu pour une entr\xe9e du contr\xf4leur",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3136, 12)))
+                                   3140, 12)))
 
 
 def _BuildAutomaton_66():
@@ -16225,7 +16342,7 @@ def _BuildAutomaton_66():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3136, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3140, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16233,7 +16350,7 @@ def _BuildAutomaton_66():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_62._UseForTag(pyxb.namespace.ExpandedName(None, 'POSITION_FEU')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3136, 12))
+                                                 3140, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16250,7 +16367,7 @@ typeCapteurMFD._AddElement(
                                documentation='Liste des tron\xe7ons constituant la zone du capteur MFD',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3280, 6)))
+                                   3284, 6)))
 
 
 def _BuildAutomaton_67():
@@ -16265,7 +16382,7 @@ def _BuildAutomaton_67():
     symbol = pyxb.binding.content.ElementUse(typeCapteurMFD._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3280, 6))
+                                                 3284, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16280,7 +16397,7 @@ CTD_ANON_63._AddElement(
                                documentation='Troncon appartenant \xe0 la zone MFD',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3286, 12)))
+                                   3290, 12)))
 
 
 def _BuildAutomaton_68():
@@ -16295,7 +16412,7 @@ def _BuildAutomaton_68():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_63._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCON')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3286, 12))
+                                                 3290, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16312,7 +16429,7 @@ typeCapteurBlueTooth._AddElement(
                                documentation='Permet de sp\xe9cifier la positione des capteurs ponctuels d\xe9tectant les v\xe9hicules entrants et sortants du noeud (Par d\xe9faut, ces capteurs sont situ\xe9s aux extr\xe9mit\xe9s des tron\xe7ons amont et aval, au niveau du noeud)',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3313, 6)))
+                                   3317, 6)))
 
 
 def _BuildAutomaton_69():
@@ -16323,7 +16440,7 @@ def _BuildAutomaton_69():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3313, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3317, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16331,7 +16448,7 @@ def _BuildAutomaton_69():
     symbol = pyxb.binding.content.ElementUse(
         typeCapteurBlueTooth._UseForTag(pyxb.namespace.ExpandedName(None, 'POSITION')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3313, 6))
+                                    3317, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16347,7 +16464,7 @@ CTD_ANON_65._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEH'), CTD_ANON_66, scope=CTD_ANON_65,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3360, 12)))
+                                   3364, 12)))
 
 
 def _BuildAutomaton_70():
@@ -16362,7 +16479,7 @@ def _BuildAutomaton_70():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_65._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEH')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3360, 12))
+                                                 3364, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16379,7 +16496,7 @@ CTD_ANON_66._AddElement(
                                documentation="Description du flux pour un type de v\xe9hicule pour l'extr\xe9mit\xe9 courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3363, 18)))
+                                   3367, 18)))
 
 
 def _BuildAutomaton_71():
@@ -16394,7 +16511,7 @@ def _BuildAutomaton_71():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_66._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3363, 18))
+                                                 3367, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16409,7 +16526,7 @@ CTD_ANON_67._AddElement(
                                documentation="Description du caract\xe8re agressif d'une classe de v\xe9hicule pour cette entr\xe9e (par d\xe9faut, le taux de v\xe9hicule agressif d'une classe est 0)\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3385, 12)))
+                                   3389, 12)))
 
 
 def _BuildAutomaton_72():
@@ -16420,7 +16537,7 @@ def _BuildAutomaton_72():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3385, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3389, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16428,7 +16545,7 @@ def _BuildAutomaton_72():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_67._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3385, 12))
+                                                 3389, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16445,7 +16562,7 @@ CTD_ANON_67._Automaton = _BuildAutomaton_72()
 CTD_ANON_68._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE'), CTD_ANON_151, scope=CTD_ANON_68,
                                documentation="D\xe9finition d'une cr\xe9ation", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3448, 16)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3452, 16)))
 
 
 def _BuildAutomaton_73():
@@ -16460,7 +16577,7 @@ def _BuildAutomaton_73():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_68._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3448, 16))
+                                    3452, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16477,7 +16594,7 @@ CTD_ANON_69._AddElement(
                                documentation="Description d'une variante de la capacit\xe9",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3492, 16)))
+                                   3496, 16)))
 
 
 def _BuildAutomaton_74():
@@ -16492,7 +16609,7 @@ def _BuildAutomaton_74():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_69._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPACITE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3492, 16))
+                                                 3496, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16509,7 +16626,7 @@ CTD_ANON_71._AddElement(
                                documentation='Tron\xe7on appartenant \xe0 la zone',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3582, 16)))
+                                   3586, 16)))
 
 
 def _BuildAutomaton_75():
@@ -16524,7 +16641,7 @@ def _BuildAutomaton_75():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_71._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCON')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3582, 16))
+                                                 3586, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16539,7 +16656,7 @@ CTD_ANON_71._Automaton = _BuildAutomaton_75()
 CTD_ANON_73._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'PARKING'), typeParkingZone, scope=CTD_ANON_73,
                                documentation='Parking appartenant \xe0 la zone', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3614, 16)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3618, 16)))
 
 
 def _BuildAutomaton_76():
@@ -16554,7 +16671,7 @@ def _BuildAutomaton_76():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_73._UseForTag(pyxb.namespace.ExpandedName(None, 'PARKING')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3614, 16))
+                                                 3618, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16571,7 +16688,7 @@ CTD_ANON_74._AddElement(
                                documentation="Description d'une variante de la matrice OD (la somme des coefficients d'affectation pour l'ensemble des destinations d\xe9clar\xe9es doit \xeatre \xe9gale \xe0 1, si une destination n'est pas d\xe9clar\xe9e son coefficient d'affectation est 0 par d\xe9faut)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3633, 16)))
+                                   3637, 16)))
 
 
 def _BuildAutomaton_77():
@@ -16586,7 +16703,7 @@ def _BuildAutomaton_77():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_74._UseForTag(pyxb.namespace.ExpandedName(None, 'MATRICE_OD_INTERNE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3633, 16))
+                                    3637, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16601,7 +16718,7 @@ CTD_ANON_74._Automaton = _BuildAutomaton_77()
 CTD_ANON_75._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE'), CTD_ANON_76, scope=CTD_ANON_75,
                                documentation="D\xe9finition d'une cr\xe9ation", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3670, 16)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3674, 16)))
 
 
 def _BuildAutomaton_78():
@@ -16616,7 +16733,7 @@ def _BuildAutomaton_78():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_75._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3670, 16))
+                                    3674, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16634,7 +16751,7 @@ CTD_ANON_77._AddElement(
                                documentation="Description d'une variante d'une r\xe9partition des types de v\xe9hicule",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3701, 16)))
+                                   3705, 16)))
 
 
 def _BuildAutomaton_79():
@@ -16649,7 +16766,7 @@ def _BuildAutomaton_79():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_77._UseForTag(pyxb.namespace.ExpandedName(None, 'REPARTITION_TYPEVEHICULE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3701, 16))
+                                    3705, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16666,7 +16783,7 @@ CTD_ANON_78._AddElement(
                                documentation="D\xe9finition du coefficient d'affectation associ\xe9 \xe0 une origine",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3727, 16)))
+                                   3731, 16)))
 
 
 def _BuildAutomaton_80():
@@ -16681,7 +16798,7 @@ def _BuildAutomaton_80():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_78._UseForTag(pyxb.namespace.ExpandedName(None, 'ORIGINE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3727, 16))
+                                                 3731, 16))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16698,7 +16815,7 @@ CTD_ANON_79._AddElement(
                                documentation='Capteur associ\xe9 \xe0 la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3812, 12)))
+                                   3816, 12)))
 
 
 def _BuildAutomaton_81():
@@ -16709,7 +16826,7 @@ def _BuildAutomaton_81():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3812, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3816, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16717,7 +16834,7 @@ def _BuildAutomaton_81():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_79._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEUR')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3812, 12))
+                                                 3816, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16734,7 +16851,7 @@ CTD_ANON_80._AddElement(
                                documentation='D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour le capteur',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3818, 18)))
+                                   3822, 18)))
 
 
 def _BuildAutomaton_82():
@@ -16745,10 +16862,10 @@ def _BuildAutomaton_82():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3817, 16))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3821, 16))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3818, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3822, 18))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -16757,7 +16874,7 @@ def _BuildAutomaton_82():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_80._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3818, 18))
+                                                 3822, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16777,7 +16894,7 @@ CTD_ANON_81._AddElement(
                                documentation="Condition de d\xe9clenchement d'actions associ\xe9e \xe0 la brique de r\xe9gulation",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3850, 12)))
+                                   3854, 12)))
 
 
 def _BuildAutomaton_83():
@@ -16788,7 +16905,7 @@ def _BuildAutomaton_83():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3850, 12))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3854, 12))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -16796,7 +16913,7 @@ def _BuildAutomaton_83():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_81._UseForTag(pyxb.namespace.ExpandedName(None, 'CONDITION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3850, 12))
+                                                 3854, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16813,7 +16930,7 @@ CTD_ANON_82._AddElement(
                                documentation='D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour la condition',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3856, 18)))
+                                   3860, 18)))
 
 
 def _BuildAutomaton_84():
@@ -16824,10 +16941,10 @@ def _BuildAutomaton_84():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3855, 16))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3859, 16))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3856, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3860, 18))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -16836,7 +16953,7 @@ def _BuildAutomaton_84():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_82._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3856, 18))
+                                                 3860, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16856,7 +16973,7 @@ CTD_ANON_83._AddElement(
                                documentation='Action associ\xe9e \xe0 la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3888, 12)))
+                                   3892, 12)))
 
 
 def _BuildAutomaton_85():
@@ -16871,7 +16988,7 @@ def _BuildAutomaton_85():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_83._UseForTag(pyxb.namespace.ExpandedName(None, 'ACTION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3888, 12))
+                                                 3892, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16888,7 +17005,7 @@ CTD_ANON_84._AddElement(
                                documentation="D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour l'action",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3894, 18)))
+                                   3898, 18)))
 
 
 def _BuildAutomaton_86():
@@ -16899,10 +17016,10 @@ def _BuildAutomaton_86():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3893, 16))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3897, 16))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3894, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3898, 18))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -16911,7 +17028,7 @@ def _BuildAutomaton_86():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_84._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3894, 18))
+                                                 3898, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16931,7 +17048,7 @@ CTD_ANON_85._AddElement(
                                documentation='D\xe9finition des sorties \xe0 produire dans le fichier de sortie poru la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3926, 12)))
+                                   3930, 12)))
 
 
 def _BuildAutomaton_87():
@@ -16946,7 +17063,7 @@ def _BuildAutomaton_87():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_85._UseForTag(pyxb.namespace.ExpandedName(None, 'RESTITUTION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3926, 12))
+                                                 3930, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -16963,7 +17080,7 @@ CTD_ANON_86._AddElement(
                                documentation='D\xe9finition des param\xe8tres n\xe9cessaire \xe0 la fonction d\xe9finie pour la restitution',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3932, 18)))
+                                   3936, 18)))
 
 
 def _BuildAutomaton_88():
@@ -16974,10 +17091,10 @@ def _BuildAutomaton_88():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3931, 16))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3935, 16))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3932, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3936, 18))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -16986,7 +17103,7 @@ def _BuildAutomaton_88():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_86._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3932, 18))
+                                                 3936, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17006,35 +17123,35 @@ CTD_ANON_87._AddElement(
                                documentation='Ensemble des plages temporelles d\xe9finies pour l\'ensemble de la ou des simulations, dont l\'ID peut \xeatre utilis\xe9 pour renseigner la plage de validit\xe9 des variantes temporelles (attributs "duree" de certains \xe9l\xe9ments)',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3971, 8)))
+                                   3975, 8)))
 
 CTD_ANON_87._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'SIMULATIONS'), CTD_ANON_89, scope=CTD_ANON_87,
                                documentation='Liste des d\xe9finitions de param\xe8tres de simulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4026, 8)))
+                                   4030, 8)))
 
 CTD_ANON_87._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRAFICS'), CTD_ANON_90, scope=CTD_ANON_87,
                                documentation='Liste des d\xe9finitions de param\xe8tres de trafic',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4045, 8)))
+                                   4049, 8)))
 
 CTD_ANON_87._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'RESEAUX'), CTD_ANON_91, scope=CTD_ANON_87,
                                documentation='Liste des d\xe9finitions de r\xe9seaux',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4064, 8)))
+                                   4068, 8)))
 
 CTD_ANON_87._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'SCENARIOS'), CTD_ANON_114, scope=CTD_ANON_87,
                                documentation='Liste des d\xe9finitions de sc\xe9narios',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4417, 8)))
+                                   4421, 8)))
 
 
 def _BuildAutomaton_89():
@@ -17045,42 +17162,42 @@ def _BuildAutomaton_89():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3971, 8))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3975, 8))
     counters.add(cc_0)
     states = []
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_87._UseForTag(pyxb.namespace.ExpandedName(None, 'PLAGES_TEMPORELLES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3971, 8))
+                                    3975, 8))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_87._UseForTag(pyxb.namespace.ExpandedName(None, 'SIMULATIONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4026, 8))
+                                                 4030, 8))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_87._UseForTag(pyxb.namespace.ExpandedName(None, 'TRAFICS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4045, 8))
+                                                 4049, 8))
     st_2 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_87._UseForTag(pyxb.namespace.ExpandedName(None, 'RESEAUX')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4064, 8))
+                                                 4068, 8))
     st_3 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_87._UseForTag(pyxb.namespace.ExpandedName(None, 'SCENARIOS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4417, 8))
+                                                 4421, 8))
     st_4 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     transitions = []
@@ -17111,7 +17228,7 @@ CTD_ANON_87._Automaton = _BuildAutomaton_89()
 CTD_ANON_89._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'SIMULATION'), CTD_ANON_174, scope=CTD_ANON_89,
                                documentation='Param\xe9trage de la simulation', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4032, 14)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4036, 14)))
 
 
 def _BuildAutomaton_90():
@@ -17126,7 +17243,7 @@ def _BuildAutomaton_90():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_89._UseForTag(pyxb.namespace.ExpandedName(None, 'SIMULATION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4032, 14))
+                                                 4036, 14))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17141,7 +17258,7 @@ CTD_ANON_89._Automaton = _BuildAutomaton_90()
 CTD_ANON_90._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRAFIC'), CTD_ANON_169, scope=CTD_ANON_90,
                                documentation='Param\xe9trage du trafic', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4051, 14)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4055, 14)))
 
 
 def _BuildAutomaton_91():
@@ -17156,7 +17273,7 @@ def _BuildAutomaton_91():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_90._UseForTag(pyxb.namespace.ExpandedName(None, 'TRAFIC')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4051, 14))
+                                                 4055, 14))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17171,7 +17288,7 @@ CTD_ANON_90._Automaton = _BuildAutomaton_91()
 CTD_ANON_91._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'RESEAU'), CTD_ANON_92, scope=CTD_ANON_91,
                                documentation='Donn\xe9es du r\xe9seau', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4070, 14)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4074, 14)))
 
 
 def _BuildAutomaton_92():
@@ -17186,7 +17303,7 @@ def _BuildAutomaton_92():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_91._UseForTag(pyxb.namespace.ExpandedName(None, 'RESEAU')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4070, 14))
+                                                 4074, 14))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17201,19 +17318,19 @@ CTD_ANON_91._Automaton = _BuildAutomaton_92()
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRONCONS'), CTD_ANON_93, scope=CTD_ANON_92,
                                documentation='Liste des tron\xe7ons', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4076, 20)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4080, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CONNEXIONS'), CTD_ANON_94, scope=CTD_ANON_92,
                                documentation='Noeud ', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4090, 20)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4094, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ZONES_DE_TERMINAISON'), CTD_ANON_103,
                                scope=CTD_ANON_92, documentation='Liste des zones de terminaison',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4201, 20)))
+                                   4205, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_VEHICULES_GUIDES'), typeLTG,
@@ -17221,28 +17338,28 @@ CTD_ANON_92._AddElement(
                                documentation='Param\xe9trage des v\xe9hicules guid\xe9s du r\xe9seau',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4223, 20)))
+                                   4227, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ROUTES'), CTD_ANON_105, scope=CTD_ANON_92,
                                documentation="Liste d'itin\xe9raires du r\xe9seau",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4228, 20)))
+                                   4232, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'COORD_REFS'), CTD_ANON_109, scope=CTD_ANON_92,
                                documentation='Liste des r\xe9f\xe9rentiels de coordonn\xe9es g\xe9ographiques utilis\xe9s\n',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4277, 20)))
+                                   4281, 20)))
 
 CTD_ANON_92._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'INIT'), CTD_ANON_112, scope=CTD_ANON_92,
                                documentation="Initialisation du r\xe9seau par une liste de v\xe9hicule pr\xe9sent sur le r\xe9seau \xe0 l'instant 0",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4331, 20)))
+                                   4335, 20)))
 
 
 def _BuildAutomaton_94():
@@ -17257,7 +17374,7 @@ def _BuildAutomaton_94():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4076, 20))
+                                                 4080, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17277,7 +17394,7 @@ def _BuildAutomaton_95():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'CONNEXIONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4090, 20))
+                                                 4094, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17293,7 +17410,7 @@ def _BuildAutomaton_96():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4201, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4205, 20))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17301,7 +17418,7 @@ def _BuildAutomaton_96():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'ZONES_DE_TERMINAISON')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4201, 20))
+                                    4205, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17319,7 +17436,7 @@ def _BuildAutomaton_97():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4223, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4227, 20))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17327,7 +17444,7 @@ def _BuildAutomaton_97():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_VEHICULES_GUIDES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4223, 20))
+                                    4227, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17345,7 +17462,7 @@ def _BuildAutomaton_98():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4228, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4232, 20))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17353,7 +17470,7 @@ def _BuildAutomaton_98():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'ROUTES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4228, 20))
+                                                 4232, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17371,7 +17488,7 @@ def _BuildAutomaton_99():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4277, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4281, 20))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17379,7 +17496,7 @@ def _BuildAutomaton_99():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'COORD_REFS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4277, 20))
+                                                 4281, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17397,7 +17514,7 @@ def _BuildAutomaton_100():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4331, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4335, 20))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17405,7 +17522,7 @@ def _BuildAutomaton_100():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_92._UseForTag(pyxb.namespace.ExpandedName(None, 'INIT')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4331, 20))
+                                                 4335, 20))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17423,19 +17540,19 @@ def _BuildAutomaton_93():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4201, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4205, 20))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4223, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4227, 20))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4228, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4232, 20))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4277, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4281, 20))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4331, 20))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4335, 20))
     counters.add(cc_4)
     states = []
     sub_automata = []
@@ -17448,7 +17565,7 @@ def _BuildAutomaton_93():
     sub_automata.append(_BuildAutomaton_100())
     final_update = set()
     symbol = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4075, 18)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4079, 18)
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=True)
     st_0._set_subAutomata(*sub_automata)
     states.append(st_0)
@@ -17462,7 +17579,7 @@ CTD_ANON_92._Automaton = _BuildAutomaton_93()
 CTD_ANON_93._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRONCON'), typeTroncon, scope=CTD_ANON_93,
                                documentation="Description d'un tron\xe7on", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4082, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4086, 26)))
 
 
 def _BuildAutomaton_101():
@@ -17477,7 +17594,7 @@ def _BuildAutomaton_101():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_93._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCON')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4082, 26))
+                                                 4086, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17494,32 +17611,32 @@ CTD_ANON_94._AddElement(
                                documentation='Liste des extr\xe9mit\xe9s (anciennement entr\xe9es et sorties)',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4096, 26)))
+                                   4100, 26)))
 
 CTD_ANON_94._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'PARKINGS'), CTD_ANON_97, scope=CTD_ANON_94,
                                documentation='Liste des parkings', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4117, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4121, 26)))
 
 CTD_ANON_94._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REPARTITEURS'), CTD_ANON_99, scope=CTD_ANON_94,
                                documentation='Liste des r\xe9partiteurs', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4138, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4142, 26)))
 
 CTD_ANON_94._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CONVERGENTS'), CTD_ANON_100, scope=CTD_ANON_94,
                                documentation='Liste des convergents', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4153, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4157, 26)))
 
 CTD_ANON_94._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'GIRATOIRES'), CTD_ANON_101, scope=CTD_ANON_94,
                                documentation='Liste des giratoires', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4168, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4172, 26)))
 
 CTD_ANON_94._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CARREFOURSAFEUX'), CTD_ANON_102, scope=CTD_ANON_94,
                                documentation='Liste des carrefours \xe0 feux', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4183, 26)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4187, 26)))
 
 
 def _BuildAutomaton_103():
@@ -17530,7 +17647,7 @@ def _BuildAutomaton_103():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4096, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4100, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17538,7 +17655,7 @@ def _BuildAutomaton_103():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'EXTREMITES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4096, 26))
+                                                 4100, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17556,7 +17673,7 @@ def _BuildAutomaton_104():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4117, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4121, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17564,7 +17681,7 @@ def _BuildAutomaton_104():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'PARKINGS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4117, 26))
+                                                 4121, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17582,7 +17699,7 @@ def _BuildAutomaton_105():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4138, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4142, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17590,7 +17707,7 @@ def _BuildAutomaton_105():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'REPARTITEURS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4138, 26))
+                                                 4142, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17608,7 +17725,7 @@ def _BuildAutomaton_106():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4153, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4157, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17616,7 +17733,7 @@ def _BuildAutomaton_106():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'CONVERGENTS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4153, 26))
+                                                 4157, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17634,7 +17751,7 @@ def _BuildAutomaton_107():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4168, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4172, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17642,7 +17759,7 @@ def _BuildAutomaton_107():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'GIRATOIRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4168, 26))
+                                                 4172, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17660,7 +17777,7 @@ def _BuildAutomaton_108():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4183, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4187, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17668,7 +17785,7 @@ def _BuildAutomaton_108():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_94._UseForTag(pyxb.namespace.ExpandedName(None, 'CARREFOURSAFEUX')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4183, 26))
+                                    4187, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17686,22 +17803,22 @@ def _BuildAutomaton_102():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4096, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4100, 26))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4117, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4121, 26))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4138, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4142, 26))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4153, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4157, 26))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4168, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4172, 26))
     counters.add(cc_4)
     cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4183, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4187, 26))
     counters.add(cc_5)
     states = []
     sub_automata = []
@@ -17713,7 +17830,7 @@ def _BuildAutomaton_102():
     sub_automata.append(_BuildAutomaton_108())
     final_update = set()
     symbol = pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4095, 24)
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4099, 24)
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=True)
     st_0._set_subAutomata(*sub_automata)
     states.append(st_0)
@@ -17729,7 +17846,7 @@ CTD_ANON_95._AddElement(
                                documentation="Description d'une extremit\xe9 du r\xe9seau",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4102, 32)))
+                                   4106, 32)))
 
 
 def _BuildAutomaton_109():
@@ -17740,7 +17857,7 @@ def _BuildAutomaton_109():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4102, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4106, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17748,7 +17865,7 @@ def _BuildAutomaton_109():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_95._UseForTag(pyxb.namespace.ExpandedName(None, 'EXTREMITE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4102, 32))
+                                                 4106, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17765,7 +17882,7 @@ CTD_ANON_97._AddElement(
                                documentation="Description d'un parking du r\xe9seau",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4123, 32)))
+                                   4127, 32)))
 
 
 def _BuildAutomaton_110():
@@ -17776,7 +17893,7 @@ def _BuildAutomaton_110():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4123, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4127, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17784,7 +17901,7 @@ def _BuildAutomaton_110():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_97._UseForTag(pyxb.namespace.ExpandedName(None, 'PARKING')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4123, 32))
+                                                 4127, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17799,7 +17916,7 @@ CTD_ANON_97._Automaton = _BuildAutomaton_110()
 CTD_ANON_99._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REPARTITEUR'), typeRepartiteur, scope=CTD_ANON_99,
                                documentation="Description d'un r\xe9partiteur", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4144, 32)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4148, 32)))
 
 
 def _BuildAutomaton_111():
@@ -17810,7 +17927,7 @@ def _BuildAutomaton_111():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4144, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4148, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17818,7 +17935,7 @@ def _BuildAutomaton_111():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_99._UseForTag(pyxb.namespace.ExpandedName(None, 'REPARTITEUR')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4144, 32))
+                                                 4148, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17833,7 +17950,7 @@ CTD_ANON_99._Automaton = _BuildAutomaton_111()
 CTD_ANON_100._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CONVERGENT'), typeConvergent, scope=CTD_ANON_100,
                                documentation="Description d'un convergent", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4159, 32)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4163, 32)))
 
 
 def _BuildAutomaton_112():
@@ -17844,7 +17961,7 @@ def _BuildAutomaton_112():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4159, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4163, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17852,7 +17969,7 @@ def _BuildAutomaton_112():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_100._UseForTag(pyxb.namespace.ExpandedName(None, 'CONVERGENT')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4159, 32))
+                                                 4163, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17867,7 +17984,7 @@ CTD_ANON_100._Automaton = _BuildAutomaton_112()
 CTD_ANON_101._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'GIRATOIRE'), typeGiratoire, scope=CTD_ANON_101,
                                documentation="Description d'un r\xe9partiteur", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4174, 32)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4178, 32)))
 
 
 def _BuildAutomaton_113():
@@ -17878,7 +17995,7 @@ def _BuildAutomaton_113():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4174, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4178, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17886,7 +18003,7 @@ def _BuildAutomaton_113():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_101._UseForTag(pyxb.namespace.ExpandedName(None, 'GIRATOIRE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4174, 32))
+                                                 4178, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17903,7 +18020,7 @@ CTD_ANON_102._AddElement(
                                scope=CTD_ANON_102, documentation="Description d'un carrefour \xe0 feux",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4189, 32)))
+                                   4193, 32)))
 
 
 def _BuildAutomaton_114():
@@ -17914,7 +18031,7 @@ def _BuildAutomaton_114():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4189, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4193, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17922,7 +18039,7 @@ def _BuildAutomaton_114():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_102._UseForTag(pyxb.namespace.ExpandedName(None, 'CARREFOURAFEUX')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4189, 32))
+                                    4193, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17939,7 +18056,7 @@ CTD_ANON_103._AddElement(
                                scope=CTD_ANON_103, documentation="Description d'une zone de terminaison",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4207, 26)))
+                                   4211, 26)))
 
 
 def _BuildAutomaton_115():
@@ -17950,7 +18067,7 @@ def _BuildAutomaton_115():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4207, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4211, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17958,7 +18075,7 @@ def _BuildAutomaton_115():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_103._UseForTag(pyxb.namespace.ExpandedName(None, 'ZONE_DE_TERMINAISON')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4207, 26))
+                                    4211, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -17975,7 +18092,7 @@ CTD_ANON_105._AddElement(
                                documentation="Description d'un itin\xe9raire du r\xe9seau",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4234, 26)))
+                                   4238, 26)))
 
 
 def _BuildAutomaton_116():
@@ -17986,7 +18103,7 @@ def _BuildAutomaton_116():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4234, 26))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4238, 26))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -17994,7 +18111,7 @@ def _BuildAutomaton_116():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_105._UseForTag(pyxb.namespace.ExpandedName(None, 'ROUTE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4234, 26))
+                                                 4238, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18011,7 +18128,7 @@ CTD_ANON_106._AddElement(
                                documentation="Liste ordonn\xe9e des tron\xe7ons composant l'itin\xe9raire",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4240, 32)))
+                                   4244, 32)))
 
 
 def _BuildAutomaton_117():
@@ -18026,7 +18143,7 @@ def _BuildAutomaton_117():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_106._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCONS_')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4240, 32))
+                                                 4244, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18039,7 +18156,7 @@ CTD_ANON_106._Automaton = _BuildAutomaton_117()
 CTD_ANON_107._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRONCON_'), CTD_ANON_108, scope=CTD_ANON_107,
                                documentation="Tron\xe7on de l'itin\xe9raire", location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4246, 38)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4250, 38)))
 
 
 def _BuildAutomaton_118():
@@ -18054,7 +18171,7 @@ def _BuildAutomaton_118():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_107._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCON_')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4246, 38))
+                                                 4250, 38))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18071,7 +18188,7 @@ CTD_ANON_109._AddElement(
                                documentation="Description d'un r\xe9f\xe9renciel g\xe9ographiqe\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4284, 26)))
+                                   4288, 26)))
 
 
 def _BuildAutomaton_119():
@@ -18082,7 +18199,7 @@ def _BuildAutomaton_119():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4283, 24))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4287, 24))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -18090,7 +18207,7 @@ def _BuildAutomaton_119():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_109._UseForTag(pyxb.namespace.ExpandedName(None, 'COORD_REF')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4284, 26))
+                                                 4288, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18107,7 +18224,7 @@ CTD_ANON_110._AddElement(
                                documentation="Description d'un point du r\xe9seau dans le rep\xe8re r\xe9f\xe9rence et dans le rep\xe8re du r\xe9seau",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4291, 32)))
+                                   4295, 32)))
 
 
 def _BuildAutomaton_120():
@@ -18118,7 +18235,7 @@ def _BuildAutomaton_120():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4291, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4295, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -18126,7 +18243,7 @@ def _BuildAutomaton_120():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_110._UseForTag(pyxb.namespace.ExpandedName(None, 'COORD_MAP')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4291, 32))
+                                                 4295, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18145,7 +18262,7 @@ CTD_ANON_112._AddElement(
                                documentation="Liste des v\xe9hicules pr\xe9sents \xe0 l'instant 0\n\t\t\t\t\t\t",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4337, 26)))
+                                   4341, 26)))
 
 
 def _BuildAutomaton_121():
@@ -18156,7 +18273,7 @@ def _BuildAutomaton_121():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4336, 24))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4340, 24))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -18164,7 +18281,7 @@ def _BuildAutomaton_121():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_112._UseForTag(pyxb.namespace.ExpandedName(None, 'TRAJS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4337, 26))
+                                                 4341, 26))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18181,7 +18298,7 @@ CTD_ANON_113._AddElement(
                                documentation="Description d'un v\xe9hicule pr\xe9sent sur le r\xe9seau \xe0 l'instant 0",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4344, 32)))
+                                   4348, 32)))
 
 
 def _BuildAutomaton_122():
@@ -18192,7 +18309,7 @@ def _BuildAutomaton_122():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4344, 32))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4348, 32))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -18200,7 +18317,7 @@ def _BuildAutomaton_122():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_113._UseForTag(pyxb.namespace.ExpandedName(None, 'TRAJ')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4344, 32))
+                                                 4348, 32))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18219,7 +18336,7 @@ CTD_ANON_114._AddElement(
                                documentation="D\xe9finition d'un sc\xe9nario \xe0 simuler.",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4423, 14)))
+                                   4427, 14)))
 
 
 def _BuildAutomaton_123():
@@ -18234,7 +18351,7 @@ def _BuildAutomaton_123():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_114._UseForTag(pyxb.namespace.ExpandedName(None, 'SCENARIO')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4423, 14))
+                                                 4427, 14))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18250,7 +18367,7 @@ CTD_ANON_116._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'TRONCON_'), CTD_ANON_117, scope=CTD_ANON_116,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4869, 12)))
+                                   4873, 12)))
 
 
 def _BuildAutomaton_124():
@@ -18265,7 +18382,7 @@ def _BuildAutomaton_124():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_116._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCON_')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4869, 12))
+                                                 4873, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18282,21 +18399,21 @@ typeFLUX._AddElement(
                                documentation="Noeud d'acc\xe8s aux variantes temporelles de la demande pour l'extr\xe9mit\xe9 courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4895, 6)))
+                                   4899, 6)))
 
 typeFLUX._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REP_DESTINATIONS'), CTD_ANON_119, scope=typeFLUX,
                                documentation="Noeud d'acc\xe8s aux variantes temporelles de la r\xe9partition vers les destinations pour l'extr\xe9mit\xe9 courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4922, 6)))
+                                   4926, 6)))
 
 typeFLUX._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REP_VOIES'), CTD_ANON_120, scope=typeFLUX,
                                documentation="Noeud d'acc\xe8s aux variantes temporelles de la r\xe9partition par voie du flux provenant de l'extr\xe9mit\xe9 (origine) courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4997, 6)))
+                                   5001, 6)))
 
 
 def _BuildAutomaton_125():
@@ -18307,13 +18424,13 @@ def _BuildAutomaton_125():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4895, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4899, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4922, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4926, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4997, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5001, 6))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -18321,7 +18438,7 @@ def _BuildAutomaton_125():
     symbol = pyxb.binding.content.ElementUse(typeFLUX._UseForTag(pyxb.namespace.ExpandedName(None, 'DEMANDES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4895, 6))
+                                                 4899, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -18329,7 +18446,7 @@ def _BuildAutomaton_125():
     symbol = pyxb.binding.content.ElementUse(typeFLUX._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_DESTINATIONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4922, 6))
+                                                 4926, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -18337,7 +18454,7 @@ def _BuildAutomaton_125():
     symbol = pyxb.binding.content.ElementUse(typeFLUX._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_VOIES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4997, 6))
+                                                 5001, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
@@ -18368,7 +18485,7 @@ CTD_ANON_118._AddElement(
                                documentation="Description d'une variante temporelle de demande de l'extr\xe9mit\xe9 courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4901, 12)))
+                                   4905, 12)))
 
 
 def _BuildAutomaton_126():
@@ -18383,7 +18500,7 @@ def _BuildAutomaton_126():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_118._UseForTag(pyxb.namespace.ExpandedName(None, 'DEMANDE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4901, 12))
+                                                 4905, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18400,7 +18517,7 @@ CTD_ANON_119._AddElement(
                                documentation='Description de la variante temporelle de la r\xe9partition vers les destinations',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4928, 12)))
+                                   4932, 12)))
 
 
 def _BuildAutomaton_127():
@@ -18415,7 +18532,7 @@ def _BuildAutomaton_127():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_119._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_DESTINATION')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    4928, 12))
+                                    4932, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18432,7 +18549,7 @@ CTD_ANON_120._AddElement(
                                documentation="Description d'une variante temporelle de la r\xe9partition par voie du flux provenant de l'extr\xe9mit\xe9 (origine) courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   5003, 12)))
+                                   5007, 12)))
 
 
 def _BuildAutomaton_128():
@@ -18447,7 +18564,7 @@ def _BuildAutomaton_128():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_120._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_VOIE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 5003, 12))
+                                                 5007, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -18462,7 +18579,7 @@ CTD_ANON_120._Automaton = _BuildAutomaton_128()
 typeFLUX_GLOBAL._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'FLUX'), typeFLUX, scope=typeFLUX_GLOBAL,
                                documentation='Description du flux ', location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5027, 6)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5031, 6)))
 
 typeFLUX_GLOBAL._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REP_TYPEVEHICULES'), CTD_ANON_121,
@@ -18470,7 +18587,7 @@ typeFLUX_GLOBAL._AddElement(
                                documentation='Description des variantes temporelles de la r\xe9partition du flux par type de v\xe9hicule (cette r\xe9partition est utilis\xe9e pour calculer le type de v\xe9hicule lors de sa cr\xe9ation)',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   5032, 6)))
+                                   5036, 6)))
 
 
 def _BuildAutomaton_129():
@@ -18481,14 +18598,14 @@ def _BuildAutomaton_129():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5032, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 5036, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(typeFLUX_GLOBAL._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 5027, 6))
+                                                 5031, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -18496,7 +18613,7 @@ def _BuildAutomaton_129():
     symbol = pyxb.binding.content.ElementUse(
         typeFLUX_GLOBAL._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_TYPEVEHICULES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    5032, 6))
+                                    5036, 6))
     st_1 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     transitions = []
@@ -18517,7 +18634,7 @@ CTD_ANON_121._AddElement(
                                documentation="Description d'une variante temporelle de la r\xe9partition du flux par type de v\xe9hicule",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   5038, 12)))
+                                   5042, 12)))
 
 
 def _BuildAutomaton_130():
@@ -18532,7 +18649,7 @@ def _BuildAutomaton_130():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_121._UseForTag(pyxb.namespace.ExpandedName(None, 'REP_TYPEVEHICULE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    5038, 12))
+                                    5042, 12))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -19573,7 +19690,7 @@ typeCarrefourAFeux._AddElement(
                                documentation="Liste des sorties du CAF dans le cas o\xf9 les convergents de rattachement au sortie ont besoin d'\xeatre pr\xe9cis\xe9s (sinon tous les mouvements se rattachent a l'extr\xe9mit\xe9 aval de la sortie)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2480, 10)))
+                                   2483, 10)))
 
 
 def _BuildAutomaton_142():
@@ -19590,7 +19707,7 @@ def _BuildAutomaton_142():
         '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2297, 10))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2480, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2483, 10))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -19614,7 +19731,7 @@ def _BuildAutomaton_142():
     symbol = pyxb.binding.content.ElementUse(
         typeCarrefourAFeux._UseForTag(pyxb.namespace.ExpandedName(None, 'SORTIES_CAF')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2480, 10))
+                                    2483, 10))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
@@ -19759,7 +19876,7 @@ CTD_ANON_143._AddElement(
                                documentation="Liste des convergents de la sortie. Ils sont ordonn\xe9s \xe0 partir de la fin (du dernier au 1er rencontr\xe9). Si cette liste n'existe pas, l'ensemble des mouvements arrivant sur cette sortie convergent  imm\xe9diatement \xe0 l'extr\xe9mit\xe9 amont du tron\xe7on de sortie.",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2492, 22)))
+                                   2495, 22)))
 
 
 def _BuildAutomaton_145():
@@ -19774,7 +19891,7 @@ def _BuildAutomaton_145():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_143._UseForTag(pyxb.namespace.ExpandedName(None, 'CONVERGENTS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2492, 22))
+                                                 2495, 22))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -19789,7 +19906,7 @@ typeParametrageCapteurs._AddElement(
                                scope=typeParametrageCapteurs, documentation='Liste des capteurs du r\xe9seau',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2854, 6)))
+                                   2858, 6)))
 
 
 def _BuildAutomaton_146():
@@ -19804,7 +19921,7 @@ def _BuildAutomaton_146():
     symbol = pyxb.binding.content.ElementUse(
         typeParametrageCapteurs._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPTEURS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2854, 6))
+                                    2858, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -19820,7 +19937,7 @@ typeControleurDeFeux._AddElement(
                                documentation="Noeud d'acc\xe8s \xe0 la liste des plans de feux",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2930, 6)))
+                                   2934, 6)))
 
 typeControleurDeFeux._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'LIGNES_GUIDEES_PRIORITAIRES'), CTD_ANON_61,
@@ -19828,7 +19945,7 @@ typeControleurDeFeux._AddElement(
                                documentation="Noeud d'acc\xe8s \xe0 la liste des lignes guid\xe9es prioritaires g\xe9r\xe9es par le contr\xf4leur de feux parent\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3055, 6)))
+                                   3059, 6)))
 
 typeControleurDeFeux._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'POSITION_FEUX'), CTD_ANON_62,
@@ -19836,7 +19953,7 @@ typeControleurDeFeux._AddElement(
                                documentation="Noeud sp\xe9cifique \xe0 l'outils de visualisation Symuplayer permettant de param\xe9trer la position des feux du contr\xf4leur",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3130, 6)))
+                                   3134, 6)))
 
 
 def _BuildAutomaton_147():
@@ -19847,13 +19964,13 @@ def _BuildAutomaton_147():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2930, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2934, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3055, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3059, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3130, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3134, 6))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -19861,7 +19978,7 @@ def _BuildAutomaton_147():
     symbol = pyxb.binding.content.ElementUse(
         typeControleurDeFeux._UseForTag(pyxb.namespace.ExpandedName(None, 'PLANS_DE_FEUX')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2930, 6))
+                                    2934, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -19869,7 +19986,7 @@ def _BuildAutomaton_147():
     symbol = pyxb.binding.content.ElementUse(
         typeControleurDeFeux._UseForTag(pyxb.namespace.ExpandedName(None, 'LIGNES_GUIDEES_PRIORITAIRES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3055, 6))
+                                    3059, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -19877,7 +19994,7 @@ def _BuildAutomaton_147():
     symbol = pyxb.binding.content.ElementUse(
         typeControleurDeFeux._UseForTag(pyxb.namespace.ExpandedName(None, 'POSITION_FEUX')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3130, 6))
+                                    3134, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
@@ -19908,7 +20025,7 @@ CTD_ANON_146._AddElement(
                                documentation="Noeud d'acc\xe8s \xe0 la liste des s\xe9quences du plan de feux",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2942, 18)))
+                                   2946, 18)))
 
 
 def _BuildAutomaton_148():
@@ -19919,7 +20036,7 @@ def _BuildAutomaton_148():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2942, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2946, 18))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -19927,7 +20044,7 @@ def _BuildAutomaton_148():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_146._UseForTag(pyxb.namespace.ExpandedName(None, 'SEQUENCES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2942, 18))
+                                                 2946, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -19944,7 +20061,7 @@ CTD_ANON_147._AddElement(
                                documentation="Noeud d'acc\xe8s \xe0 la liste de description des signaux actifs de la s\xe9quence\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2955, 30)))
+                                   2959, 30)))
 
 
 def _BuildAutomaton_149():
@@ -19959,7 +20076,7 @@ def _BuildAutomaton_149():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_147._UseForTag(pyxb.namespace.ExpandedName(None, 'SIGNAUX_ACTIFS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2955, 30))
+                                    2959, 30))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -19975,21 +20092,21 @@ typeTraficOrigine._AddElement(
                                documentation="Noeud d'acc\xe8s \xe0 la description d'un flux global ayant pour origine l'extr\xe9mit\xe9 courante (pour tous les types de v\xe9hicule)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3349, 6)))
+                                   3353, 6)))
 
 typeTraficOrigine._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS'), CTD_ANON_65, scope=typeTraficOrigine,
                                documentation="Noeud d'acc\xe8s \xe0 la collection des flux par type de v\xe9hicule pour l'extr\xe9mit\xe9 courante",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3354, 6)))
+                                   3358, 6)))
 
 typeTraficOrigine._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES'), CTD_ANON_67, scope=typeTraficOrigine,
                                documentation="Description du caract\xe8re agressif des v\xe9hicules issus de l'entr\xe9e",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3379, 6)))
+                                   3383, 6)))
 
 
 def _BuildAutomaton_150():
@@ -20000,13 +20117,13 @@ def _BuildAutomaton_150():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3349, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3353, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3379, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 6))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -20014,7 +20131,7 @@ def _BuildAutomaton_150():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOrigine._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_GLOBAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3349, 6))
+                                    3353, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -20022,7 +20139,7 @@ def _BuildAutomaton_150():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOrigine._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3354, 6))
+                                    3358, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -20030,7 +20147,7 @@ def _BuildAutomaton_150():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOrigine._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3379, 6))
+                                    3383, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
@@ -20062,7 +20179,7 @@ typeParkingParameters._AddElement(
                                documentation='Permet la d\xe9finition de types de v\xe9hicules interdits dans le parking',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3518, 6)))
+                                   3522, 6)))
 
 
 def _BuildAutomaton_151():
@@ -20073,7 +20190,7 @@ def _BuildAutomaton_151():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3518, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3522, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -20081,7 +20198,7 @@ def _BuildAutomaton_151():
     symbol = pyxb.binding.content.ElementUse(
         typeParkingParameters._UseForTag(pyxb.namespace.ExpandedName(None, 'TYPE_VEHICULE_INTERDIT')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3518, 6))
+                                    3522, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20097,7 +20214,7 @@ CTD_ANON_153._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'DESTINATION'), CTD_ANON_154, scope=CTD_ANON_153,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3639, 22)))
+                                   3643, 22)))
 
 
 def _BuildAutomaton_152():
@@ -20112,7 +20229,7 @@ def _BuildAutomaton_152():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_153._UseForTag(pyxb.namespace.ExpandedName(None, 'DESTINATION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3639, 22))
+                                                 3643, 22))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20129,28 +20246,28 @@ typeRegulation._AddElement(
                                documentation='Ensemble des d\xe9tecteurs associ\xe9s \xe0 la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3806, 6)))
+                                   3810, 6)))
 
 typeRegulation._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'DECLENCHEURS'), CTD_ANON_81, scope=typeRegulation,
                                documentation='Ensemble des d\xe9clencheurs associ\xe9s \xe0 la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3844, 6)))
+                                   3848, 6)))
 
 typeRegulation._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ACTIONS'), CTD_ANON_83, scope=typeRegulation,
                                documentation='Ensemble des actions associ\xe9es \xe0 la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3882, 6)))
+                                   3886, 6)))
 
 typeRegulation._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'RESTITUTIONS'), CTD_ANON_85, scope=typeRegulation,
                                documentation='Ensemble des d\xe9finitions de restitution dans le fichier de sortie pour la brique de r\xe9gulation',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3920, 6)))
+                                   3924, 6)))
 
 
 def _BuildAutomaton_153():
@@ -20161,31 +20278,31 @@ def _BuildAutomaton_153():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3806, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3810, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3920, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3924, 6))
     counters.add(cc_1)
     states = []
     final_update = None
     symbol = pyxb.binding.content.ElementUse(typeRegulation._UseForTag(pyxb.namespace.ExpandedName(None, 'DETECTEURS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3806, 6))
+                                                 3810, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeRegulation._UseForTag(pyxb.namespace.ExpandedName(None, 'DECLENCHEURS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3844, 6))
+                                    3848, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(typeRegulation._UseForTag(pyxb.namespace.ExpandedName(None, 'ACTIONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3882, 6))
+                                                 3886, 6))
     st_2 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
@@ -20193,7 +20310,7 @@ def _BuildAutomaton_153():
     symbol = pyxb.binding.content.ElementUse(
         typeRegulation._UseForTag(pyxb.namespace.ExpandedName(None, 'RESTITUTIONS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3920, 6))
+                                    3924, 6))
     st_3 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     transitions = []
@@ -20224,7 +20341,7 @@ CTD_ANON_156._AddElement(
                                documentation='Plage temporelle pouvant \xeatre utilis\xe9e en mode "horaire" pour renseigner la plage de validit\xe9 des variantes temporelles (attributs "duree" de certains \xe9l\xe9ments)',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3977, 14)))
+                                   3981, 14)))
 
 
 def _BuildAutomaton_154():
@@ -20235,7 +20352,7 @@ def _BuildAutomaton_154():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3977, 14))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3981, 14))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -20243,7 +20360,7 @@ def _BuildAutomaton_154():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_156._UseForTag(pyxb.namespace.ExpandedName(None, 'PLAGE_TEMPORELLE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3977, 14))
+                                    3981, 14))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20260,7 +20377,7 @@ typeITINERAIRE._AddElement(
                                documentation="Liste des tron\xe7ons constituant l'itin\xe9raire",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4863, 6)))
+                                   4867, 6)))
 
 
 def _BuildAutomaton_155():
@@ -20271,7 +20388,7 @@ def _BuildAutomaton_155():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4863, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4867, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -20279,7 +20396,7 @@ def _BuildAutomaton_155():
     symbol = pyxb.binding.content.ElementUse(typeITINERAIRE._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCONS_')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4863, 6))
+                                                 4867, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20296,7 +20413,7 @@ CTD_ANON_159._AddElement(
                                documentation="Description d'une destination de l'extr\xe9mit\xe9 courante\n",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4934, 18)))
+                                   4938, 18)))
 
 
 def _BuildAutomaton_156():
@@ -20311,7 +20428,7 @@ def _BuildAutomaton_156():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_159._UseForTag(pyxb.namespace.ExpandedName(None, 'DESTINATION')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4934, 18))
+                                                 4938, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20327,7 +20444,7 @@ CTD_ANON_160._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ROUTE'), typeITINERAIRE, scope=CTD_ANON_160,
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   4944, 24)))
+                                   4948, 24)))
 
 
 def _BuildAutomaton_157():
@@ -20338,7 +20455,7 @@ def _BuildAutomaton_157():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4944, 24))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 4948, 24))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -20346,7 +20463,7 @@ def _BuildAutomaton_157():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_160._UseForTag(pyxb.namespace.ExpandedName(None, 'ROUTE')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 4944, 24))
+                                                 4948, 24))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -20993,7 +21110,7 @@ CTD_ANON_165._AddElement(
                                documentation="Liste des points internes se situant entre le pr\xe9c\xe9dent convergent d\xe9fini et celui-ci (si c'est le premier convergent d\xe9fini, c'est entre l'extr\xe9mit\xe9 amont du tron\xe7on de sortie et celui-ci)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2504, 34)))
+                                   2507, 34)))
 
 
 def _BuildAutomaton_175():
@@ -21004,7 +21121,7 @@ def _BuildAutomaton_175():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2504, 34))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2507, 34))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -21012,7 +21129,7 @@ def _BuildAutomaton_175():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_165._UseForTag(pyxb.namespace.ExpandedName(None, 'POINTS_INTERNES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2504, 34))
+                                    2507, 34))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -21029,7 +21146,7 @@ CTD_ANON_166._AddElement(
                                documentation="Liste des variantes temporelles de d\xe9finition du profil des demandes pour l'arr\xeat",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2715, 18)))
+                                   2719, 18)))
 
 CTD_ANON_166._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_DESCENTE'), CTD_ANON_55,
@@ -21037,7 +21154,7 @@ CTD_ANON_166._AddElement(
                                documentation="D\xe9finition des param\xe8tres de descente des bus pour l'arr\xeat consid\xe9r\xe9",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2762, 18)))
+                                   2766, 18)))
 
 
 def _BuildAutomaton_176():
@@ -21048,10 +21165,10 @@ def _BuildAutomaton_176():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2715, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2719, 18))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2762, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2766, 18))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -21059,7 +21176,7 @@ def _BuildAutomaton_176():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_166._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_MONTEE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2715, 18))
+                                    2719, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -21067,7 +21184,7 @@ def _BuildAutomaton_176():
     symbol = pyxb.binding.content.ElementUse(
         CTD_ANON_166._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRAGE_DESCENTE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    2762, 18))
+                                    2766, 18))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     transitions = []
@@ -21090,7 +21207,7 @@ typeTraficOriginePonctuelle._AddElement(
                                scope=typeTraficOriginePonctuelle, documentation='Liste des v\xe9hicules \xe0 cr\xe9er',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3442, 10)))
+                                   3446, 10)))
 
 
 def _BuildAutomaton_177():
@@ -21101,19 +21218,19 @@ def _BuildAutomaton_177():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3349, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3353, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3379, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 6))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3441, 8))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3445, 8))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3442, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3446, 10))
     counters.add(cc_4)
     states = []
     final_update = set()
@@ -21121,7 +21238,7 @@ def _BuildAutomaton_177():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOriginePonctuelle._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_GLOBAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3349, 6))
+                                    3353, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -21129,7 +21246,7 @@ def _BuildAutomaton_177():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOriginePonctuelle._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3354, 6))
+                                    3358, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -21137,7 +21254,7 @@ def _BuildAutomaton_177():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOriginePonctuelle._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3379, 6))
+                                    3383, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
@@ -21146,7 +21263,7 @@ def _BuildAutomaton_177():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficOriginePonctuelle._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3442, 10))
+                                    3446, 10))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     transitions = []
@@ -21194,7 +21311,7 @@ def _BuildAutomaton_178():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3518, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3522, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -21202,7 +21319,7 @@ def _BuildAutomaton_178():
     symbol = pyxb.binding.content.ElementUse(
         typeParkingZone._UseForTag(pyxb.namespace.ExpandedName(None, 'TYPE_VEHICULE_INTERDIT')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3518, 6))
+                                    3522, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -21219,14 +21336,14 @@ typeTraficZone._AddElement(
                                documentation='Liste des tron\xe7ons d\xe9finissant la zone',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3576, 10)))
+                                   3580, 10)))
 
 typeTraficZone._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'GROUPE_PARKING'), CTD_ANON_73, scope=typeTraficZone,
                                documentation='Liste des parkings compris dans la zone',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3608, 10)))
+                                   3612, 10)))
 
 typeTraficZone._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'MATRICES_OD_INTERNES'), CTD_ANON_74,
@@ -21234,14 +21351,14 @@ typeTraficZone._AddElement(
                                documentation='Liste des variantes temporelles de la matrice OD interne \xe0 la zone de terminaison',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3627, 10)))
+                                   3631, 10)))
 
 typeTraficZone._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES'), CTD_ANON_75,
                                scope=typeTraficZone, documentation='Liste des v\xe9hicules \xe0 cr\xe9er',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3664, 10)))
+                                   3668, 10)))
 
 typeTraficZone._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REPARTITIONS_TYPEVEHICULE'), CTD_ANON_77,
@@ -21249,7 +21366,7 @@ typeTraficZone._AddElement(
                                documentation='Liste des variantes des r\xe9partitions des types de v\xe9hicule',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3695, 10)))
+                                   3699, 10)))
 
 typeTraficZone._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'REPARTITION_ORIGINES'), CTD_ANON_78,
@@ -21257,7 +21374,7 @@ typeTraficZone._AddElement(
                                documentation="Liste des coefficients de r\xe9partition de la demande sur les diff\xe9rents \xe9l\xe9ments de la zone d'origine (groupes de parkings et tron\xe7ons avec stationnement)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3721, 10)))
+                                   3725, 10)))
 
 
 def _BuildAutomaton_179():
@@ -21268,56 +21385,56 @@ def _BuildAutomaton_179():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3349, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3353, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3379, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 6))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3608, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3612, 10))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3627, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3631, 10))
     counters.add(cc_4)
     cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3664, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3668, 10))
     counters.add(cc_5)
     cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3695, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3699, 10))
     counters.add(cc_6)
     cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3721, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3725, 10))
     counters.add(cc_7)
     states = []
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_GLOBAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3349, 6))
+                                    3353, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3354, 6))
+                                    3358, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3379, 6))
+                                    3383, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'TRONCONS')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 3576, 10))
+                                                 3580, 10))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
@@ -21325,7 +21442,7 @@ def _BuildAutomaton_179():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'GROUPE_PARKING')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3608, 10))
+                                    3612, 10))
     st_4 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
@@ -21333,7 +21450,7 @@ def _BuildAutomaton_179():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'MATRICES_OD_INTERNES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3627, 10))
+                                    3631, 10))
     st_5 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
@@ -21341,7 +21458,7 @@ def _BuildAutomaton_179():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3664, 10))
+                                    3668, 10))
     st_6 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
@@ -21349,7 +21466,7 @@ def _BuildAutomaton_179():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'REPARTITIONS_TYPEVEHICULE')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3695, 10))
+                                    3699, 10))
     st_7 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
@@ -21357,7 +21474,7 @@ def _BuildAutomaton_179():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficZone._UseForTag(pyxb.namespace.ExpandedName(None, 'REPARTITION_ORIGINES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3721, 10))
+                                    3725, 10))
     st_8 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     transitions = []
@@ -22005,7 +22122,7 @@ typeTraficExtremite._AddElement(
                                documentation="Liste des variantes de la capacit\xe9 de la sortie. Si cette liste n'existe pas, la sortie est libre.",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   3486, 10)))
+                                   3490, 10)))
 
 
 def _BuildAutomaton_184():
@@ -22016,25 +22133,25 @@ def _BuildAutomaton_184():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3349, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3353, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3379, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 6))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3441, 8))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3445, 8))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3442, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3446, 10))
     counters.add(cc_4)
     cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3485, 8))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3489, 8))
     counters.add(cc_5)
     cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3486, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3490, 10))
     counters.add(cc_6)
     states = []
     final_update = set()
@@ -22042,7 +22159,7 @@ def _BuildAutomaton_184():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficExtremite._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_GLOBAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3349, 6))
+                                    3353, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -22050,7 +22167,7 @@ def _BuildAutomaton_184():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficExtremite._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3354, 6))
+                                    3358, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -22058,7 +22175,7 @@ def _BuildAutomaton_184():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficExtremite._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3379, 6))
+                                    3383, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
@@ -22067,7 +22184,7 @@ def _BuildAutomaton_184():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficExtremite._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3442, 10))
+                                    3446, 10))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
@@ -22076,7 +22193,7 @@ def _BuildAutomaton_184():
     symbol = pyxb.binding.content.ElementUse(
         typeTraficExtremite._UseForTag(pyxb.namespace.ExpandedName(None, 'CAPACITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3486, 10))
+                                    3490, 10))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     transitions = []
@@ -22134,7 +22251,7 @@ typeTraficExtremite._Automaton = _BuildAutomaton_184()
 typeTraficParking._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'PARAMETRES'), typeParkingParameters,
                                scope=typeTraficParking, location=pyxb.utils.utility.Location(
-            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3556, 10)))
+            '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3560, 10)))
 
 
 def _BuildAutomaton_185():
@@ -22145,54 +22262,54 @@ def _BuildAutomaton_185():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3349, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3353, 6))
     counters.add(cc_0)
     cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3354, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3358, 6))
     counters.add(cc_1)
     cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3379, 6))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3383, 6))
     counters.add(cc_2)
     cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3441, 8))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3445, 8))
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3442, 10))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 3446, 10))
     counters.add(cc_4)
     states = []
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficParking._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_GLOBAL')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3349, 6))
+                                    3353, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficParking._UseForTag(pyxb.namespace.ExpandedName(None, 'FLUX_TYPEVEHS')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3354, 6))
+                                    3358, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficParking._UseForTag(pyxb.namespace.ExpandedName(None, 'AGRESSIVITES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3379, 6))
+                                    3383, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
     symbol = pyxb.binding.content.ElementUse(
         typeTraficParking._UseForTag(pyxb.namespace.ExpandedName(None, 'CREATION_VEHICULES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3442, 10))
+                                    3446, 10))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(
         typeTraficParking._UseForTag(pyxb.namespace.ExpandedName(None, 'PARAMETRES')),
         pyxb.utils.utility.Location('/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                    3556, 10))
+                                    3560, 10))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     transitions = []
@@ -22293,14 +22410,14 @@ CTD_ANON_177._AddElement(
                                documentation="Liste des horaires des v\xe9hicules guid\xe9s (uniquement le premier v\xe9hicule guid\xe9 dans le cas d'un param\xe9trage de type global)",
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2581, 18)))
+                                   2585, 18)))
 
 CTD_ANON_177._AddElement(
     pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'FREQUENCES'), CTD_ANON_51, scope=CTD_ANON_177,
                                documentation='D\xe9finition des variations temporelles de fr\xe9quence des v\xe9hicules guid\xe9s sur la ligne, en cas de param\xe8trage de type \'Global\'. L\'attribut "fr\xe9quence" du NOEUD "LIGNE_TRANSPORT_GUIDEE" sera ignor\xe9 si des variations temporelles sotn d\xe9finies ici.',
                                location=pyxb.utils.utility.Location(
                                    '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                   2614, 18)))
+                                   2618, 18)))
 
 
 def _BuildAutomaton_187():
@@ -22311,14 +22428,14 @@ def _BuildAutomaton_187():
 
     counters = set()
     cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(
-        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2614, 18))
+        '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd', 2618, 18))
     counters.add(cc_0)
     states = []
     final_update = set()
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_177._UseForTag(pyxb.namespace.ExpandedName(None, 'HORAIRES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2581, 18))
+                                                 2585, 18))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
@@ -22326,7 +22443,7 @@ def _BuildAutomaton_187():
     symbol = pyxb.binding.content.ElementUse(CTD_ANON_177._UseForTag(pyxb.namespace.ExpandedName(None, 'FREQUENCES')),
                                              pyxb.utils.utility.Location(
                                                  '/home/latty/__DEV__/__REMI__/plugins/interactive_map_tracking/reseau_2.04.xsd',
-                                                 2614, 18))
+                                                 2618, 18))
     st_1 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     transitions = []
@@ -22338,5 +22455,7 @@ def _BuildAutomaton_187():
         fac.UpdateInstruction(cc_0, True)]))
     st_1._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
+
+
 CTD_ANON_177._Automaton = _BuildAutomaton_187()
 

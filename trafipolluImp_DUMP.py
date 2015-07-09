@@ -12,6 +12,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -168,16 +169,14 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
     :return:
     """
+    lane_position = object_sql_lane['lane_position']
+    lane_side = object_sql_lane['lane_side']
     # url: https://wiki.python.org/moin/BitManipulation
     lambdas_generate_id = {
         'left': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 - (position >> 1),
         'right': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 + (position >> 1) - even,
         'center': lambda nb_lanes_by_2, position, even: nb_lanes_by_2
     }
-
-    lane_position = object_sql_lane['lane_position']
-    lane_side = object_sql_lane['lane_side']
-
     # update list sides for (grouping)
     lambda_generate_id = lambdas_generate_id[lane_side]
     nb_lanes_by_2 = nb_lanes >> 1
@@ -205,7 +204,7 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         lane_side = object_from_sql_request['lane_side']
         lane_direction = object_from_sql_request['lane_direction']
         lane_center_axis = object_from_sql_request['lane_center_axis']
-        sg3_lane_id = object_from_sql_request['lane_ordinality']
+        lane_ordinality = object_from_sql_request['lane_ordinality']
         #
         nb_lanes = dict_edges[sg3_edge_id]['ui_lane_number']
         #
@@ -219,9 +218,12 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
 
         python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)
+        # print 'sg3_lane_id: %s\tpython_lane_id: %s' % (sg3_lane_id, python_lane_id)
         # print 'edge_id: %s id_in_list: %s' % (edge_id, id_in_list)
 
         sg3_lane = dict_lanes[sg3_edge_id]
+
+        sg3_lane['sg3_to_python'][lane_ordinality] = python_lane_id
 
         # Attention ici !
         # on places les lanes dans des listes pythons (avec ordre python) et non dans l'ordre fournit par la requete
@@ -232,8 +234,6 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
             lane_center_axis,
             nb_lanes,
         )
-
-        sg3_lane['sg3_to_python'][sg3_lane_id] = python_lane_id
 
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
         # find a key with value
