@@ -53,8 +53,7 @@ def debug_draw(
     :param result_from_ecfsn:
     :return:
     """
-    convex_hull = result_from_ecfsn[0]
-    points_cloud = result_from_ecfsn[1]
+    convex_hull, points_cloud = result_from_ecfsn
 
     # url: http://docs.scipy.org/doc/scipy-dev/reference/generated/scipy.spatial.ConvexHull.html
     #url: http://matplotlib.org/users/pyplot_tutorial.html

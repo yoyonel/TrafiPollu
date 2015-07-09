@@ -155,8 +155,8 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         # print 'TRAFICS - sym_TRAFICS: ', sym_TRAFICS
         # print 'TRAFICS - self.list_troncons: ', self.list_troncons
         # sym_TRAFICS.append(export_TRAFIC(self.list_symu_troncons, self.list_symu_connexions, str_path_to_child))
-        list_extrimites = self.module_topo.dict_extremites['ENTREES']
-        list_extrimites.extend(self.module_topo.dict_extremites['SORTIES'])
+        list_extremites = self.module_topo.dict_extremites['ENTREES']
+        list_extremites.extend(self.module_topo.dict_extremites['SORTIES'])
         # print "self.module_topo.dict_extremites['ENTREES']: ", self.module_topo.dict_extremites['ENTREES']
         # print "self.module_topo.dict_extremites['SORTIES']: ", self.module_topo.dict_extremites['SORTIES']
         # print "list_extrimites :", list_extrimites
@@ -165,7 +165,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
             export_TRAFIC(
                 self.module_topo.dict_pyxb_symutroncons.values(),
                 self.list_symu_connexions,
-                list_extrimites,
+                list_extremites,
                 str_path_to_child
             )
         )
