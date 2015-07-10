@@ -26,23 +26,17 @@ class TrafiPolluImp(object):
         self.__dict_lanes = {}
         self.__dict_nodes = {}
         #
-        self.module_SQL = trafipolluImp_SQL(
-            iface,
-            self.__dict_edges,
-            self.__dict_lanes,
-            self.__dict_nodes
-        )
-        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(
-            self.__dict_edges,
-            self.__dict_lanes,
-            self.__dict_nodes
-        )
-        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(
-            dict_edges=self.__dict_edges,
-            dict_lanes=self.__dict_lanes,
-            dict_nodes=self.__dict_nodes,
-            module_topo=self.module_topo
-        )
+        kwargs = {
+            'iface': iface,
+            'dict_edges': self.__dict_edges,
+            'dict_lanes': self.__dict_lanes,
+            'dict_nodes': self.__dict_nodes,
+        }
+
+        self.module_SQL = trafipolluImp_SQL(**kwargs)
+        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
+        kwargs.update({'module_topo': self.module_topo})
+        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
 
     def _init_signals_(self):
         """
@@ -175,7 +169,13 @@ class TrafiPolluImp(object):
         """
         #
         list_sql_commands = [
-            'update_table_edges_from_qgis',
+            # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
+            # 'update_def_zone_test',
+            #
+            # 'update_table_edges_from_qgis',
+            #
+            'update_tables_from_def_zone_test',
+            #
             'dump_informations_from_edges',
             'dump_sides_from_edges',
             'dump_informations_from_nodes',

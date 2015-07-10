@@ -17,6 +17,9 @@ SELECT
   vrli.lane_ordinality2          AS str_lane_ordinality2,
 
   ST_AsEWKB(vrli.interconnexion) AS wkb_interconnexion
+-- url: http://www.postgis.org/docs/ST_Simplify.html
+--   ST_AsEWKB(ST_Simplify(vrli.interconnexion, 0.10)) AS wkb_interconnexion
+
 FROM
   street_amp.visu_result_lane_interconnexion AS vrli
   JOIN

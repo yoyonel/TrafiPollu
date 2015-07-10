@@ -13,6 +13,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -214,7 +215,9 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
                                   'sg3_to_symuvia': [None] * nb_lanes,  # pre-allocate size for list,
                                   'sg3_to_python': [None] * (nb_lanes + 1),  # pre-allocate size for list,
                               })
-        #
+
+        # decompression des donnees a la main
+        # print 'sp_wkb_loads(bytes(lane_center_axis)): ', sp_wkb_loads(bytes(lane_center_axis))
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
 
         python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)

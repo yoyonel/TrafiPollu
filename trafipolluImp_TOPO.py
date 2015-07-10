@@ -51,7 +51,8 @@ NT_RESULT_BUILD_PYXB = CreateNamedTuple(
 
 # ######## OPTIONS D'EXPORT ############
 b_add_points_internes_troncons = True
-b_use_simplification_for_points_internes = True
+b_use_simplification_for_points_internes_troncon = True
+b_use_simplification_for_points_internes_interconnexion = True
 ######### ######### ######### #########
 
 class trafipolluImp_TOPO(object):
@@ -59,13 +60,14 @@ class trafipolluImp_TOPO(object):
 
     """
 
-    def __init__(self, dict_edges, dict_lanes, dict_nodes):
+    # def __init__(self, dict_edges, dict_lanes, dict_nodes):
+    def __init__(self, **kwargs):
         """
 
         """
-        self.dict_edges = dict_edges
-        self.dict_lanes = dict_lanes
-        self.dict_nodes = dict_nodes
+        self.dict_edges = kwargs['dict_edges']
+        self.dict_nodes = kwargs['dict_nodes']
+        self.dict_lanes = kwargs['dict_lanes']
         #
         self.dict_pyxb_symutroncons = {}
         #
@@ -175,9 +177,9 @@ class trafipolluImp_TOPO(object):
             # transfert des POINTS_INTERNES
             if b_add_points_internes_troncons:
                 points_internes = result_build.points_internes
-                if b_use_simplification_for_points_internes:
+                if b_use_simplification_for_points_internes_troncon:
                     try:
-                        points_internes = self.simplify_list_points(result_build.points_internes, 0.10, 3.0)
+                        points_internes = self.simplify_list_points(result_build.points_internes, 2.0, 0.10)
                     except Exception, e:
                         print 'Simplification des points internes (TRONCON) - Exception: ', e
                         print 'result_build.points_internes: ', result_build.points_internes
@@ -558,20 +560,28 @@ class trafipolluImp_TOPO(object):
     @staticmethod
     def simplify_list_points(
             list_points,
-            tolerance_distance=0.10,
             min_distance=0.60,
+            tolerance_distance=0.10,
+            epsilon=0.05
     ):
         """
 
         :return:
 
         """
+        min_distance += epsilon
+
         list_points_simplify = list_points
 
         try:
-            if len(list_points) > 2:
-                list_points_simplify = LineString(list_points)
+            list_shp_points = []
+            if len(list_points_simplify):
+                if len(list_points_simplify) < 2:
+                    list_points_simplify = MultiPoint(list_points)
+                else:
+                    list_points_simplify = LineString(list_points)
 
+                # resampling
                 list_shp_points = [
                     list_points_simplify.interpolate(distance)
                     for distance in np.arange(min_distance,
@@ -579,15 +589,17 @@ class trafipolluImp_TOPO(object):
                                               min_distance)
                 ]
 
-                if list_shp_points:
-                    if len(list_shp_points) < 2:
-                        list_points_simplify = MultiPoint(list_shp_points)
-                    else:
-                        resample_shp_geometry = LineString(list_shp_points)
-                        list_points_simplify = resample_shp_geometry.simplify(
-                            tolerance_distance,
-                            preserve_topology=False
-                        )
+            if list_shp_points:
+                if len(list_shp_points) < 2:
+                    list_points_simplify = MultiPoint(list_shp_points)
+                else:
+                    resample_shp_geometry = LineString(list_shp_points)
+                    list_points_simplify = resample_shp_geometry.simplify(
+                        tolerance_distance,
+                        preserve_topology=False
+                    )
+                    # list_points_simplify = LineString(list_shp_points)
+
         except Exception, e:
             print 'simplify_list_points - Exception: ', e
             print 'list_points: ', list_points
@@ -678,11 +690,22 @@ class trafipolluImp_TOPO(object):
                         # #################################################
                         # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
                         ##################################################
-                        sg3_interconnexion_geometry = self.simplify_list_points(
-                            interconnexion['np_interconnexion'],
-                            0.10,
-                            0.60
-                        )
+                        if b_use_simplification_for_points_internes_interconnexion:
+                            sg3_interconnexion_geometry = self.simplify_list_points(
+                                interconnexion['np_interconnexion'],
+                                0.50,
+                                0.10
+                            )
+                            # list_points_for_edge_and_interconnexion = [symu_troncons[id_amont].extremite_aval] + \
+                            # sg3_interconnexion_geometry.tolist() + \
+                            #                                           [symu_troncons[id_aval].extremite_amont]
+                            # # print 'list_points_for_edge_and_interconnexion: ', list_points_for_edge_and_interconnexion
+                            # ls = asarray(LineString(list_points_for_edge_and_interconnexion).simplify(0.60, False))
+                            # print 'ls: ', ls
+                            # if len(ls) <= 2:
+                            #     sg3_interconnexion_geometry = []
+                        else:
+                            sg3_interconnexion_geometry = interconnexion['np_interconnexion']
                         ##################################################
 
                         #
