@@ -1,7 +1,6 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
-
 import psycopg2
 import psycopg2.extras
 
@@ -42,13 +41,15 @@ class trafipolluImp_SQL(object):
                 'host': "localhost",
                 'port': "5433",
                 'user': "postgres",
-                'password': "postgres"
+                'password': "postgres",
+                'connect_timeout': 2,
             },
             'IGN': {
                 'host': "172.16.3.50",
                 'port': "5432",
                 'user': "streetgen",
                 'password': "streetgen",
+                'connect_timeout': 2,
             },
         }
 

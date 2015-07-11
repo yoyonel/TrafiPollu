@@ -52,7 +52,7 @@ NT_RESULT_BUILD_PYXB = CreateNamedTuple(
 # ######## OPTIONS D'EXPORT ############
 b_add_points_internes_troncons = True
 b_use_simplification_for_points_internes_troncon = True
-b_use_simplification_for_points_internes_interconnexion = True
+b_use_simplification_for_points_internes_interconnexion = False
 ######### ######### ######### #########
 
 class trafipolluImp_TOPO(object):
@@ -555,7 +555,6 @@ class trafipolluImp_TOPO(object):
 
         [pyxb_symuPOINTS_INTERNES.append(pyxb.BIND(coordonnees=[x[0], x[1]])) for x in list_points]
         return pyxb_symuPOINTS_INTERNES
-
 
     @staticmethod
     def simplify_list_points(

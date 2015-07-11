@@ -172,9 +172,9 @@ class TrafiPolluImp(object):
             # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
             # 'update_def_zone_test',
             #
-            # 'update_table_edges_from_qgis',
+            'update_table_edges_from_qgis',
             #
-            'update_tables_from_def_zone_test',
+            # 'update_tables_from_def_zone_test',
             #
             'dump_informations_from_edges',
             'dump_sides_from_edges',
