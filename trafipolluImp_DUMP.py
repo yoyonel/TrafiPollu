@@ -9,6 +9,7 @@ import imt_tools
 from imt_tools import timerDecorator
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -52,9 +53,6 @@ def dump_for_edges(objects_from_sql_request):
                 ]
             )
         )
-
-        # dict_sql_request['np_amont_to_aval'] = dict_sql_request['np_aval'] - dict_sql_request['np_amont']
-
         edge_id = object_from_sql_request['str_edge_id']
         dict_edges.update({edge_id: dict_sql_request})
     #
@@ -222,6 +220,8 @@ def dump_lanes(objects_from_sql_request, dict_edges):
         # decompression des donnees a la main
         # print 'sp_wkb_loads(bytes(lane_center_axis)): ', sp_wkb_loads(bytes(lane_center_axis))
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
+        # if not lane_direction:
+        # lane_center_axis = lane_center_axis[::-1]
 
         python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)
         # print 'sg3_lane_id: %s\tpython_lane_id: %s' % (sg3_lane_id, python_lane_id)
@@ -352,7 +352,7 @@ def get_lane_geometry_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_i
     return get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id).lane_center_axis
 
 
-def get_list_lanes_from_edge_id(dict_lanes, sg3_edge_id):
+def get_Symuvia_list_lanes_from_edge_id(dict_lanes, sg3_edge_id):
     """
 
     :param dict_lanes:
@@ -372,7 +372,7 @@ def get_lane_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']][python_lane_id]
 
-def get_lane_from_edge_id(dict_lanes, sg3_edge_id):
+def get_PYTHON_list_lanes(dict_lanes, sg3_edge_id):
     """
 
     :param dict_lanes:
@@ -388,7 +388,7 @@ def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality)
     :param sg3_edge_id:
     :return:
     """
-    return get_lane_from_edge_id(dict_lanes, sg3_edge_id)[lane_ordinality]
+    return get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality]
 
 
 def set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id):
@@ -398,4 +398,4 @@ def set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id)
     :param sg3_edge_id:
     :return:
     """
-    get_lane_from_edge_id(dict_lanes, sg3_edge_id)[lane_ordinality] = python_lane_id
+    get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality] = python_lane_id

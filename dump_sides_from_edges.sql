@@ -15,7 +15,12 @@ SELECT
   lane.lane_position,
   lane.lane_direction,
   lane.lane_ordinality,
-  ST_AsEWKB(lane.lane_center_axis) AS lane_center_axis
+  ST_AsEWKB(
+      CASE lane.lane_direction
+      WHEN TRUE THEN lane.lane_center_axis
+      ELSE ST_Reverse(lane.lane_center_axis)
+      END
+  ) AS lane_center_axis
 FROM
   test.edges_selected AS e_s
   INNER JOIN

@@ -1,10 +1,8 @@
 __author__ = 'latty'
 
 import numpy as np
-import traceback
-import sys
 
-from shapely.geometry import Point, LineString, MultiPoint
+from shapely.geometry import Point, LineString
 import pyxb
 
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
@@ -53,7 +51,7 @@ NT_RESULT_BUILD_PYXB = CreateNamedTuple(
 # ######## OPTIONS D'EXPORT ############
 b_add_points_internes_troncons = True
 b_use_simplification_for_points_internes_troncon = True
-b_use_simplification_for_points_internes_interconnexion = False
+b_use_simplification_for_points_internes_interconnexion = True
 ######### ######### ######### #########
 
 class trafipolluImp_TOPO(object):
@@ -180,7 +178,7 @@ class trafipolluImp_TOPO(object):
                 points_internes = result_build.points_internes
                 if b_use_simplification_for_points_internes_troncon:
                     try:
-                        points_internes = self.simplify_list_points(result_build.points_internes, 2.0, 0.10)
+                        points_internes = self.optimize_list_points(result_build.points_internes, 2.0, 0.10)
                     except Exception, e:
                         print 'Simplification des points internes (TRONCON) - Exception: ', e
                         print 'result_build.points_internes: ', result_build.points_internes
@@ -269,7 +267,7 @@ class trafipolluImp_TOPO(object):
         :return:
         """
         # symu_lanes = self.dict_lanes[sg3_edge_id]['sg3_to_symuvia']  # LINK STREETGEN3 to SYMUVIA (TOPO)
-        symu_lanes = tpi_DUMP.get_list_lanes_from_edge_id(self.dict_lanes, sg3_edge_id)
+        symu_lanes = tpi_DUMP.get_Symuvia_list_lanes_from_edge_id(self.dict_lanes, sg3_edge_id)
 
         for python_id in range(python_lane_id, python_lane_id + nb_lanes):
             symu_lanes[python_id] = NT_LANE_SG3_SYMU(
@@ -370,10 +368,10 @@ class trafipolluImp_TOPO(object):
             id_vertice_for_amont, id_vertice_for_aval = 0, -1
 
             # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
-            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
-                                                                             python_lane_id)
-            if not lane_direction:
-                lane_geometry.reverse()
+            # lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
+            # python_lane_id)
+            # if not lane_direction:
+            #     lane_geometry.reverse()
 
             # Comme la liste des coefficients 1D est triee,
             # on peut declarer le 1er et dernier point comme Amont/Aval
@@ -506,17 +504,13 @@ class trafipolluImp_TOPO(object):
         python_lane_id = kwargs['python_lane_id']
         #
         try:
-            # sg3_lane = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id]
             sg3_lane = tpi_DUMP.get_lane_from_python_lane_id(self.dict_lanes, sg3_edge_id, python_lane_id)
 
             try:
-                lane_direction = sg3_lane.lane_direction
-
-                # orientation de la geometrie de la lane en fonction de l'orientation de l'edge
                 lane_geometry = sg3_lane.lane_center_axis
-                lane_points_internes = lane_geometry[1:-1]
-                if not lane_direction:
-                    lane_points_internes = lane_points_internes[::-1]
+                lane_points_internes = lane_geometry[1:-1]  # du 2nd a l'avant dernier point
+
+                id_vertice_for_amont, id_vertice_for_aval = 0, -1
 
                 # print ''
                 # print 'udpate_TRONCON_with_lane_in_groups'
@@ -525,12 +519,6 @@ class trafipolluImp_TOPO(object):
                 # print '\tlane_geometry: ', lane_geometry
                 # print '\tsg3_edge - amont, aval: ', self.dict_edges[sg3_edge_id]['np_amont'], \
                 # self.dict_edges[sg3_edge_id]['np_aval'],
-
-                # MOG: probleme autour des sens edges, lanes
-                id_vertice_for_amont, id_vertice_for_aval = (
-                    (-1, 0),  # lane_direction == false => same direction than edge
-                    (0, -1)  # lane_direction == true
-                )[lane_direction]
 
                 return NT_RESULT_BUILD_PYXB(
                     lane_geometry[id_vertice_for_amont],
@@ -568,6 +556,24 @@ class trafipolluImp_TOPO(object):
     @staticmethod
     def simplify_list_points(
             list_points,
+            tolerance_distance=0.10
+    ):
+        """
+
+        :param list_points: list des points a simplfier.
+                -> A priori cette liste provient d'une interconnexion SG3
+                donc elle possede (normalement) au moins 4 points (amont 2 points internes aval)
+        :param tolerance_distance:
+        :return:
+
+        """
+        shp_list_points = LineString(list_points)
+        shp_simplify_list_points = shp_list_points.simplify(tolerance_distance, preserve_topology=False)
+        return np.asarray(shp_simplify_list_points)
+
+    @staticmethod
+    def optimize_list_points(
+            list_points,
             min_distance=0.60,
             tolerance_distance=0.10,
             epsilon=0.05
@@ -578,45 +584,31 @@ class trafipolluImp_TOPO(object):
 
         """
         min_distance += epsilon
-
-        list_points_simplify = list_points
+        shp_list_points_optimized = []
 
         try:
-            list_shp_points = []
-            if len(list_points_simplify):
-                if len(list_points_simplify) < 2:
-                    list_points_simplify = MultiPoint(list_points)
-                else:
-                    list_points_simplify = LineString(list_points)
-
-                # resampling
-                list_shp_points = [
-                    list_points_simplify.interpolate(distance)
-                    for distance in np.arange(min_distance,
-                                              list_points_simplify.length - min_distance,
-                                              min_distance)
-                ]
-
-            if list_shp_points:
-                if len(list_shp_points) < 2:
-                    list_points_simplify = MultiPoint(list_shp_points)
-                else:
-                    resample_shp_geometry = LineString(list_shp_points)
-                    list_points_simplify = resample_shp_geometry.simplify(
-                        tolerance_distance,
-                        preserve_topology=False
-                    )
-                    # list_points_simplify = LineString(list_shp_points)
-
+            shp_list_points = LineString(list_points)
+            # resampling
+            list_shp_points_resampled = [
+                shp_list_points.interpolate(distance)
+                for distance in np.arange(min_distance,
+                                          shp_list_points.length - min_distance,
+                                          min_distance)
+            ]
+            list_shp_points = list_shp_points_resampled
         except Exception, e:
-            print 'simplify_list_points - Exception: ', e
-            print 'list_points: ', list_points
-            # url: http://stackoverflow.com/questions/6961750/locating-the-line-number-where-an-exception-occurs-in-python-code
-            for frame in traceback.extract_tb(sys.exc_info()[2]):
-                fname, lineno, fn, text = frame
-                print "Error in %s on line %d" % (fname, lineno)
-
-        return np.array(list_points_simplify)
+            print 'Exception: ', e
+        else:
+            try:
+                resample_shp_geometry = LineString(list_shp_points)
+                shp_list_points_optimized = resample_shp_geometry.simplify(
+                    tolerance_distance,
+                    preserve_topology=False
+                )
+            except Exception, e:
+                print 'Exception: ', e
+        finally:
+            return np.array(shp_list_points_optimized)
 
     @timerDecorator()
     def build_topo_for_interconnexions(self):
@@ -663,31 +655,11 @@ class trafipolluImp_TOPO(object):
                         sg3_edge_id = interconnexion['edge_id' + str_sg3_id]
                         sg3_lane_ordinality = interconnexion['lane_ordinality' + str_sg3_id]
                         try:
-                            # sg3_lanes = self.dict_lanes[sg3_edge_id]
-
-                            # python_lane_id = sg3_lanes['sg3_to_python'][sg3_lane_ordinality]
-                            python_lane_id = tpi_DUMP.get_python_id_from_lane_ordinality(
+                            symu_lane, symu_lane_id = self.find_symu_lane(
                                 self.dict_lanes,
                                 sg3_edge_id,
                                 sg3_lane_ordinality
                             )
-
-                            # symu_lane = sg3_lanes['sg3_to_symuvia'][python_lane_id]
-                            symu_lane = tpi_DUMP.get_lane_from_python_id(
-                                self.dict_lanes,
-                                sg3_edge_id,
-                                python_lane_id
-                            )
-
-                            symu_lane_id = python_lane_id - symu_lane.start_id_lane
-
-                            # #######################################################################
-                            # MOG : Probleme autour des sens edges, lanes, symuvia
-                            ########################################################################
-                            if symu_lane.lane_direction:
-                                symu_lane_id = (symu_lane.nb_lanes - 1) - symu_lane_id
-                                ########################################################################
-
                         except Exception, e:
                             print '# build_topo_for_nodes - Find Symu_Troncon - EXCEPTION: ', e
                         else:
@@ -711,11 +683,17 @@ class trafipolluImp_TOPO(object):
                         # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
                         ##################################################
                         if b_use_simplification_for_points_internes_interconnexion:
+                            # sg3_interconnexion_geometry = self.optimize_list_points(
+                            # interconnexion['np_interconnexion'],
+                            #     0.50,
+                            #     0.10
+                            # )
+                            # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
+                            # inutile dans ce cas pour SYMUVIA
                             sg3_interconnexion_geometry = self.simplify_list_points(
                                 interconnexion['np_interconnexion'],
-                                0.50,
                                 0.10
-                            )
+                            )[1:-1]     # les 1er et dernier points sont les amont/aval de l'interconnexion/troncons
                         else:
                             sg3_interconnexion_geometry = interconnexion['np_interconnexion']
                         ##################################################
@@ -724,7 +702,13 @@ class trafipolluImp_TOPO(object):
                         list_interconnexions = dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']
 
                         # build key with id symu_troncon and the id lane
-                        key_for_interconnexion = symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
+                        # key_for_interconnexion = symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
+                        key_for_interconnexion = self.build_id_for_interconnexion(
+                            symu_troncons,
+                            symu_troncons_lane_id,
+                            id_amont
+                        )
+
                         list_interconnexions.setdefault(key_for_interconnexion, []).append(
                             NT_INTERCONNEXION(
                                 lane_amont=NT_LANE_SYMU(symu_troncons[id_amont], symu_troncons_lane_id[id_amont]),
@@ -761,6 +745,45 @@ class trafipolluImp_TOPO(object):
 
         if list_remove_nodes:
             print '# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes)
+
+    @staticmethod
+    def find_symu_lane(
+            dict_lanes,
+            sg3_edge_id,
+            sg3_lane_ordinality
+    ):
+        """
+
+
+        :param sg3_lane_ordinality:
+        :param dict_lanes:
+        :param sg3_edge_id:
+        :return:
+
+        """
+        python_lane_id = tpi_DUMP.get_python_id_from_lane_ordinality(
+            dict_lanes,
+            sg3_edge_id,
+            sg3_lane_ordinality
+        )
+
+        symu_lane = tpi_DUMP.get_lane_from_python_id(
+            dict_lanes,
+            sg3_edge_id,
+            python_lane_id
+        )
+
+        symu_lane_id = python_lane_id - symu_lane.start_id_lane
+
+        # #######################################################################
+        # Conversion SG3/Python -> SYMUVIA
+        # On doit prendre en compte l'orientation de la lane par rapport a l'edge
+        # #######################################################################
+        if symu_lane.lane_direction:
+            symu_lane_id = (symu_lane.nb_lanes - 1) - symu_lane_id
+        ########################################################################
+
+        return symu_lane, symu_lane_id
 
     @timerDecorator()
     def build_topo_extrimites(self):
@@ -799,3 +822,15 @@ class trafipolluImp_TOPO(object):
 
         """
         return prefix + symu_troncon.id
+
+    @staticmethod
+    def build_id_for_interconnexion(
+            symu_troncons,
+            symu_troncons_lane_id,
+            id_amont
+    ):
+        """
+
+        :return:
+        """
+        return symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])

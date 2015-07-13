@@ -1,7 +1,7 @@
 # ./parser_symuvia_xsd_2_04_pyxb.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-07-12 11:04:44.136721 by PyXB version 1.2.4 using Python 2.7.6.final.0
+# Generated 2015-07-13 11:23:32.218001 by PyXB version 1.2.4 using Python 2.7.6.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -16,7 +16,7 @@ import pyxb.utils.six as _six
 
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0948767c-2875-11e5-ae4c-d050992ef328')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d4104d46-2940-11e5-8ace-d050992ef328')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -919,12 +919,12 @@ class typeCoordonnees(pyxb.binding.basis.STD_list):
     _ItemType = pyxb.binding.datatypes.float
 
 
+typeCoordonnees._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
 typeCoordonnees._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(2))
 typeCoordonnees._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
-typeCoordonnees._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
-typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_minLength,
-                                    typeCoordonnees._CF_maxLength,
-                                    typeCoordonnees._CF_whiteSpace)
+typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_whiteSpace,
+                                    typeCoordonnees._CF_minLength,
+                                    typeCoordonnees._CF_maxLength)
 Namespace.addCategoryObject('typeBinding', 'typeCoordonnees', typeCoordonnees)
 
 # Atomic simple type: typeString256
@@ -1072,12 +1072,12 @@ class typeRGBAColor(pyxb.binding.basis.STD_list):
     _ItemType = typeFloat01
 
 
+typeRGBAColor._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
 typeRGBAColor._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
 typeRGBAColor._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
-typeRGBAColor._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
-typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_minLength,
-                                  typeRGBAColor._CF_maxLength,
-                                  typeRGBAColor._CF_whiteSpace)
+typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_whiteSpace,
+                                  typeRGBAColor._CF_minLength,
+                                  typeRGBAColor._CF_maxLength)
 Namespace.addCategoryObject('typeBinding', 'typeRGBAColor', typeRGBAColor)
 
 # Complex type typeAny with content type ELEMENT_ONLY
