@@ -284,7 +284,7 @@ class trafipolluImp_TOPO(object):
         1 Groupe de plusieurs voies (dans la meme direction) dans une serie de groupes (de voies) pour l'edge_sg3
         On recupere les coefficients 1D de projection de chaque point sur sa voie.
         On rassemble tout ces coefficients et re-echantillone les voies (nombres de points d'echantillon homogene entre
-         chaque voie). On moyenne tous les points de chaque voie pour former un axe edge mediant.
+         chaque voie). On moyenne tous les points de chaque voie pour former un axe (edge) mediant.
 
         :return:
 
@@ -367,7 +367,7 @@ class trafipolluImp_TOPO(object):
             # sg3_edge = self.dict_edges[sg3_edge_id]
             # print 'sg3_edge - amont, aval - ({}, {}): '.format(sg3_edge['np_amont'], sg3_edge['np_aval'])
 
-            id_amont, id_aval = 0, -1
+            id_vertice_for_amont, id_vertice_for_aval = 0, -1
 
             # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
             lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
@@ -378,8 +378,8 @@ class trafipolluImp_TOPO(object):
             # Comme la liste des coefficients 1D est triee,
             # on peut declarer le 1er et dernier point comme Amont/Aval
             return NT_RESULT_BUILD_PYXB(
-                lane_geometry[id_amont],
-                lane_geometry[id_aval],
+                lane_geometry[id_vertice_for_amont],
+                lane_geometry[id_vertice_for_aval],
                 lane_geometry
             )
 
@@ -527,14 +527,14 @@ class trafipolluImp_TOPO(object):
                 # self.dict_edges[sg3_edge_id]['np_aval'],
 
                 # MOG: probleme autour des sens edges, lanes
-                id_amont, id_aval = (
+                id_vertice_for_amont, id_vertice_for_aval = (
                     (-1, 0),  # lane_direction == false => same direction than edge
                     (0, -1)  # lane_direction == true
                 )[lane_direction]
 
                 return NT_RESULT_BUILD_PYXB(
-                    lane_geometry[id_amont],
-                    lane_geometry[id_aval],
+                    lane_geometry[id_vertice_for_amont],
+                    lane_geometry[id_vertice_for_aval],
                     lane_points_internes
                 )
             except Exception, e:
@@ -716,14 +716,6 @@ class trafipolluImp_TOPO(object):
                                 0.50,
                                 0.10
                             )
-                            # list_points_for_edge_and_interconnexion = [symu_troncons[id_amont].extremite_aval] + \
-                            # sg3_interconnexion_geometry.tolist() + \
-                            #                                           [symu_troncons[id_aval].extremite_amont]
-                            # # print 'list_points_for_edge_and_interconnexion: ', list_points_for_edge_and_interconnexion
-                            # ls = asarray(LineString(list_points_for_edge_and_interconnexion).simplify(0.60, False))
-                            # print 'ls: ', ls
-                            # if len(ls) <= 2:
-                            #     sg3_interconnexion_geometry = []
                         else:
                             sg3_interconnexion_geometry = interconnexion['np_interconnexion']
                         ##################################################
