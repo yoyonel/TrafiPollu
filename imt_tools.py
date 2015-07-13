@@ -716,3 +716,18 @@ def init_logger(logger_name):
     logger.info('\n\n################## NEW SESSION ##################\n\n')
 
     return logger
+
+
+# url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python
+class ReadOnlyDict(dict):
+    def __readonly__(self, *args, **kwargs):
+        raise RuntimeError("Cannot modify ReadOnlyDict")
+
+    __setitem__ = __readonly__
+    __delitem__ = __readonly__
+    pop = __readonly__
+    popitem = __readonly__
+    clear = __readonly__
+    update = __readonly__
+    setdefault = __readonly__
+    del __readonly__

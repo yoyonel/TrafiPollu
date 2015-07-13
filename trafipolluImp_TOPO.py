@@ -11,6 +11,7 @@ import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 from imt_tools import CreateNamedTupleOnGlobals
 from imt_tools import CreateNamedTuple
 from imt_tools import timerDecorator
+import trafipolluImp_DUMP as tpi_DUMP
 
 
 NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
@@ -188,7 +189,8 @@ class trafipolluImp_TOPO(object):
                 pyxb_symuTRONCON.POINTS_INTERNES = self.build_pyxb_POINTS_INTERNES(points_internes)
 
             # MOG : probleme autour des sens edge, lanes, symuvia
-            lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
+            # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
+            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id, python_lane_id)
 
             # LINK STREETGEN3 to SYMUVIA (TOPO)
             self.build_link_from_sg3_to_symuvia_for_lane(
@@ -266,7 +268,9 @@ class trafipolluImp_TOPO(object):
         :param nb_lanes:
         :return:
         """
-        symu_lanes = self.dict_lanes[sg3_edge_id]['sg3_to_symuvia']  # LINK STREETGEN3 to SYMUVIA (TOPO)
+        # symu_lanes = self.dict_lanes[sg3_edge_id]['sg3_to_symuvia']  # LINK STREETGEN3 to SYMUVIA (TOPO)
+        symu_lanes = tpi_DUMP.get_list_lanes_from_edge_id(self.dict_lanes, sg3_edge_id)
+
         for python_id in range(python_lane_id, python_lane_id + nb_lanes):
             symu_lanes[python_id] = NT_LANE_SG3_SYMU(
                 pyxb_symuTRONCON,
@@ -298,7 +302,9 @@ class trafipolluImp_TOPO(object):
         try:
             for id_lane in range(python_lane_id, python_lane_id + nb_lanes):
                 # get the linestring of the current lane
-                sg3_lane_geometry = self.dict_lanes[sg3_edge_id]['informations'][id_lane].lane_center_axis
+                # sg3_lane_geometry = self.dict_lanes[sg3_edge_id]['informations'][id_lane].lane_center_axis
+                sg3_lane_geometry = tpi_DUMP.get_lane_geometry_from_python_lane_id(self.dict_lanes, sg3_edge_id,
+                                                                                   id_lane)
                 shp_lane = LineString(sg3_lane_geometry)
                 # project this linestring into 1D coefficients
                 linestring_proj_1D_coefficients = [
@@ -363,7 +369,9 @@ class trafipolluImp_TOPO(object):
 
             id_amont, id_aval = 0, -1
 
-            lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
+            # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
+            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
+                                                                             python_lane_id)
             if not lane_direction:
                 lane_geometry.reverse()
 
@@ -498,7 +506,8 @@ class trafipolluImp_TOPO(object):
         python_lane_id = kwargs['python_lane_id']
         #
         try:
-            sg3_lane = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id]
+            # sg3_lane = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id]
+            sg3_lane = tpi_DUMP.get_lane_from_python_lane_id(self.dict_lanes, sg3_edge_id, python_lane_id)
 
             try:
                 lane_direction = sg3_lane.lane_direction
@@ -654,10 +663,22 @@ class trafipolluImp_TOPO(object):
                         sg3_edge_id = interconnexion['edge_id' + str_sg3_id]
                         sg3_lane_ordinality = interconnexion['lane_ordinality' + str_sg3_id]
                         try:
-                            sg3_lanes = self.dict_lanes[sg3_edge_id]
+                            # sg3_lanes = self.dict_lanes[sg3_edge_id]
 
-                            python_lane_id = sg3_lanes['sg3_to_python'][sg3_lane_ordinality]
-                            symu_lane = sg3_lanes['sg3_to_symuvia'][python_lane_id]
+                            # python_lane_id = sg3_lanes['sg3_to_python'][sg3_lane_ordinality]
+                            python_lane_id = tpi_DUMP.get_python_id_from_lane_ordinality(
+                                self.dict_lanes,
+                                sg3_edge_id,
+                                sg3_lane_ordinality
+                            )
+
+                            # symu_lane = sg3_lanes['sg3_to_symuvia'][python_lane_id]
+                            symu_lane = tpi_DUMP.get_lane_from_python_id(
+                                self.dict_lanes,
+                                sg3_edge_id,
+                                python_lane_id
+                            )
+
                             symu_lane_id = python_lane_id - symu_lane.start_id_lane
 
                             # #######################################################################

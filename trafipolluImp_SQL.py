@@ -8,6 +8,7 @@ import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
+
 class trafipolluImp_SQL(object):
     """
 
@@ -174,8 +175,8 @@ class trafipolluImp_SQL(object):
         gPolygonWkt = ''
 
         if b_update_def_zone_test_with_convex_hull_on_symuvia_network:
-            convex_hull, list_extremites = tpi_TS.extract_convexhull_from_symuvia_network(**kwargs)
-            gPolygonWkt = convex_hull.wkt
+            shp_convex_hull, shp_list_extremites = tpi_TS.extract_convexhull_from_symuvia_network(**kwargs)
+            gPolygonWkt = shp_convex_hull.wkt
 
         if gPolygonWkt == '':
             # Convex hull du reseau symuvia '/home/latty/__DEV__/__Ifsttar__/Envoi_IGN_2015_07/reseau_paris6_v31.xml'
@@ -251,7 +252,16 @@ class trafipolluImp_SQL(object):
             except:
                 pass
             else:
-                self.dict_edges.update(tpi_DUMP.dump_for_edges(objects_from_sql_request))
+                self._post_request_for_edges(tpi_DUMP.dump_for_edges(objects_from_sql_request))
+
+    def _post_request_for_edges(self, results_dump):
+        """
+
+        :param results_dump:
+        :return:
+        """
+        dict_edges = results_dump
+        self.dict_edges.update(dict_edges)
 
     def _request_for_nodes(self, **kwargs):
         """
@@ -270,7 +280,16 @@ class trafipolluImp_SQL(object):
             except:
                 pass
             else:
-                self.dict_nodes.update(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
+                self._post_request_for_nodes(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
+
+    def _post_request_for_nodes(self, results_dump):
+        """
+
+        :param results_dump:
+        :return:
+        """
+        dict_nodes = results_dump
+        self.dict_nodes.update(dict_nodes)
 
     def _request_for_interconnexions(self, **kwargs):
         """
@@ -289,15 +308,24 @@ class trafipolluImp_SQL(object):
             except:
                 pass
             else:
-                # ajouter les informations d'interconnexions au noeud
-                (dict_interconnexions, dict_set_id_edges) = tpi_DUMP.dump_for_interconnexions(objects_from_sql_request)
-                for node_id, interconnexions in dict_interconnexions.iteritems():
-                    self.dict_nodes[node_id].update(
-                        {
-                            'interconnexions': interconnexions,
-                            'set_id_edges': dict_set_id_edges[node_id]
-                        }
-                    )
+                self._post_request_for_interconnexions(tpi_DUMP.dump_for_interconnexions(objects_from_sql_request))
+
+    def _post_request_for_interconnexions(self, results_dump):
+        """
+
+        :param results_dump:
+        :return:
+        """
+        dict_interconnexions, dict_set_id_edges = results_dump
+
+        # ajouter les informations d'interconnexions au noeud
+        for node_id, interconnexions in dict_interconnexions.iteritems():
+            self.dict_nodes[node_id].update(
+                {
+                    'interconnexions': interconnexions,
+                    'set_id_edges': dict_set_id_edges[node_id]
+                }
+            )
 
     def _request_for_lanes(self, **kwargs):
         """
@@ -317,4 +345,17 @@ class trafipolluImp_SQL(object):
             except:
                 pass
             else:
-                tpi_DUMP.dump_lanes(objects_from_sql_request, self.dict_edges, self.dict_lanes)
+                self._post_request_for_lanes(tpi_DUMP.dump_lanes(objects_from_sql_request, self.dict_edges))
+
+    def _post_request_for_lanes(self, results_dump):
+        """
+
+        :param results_dump:
+        :return:
+        """
+        dict_lanes, dict_grouped_lanes = results_dump
+
+        self.dict_lanes.update(dict_lanes)
+        # update dict_edges with lanes grouped informations
+        for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
+            self.dict_edges[sg3_edge_id].update(grouped_lanes)

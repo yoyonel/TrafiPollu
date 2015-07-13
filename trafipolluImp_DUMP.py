@@ -9,11 +9,6 @@ import imt_tools
 from imt_tools import timerDecorator
 
 
-
-
-
-
-
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -24,6 +19,12 @@ NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
         'nb_lanes'
     ]
 )
+
+str_ids_for_lanes = {
+    'SG3 Informations': "LANES - SG3 Informations",
+    'SG3 to SYMUVIA': "LANES - SG3 to SYMUVIA",
+    'SG3 to PYTHON': "LANES - SG3 to PYTHON"
+}
 
 
 @timerDecorator()
@@ -189,15 +190,15 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
 
 @timerDecorator()
-def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
+def dump_lanes(objects_from_sql_request, dict_edges):
     """
 
     :param objects_from_sql_request:
     :param dict_edges:
-    :param dict_lanes:
     :return:
 
     """
+    dict_lanes = {}
     # get sides informations for each 'edge'/'troncon'
     for object_from_sql_request in objects_from_sql_request:
         # retieve informations/values from the SQL request
@@ -211,9 +212,11 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         #
         dict_lanes.setdefault(sg3_edge_id,
                               {
-                                  'informations': [None] * nb_lanes,  # pre-allocate size for list,
-                                  'sg3_to_symuvia': [None] * nb_lanes,  # pre-allocate size for list,
-                                  'sg3_to_python': [None] * (nb_lanes + 1),  # pre-allocate size for list,
+                                  str_ids_for_lanes['SG3 Informations']: [None] * nb_lanes,
+                                  # pre-allocate size for list,
+                                  str_ids_for_lanes['SG3 to SYMUVIA']: [None] * nb_lanes,  # pre-allocate size for list,
+                                  str_ids_for_lanes['SG3 to PYTHON']: [None] * (nb_lanes + 1),
+                                  # pre-allocate size for list,
                               })
 
         # decompression des donnees a la main
@@ -224,18 +227,23 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
         # print 'sg3_lane_id: %s\tpython_lane_id: %s' % (sg3_lane_id, python_lane_id)
         # print 'edge_id: %s id_in_list: %s' % (edge_id, id_in_list)
 
-        sg3_lane = dict_lanes[sg3_edge_id]
+        # sg3_lane = dict_lanes[sg3_edge_id]
 
-        sg3_lane['sg3_to_python'][lane_ordinality] = python_lane_id
+        # sg3_lane['sg3_to_python'][lane_ordinality] = python_lane_id
+        set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id)
 
         # Attention ici !
         # on places les lanes dans des listes pythons (avec ordre python) et non dans l'ordre fournit par la requete
         # SQL (ce qui etait avant) et/ou l'ordre fournit par SG3 (ordonality id)
-        sg3_lane['informations'][python_lane_id] = NT_LANE_INFORMATIONS(
-            lane_side,
-            lane_direction,
-            lane_center_axis,
-            nb_lanes,
+        # get_SG3_list_lanes_informations(sg3_lane)[python_lane_id] = NT_LANE_INFORMATIONS(
+        set_lane_informations(
+            dict_lanes, sg3_edge_id, python_lane_id,
+            NT_LANE_INFORMATIONS(
+                lane_side,
+                lane_direction,
+                lane_center_axis,
+                nb_lanes
+            )
         )
 
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
@@ -246,19 +254,148 @@ def dump_lanes(objects_from_sql_request, dict_edges, dict_lanes):
 
     # create the dict: dict_grouped_lanes
     # contain : for each edge_id list of lanes in same direction
+    dict_grouped_lanes = build_dict_grouped_lanes(dict_lanes)
+
+    # # update dict_edges with lanes grouped informations
+    # for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
+    # dict_edges[sg3_edge_id].update(grouped_lanes)
+    #     # print "** self._dict_edges: ", dict_edges
+    return dict_lanes, dict_grouped_lanes
+
+
+def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
+    """
+
+    :param dict_lanes:
+    :return:
+    Retourne un dictionnaire dont les
+    - key: indice d'une edge SG3
+    - value: liste de groupes de lanes dans le meme sens.
+        Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
+    """
     dict_grouped_lanes = {}
-    map(lambda x, y: dict_grouped_lanes.__setitem__(x, {'grouped_lanes': y}),
+    map(lambda x, y: dict_grouped_lanes.__setitem__(x, {str_id_for_grouped_lanes: y}),
         dict_lanes,
         [
             [
-                sum(1 for i in g) for sg3_edge_id, g in
-                groupby(dict_lanes[sg3_edge_id]['informations'], lambda x: x.lane_direction)
+                sum(1 for i in value_groupby)
+                for key_groupby, value_groupby in
+                groupby(get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id), lambda x: x.lane_direction)
             ]
             for sg3_edge_id in dict_lanes
         ])
-    print "** self._dict_grouped_lanes:", dict_grouped_lanes
+    return dict_grouped_lanes
 
-    # update dict_edges with lanes grouped informations
-    for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
-        dict_edges[sg3_edge_id].update(grouped_lanes)
-        # print "** self._dict_edges: ", dict_edges
+
+def set_lane_informations(dict_lanes, sg3_edge_id, python_lane_id, informations):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :param python_lane_id:
+    :return:
+    """
+    get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id)[python_lane_id] = informations
+
+def get_list_lanes_informations_from_lane(lane):
+    """
+
+    :param lane:
+    :return:
+
+    """
+    return lane[str_ids_for_lanes['SG3 Informations']]
+
+
+def get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+    """
+    return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 Informations']]
+
+
+def get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :param python_lane_id:
+    :return:
+    """
+    return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 Informations']][python_lane_id]
+
+
+def get_lane_direction_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :param python_lane_id:
+    :return:
+
+    """
+    return get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id).lane_direction
+
+
+def get_lane_geometry_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :param python_lane_id:
+    :return:
+
+    """
+    return get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id).lane_center_axis
+
+
+def get_list_lanes_from_edge_id(dict_lanes, sg3_edge_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+
+    """
+    return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']]
+
+def get_lane_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+
+    """
+    return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']][python_lane_id]
+
+def get_lane_from_edge_id(dict_lanes, sg3_edge_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+    """
+    return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to PYTHON']]
+
+def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+    """
+    return get_lane_from_edge_id(dict_lanes, sg3_edge_id)[lane_ordinality]
+
+
+def set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id):
+    """
+
+    :param dict_lanes:
+    :param sg3_edge_id:
+    :return:
+    """
+    get_lane_from_edge_id(dict_lanes, sg3_edge_id)[lane_ordinality] = python_lane_id
