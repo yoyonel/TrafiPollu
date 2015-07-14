@@ -9,6 +9,12 @@ import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
+
 class trafipolluImp_SQL(object):
     """
 
@@ -60,9 +66,6 @@ class trafipolluImp_SQL(object):
 
         self.connect_sql_server()
 
-        # creation de l'objet logger qui va nous servir a ecrire dans les logs
-        self.logger = imt_tools.init_logger(__name__)
-
     def __del__(self):
         """
 
@@ -93,14 +96,14 @@ class trafipolluImp_SQL(object):
                     **self._dict_params_server[name_server]
                 )
             except Exception, e:
-                print 'PostGres : problem de connexion -> ', e
+                logger.fatal('PostGres : problem de connexion -> %s' % e)
             else:
                 try:
                     self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
                 except Exception, e:
-                    print 'PostGres : problem pour recuperer un cursor -> ', e
+                    logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
-                    print 'PostGres: connected with %s server' % name_server
+                    logger.info('PostGres: connected with %s server' % name_server)
                     self.b_connection_to_postgres_server = True
                     break
         return self.b_connection_to_postgres_server
@@ -118,7 +121,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                self.logger.info("[SQL] - try to commit ...")
+                logger.info("[SQL] - try to commit ...")
                 connection.commit()
             except:
                 pass
@@ -154,10 +157,10 @@ class trafipolluImp_SQL(object):
             'extent_postgisSrid': extent_postgisSrid
         }
 
-        self.logger.info("* list_points_from_mapcanvas: %s", list_points_from_mapcanvas)
-        self.logger.info("* gPolygonWkt: %s", gPolylineWkt)
-        self.logger.info("* extent_postgisSrid: %s", extent_postgisSrid)
-        self.logger.info("extent_src_crs.postgisSrid: %s", extent_src_crs.postgisSrid())
+        logger.info("* list_points_from_mapcanvas: %s", list_points_from_mapcanvas)
+        logger.info("* gPolygonWkt: %s", gPolylineWkt)
+        logger.info("* extent_postgisSrid: %s", extent_postgisSrid)
+        logger.info("extent_src_crs.postgisSrid: %s", extent_src_crs.postgisSrid())
 
         return dict_parameters
 
@@ -184,7 +187,7 @@ class trafipolluImp_SQL(object):
 
         gPolygonSRID = 2154  # SRID du Lambert93
 
-        print '################ gPolygonWkt: ', gPolygonWkt
+        logger.info('################ gPolygonWkt: ', gPolygonWkt)
 
         dict_parameters = {
             'gPolygonWkt': gPolygonWkt,
@@ -231,7 +234,7 @@ class trafipolluImp_SQL(object):
                         self.cursor.execute(command, dict_parameters)
                         sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
-                    self.logger.warning("Command skipped: %s", msg)
+                    logger.warning("Command skipped: %s", msg)
                     # #
 
     def _request_for_edges(self, **kwargs):
@@ -247,7 +250,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                self.logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except:
                 pass
@@ -275,7 +278,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                self.logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except:
                 pass
@@ -303,7 +306,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                self.logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except:
                 pass
@@ -340,7 +343,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                self.logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except:
                 pass

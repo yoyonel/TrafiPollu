@@ -6,6 +6,12 @@ from trafipolluImp_MixInF import MixInF
 
 b_add_points_internes_for_interconnexions = True
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
+
 # voir dans 'trafipolluImp_MixInF' pour des explications/liens
 class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
     """
@@ -54,7 +60,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             try:
                 type_connexion = self.dict_nodes[node_id]['sg3_to_symuvia']['type_connexion']
             except Exception, e:
-                print 'export_CONNEXIONS - Exception: ', e
+                logger.fatal('Exception: %s' % e)
             else:
                 list_id_nodes_for_CONNEXIONS[type_connexion].append(node_id)
 
@@ -122,11 +128,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             #
             sym_CARREFOURAFEUX.MOUVEMENTS_AUTORISES = self.export_MOUVEMENTS_AUTORISES(str_path_to_child)
             sym_CARREFOURAFEUX.ENTREES_CAF = self.export_ENTREES_CAF(str_path_to_child)
-            #
-            # print 'node_id: ', self.current['node_id']
-            # print 'sg3_node: ', self.current['sg3_node']
-            # print "sg3_node['edge_ids']:", self.current['sg3_node']['edge_ids']
-            # print 'nb_edges_connected: ', nb_edges_connected
 
         return sym_CARREFOURAFEUX
 
@@ -224,7 +225,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             sym_MOUVEMENTS.append(mouvement)
         return sym_MOUVEMENTS
 
-    #########################################################################################################
+    # ########################################################################################################
     ## Version avec les interconnexions SG3
     #########################################################################################################
     @pyxbDecorator(pyxb_parser)
@@ -244,12 +245,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             str_path_to_child = pyxbDecorator.get_path(*args)
             for key_for_troncon_lane_1, list_interconnexions in sg3_node_interconnexions.iteritems():
                 #
-                # print '+-++-> key_for_troncon_lane_1: ', key_for_troncon_lane_1
-                # for interconnexion in list_interconnexions:
-                # print '\ amont + id_lane: ', interconnexion[0]
-                # print '\ aval  + id_lane: ', interconnexion[1]
-                # print 'list_interconnexions: ', list_interconnexions
-
                 # dans la liste (courante) d'interconnexions l'amont est constant
                 # car le dictionnaire self.cursor_symuvia['sg3_node']['sg3_to_symuvia'] a sa clee sur l'amont
                 #
@@ -258,7 +253,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
                 # on recupere les informations sur l'amont
                 lane_amont = interconnexion.lane_amont
-                # lane_amont = interconnexion.lane_aval
                 #
                 lane_amont_symu_troncon = lane_amont.symu_troncon
                 lane_amont_id_lane = lane_amont.id_lane
@@ -368,6 +362,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                 list_ENTREE_CAF.append(sym_ENTREE_CAF)
 
         return list_ENTREE_CAF
+
     @pyxbDecorator(pyxb_parser)
     def export_MOUVEMENT(self, *args):
         """
@@ -403,7 +398,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                 )
 
                 if b_add_points_internes_for_interconnexions:
-                    # print 'interconnexion.geometry: ', interconnexion.geometry
                     sym_MOUVEMENT.POINTS_INTERNES = self.module_topo.build_pyxb_POINTS_INTERNES(interconnexion.geometry)
 
                 #

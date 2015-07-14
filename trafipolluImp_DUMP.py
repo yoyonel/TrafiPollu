@@ -10,6 +10,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -26,6 +27,9 @@ str_ids_for_lanes = {
     'SG3 to SYMUVIA': "LANES - SG3 to SYMUVIA",
     'SG3 to PYTHON': "LANES - SG3 to PYTHON"
 }
+
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+logger = imt_tools.init_logger(__name__)
 
 
 @timerDecorator()
@@ -56,7 +60,7 @@ def dump_for_edges(objects_from_sql_request):
         edge_id = object_from_sql_request['str_edge_id']
         dict_edges.update({edge_id: dict_sql_request})
     #
-    print '# dump_for_edge - nb edges added: ', len(dict_edges.keys())
+    logger.info("nb edges added: %d" % len(dict_edges.keys()))
     #
     return dict_edges
 
@@ -76,7 +80,7 @@ def dump_for_nodes(objects_from_sql_request):
         #
         dict_nodes[str_node_id] = {'array_str_edge_ids': array_str_edge_ids}
     #
-    print '# dump_for_nodes - nb nodes added: ', len(dict_nodes.keys())
+    logger.info("nb nodes added: %d" % len(dict_nodes.keys()))
     #
     return dict_nodes
 
@@ -92,8 +96,6 @@ def dump_for_interconnexions(objects_from_sql_request):
     dict_interconnexions = {}
     dict_set_id_edges = {}
     nb_total_interconnexion = 0
-
-    # print 'objects_from_sql_request: ', objects_from_sql_request
 
     for object_from_sql_request in objects_from_sql_request:
         #
@@ -126,10 +128,8 @@ def dump_for_interconnexions(objects_from_sql_request):
         nb_total_interconnexion += 1
 
     #
-    print '# dump_for_interconnexions - nb interconnexions added: ', len(dict_interconnexions.keys())
-    print '# dump_for_interconnexions - total interconnexions added: ', nb_total_interconnexion
-    print ''
-    # print '# dump_for_interconnexions - dict_set_id_edges: ', dict_set_id_edges
+    logger.info("nb interconnexions added: %d" % len(dict_interconnexions.keys()))
+    logger.info("total interconnexions added: %d" % nb_total_interconnexion)
     #
     return dict_interconnexions, dict_set_id_edges
 
@@ -218,24 +218,15 @@ def dump_lanes(objects_from_sql_request, dict_edges):
                               })
 
         # decompression des donnees a la main
-        # print 'sp_wkb_loads(bytes(lane_center_axis)): ', sp_wkb_loads(bytes(lane_center_axis))
         lane_center_axis = np.asarray(sp_wkb_loads(bytes(lane_center_axis)))
-        # if not lane_direction:
-        # lane_center_axis = lane_center_axis[::-1]
 
         python_lane_id = generate_id_for_lane(object_from_sql_request, nb_lanes)
-        # print 'sg3_lane_id: %s\tpython_lane_id: %s' % (sg3_lane_id, python_lane_id)
-        # print 'edge_id: %s id_in_list: %s' % (edge_id, id_in_list)
 
-        # sg3_lane = dict_lanes[sg3_edge_id]
-
-        # sg3_lane['sg3_to_python'][lane_ordinality] = python_lane_id
         set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id)
 
         # Attention ici !
         # on places les lanes dans des listes pythons (avec ordre python) et non dans l'ordre fournit par la requete
         # SQL (ce qui etait avant) et/ou l'ordre fournit par SG3 (ordonality id)
-        # get_SG3_list_lanes_informations(sg3_lane)[python_lane_id] = NT_LANE_INFORMATIONS(
         set_lane_informations(
             dict_lanes, sg3_edge_id, python_lane_id,
             NT_LANE_INFORMATIONS(
@@ -249,17 +240,10 @@ def dump_lanes(objects_from_sql_request, dict_edges):
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
         # find a key with value
 
-    # print "** dict_lanes: ", dict_lanes
-    # print "** _dict_sides:", self.__dict_sides
-
     # create the dict: dict_grouped_lanes
     # contain : for each edge_id list of lanes in same direction
     dict_grouped_lanes = build_dict_grouped_lanes(dict_lanes)
 
-    # # update dict_edges with lanes grouped informations
-    # for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
-    # dict_edges[sg3_edge_id].update(grouped_lanes)
-    #     # print "** self._dict_edges: ", dict_edges
     return dict_lanes, dict_grouped_lanes
 
 
@@ -296,6 +280,7 @@ def set_lane_informations(dict_lanes, sg3_edge_id, python_lane_id, informations)
     :return:
     """
     get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id)[python_lane_id] = informations
+
 
 def get_list_lanes_informations_from_lane(lane):
     """
@@ -362,7 +347,8 @@ def get_Symuvia_list_lanes_from_edge_id(dict_lanes, sg3_edge_id):
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']]
 
-def get_lane_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
+
+def get_symu_troncon_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
     """
 
     :param dict_lanes:
@@ -372,6 +358,7 @@ def get_lane_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']][python_lane_id]
 
+
 def get_PYTHON_list_lanes(dict_lanes, sg3_edge_id):
     """
 
@@ -380,6 +367,7 @@ def get_PYTHON_list_lanes(dict_lanes, sg3_edge_id):
     :return:
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to PYTHON']]
+
 
 def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality):
     """

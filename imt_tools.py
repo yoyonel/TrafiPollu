@@ -148,7 +148,7 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
 # def get_timestamp_from_qt_string_format(QtDateFormat):
 # """ Retrieve timestamp from the system and convert into a ISO QString/QDateTime format.
 #
-#     urls:
+# urls:
 #     - https://docs.python.org/2/library/datetime.html
 #     - http://stackoverflow.com/questions/2935041/how-to-convert-from-timestamp-to-date-in-qt
 #     - http://stackoverflow.com/questions/3387655/safest-way-to-convert-float-to-integer-in-python
@@ -705,11 +705,11 @@ def init_logger(logger_name):
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    # creation d'un second handler qui va rediriger chaque ecriture de log
-    # sur la console
-    steam_handler = logging.StreamHandler()
-    steam_handler.setLevel(logging.DEBUG)
-    logger.addHandler(steam_handler)
+    # # creation d'un second handler qui va rediriger chaque ecriture de log
+    # # sur la console
+    # steam_handler = logging.StreamHandler()
+    # steam_handler.setLevel(logging.DEBUG)
+    # logger.addHandler(steam_handler)
 
     print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
 

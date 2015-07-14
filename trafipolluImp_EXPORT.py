@@ -24,6 +24,12 @@ outfilename_for_symuvia = qgis_plugins_directory + '/' + "export_from_sg3_to_sym
 
 b_export_connexion = True
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
+
 class trafipolluImp_EXPORT(
     trafipolluImp_EXPORT_CONNEXIONS,
     trafipolluImp_EXPORT_TRAFICS
@@ -31,6 +37,7 @@ class trafipolluImp_EXPORT(
     """
 
     """
+
     def __init__(self, **kwargs):
         """
 
@@ -43,10 +50,10 @@ class trafipolluImp_EXPORT(
         self.list_symu_connexions = []
         #
         infilename = kwargs.setdefault('infilename_for_symuvia', infilename_for_symuvia)
-        print "trafipolluImp_EXPORT - Open file: ", infilename, "..."
+        logger.info("trafipolluImp_EXPORT - Open file: %s ..." % infilename)
         xml = open(infilename).read()
         self.symu_ROOT = symuvia_parser.CreateFromDocument(xml)
-        print "trafipolluImp_EXPORT - Open file: ", infilename, "[DONE]"
+        logger.info("trafipolluImp_EXPORT - Open file: %s [DONE]" % infilename)
         #
         self.symu_ROOT_RESEAU_TRONCONS = None
         self.symu_ROOT_RESEAU_CONNEXIONS = None
@@ -147,18 +154,18 @@ class trafipolluImp_EXPORT(
         :param outfilename:
         :return:
         """
-        print "Write in file: ", outfilename, "..."
+        logger.info("Write in file: %s ..." % outfilename)
         f = open(outfilename, "w")
         str_xml = ""
         if prettyxml:
             try:
                 dom = sym_node.toDOM(None, element_name=element_name)
             except pyxb.IncompleteElementContentError as e:
-                print '*** ERROR : IncompleteElementContentError'
-                print '- Details error: ', e.details()
+                logger.fatal('*** ERROR : IncompleteElementContentError')
+                logger.fatal('- Details error: ', e.details())
             except pyxb.MissingAttributeError as e:
-                print '*** ERROR : MissingAttributeError'
-                print '- Details error: ', e.details()
+                logger.fatal('*** ERROR : MissingAttributeError')
+                logger.fatal('- Details error: ', e.details())
             else:
                 str_xml = dom.toprettyxml(indent="\t", newl="\n", encoding='utf-8')
         else:
@@ -166,7 +173,7 @@ class trafipolluImp_EXPORT(
         #
         f.write(str_xml)
         f.close()
-        print "Write in file: ", outfilename, "[DONE]"
+        logger.info("Write in file: %s [DONE]" % outfilename)
 
     @pyxbDecorator(pyxb_parser)
     def export_TRONCONS(self, *args):
@@ -180,6 +187,6 @@ class trafipolluImp_EXPORT(
             for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
                 sym_TRONCONS.append(pyxb_symuTRONCON)
         except pyxb.ValidationError as e:
-            print("Exception in 'export_TRONCONS' - details: ", e.details())
+            logger.fatal("Exception in 'export_TRONCONS' - details: ", e.details())
         #
         return sym_TRONCONS

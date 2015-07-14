@@ -10,6 +10,13 @@ import trafipolluImp_EXPORT as tpi_EXPORT
 import trafipolluImp_TOPO as tpi_TOPO
 
 
+
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
+
 class TrafiPolluImp(object):
     """
 
@@ -59,7 +66,7 @@ class TrafiPolluImp(object):
 
         :return:
         """
-        print 'clean ressources ...'
+        logger.info('clean ressources ...')
         #
         self.__dict_edges.clear()
         self.__dict_lanes.clear()
@@ -185,8 +192,8 @@ class TrafiPolluImp(object):
         for sql_command in list_sql_commands:
             sql_filename = self.get_sql_filename(sql_command)
             sql_file = self.get_sql_file(sql_filename)
-            print 'sql_filename: ', sql_filename
-            print 'sql_file: ', sql_file
+            logger.info('sql_filename: %s' % sql_filename)
+            logger.info('sql_file: %s' % sql_file)
             self._execute_SQL_commands(
                 sql_file,
                 sql_command
@@ -208,9 +215,9 @@ class TrafiPolluImp(object):
         # test Pickle
         qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
         infilename_for_pickle = qgis_plugins_directory + '/' + "dump_pickle.p"
-        print "Pickle TrafiPollu in: ", infilename_for_pickle, "..."
+        logger.info("Pickle TrafiPollu in: %s ..." % infilename_for_pickle)
         pickle.dump(self, open(infilename_for_pickle, "wb"))
-        print "Pickle TrafiPollu in: ", infilename_for_pickle, "[DONE]"
+        logger.info("Pickle TrafiPollu in: %s [DONE]" % infilename_for_pickle)
 
     def __getstate__(self):
         """

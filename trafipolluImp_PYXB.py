@@ -2,6 +2,11 @@ __author__ = 'atty'
 
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
 
 class trafipolluImp_PYXB(object):
     """
@@ -18,8 +23,6 @@ class trafipolluImp_PYXB(object):
         #
         ctd_root_node = parser.ROOT_SYMUBRUIT
         self.dump_pyxb_tree(('ROOT_SYMUBRUIT', ctd_root_node))
-        # for k, v in self.pyxb_tree_ctd.iteritems():
-        # print "path: %s -> CTD: %s" % (k, v)
 
     def dump_pyxb_tree(self, tuple_Name_CTD, prefix=""):
         """
@@ -37,7 +40,6 @@ class trafipolluImp_PYXB(object):
         #
         for child_pyxb in tp_node_parent._ElementMap:
             uri_child = child_pyxb.uriTuple()[1]
-            # node_child = tuple_Name_CTD[1]._ElementBindingDeclForName(uri_child)[0]()
             node_child = node_parent.memberElement(uri_child)
             self.dump_pyxb_tree((uri_child, node_child), prefix_node + '/')
 
@@ -50,8 +52,6 @@ class trafipolluImp_PYXB(object):
         try:
             return self.pyxb_tree_ctd[path_to_CTD]
         except KeyError:
-            # print "Not found the element with this path: ", path_to_CTD
-            # print "Searching CTD in dict ..."
             # cherche les clees avec le suffixe path_to_CTD
             # potentiellement il peut avoir plusieurs cles repondant au critere de suffixe
             l_key = filter(
@@ -81,8 +81,6 @@ class trafipolluImp_PYXB(object):
         """
         try:
             CTD = self.get_CTD(path_to_CTD, update_dict)
-            # print 'kwargs: ', kwargs
-            # print 'CTD: ', CTD
             return CTD(**kwargs)
         except:
             return None
@@ -109,22 +107,16 @@ class pyxbDecorator(object):
             """
             if self.pyxb_result == ():
                 str_child_name = f.__name__[7:]  # 7 = len('export_')
-                # print 'pyxbDecorator - str_child_name: ', str_child_name
                 str_parent = args[-1]
                 if type(str_parent) is tuple:
                     str_parent = str_parent[0]
                 str_path_to_child = str_parent + '/' + str_child_name
                 sym_NODE = self.parser_pyxb.get_instance(str_path_to_child)
-                # print 'pyxbDecorator - str_parent: ', str_parent
-                # print 'pyxbDecorator - str_path_to_child: ', str_path_to_child
-                # print 'sym_NODE: ', sym_NODE
                 self.pyxb_result = (str_child_name, sym_NODE)
-            # print 'pyxbDecorator - before update, args: ', args
             # update de la liste des arguments
             # on rajoute en fin de liste le tuple : (nom du child, instance de l'element)
             args = list(args)
             args.append(self.pyxb_result)
-            # print 'pyxbDecorator - after update, args: ', args
             args = iter(args)
             return f(*args)
 
@@ -145,16 +137,14 @@ class pyxbDecorator(object):
     @staticmethod
     def get_path_instance(*args, **kwargs):
         """
+
+        :param args:
+        :param kwargs:
         """
-        # print 'get_path_instance - args: ', args
         str_parent = args[-2]
         str_child = args[-1][0]
         str_path_to_child = str_parent + '/' + str_child
         sym_NODE = pyxb_parser.get_instance(str_path_to_child, **kwargs)
-
-        # print 'str_parent :', str_parent
-        # print 'str_child :', str_child
-
         return str_path_to_child, sym_NODE
 
     @staticmethod

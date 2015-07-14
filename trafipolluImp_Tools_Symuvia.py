@@ -11,8 +11,13 @@ import matplotlib.pyplot as plt
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
 
-# xml_filename="/home/atty/Prog/reseau_symuvia/reseau_paris6_v11_new.xml"
+logger = init_logger(__name__)
+
+
+# xml_filen ame="/home/atty/Prog/reseau_symuvia/reseau_paris6_v11_new.xml"
 # >>> t1 = time.time();
 # >>> result = extract_convexhull_from_symuvia_network(symuvia_xml_filename='/home/atty/Prog/reseau_symuvia/reseau_paris6_v11_new.xml');
 # >>> print 'time: ', time.time() - t1
@@ -37,7 +42,7 @@ def extract_convexhull_from_symuvia_network(
             xml = open(xml_filename).read()
             symu_ROOT = symuvia_parser.CreateFromDocument(xml)
         except Exception, e:
-            print 'extract_convexhull_from_symuvia_network - Exception: ', e
+            logger.fatal('extract_convexhull_from_symuvia_network - Exception: ', e)
     elif 'symuvia_root_node' in kwargs:
         symu_ROOT = kwargs['symuvia_root_node']
 
@@ -53,7 +58,7 @@ def extract_convexhull_from_symuvia_network(
             operator.add,
             [(TRONCON.extremite_amont, TRONCON.extremite_aval) for TRONCON in list_TRONCONS]
         )
-        print '# list_extremites: ', len(list_extremites)
+        logger.info('# list_extremites: ', len(list_extremites))
         # url: http://toblerity.org/shapely/manual.html
         convex_hull = MultiPoint(list_extremites).convex_hull
         list_convex_hull = list(convex_hull.exterior.coords)
@@ -94,7 +99,6 @@ def extract_convexhull_from_symuvia_network_2(
                     # url: http://stackoverflow.com/questions/5352546/best-way-to-extract-subset-of-key-value-pairs-from-python-dictionary-object
                     list_of_keys = ('extremite_amont', 'extremite_aval', 'id_eltamont')
                     self.TRONCONS[id_TRONCON] = {k: v for k, v in attrib.iteritems() if k in list_of_keys}
-                    # self.TRONCONS[id_TRONCON] = dict(map(lambda key: (key, attrib.get(key, None)), list_of_keys))
                     #
                     self.dict_amonts_avals[attrib['id_eltaval']] = id_TRONCON
                     self.dict_amonts_avals[attrib['id_eltamont']] = id_TRONCON
@@ -113,31 +117,59 @@ def extract_convexhull_from_symuvia_network_2(
             return self.TRONCONS, self.EXTREMITES, self.dict_amonts_avals
 
     parser = etree.XMLParser(target=TronconsExtremitesTarget())
-    dict_TRONCONS, list_EXTREMITES, dict_amonts_avals = etree.parse(xml_filename, parser)
+    # list_extremites = find_extremites_without_tests(etree.parse(xml_filename, parser))
+    list_extremites = find_extremites_with_tests(etree.parse(xml_filename, parser))
 
+    # # url: http://toblerity.org/shapely/manual.html
+    convex_hull = MultiPoint(list_extremites).convex_hull
+    list_convex_hull = list(convex_hull.exterior.coords)
+
+    return list_convex_hull, list_extremites
+
+
+def find_extremites_without_tests(*results_parse):
+    """
+
+    :param results_parse:
+    :return:
+    on genere la liste des coordonnees des amonts/avals des troncons qui possede au moins une extremite
+
+    Version sans TEST du coup on double le nombre de points dans le nuage (amont&aval des troncons avec extremites)
+
+    """
     # url: http://stackoverflow.com/questions/4004550/converting-string-series-to-float-list-in-python
-    # on genere la liste des coordonnees des amonts/avals des troncons qui possede au moins une extremite
+    dict_TRONCONS, list_EXTREMITES, dict_amonts_avals = results_parse
 
-    # Version sans TEST du coup on double le nombre de points dans le nuage (amont&aval des troncons avec extremites)
-    # list_extremites = reduce(
-    # operator.add,
-    #     [
-    #         # conversion des coordonnees amont/aval en list float
-    #         (
-    #             [float(x) for x in TRONCON['extremite_amont'].split()],
-    #             [float(x) for x in TRONCON['extremite_aval'].split()]
-    #         )
-    #         # on recupere les TRONCONS dont l'amont ou l'aval est une extremite
-    #         for TRONCON in
-    #         [
-    #             dict_TRONCONS[dict_amonts_avals[id_EXTREMITE]]
-    #             for id_EXTREMITE in list_EXTREMITES
-    #         ]
-    #     ]
-    # )
+    list_extremites = reduce(
+        operator.add,
+        [
+            # conversion des coordonnees amont/aval en list float
+            (
+                [float(x) for x in TRONCON['extremite_amont'].split()],
+                [float(x) for x in TRONCON['extremite_aval'].split()]
+            )
+            # on recupere les TRONCONS dont l'amont ou l'aval est une extremite
+            for TRONCON in
+            [
+                dict_TRONCONS[dict_amonts_avals[id_EXTREMITE]]
+                for id_EXTREMITE in list_EXTREMITES
+            ]
+        ]
+    )
+    return list_extremites
 
-    # Version avec TEST (on cherche un id dans un dictionnaire)
-    # On recupere les coordonnees des extremites uniquement (amont ou aval)
+
+def find_extremites_with_tests(*results_parse):
+    """
+
+    :param result_parse:
+    :return:
+
+    Version avec TEST (on cherche un id dans un dictionnaire (... in list_EXTREMITES ...))
+    On recupere les coordonnees des extremites uniquement (amont ou aval)
+
+    """
+    dict_TRONCONS, list_EXTREMITES, dict_amonts_avals = results_parse
     list_str_amont_aval = ('aval', 'amont')
     list_extremites = [
         #
@@ -155,12 +187,7 @@ def extract_convexhull_from_symuvia_network_2(
             for id_EXTREMITE in list_EXTREMITES
         ]
     ]
-
-    # # url: http://toblerity.org/shapely/manual.html
-    convex_hull = MultiPoint(list_extremites).convex_hull
-    list_convex_hull = list(convex_hull.exterior.coords)
-
-    return list_convex_hull, list_extremites
+    return list_extremites
 
 
 def build_QgsTransfrom_from_Symuvia_to_SG3(
@@ -189,7 +216,7 @@ def debug_draw(
     convex_hull, points_cloud = results_from_ecfsn
 
     # url: http://docs.scipy.org/doc/scipy-dev/reference/generated/scipy.spatial.ConvexHull.html
-    #url: http://matplotlib.org/users/pyplot_tutorial.html
+    # url: http://matplotlib.org/users/pyplot_tutorial.html
     np_convex_hull = asarray(convex_hull)
     np_points_cloud = asarray(points_cloud)
 

@@ -4,6 +4,11 @@ from trafipolluImp_PYXB import pyxb_parser
 from trafipolluImp_PYXB import pyxbDecorator
 from trafipolluImp_MixInF import MixInF
 
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+from imt_tools import init_logger
+
+logger = init_logger(__name__)
+
 
 class trafipolluImp_EXPORT_TRAFICS(MixInF):
     """
@@ -61,7 +66,6 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
 
                     """
                     sym_TRONCON = pyxbDecorator.get_instance(*args)
-                    # print 'TRAFIC/TRONCONS/TRONCON - sym_TRONCON: ', sym_TRONCON
                     self.update_pyxb_node(
                         sym_TRONCON,
                         id=arg_sym_TRONCON.id,
@@ -70,11 +74,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                     return sym_TRONCON
 
                 #
-                # print 'TRAFIC/TRONCONS - args: ', args1
                 str_path_to_child, sym_TRONCONS = pyxbDecorator.get_path_instance(*args)
-                # print 'TRAFIC/TRONCONS - sym_TRONCONS: ', sym_TRONCONS
-                # print 'TRAFIC/TRONCONS - str_path_to_child: ', str_path_to_child
-                # print 'TRAFIC/TRONCONS - list_troncons: ', list_troncons
                 for sym_TRONCON in list_troncons:
                     sym_TRONCONS.append(export_TRONCON(sym_TRONCON, str_path_to_child))
                 return sym_TRONCONS
@@ -92,7 +92,6 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
 
                     """
                     sym_CONNEXION_INTERNE = pyxbDecorator.get_instance(*args)
-                    # print 'TRAFIC/TRONCONS/TRONCON - sym_TRONCON: ', sym_TRONCON
                     self.update_pyxb_node(
                         sym_CONNEXION_INTERNE,
                         id=sym_CAF.id
@@ -131,10 +130,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                 return sym_EXTREMITES
 
             #
-            # print 'TRAFIC - args: ', args
             str_path_to_child, sym_TRAFIC = pyxbDecorator.get_path_instance(*args)
-            # print 'TRAFIC - str_path_to_child: ', str_path_to_child
-            # print 'TRAFIC - sym_TRAFIC: ', sym_TRAFIC
             self.update_pyxb_node(
                 sym_TRAFIC,
                 id="trafID",
@@ -151,17 +147,9 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
             return sym_TRAFIC
 
         str_path_to_child, sym_TRAFICS = pyxbDecorator.get_path_instance(*args)
-        # print 'TRAFICS - str_path_to_child: ', str_path_to_child
-        # print 'TRAFICS - sym_TRAFICS: ', sym_TRAFICS
-        # print 'TRAFICS - self.list_troncons: ', self.list_troncons
-        # sym_TRAFICS.append(export_TRAFIC(self.list_symu_troncons, self.list_symu_connexions, str_path_to_child))
         list_extremites = self.module_topo.dict_extremites['ENTREES']
         list_extremites.extend(self.module_topo.dict_extremites['SORTIES'])
-        # print "self.module_topo.dict_extremites['ENTREES']: ", self.module_topo.dict_extremites['ENTREES']
-        # print "self.module_topo.dict_extremites['SORTIES']: ", self.module_topo.dict_extremites['SORTIES']
-        # print "list_extrimites :", list_extrimites
         sym_TRAFICS.append(
-            # export_TRAFIC(self.module_topo.dict_pyxb_symutroncons, self.list_symu_connexions, str_path_to_child)
             export_TRAFIC(
                 self.module_topo.dict_pyxb_symutroncons.values(),
                 self.list_symu_connexions,
@@ -170,14 +158,3 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
             )
         )
         return sym_TRAFICS
-
-        # @staticmethod
-        # def update_pyxb_node(node, **kwargs):
-        # """
-        #
-        #     :param kwargs:
-        #     :return:
-        #     """
-        #     # print 'update_pyxb_node - kwargs: ', kwargs
-        #     for k, v in kwargs.iteritems():
-        #         node._setAttribute(k, v)
