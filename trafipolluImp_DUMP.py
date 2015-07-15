@@ -11,6 +11,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -33,6 +34,16 @@ logger = imt_tools.init_logger(__name__)
 
 
 @timerDecorator()
+def dump_for_roundabouts(objects_from_sql_request):
+    """
+
+    :param objects_from_sql_request:
+    :return:
+    """
+    for object_from_sql_request in objects_from_sql_request:
+        print 'object_from_sql_request: ', object_from_sql_request
+
+
 def dump_for_edges(objects_from_sql_request):
     """
 
@@ -76,11 +87,29 @@ def dump_for_nodes(objects_from_sql_request):
     for object_from_sql_request in objects_from_sql_request:
         #
         str_node_id = object_from_sql_request['str_node_id']
-        array_str_edge_ids = object_from_sql_request['str_edge_ids']
+        dict_sql_request = {
+            'array_str_edge_ids': object_from_sql_request['str_edge_ids'],
+            'wkb_geom': object_from_sql_request['wkb_geom']
+        }
+        dict_sql_request.update(load_geom_buffers_with_shapely(dict_sql_request))
         #
-        dict_nodes[str_node_id] = {'array_str_edge_ids': array_str_edge_ids}
+        dict_sql_request.update(
+            load_arrays_with_numpely(
+                dict_sql_request,
+                [
+                    ('wkb_geom', 'np_geom')
+                ]
+            )
+        )
+        #
+        print '%s - dict_sql_request: %s' % (str_node_id, dict_sql_request['np_geom'])
+        #
+        dict_nodes[str_node_id] = dict_sql_request
     #
     logger.info("nb nodes added: %d" % len(dict_nodes.keys()))
+
+    for k, v in dict_nodes.iteritems():
+        print 'dict_nodes[%s].np_geom: %s' % (k, v['np_geom'])
     #
     return dict_nodes
 

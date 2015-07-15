@@ -11,7 +11,6 @@ from imt_tools import CreateNamedTuple
 from imt_tools import timerDecorator
 from imt_tools import init_logger
 import trafipolluImp_DUMP as tpi_DUMP
-import imt_tools
 
 
 NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
@@ -98,18 +97,11 @@ class trafipolluImp_TOPO(object):
         """
 
         :return:
-        """
-        print 'build_topo'
 
+        """
         self.convert_sg3_edges_to_pyxb_symutroncons()
         self.build_topo_for_interconnexions()
         self.build_topo_extrimites()
-
-        # TEST: construction d'un graph topologique
-        try:
-            imt_tools.build_networkx_graph(self.dict_nodes)
-        except Exception, e:
-            print 'Exception :', e
 
     @timerDecorator()
     def convert_sg3_edges_to_pyxb_symutroncons(self):
@@ -478,7 +470,7 @@ class trafipolluImp_TOPO(object):
                     preserve_topology=False
                 )
             # except Exception, e:
-            #     logger.fatal('Exception: %s' % e)
+            # logger.fatal('Exception: %s' % e)
             except:
                 pass
         finally:
@@ -549,7 +541,7 @@ class trafipolluImp_TOPO(object):
 
                         # #################################################
                         # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
-                        ##################################################
+                        # #################################################
                         if b_use_simplification_for_points_internes_interconnexion:
                             # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
                             # inutile dans ce cas pour SYMUVIA
@@ -594,7 +586,7 @@ class trafipolluImp_TOPO(object):
         self.dict_nodes.update(dict_interconnexions)
 
         if list_remove_nodes:
-            logger.info('# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes))
+            logger.info('# build_topo_for_nodes - nb nodes_removed: %d' % len(list_remove_nodes))
 
 
     def find_symu_troncon_lane(
@@ -631,7 +623,7 @@ class trafipolluImp_TOPO(object):
         # #######################################################################
         if symu_lane.lane_direction:
             symu_lane_id = (symu_lane.nb_lanes - 1) - symu_lane_id
-        ########################################################################
+        # #######################################################################
 
         return symu_lane, symu_lane_id
 

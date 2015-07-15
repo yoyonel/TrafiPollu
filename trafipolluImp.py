@@ -11,6 +11,7 @@ import trafipolluImp_TOPO as tpi_TOPO
 
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 
@@ -198,6 +199,10 @@ class TrafiPolluImp(object):
                 sql_file,
                 sql_command
             )
+
+        # # TEST: construction d'un graph topologique
+        # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
+
         #
         self.module_export.export(True)
 
