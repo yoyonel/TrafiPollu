@@ -1,12 +1,14 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
+
 import psycopg2
 import psycopg2.extras
 
 import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
+
 
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs

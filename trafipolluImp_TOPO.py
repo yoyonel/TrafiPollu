@@ -11,6 +11,7 @@ from imt_tools import CreateNamedTuple
 from imt_tools import timerDecorator
 from imt_tools import init_logger
 import trafipolluImp_DUMP as tpi_DUMP
+import imt_tools
 
 
 NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
@@ -98,9 +99,17 @@ class trafipolluImp_TOPO(object):
 
         :return:
         """
+        print 'build_topo'
+
         self.convert_sg3_edges_to_pyxb_symutroncons()
         self.build_topo_for_interconnexions()
         self.build_topo_extrimites()
+
+        # TEST: construction d'un graph topologique
+        try:
+            imt_tools.build_networkx_graph(self.dict_nodes)
+        except Exception, e:
+            print 'Exception :', e
 
     @timerDecorator()
     def convert_sg3_edges_to_pyxb_symutroncons(self):
@@ -491,9 +500,9 @@ class trafipolluImp_TOPO(object):
                 node_list_interconnexions = dict_values['interconnexions']
                 set_id_edges = dict_values['set_id_edges']
             except Exception, e:
-                logger.fatal('build_topo_for_interconnexions - Exception: ', e)
-                logger.fatal('\tnode_id: ', node_id)
-                logger.fatal("\tdict_node[%s]: %s", node_id, dict_values)
+                logger.fatal('build_topo_for_interconnexions - Exception: %s' % e)
+                logger.fatal('\tnode_id: %s' % node_id)
+                logger.fatal("\tdict_node[%s]: %s" % (node_id, dict_values))
                 #
                 list_remove_nodes.append(node_id)
             else:
@@ -523,7 +532,7 @@ class trafipolluImp_TOPO(object):
                                 sg3_lane_ordinality
                             )
                         except Exception, e:
-                            logger.fatal('# Find Symu_Troncon - EXCEPTION: ', e)
+                            logger.fatal('# Find Symu_Troncon - EXCEPTION: %s' % e)
                         else:
                             #
                             symu_troncons.append(symu_lane.symu_troncon)
@@ -586,6 +595,7 @@ class trafipolluImp_TOPO(object):
 
         if list_remove_nodes:
             logger.info('# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes))
+
 
     def find_symu_troncon_lane(
             self,
