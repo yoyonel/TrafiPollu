@@ -1,6 +1,7 @@
 __author__ = 'latty'
 
 import numpy as np
+from numpy.linalg import norm
 
 from shapely.geometry import Point, LineString
 import pyxb
@@ -71,6 +72,7 @@ class trafipolluImp_TOPO(object):
         self.dict_edges = kwargs['dict_edges']
         self.dict_nodes = kwargs['dict_nodes']
         self.dict_lanes = kwargs['dict_lanes']
+        self.dict_roundabouts = kwargs['dict_roundabouts']
         #
         self.dict_pyxb_symutroncons = {}
         #
@@ -99,8 +101,14 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
+        # On transforme les edges (SG3) en TRONCONS (SYMUVIA)
+        # Transformation directe a partir du DUMP des informations sur les edges (SG3)
         self.convert_sg3_edges_to_pyxb_symutroncons()
+
+        #
         self.build_topo_for_interconnexions()
+
+        #
         self.build_topo_extrimites()
 
     @timerDecorator()
@@ -112,8 +120,9 @@ class trafipolluImp_TOPO(object):
         """
         # self.dict_edges: clee sur les id des edges
         # on parcourt l'ensemble des id des edges disponibles
-        for sg3_edge_id in self.dict_edges:
-            self.dict_pyxb_symutroncons.update(self.build_pyxb_symutroncon_from_sg3_edge(sg3_edge_id))
+        for sg3_edge_id, sg3_edge in self.dict_edges.iteritems():
+            if not 'roundabouts' in sg3_edge:
+                self.dict_pyxb_symutroncons.update(self.build_pyxb_symutroncon_from_sg3_edge(sg3_edge_id))
 
         logger.info(
             'convert_sg3_edges_to_pyxb_symutroncons - %d troncons added' %
@@ -161,12 +170,14 @@ class trafipolluImp_TOPO(object):
                 python_lane_id=python_lane_id,
                 nb_lanes=nb_lanes
             )
+
             # mise a jour des champs (debug LICIT)
             nom_rue_g = sg3_edge['str_nom_rue_g']
             nom_rue_d = sg3_edge['str_nom_rue_d']
             nom_rue = nom_rue_g
             if nom_rue_g != nom_rue_d:
                 nom_rue += '-_-' + nom_rue_d
+
             # construction de l'objet PYXB pour export Symuvia TRONCON
             pyxb_symuTRONCON = symuvia_parser.typeTroncon(
                 id=self.build_id_for_TRONCON(sg3_edge['str_ign_id'], python_lane_id),
@@ -179,7 +190,6 @@ class trafipolluImp_TOPO(object):
                 nb_voie=nb_lanes
             )
 
-            # if result_build.points_internes:
             # transfert des POINTS_INTERNES
             if b_add_points_internes_troncons:
                 points_internes = result_build.points_internes
@@ -189,9 +199,11 @@ class trafipolluImp_TOPO(object):
                     pyxb_symuTRONCON.POINTS_INTERNES = self.build_pyxb_POINTS_INTERNES(points_internes)
 
             # MOG : probleme autour des sens edge, lanes, symuvia
-            # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
-            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
-                                                                             python_lane_id)
+            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(
+                self.dict_lanes,
+                sg3_edge_id,
+                python_lane_id
+            )
 
             # LINK STREETGEN3 to SYMUVIA (TOPO)
             self.build_link_from_sg3_to_symuvia_for_lane(
@@ -230,7 +242,7 @@ class trafipolluImp_TOPO(object):
                 for nb_lanes_in_group in grouped_lanes:
                     pyxb_symuTRONCON = self._build_pyxb_symutroncon_from_sg3_edge_lane(
                         sg3_edge, sg3_edge_id, python_lane_id, nb_lanes_in_group,
-                        self.build_pyxb_symuTroncon_with_lanes_in_groups
+                        self._build_pyxb_symuTroncon_with_lanes_in_groups
                     )
                     # Update list_troncon
                     self.update_dict_pyxb_symuTroncons(dict_pyxb_symuTroncons, pyxb_symuTRONCON, sg3_edge)
@@ -269,7 +281,7 @@ class trafipolluImp_TOPO(object):
                 lane_direction
             )
 
-    def build_pyxb_symuTroncon_with_lanes_in_groups(self, **kwargs):
+    def _build_pyxb_symuTroncon_with_lanes_in_groups(self, **kwargs):
         """
         1 Groupe de plusieurs voies (dans la meme direction) dans une serie de groupes (de voies) pour l'edge_sg3
         On recupere les coefficients 1D de projection de chaque point sur sa voie.
@@ -295,14 +307,17 @@ class trafipolluImp_TOPO(object):
                     sg3_edge_id,
                     id_lane
                 )
+
+                #
                 shp_lane = LineString(sg3_lane_geometry)
+                # save the geometry lane
+                shp_lanes.append(shp_lane)
+
                 # project this linestring into 1D coefficients
                 linestring_proj_1D_coefficients = [
                     shp_lane.project(Point(point), normalized=True)
                     for point in list(shp_lane.coords)
                 ]
-                # save the geometry lane
-                shp_lanes.append(shp_lane)
                 # save the 1D coefficients from the lane
                 list_1D_coefficients += linestring_proj_1D_coefficients
         except Exception, e:
@@ -317,7 +332,7 @@ class trafipolluImp_TOPO(object):
         list_1D_coefficients.sort()
         # ##########################
 
-        # Compute the troncon center axis
+        # Calcul de l'axe central du TRONCON
         # Methode: on utilise les coefficients 1D de chaque voie qui va composer ce troncon.
         # On retroprojete chaque coeffient (1D) sur l'ensemble des voies (2D) et on effectue la moyenne des positions
         # On recupere 'une sorte d'axe median' des voies (du meme groupe)
@@ -332,9 +347,8 @@ class trafipolluImp_TOPO(object):
                 np_point_for_troncon = np.array(Point(0, 0).coords[0])
                 # pour chaque shapely lane
                 for shp_lane in shp_lanes:
-                    projected_point_on_lane = np.array((shp_lane.interpolate(coef_point, normalized=True)).coords[0])
                     # on projete le coefficient et on somme le point
-                    np_point_for_troncon += projected_point_on_lane
+                    np_point_for_troncon += np.array((shp_lane.interpolate(coef_point, normalized=True)).coords[0])
                 # on calcule la moyenne
                 np_point_for_troncon *= norm_lanes_center_axis
                 lane_geometry.append(list(np_point_for_troncon))
@@ -342,6 +356,7 @@ class trafipolluImp_TOPO(object):
             logger.fatal('Exception: %s' % e)
         else:
             id_vertice_for_amont, id_vertice_for_aval = 0, -1
+
 
             # Comme la liste des coefficients 1D est triee,
             # on peut declarer le 1er et dernier point comme Amont/Aval
@@ -476,6 +491,240 @@ class trafipolluImp_TOPO(object):
         finally:
             return np.array(shp_list_points_optimized)
 
+    def find_type_for_interconnexion(self, node_id, set_id_edges):
+        """
+
+        :param node_id:
+        :param set_id_edges:
+        :return:
+        """
+        str_type_connexion = ''
+
+        if 'roundabouts' in self.dict_nodes[node_id]:
+            str_type_connexion = 'GIRATOIRE'
+            logger.info("GIRATOIRE detecte ! node_id=%s" % node_id)
+        else:
+            nb_edges_connected_on_this_node = len(set_id_edges)
+            if nb_edges_connected_on_this_node == 2:
+                str_type_connexion = 'REPARTITEUR'
+            elif nb_edges_connected_on_this_node > 2:
+                # potentiellement un CAF
+                str_type_connexion = 'CAF'
+
+        return str_type_connexion
+
+    @staticmethod
+    def roundabout_get_first_intersection(result_intersection):
+        """
+
+        :param result_intersection:
+        :return:
+        """
+        # TODO: a revoir, surement pas assez stable !
+        return result_intersection[0] if (result_intersection.type == 'MultiPoint') else result_intersection
+
+    @staticmethod
+    def roundabout_compute_projection(shp_amont_aval_0, np_amont_aval_1, shp_node, ls_edge_0, ls_edge_1):
+        """
+
+        :param shp_amont_aval_0:
+        :param np_amont_aval_1:
+        :param shp_node:
+        :param ls_edge_0:
+        :param ls_edge_1:
+        :return:
+        """
+        np_amont_aval_0 = np.asarray(shp_amont_aval_0)
+        lane_direction = (np_amont_aval_0 - np_amont_aval_1) / norm(np_amont_aval_0 - np_amont_aval_1)
+        dist_node_aval = shp_node.distance(shp_amont_aval_0)
+        projection_distance = dist_node_aval * 2  # TODO: a revoir, surement pas assez stable !
+        ls_amont_aval_node = LineString([shp_amont_aval_0, np_amont_aval_0 + lane_direction * projection_distance])
+
+        proj_point_on_edge_0 = ls_amont_aval_node.intersection(ls_edge_0)
+        if proj_point_on_edge_0.is_empty:
+            proj_point_on_edge_1 = ls_amont_aval_node.intersection(ls_edge_1)
+            proj_point_on_edge = trafipolluImp_TOPO.roundabout_get_first_intersection(proj_point_on_edge_1)
+        else:
+            proj_point_on_edge = trafipolluImp_TOPO.roundabout_get_first_intersection(proj_point_on_edge_0)
+        return proj_point_on_edge
+
+    def update_for_GIRATOIRE(self, node_id, set_id_edges):
+        """
+
+        :param node_id:
+        :param set_id_edges:
+        :return:
+
+        """
+        dict_interconnexions = {}
+
+        sg3_node = self.dict_nodes[node_id]
+        set_edges_for_node = set(sg3_node['set_id_edges'])
+        sg3_ra_id = sg3_node['roundabouts']
+        id_for_giratoire = self.build_id_for_giratoire(sg3_ra_id, 'G_')
+        sg3_ra = self.dict_roundabouts[sg3_ra_id]
+        set_edges_for_ra = set(sg3_ra['list_edges'])
+
+        set_edges_inoutgoing_ra = set_edges_for_node - set_edges_for_ra
+        set_edges_on_ra = set_edges_for_node - set_edges_inoutgoing_ra
+
+        # print 'set_edges_on_ra: %s' % set_edges_on_ra
+        # print 'set_edges_inoutgoing_ra: %s' % set_edges_inoutgoing_ra
+
+        set_id_symu_troncon_modifie = set()
+
+        for sg3_edge_inoutgoing_ra in set_edges_inoutgoing_ra:
+            symu_lanes = tpi_DUMP.get_Symuvia_list_lanes_from_edge_id(self.dict_lanes, sg3_edge_inoutgoing_ra)
+            for symu_lane in symu_lanes:
+                np_node_geom = sg3_node['np_geom'][0:2]
+                shp_node_geom = Point(np_node_geom)
+                symu_troncon = symu_lane.symu_troncon
+                if not symu_troncon.id in set_id_symu_troncon_modifie:
+                    shp_amont = Point(symu_troncon.extremite_amont)
+                    shp_aval = Point(symu_troncon.extremite_aval)
+
+                    # Surement a revoir ici
+                    # Il y a une supposition de 2 edges sur le rond-point pour ce node
+                    ls_edge_0 = LineString(self.dict_edges[list(set_edges_on_ra)[0]]['np_edge_center_axis'])
+                    ls_edge_1 = LineString(self.dict_edges[list(set_edges_on_ra)[1]]['np_edge_center_axis'])
+
+                    d0 = Point(np_node_geom).distance(shp_amont)
+                    d1 = Point(np_node_geom).distance(shp_aval)
+                    update_amont_or_aval = d0 < d1
+                    tuples_uaoa = (
+                        (shp_aval, -1),
+                        (shp_amont, 0),
+                    )
+                    list_points_internes = symu_troncon.POINTS_INTERNES.content()
+                    proj_point_on_edge = self.roundabout_compute_projection(
+                        tuples_uaoa[update_amont_or_aval][0],
+                        np.asarray(list_points_internes[tuples_uaoa[update_amont_or_aval][1]].coordonnees),
+                        shp_node_geom,
+                        ls_edge_0,
+                        ls_edge_1
+                    )
+                    if update_amont_or_aval:
+                        symu_troncon.extremite_amont = [proj_point_on_edge.x, proj_point_on_edge.y]
+                        symu_troncon.id_eltamont = id_for_giratoire
+                    else:
+                        symu_troncon.extremite_aval = [proj_point_on_edge.x, proj_point_on_edge.y]
+                        symu_troncon.id_eltaval = id_for_giratoire
+
+                    set_id_symu_troncon_modifie.add(symu_troncon.id)
+
+        # TODO: a revoir, faudrait verifier la topo du rondpoint
+        sg3_edge = self.dict_edges[sg3_ra['list_edges'][0]]
+
+        nb_voie = sg3_edge['ui_lane_number']
+        largeur_voie = sg3_edge['f_road_width'] / sg3_edge['ui_lane_number']
+
+        sg3_ra.setdefault('set_troncons_inoutgoing', set_id_symu_troncon_modifie)
+        sg3_ra['set_troncons_inoutgoing'] = sg3_ra['set_troncons_inoutgoing'].union(set_id_symu_troncon_modifie)
+        # logger.info("set_id_symu_troncon_modifie: %s" % set_id_symu_troncon_modifie)
+        # logger.info("%s" % sg3_ra['set_troncons_inoutgoing'])
+        sg3_ra.update(
+            {
+                'nb_voie': nb_voie,
+                'largeur_voie': largeur_voie
+            }
+        )
+
+        dict_interconnexions.setdefault(
+            node_id,
+            {
+                'sg3_to_symuvia': {
+                    'type_connexion': "GIRATOIRE",
+                    'sg3_ra_id': sg3_ra_id,
+                    'set_edges_inoutgoing_ra': set_edges_inoutgoing_ra
+                }
+            }
+        )
+
+        return dict_interconnexions
+
+    def build_dict_interconnexions(self, node_id, node_list_interconnexions, str_type_connexion):
+        """
+
+        :param node_list_interconnexions:
+        :param str_type_connexion:
+        :return:
+        """
+        id_amont, id_aval = interval_ids_amont_aval = range(2)
+
+        dict_interconnexions = {}
+
+        # pour chaque interconnexion
+        for interconnexion in node_list_interconnexions:
+            symu_troncons = []
+            symu_troncons_lane_id = []
+
+            # parcours sur les elements interconnectes (connexion amont -> aval)
+            for python_id in interval_ids_amont_aval:
+                str_sg3_id = str(python_id + 1)
+                #
+                sg3_edge_id = interconnexion['edge_id' + str_sg3_id]
+                sg3_lane_ordinality = interconnexion['lane_ordinality' + str_sg3_id]
+                try:
+                    symu_lane, symu_lane_id = self.find_symu_troncon_lane(
+                        sg3_edge_id,
+                        sg3_lane_ordinality
+                    )
+                except Exception, e:
+                    logger.fatal('# Find Symu_Troncon - EXCEPTION: %s' % e)
+                else:
+                    #
+                    symu_troncons.append(symu_lane.symu_troncon)
+                    symu_troncons_lane_id.append(symu_lane_id)
+
+            if len(symu_troncons) == 2:
+                dict_interconnexions.setdefault(
+                    node_id,
+                    {
+                        'sg3_to_symuvia': {
+                            'type_connexion': str_type_connexion,
+                            'list_interconnexions': {}
+                        }
+                    }
+                )
+
+                # #################################################
+                # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
+                # #################################################
+                if b_use_simplification_for_points_internes_interconnexion:
+                    # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
+                    # inutile dans ce cas pour SYMUVIA
+                    sg3_interconnexion_geometry = self.simplify_list_points(
+                        interconnexion['np_interconnexion'],
+                        0.10
+                    )[1:-1]  # les 1er et dernier points sont les amont/aval de l'interconnexion/troncons
+                else:
+                    sg3_interconnexion_geometry = interconnexion['np_interconnexion']
+                # #################################################
+
+                #
+                dict_list_interconnexions = dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']
+
+                # build key with id symu_troncon and the id lane
+                key_for_interconnexion = self.build_id_for_interconnexion(
+                    symu_troncons,
+                    symu_troncons_lane_id,
+                    id_amont
+                )
+
+                dict_list_interconnexions.setdefault(key_for_interconnexion, []).append(
+                    NT_INTERCONNEXION(
+                        lane_amont=NT_LANE_SYMU(symu_troncons[id_amont], symu_troncons_lane_id[id_amont]),
+                        lane_aval=NT_LANE_SYMU(symu_troncons[id_aval], symu_troncons_lane_id[id_aval]),
+                        geometry=sg3_interconnexion_geometry
+                    )
+                )
+
+                # TODO -> [TOPO] : FAKE TOPO pour CONNEXIONS/EXTREMITES
+                symu_troncons[id_amont].id_eltaval = symu_troncons[id_aval].id
+                symu_troncons[id_aval].id_eltamont = symu_troncons[id_amont].id
+
+        return dict_interconnexions
+
     @timerDecorator()
     def build_topo_for_interconnexions(self):
         """
@@ -483,8 +732,6 @@ class trafipolluImp_TOPO(object):
         """
         list_remove_nodes = []
         dict_interconnexions = {}
-
-        id_amont, id_aval = interval_ids_amont_aval = range(2)
 
         # pour chaque node SG3
         for node_id, dict_values in self.dict_nodes.iteritems():
@@ -499,86 +746,27 @@ class trafipolluImp_TOPO(object):
                 list_remove_nodes.append(node_id)
             else:
                 #
-                str_type_connexion = ''
-                nb_edges_connected_on_this_node = len(set_id_edges)
-                if nb_edges_connected_on_this_node == 2:
-                    str_type_connexion = 'REPARTITEUR'
-                elif nb_edges_connected_on_this_node > 2:
-                    # potentiellement un CAF
-                    str_type_connexion = 'CAF'
+                str_type_connexion = self.find_type_for_interconnexion(node_id, set_id_edges)
 
-                # pour chaque interconnexion
-                for interconnexion in node_list_interconnexions:
-                    symu_troncons = []
-                    symu_troncons_lane_id = []
-
-                    # parcours sur les elements interconnectes (connexion amont -> aval)
-                    for python_id in interval_ids_amont_aval:
-                        str_sg3_id = str(python_id + 1)
-                        #
-                        sg3_edge_id = interconnexion['edge_id' + str_sg3_id]
-                        sg3_lane_ordinality = interconnexion['lane_ordinality' + str_sg3_id]
-                        try:
-                            symu_lane, symu_lane_id = self.find_symu_troncon_lane(
-                                sg3_edge_id,
-                                sg3_lane_ordinality
-                            )
-                        except Exception, e:
-                            logger.fatal('# Find Symu_Troncon - EXCEPTION: %s' % e)
-                        else:
-                            #
-                            symu_troncons.append(symu_lane.symu_troncon)
-                            symu_troncons_lane_id.append(symu_lane_id)
-
-                    if len(symu_troncons) == 2:
-                        dict_interconnexions.setdefault(node_id, {
-                            'sg3_to_symuvia': {
-                                'type_connexion': str_type_connexion,
-                                'list_interconnexions': {}
-                            }
-                        }
+                if str_type_connexion == 'GIRATOIRE':
+                    dict_interconnexions.update(
+                        self.update_for_GIRATOIRE(node_id, set_id_edges)
+                    )
+                else:
+                    dict_interconnexions.update(
+                        self.build_dict_interconnexions(
+                            node_id,
+                            node_list_interconnexions,
+                            str_type_connexion
                         )
-
-                        # #################################################
-                        # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
-                        # #################################################
-                        if b_use_simplification_for_points_internes_interconnexion:
-                            # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
-                            # inutile dans ce cas pour SYMUVIA
-                            sg3_interconnexion_geometry = self.simplify_list_points(
-                                interconnexion['np_interconnexion'],
-                                0.10
-                            )[1:-1]  # les 1er et dernier points sont les amont/aval de l'interconnexion/troncons
-                        else:
-                            sg3_interconnexion_geometry = interconnexion['np_interconnexion']
-                        ##################################################
-
-                        #
-                        list_interconnexions = dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']
-
-                        # build key with id symu_troncon and the id lane
-                        key_for_interconnexion = self.build_id_for_interconnexion(
-                            symu_troncons,
-                            symu_troncons_lane_id,
-                            id_amont
-                        )
-
-                        list_interconnexions.setdefault(key_for_interconnexion, []).append(
-                            NT_INTERCONNEXION(
-                                lane_amont=NT_LANE_SYMU(symu_troncons[id_amont], symu_troncons_lane_id[id_amont]),
-                                lane_aval=NT_LANE_SYMU(symu_troncons[id_aval], symu_troncons_lane_id[id_aval]),
-                                geometry=sg3_interconnexion_geometry
-                            )
-                        )
-
-                        # TODO -> [TOPO] : FAKE TOPO pour CONNEXIONS/EXTREMITES
-                        symu_troncons[id_amont].id_eltaval = symu_troncons[id_aval].id
-                        symu_troncons[id_aval].id_eltamont = symu_troncons[id_amont].id
-
-                # si il n'y a aucune interconnexion associee au node
-                if not dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']:
-                    # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
-                    list_remove_nodes.append(node_id)
+                    )
+                    # s'il n'y a aucune interconnexion associee au node
+                    try:
+                        if not dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']:
+                            # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
+                            list_remove_nodes.append(node_id)
+                    except:  #
+                        list_remove_nodes.append(node_id)
 
         for id_node_to_remove in list_remove_nodes:
             self.dict_nodes.pop(id_node_to_remove)
@@ -679,3 +867,18 @@ class trafipolluImp_TOPO(object):
         :return:
         """
         return symu_troncons[id_amont].id + '_' + str(symu_troncons_lane_id[id_amont])
+
+    @staticmethod
+    def build_id_for_giratoire(
+            ra_id,
+            prefix=""
+    ):
+        """
+
+        :param ra_id:
+        :return:
+        """
+        return prefix + str(ra_id)
+
+
+

@@ -19,6 +19,7 @@ WITH edges_selected AS (
     )
     SELECT
       mr.gid,
+      face_id,
       ed.*
     FROM my_roundabouts_points AS mr
       , bdtopo_topological.edge_data AS ed
@@ -26,9 +27,16 @@ WITH edges_selected AS (
       ed.left_face = mr.face_id OR ed.right_face = mr.face_id
 )
 SELECT
--- test! Demander a Remi une version plus stable/PostGis orientee !
-  St_Azimuth(ST_Line_Interpolate_Point(edges_selected.geom, 0.5), node.geom) AS Azimuth,
-  edges_selected.*
-FROM edges_selected, bdtopo_topological.node AS node
-WHERE node.node_id = edges_selected.start_node
-ORDER BY gid, Azimuth;
+  es_gid        AS id,
+  ra.geom       AS wkb_centroid   -- geometrie du centre du rond-point,
+  es_list_nodes AS list_nodes     -- list des (id des) nodes (BDTopo) dans le rond-point,
+  es_list_edges AS list_edges -- list des (id des) edges (BDTopo) dans le rond-point
+FROM (SELECT
+        gid                   AS es_gid,
+        array_agg(start_node) AS es_list_nodes,
+        array_agg(edge_id)    AS es_list_edges
+      FROM edges_selected
+      GROUP BY es_gid
+     ) AS results_agg
+  NATURAL JOIN test.roundabouts_points AS ra
+WHERE ra.gid = es_gid

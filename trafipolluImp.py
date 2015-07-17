@@ -12,6 +12,7 @@ import trafipolluImp_TOPO as tpi_TOPO
 
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 
@@ -33,12 +34,14 @@ class TrafiPolluImp(object):
         self.__dict_edges = {}  # key: id_edge  -   value: (topo) informations from SG3
         self.__dict_lanes = {}
         self.__dict_nodes = {}
+        self.__dict_roundabouts = {}
         #
         kwargs = {
             'iface': iface,
             'dict_edges': self.__dict_edges,
             'dict_lanes': self.__dict_lanes,
             'dict_nodes': self.__dict_nodes,
+            'dict_roundabouts': self.__dict_roundabouts,
         }
 
         self.module_SQL = trafipolluImp_SQL(**kwargs)
@@ -188,6 +191,7 @@ class TrafiPolluImp(object):
             'dump_sides_from_edges',
             'dump_informations_from_nodes',
             'dump_informations_from_lane_interconnexion',
+            'dump_roundabouts',
         ]
         #
         for sql_command in list_sql_commands:

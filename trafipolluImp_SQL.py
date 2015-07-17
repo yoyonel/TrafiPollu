@@ -30,6 +30,7 @@ class trafipolluImp_SQL(object):
         self.dict_edges = kwargs['dict_edges']
         self.dict_nodes = kwargs['dict_nodes']
         self.dict_lanes = kwargs['dict_lanes']
+        self.dict_roundabouts = kwargs['dict_roundabouts']
 
         iface = kwargs['iface']
         self._map_canvas = iface.mapCanvas()
@@ -39,12 +40,14 @@ class trafipolluImp_SQL(object):
             'update_table_edges_from_qgis': self._update_tables_from_qgis,
             'update_tables_from_def_zone_test': self._update_tables_from_qgis,
             #
-            'request_detecting_roundabouts_from_qgis': self._request_for_detecting_roundabouts_from_qgis,
+            'update_table_detecting_roundabouts_from_qgis': self._update_tables_from_qgis,
             #
             'dump_informations_from_edges': self._request_for_edges,
             'dump_sides_from_edges': self._request_for_lanes,
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
+            #
+            'dump_roundabouts': self._request_for_roundabouts
         }
 
         self._dict_params_server = {
@@ -96,11 +99,11 @@ class trafipolluImp_SQL(object):
             try:
                 self.connection = psycopg2.connect(
                     dbname="street_gen_3",
-                    database="bdtopo_topological",
+                    # database="bdtopo_topological",
                     **self._dict_params_server[name_server]
                 )
-            except Exception, e:
-                logger.fatal('PostGres : problem de connexion -> %s' % e)
+            except psycopg2.Error as e:
+                logger.warning("[SQL] PsyCopg2 Error : %s - Detail: %s" % (e.pgerror, e.diag.message_detail))
             else:
                 try:
                     self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -110,6 +113,10 @@ class trafipolluImp_SQL(object):
                     logger.info('PostGres: connected with %s server' % name_server)
                     self.b_connection_to_postgres_server = True
                     break
+
+        if not self.b_connection_to_postgres_server:
+            logger.fatal('Impossible de se connecter a un serveur !')
+
         return self.b_connection_to_postgres_server
 
     def _update_tables_from_qgis(self, *args, **kwargs):
@@ -191,16 +198,16 @@ class trafipolluImp_SQL(object):
         list_points = [xform.transform(point) for point in list_points_from_mapcanvas]
 
         # list of lists of points
-        gPolyline = QgsGeometry.fromPolygon([list_points])
-        gPolylineWkt = gPolyline.exportToWkt()
+        gPolygon = QgsGeometry.fromPolygon([list_points])
+        gPolygoneWkt = gPolygon.exportToWkt()
 
         dict_parameters = {
-            'gPolylineWkt': gPolylineWkt,
+            'gPolygonWkt': gPolygoneWkt,
             'extent_postgisSrid': extent_postgisSrid
         }
 
         logger.info("* list_points_from_mapcanvas: %s", list_points_from_mapcanvas)
-        logger.info("* gPolygonWkt: %s", gPolylineWkt)
+        logger.info("* gPolygonWkt: %s", gPolygoneWkt)
         logger.info("* extent_postgisSrid: %s", extent_postgisSrid)
         logger.info("extent_src_crs.postgisSrid: %s", extent_src_crs.postgisSrid())
 
@@ -251,12 +258,16 @@ class trafipolluImp_SQL(object):
             dict_parameters = {}
             if id_sql_method == 'update_table_edges_from_qgis':
                 dict_parameters = self.build_sql_parameters_with_map_extent()
-            elif id_sql_method == 'request_detecting_roundabouts_from_qgis':
+            elif id_sql_method == 'update_table_detecting_roundabouts_from_qgis':
                 dict_parameters = self.build_sql_parameters_with_map_extent_for_roundabouts()
             elif id_sql_method == 'update_def_zone_test':
                 dict_parameters = self.build_sql_parameters_with_update_def_zone_test()
 
-            sql_method = self._dict_sql_methods[id_sql_method]
+            try:
+                sql_method = self._dict_sql_methods[id_sql_method]
+            except:
+                sql_method = None
+                logger.warning('Pas de methode (python) associee au script sql: %s' % id_sql_method)
 
             # all SQL commands (split on ';')
             sqlCommands = sql_file.split(';')
@@ -276,12 +287,13 @@ class trafipolluImp_SQL(object):
                         # url: http://initd.org/psycopg/docs/usage.html#query-parameters
                         # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
                         self.cursor.execute(command, dict_parameters)
-                        sql_method(connection=self.connection, cursor=self.cursor)
+                        if sql_method:
+                            sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
                     # #
 
-    def _request_for_detecting_roundabouts_from_qgis(self, *args, **kwargs):
+    def _request_for_roundabouts(self, *args, **kwargs):
         """
 
         :param args:
@@ -289,28 +301,34 @@ class trafipolluImp_SQL(object):
         :return:
 
         """
+        cursor = kwargs['cursor']
         try:
-            cursor = kwargs['cursor']
-        except:
-            pass
+            logger.info("[SQL] - try to cursor.fetchall ...")
+            objects_from_sql_request = cursor.fetchall()
+        except Exception, e:
+            logger.warning("[SQL] Exception: %s" % e)
         else:
-            try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
-            else:
-                self._post_request_for_detecting_roundabouts_from_qgis(
-                    tpi_DUMP.dump_for_roundabouts(objects_from_sql_request)
-                )
+            self._post_request_for_roundabouts(tpi_DUMP.dump_for_roundabouts(objects_from_sql_request))
 
-    def _post_request_for_detecting_roundabouts_from_qgis(self, results_dump):
+    def _post_request_for_roundabouts(self, results_dump):
         """
 
         :param results_dump:
         :return:
         """
-        pass
+        dict_roundabouts = results_dump
+
+        for ra_id, ra_dump in dict_roundabouts.iteritems():
+            # ajouter les informations aux 'nodes'
+            for node_id in ra_dump['list_nodes']:
+                if node_id in self.dict_nodes:
+                    self.dict_nodes[node_id].update({'roundabouts': ra_id})
+            # ajouter les informations aux 'edges'
+            for edge_id in ra_dump['list_edges']:
+                if edge_id in self.dict_edges:
+                    self.dict_edges[edge_id].update({'roundabouts': ra_id})
+
+        self.dict_roundabouts.update(dict_roundabouts)
 
     def _request_for_edges(self, **kwargs):
         """
@@ -327,8 +345,8 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
+            except Exception, e:
+                logger.warning("[SQL] Exception: %s" % e)
             else:
                 self._post_request_for_edges(tpi_DUMP.dump_for_edges(objects_from_sql_request))
 
@@ -355,8 +373,8 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
+            except Exception, e:
+                logger.warning("[SQL] Exception: %s" % e)
             else:
                 self._post_request_for_nodes(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
 
@@ -383,8 +401,8 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
+            except Exception, e:
+                logger.warning("[SQL] Exception: %s" % e)
             else:
                 self._post_request_for_interconnexions(tpi_DUMP.dump_for_interconnexions(objects_from_sql_request))
 
@@ -420,8 +438,8 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
+            except Exception, e:
+                logger.warning("[SQL] Exception: %s" % e)
             else:
                 self._post_request_for_lanes(tpi_DUMP.dump_lanes(objects_from_sql_request, self.dict_edges))
 

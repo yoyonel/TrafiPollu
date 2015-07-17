@@ -22,23 +22,23 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         """
 
         """
-        self.transfer_arguments(
-            [
-                'dict_edges',
-                'dict_lanes',
-                'dict_nodes',
-                'list_symu_connexions'
-            ],
-            **kwargs
-        )
+        self.dict_edges = kwargs['dict_edges']
+        self.dict_lanes = kwargs['dict_lanes']
+        self.dict_nodes = kwargs['dict_nodes']
+        self.dict_roundabouts = kwargs['dict_roundabouts']
+        self.list_symu_connexions = kwargs['list_symu_connexions']
         #
         self.pyxb_parser = pyxb_parser
         #
         self.cursor_symuvia = {
+            #
             'sg3_node': None,
             'node_id': 0,
             'sym_CONNEXION': None,
-            'id_amont_troncon_lane': ""
+            'id_amont_troncon_lane': "",
+            #
+            'ra_id': 0,
+            'sg3_ra': None
         }
         #
         super(trafipolluImp_EXPORT_CONNEXIONS, self).__init__(**kwargs)
@@ -54,7 +54,8 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
         list_id_nodes_for_CONNEXIONS = {
             'CAF': [],
-            'REPARTITEUR': []
+            'REPARTITEUR': [],
+            'GIRATOIRE': []
         }
         for node_id in self.dict_nodes:
             try:
@@ -84,7 +85,122 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                 str_path_to_child
             )
 
+        if len(list_id_nodes_for_CONNEXIONS['GIRATOIRE']):
+            sym_CONNEXIONS.GIRATOIRES = self.export_GIRATOIRES(
+                list_id_nodes_for_CONNEXIONS['GIRATOIRE'],
+                str_path_to_child
+            )
+
         return sym_CONNEXIONS
+
+    @pyxbDecorator(pyxb_parser)
+    def export_GIRATOIRES(self, list_id_nodes, *args):
+        """
+
+        :param list_id_nodes:
+        :param args:
+        :return:
+        """
+        str_path_to_child, sym_GIRATOIRES = pyxbDecorator.get_path_instance(*args)
+
+        logger.info('list_id_nodes: %s' % list_id_nodes)
+        set_ra_ids = set(self.dict_nodes[node_id]['sg3_to_symuvia']['sg3_ra_id'] for node_id in list_id_nodes)
+        logger.info('set_ra_ids: %s' % set_ra_ids)
+
+        for ra_id in set_ra_ids:
+            self.select_ra(ra_id)
+            sym_GIRATOIRE = self.export_GIRATOIRE(str_path_to_child)
+            sym_GIRATOIRES.append(sym_GIRATOIRE)
+            self.list_symu_connexions.append(sym_GIRATOIRE)
+
+        return sym_GIRATOIRES
+
+    @pyxbDecorator(pyxb_parser)
+    def export_GIRATOIRE(self, *args):
+        """
+
+        :return:
+        """
+        sym_GIRATOIRE = None
+
+        try:
+            id_GIRATOIRE = self.build_id_for_GIRATOIRE(self.cursor_symuvia['ra_id'])
+        except Exception, e:
+            logger.warning('Exception: %s' % e)
+        else:
+            sg3_ra = self.cursor_symuvia['sg3_ra']
+            set_troncons_inoutgoing_for_ra = sg3_ra['set_troncons_inoutgoing']
+            list_id_troncons_for_ra = [troncon_id for troncon_id in set_troncons_inoutgoing_for_ra]
+            str_list_troncons_for_ra = " ".join(list_id_troncons_for_ra)
+            try:
+                str_path_to_child, sym_GIRATOIRE = pyxbDecorator.get_path_instance(
+                    *args,
+                    id=id_GIRATOIRE,
+                    troncons=str_list_troncons_for_ra,
+                    nb_voie=sg3_ra['nb_voie'],
+                    LargeurVoie=sg3_ra['largeur_voie'],
+                    vit_max="8"
+                )
+            except Exception, e:
+                logger.warning('Exception: %s' % e)
+
+                # sym_GIRATOIRE.TRONCONS_INTERNES = self.export_TRONCONS_INTERNES(str_path_to_child)
+
+        return sym_GIRATOIRE
+
+    @pyxbDecorator(pyxb_parser)
+    def export_TRONCONS_INTERNES(self, *args):
+        """
+
+        :param args:
+        :return:
+        """
+        str_path_to_child, sym_TRONCONS_INTERNES = pyxbDecorator.get_path_instance(*args)
+        for troncon_interne in self.export_TRONCON_INTERNE(str_path_to_child):
+            sym_TRONCONS_INTERNES.append(troncon_interne)
+        return sym_TRONCONS_INTERNES
+
+    @pyxbDecorator(pyxb_parser)
+    def export_TRONCON_INTERNE(self, *args):
+        """
+
+        :param args:
+        :return:
+        """
+        list_TRONCON_INTERNE = []
+        sg3_ra = self.cursor_symuvia['sg3_ra']
+        list_edges_ids_on_ra = sg3_ra['list_edges']
+
+        for edge_id_on_ra in list_edges_ids_on_ra:
+            try:
+                sg3_edge_on_ra = self.dict_edges[edge_id_on_ra]
+
+                np_edge_center_axis = sg3_edge_on_ra['np_edge_center_axis']
+
+                sg3_start_node = self.dict_nodes[sg3_edge_on_ra['ui_start_node']]
+                # #
+                edges_inoutgoing_ra = list(sg3_start_node['sg3_to_symuvia']['set_edges_inoutgoing_ra'])
+                # edge_inoutgoing_ra = edges_inoutgoing_ra[0]
+                #
+                str_path_to_child, sym_TRONCON_INTERNE = pyxbDecorator.get_path_instance(
+                    *args,
+                    id="toto",
+                    troncon_amont="-1",
+                    troncon_aval="-1",
+                    extremite_amont="0.0 0.0",
+                    extremite_aval="0.0 0.0"
+                    # extremite_amont=np_edge_center_axis[0][0:2],
+                    # extremite_aval=np_edge_center_axis[-1][0:2]
+                )
+
+                # POINTS INTERNES du TRONCON INTERNE
+
+                # on ajoute le TRONCON INTERNE a la liste
+                list_TRONCON_INTERNE.append(sym_TRONCON_INTERNE)
+            except Exception, e:
+                logger.warning('Exception: %s' % e)
+
+        return list_TRONCON_INTERNE
 
     @pyxbDecorator(pyxb_parser)
     def export_CARREFOURSAFEUX(self, list_id_nodes, *args):
@@ -440,6 +556,15 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         self.cursor_symuvia['node_id'] = node_id
         self.cursor_symuvia['sg3_node'] = self.dict_nodes[node_id]
 
+    def select_ra(self, ra_id):
+        """
+
+        :param ra_id:
+        :return:
+        """
+        self.cursor_symuvia['ra_id'] = ra_id
+        self.cursor_symuvia['sg3_ra'] = self.dict_roundabouts[ra_id]
+
     def select_CONNEXION(self, sym_CONNEXION):
         """
 
@@ -492,3 +617,18 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
         """
         return python_id + 1
+
+    @staticmethod
+    def build_id_for_GIRATOIRE(
+            ra_id,
+            prefix="G_"
+    ):
+        """
+
+        :param ra_id:
+        :return:
+        """
+        return prefix + str(ra_id)
+
+
+

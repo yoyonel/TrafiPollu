@@ -12,6 +12,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -40,10 +41,29 @@ def dump_for_roundabouts(objects_from_sql_request):
     :param objects_from_sql_request:
     :return:
     """
+    dict_roundabouts = {}
+
     for object_from_sql_request in objects_from_sql_request:
         print 'object_from_sql_request: ', object_from_sql_request
 
+        dict_sql_request = dict(object_from_sql_request)
 
+        dict_sql_request.update(load_geom_buffers_with_shapely(dict_sql_request))
+        dict_sql_request.update(
+            load_arrays_with_numpely(
+                dict_sql_request,
+                [
+                    ('wkb_centroid', 'np_centroid')
+                ]
+            )
+        )
+        ra_id = object_from_sql_request['id']
+        dict_roundabouts.update({ra_id: dict_sql_request})
+
+    return dict_roundabouts
+
+
+@timerDecorator()
 def dump_for_edges(objects_from_sql_request):
     """
 
