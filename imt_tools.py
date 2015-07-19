@@ -695,15 +695,15 @@ def init_logger(logger_name):
     # creation d'un handler qui va rediriger une ecriture du log vers
     # un fichier en mode 'append'
 
-    pathname = os.path.normcase(os.path.dirname(__file__))
-    filename = pathname + '/' + '%s.log' % logger_name
-    file_handler = logging.FileHandler(filename, 'a')
-    # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
-    # cree precedement et on ajoute ce handler au logger
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
+    # pathname = os.path.normcase(os.path.dirname(__file__))
+    # filename = pathname + '/' + '%s.log' % logger_name
+    # file_handler = logging.FileHandler(filename, 'a')
+    # # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
+    # # cree precedement et on ajoute ce handler au logger
+    # file_handler.setLevel(logging.DEBUG)
+    # file_handler.setFormatter(formatter)
+    # logger.addHandler(file_handler)
+    # print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
 
     # creation d'un second handler qui va rediriger chaque ecriture de log
     # sur la console
