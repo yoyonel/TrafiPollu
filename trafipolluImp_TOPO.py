@@ -1,6 +1,7 @@
 __author__ = 'latty'
 
 import numpy as np
+from itertools import groupby
 
 from shapely.geometry import Point, LineString
 import pyxb
@@ -57,6 +58,121 @@ b_use_simplification_for_points_internes_interconnexion = True
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = init_logger(__name__)
+
+
+class trafipolluImp_TOPO_for_TRONCONS(object):
+    """
+
+    """
+
+    def __init__(self, *args, **kwargs):
+        """
+
+        """
+        self.dict_symu_troncons = {}
+
+    def clear(self):
+        """
+
+        :return:
+
+        """
+        self.dict_symu_troncons = {}
+
+    @staticmethod
+    def static_convert_sg3_edges_to_symutroncons(dict_edges):
+        """
+
+        :param dict_edges: dictionnaire contenant les edges SG3
+         - key: edge id
+         - values:
+        :return:
+
+        """
+        dict_symu_troncons = {}
+        # on parcourt l'ensemble des id des edges disponibles
+        for edge_id, edge_values in dict_edges.iteritems():
+            dict_symu_troncons.update(trafipolluImp_TOPO_for_TRONCONS.build_symutroncon_from_sg3_edge(edge_values))
+
+        logger.info('%d (symu) troncons added' % len(dict_symu_troncons.keys()))
+        #
+
+    @staticmethod
+    def build_dict_grouped_lanes(dict_lanes_from_dump, str_id_for_grouped_lanes='grouped_lanes'):
+        """
+
+        :param dict_lanes:
+        :return:
+        Retourne un dictionnaire dont les
+        - key: indice d'une edge SG3
+        - value: liste de groupes de lanes dans le meme sens.
+            Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
+        """
+        dict_grouped_lanes = {}
+
+        list_edge_count_grouped_lanes = [
+            [
+                sum(1 for i in value_groupby)
+                for key_groupby, value_groupby in
+                groupby(get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id), lambda x: x.lane_direction)
+            ]
+            for sg3_edge_id in dict_lanes_from_dump
+        ]
+
+        map(
+            lambda x, y: dict_grouped_lanes.__setitem__(x, {str_id_for_grouped_lanes: y}),
+            dict_lanes_from_dump,
+            list_edge_count_grouped_lanes
+        )
+        return dict_grouped_lanes
+
+    @staticmethod
+    def build_symutroncon_from_sg3_edge(sg3_edge):
+        """
+
+        :param sg3_edge:
+        :return:
+
+        """
+        dict_symu_troncons = {}
+        sg3_edge_id = tpi_DUMP.get_edge_id(sg3_edge)
+
+        try:
+            grouped_lanes = sg3_edge['grouped_lanes']
+        except:
+            # Il y a des edge_sg3 sans voie(s) dans le reseau SG3 ... faudrait demander a Remi !
+            # Peut etre des edges_sg3 aidant uniquement aux connexions/creation (de zones) d'intersections
+            logger.fatal("!!! 'BUG' with edge id: ", sg3_edge_id, " - no 'group_lanes' found !!!")
+        else:
+            python_lane_id = 0
+            try:
+                for nb_lanes_in_group in grouped_lanes:
+                    pyxb_symuTRONCON = self._build_pyxb_symutroncon_from_sg3_edge_lane(
+                        sg3_edge, sg3_edge_id, python_lane_id, nb_lanes_in_group,
+                        self.build_pyxb_symuTroncon_with_lanes_in_groups
+                    )
+                    # Update list_troncon
+                    self.update_dict_pyxb_symuTroncons(dict_symu_troncons, pyxb_symuTRONCON, sg3_edge)
+                    # next lanes group
+                    python_lane_id += nb_lanes_in_group
+            except Exception, e:
+                logger.fatal('Exception, e: ', e)
+        finally:
+            return dict_symu_troncons
+
+
+class trafipolluImp_TOPO_for_INTERCONNEXIONS(object):
+    """
+
+    """
+    pass
+
+
+class trafipolluImp_TOPO_for_EXTREMITES(object):
+    """
+
+    """
+    pass
 
 
 class trafipolluImp_TOPO(object):

@@ -1,11 +1,9 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
-
 import psycopg2
 import psycopg2.extras
 
-import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
@@ -39,12 +37,11 @@ class trafipolluImp_SQL(object):
             'update_table_edges_from_qgis': self._update_tables_from_qgis,
             'update_tables_from_def_zone_test': self._update_tables_from_qgis,
             #
-            'request_detecting_roundabouts_from_qgis': self._request_for_detecting_roundabouts_from_qgis,
-            #
-            'dump_informations_from_edges': self._request_for_edges,
-            'dump_sides_from_edges': self._request_for_lanes,
-            'dump_informations_from_nodes': self._request_for_nodes,
-            'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
+            'request_detecting_roundabouts_from_qgis': self._request_sql,
+            'dump_informations_from_edges': self._request_sql,
+            'dump_sides_from_edges': self._request_sql,
+            'dump_informations_from_nodes': self._request_sql,
+            'dump_informations_from_lane_interconnexion': self._request_sql,
         }
 
         self._dict_params_server = {
@@ -129,6 +126,8 @@ class trafipolluImp_SQL(object):
                 connection.commit()
             except:
                 pass
+            else:
+                return True
 
     def build_sql_parameters_with_map_extent(self):
         """
@@ -261,6 +260,8 @@ class trafipolluImp_SQL(object):
             # all SQL commands (split on ';')
             sqlCommands = sql_file.split(';')
 
+            list_results = []
+
             # Execute every command from the input file
             for command in sqlCommands:
                 # This will skip and report errors
@@ -276,12 +277,13 @@ class trafipolluImp_SQL(object):
                         # url: http://initd.org/psycopg/docs/usage.html#query-parameters
                         # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
                         self.cursor.execute(command, dict_parameters)
-                        sql_method(connection=self.connection, cursor=self.cursor)
+                        list_results.append(sql_method(connection=self.connection, cursor=self.cursor))
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
                     # #
+            return list_results
 
-    def _request_for_detecting_roundabouts_from_qgis(self, *args, **kwargs):
+    def _request_sql(self, *args, **kwargs):
         """
 
         :param args:
@@ -297,143 +299,7 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
+            except Exception, e:
+                logger.fatal('Exception: %s' % e)
             else:
-                self._post_request_for_detecting_roundabouts_from_qgis(
-                    tpi_DUMP.dump_for_roundabouts(objects_from_sql_request)
-                )
-
-    def _post_request_for_detecting_roundabouts_from_qgis(self, results_dump):
-        """
-
-        :param results_dump:
-        :return:
-        """
-        pass
-
-    def _request_for_edges(self, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-
-        """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
-            else:
-                self._post_request_for_edges(tpi_DUMP.dump_for_edges(objects_from_sql_request))
-
-    def _post_request_for_edges(self, results_dump):
-        """
-
-        :param results_dump:
-        :return:
-        """
-        dict_edges = results_dump
-        self.dict_edges.update(dict_edges)
-
-    def _request_for_nodes(self, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-        """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except:
-                pass1
-            else:
-                self._post_request_for_nodes(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
-
-    def _post_request_for_nodes(self, results_dump):
-        """
-
-        :param results_dump:
-        :return:
-        """
-        dict_nodes = results_dump
-        self.dict_nodes.update(dict_nodes)
-
-    def _request_for_interconnexions(self, **kwargs):
-        """
-
-        :param kwargs:
-        :return:
-        """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
-            else:
-                self._post_request_for_interconnexions(tpi_DUMP.dump_for_interconnexions(objects_from_sql_request))
-
-    def _post_request_for_interconnexions(self, results_dump):
-        """
-
-        :param results_dump:
-        :return:
-        """
-        dict_interconnexions, dict_set_id_edges = results_dump
-
-        # ajouter les informations d'interconnexions au noeud
-        for node_id, interconnexions in dict_interconnexions.iteritems():
-            self.dict_nodes[node_id].update(
-                {
-                    'interconnexions': interconnexions,
-                    'set_id_edges': dict_set_id_edges[node_id]
-                }
-            )
-
-    def _request_for_lanes(self, **kwargs):
-        """
-
-        :param objects_from_sql_request:
-        :param b_load_geom:
-        :return:
-        """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except:
-                pass
-            else:
-                self._post_request_for_lanes(tpi_DUMP.dump_lanes(objects_from_sql_request, self.dict_edges))
-
-    def _post_request_for_lanes(self, results_dump):
-        """
-
-        :param results_dump:
-        :return:
-        """
-        dict_lanes, dict_grouped_lanes = results_dump
-
-        self.dict_lanes.update(dict_lanes)
-        # update dict_edges with lanes grouped informations
-        for sg3_edge_id, grouped_lanes in dict_grouped_lanes.items():
-            self.dict_edges[sg3_edge_id].update(grouped_lanes)
+                return objects_from_sql_request

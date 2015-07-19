@@ -20,7 +20,7 @@ SELECT
       WHEN TRUE THEN lane.lane_center_axis
       ELSE ST_Reverse(lane.lane_center_axis)
       END
-  ) AS lane_center_axis
+  ) AS wkb_lane_center_axis
 FROM
   test.edges_selected AS e_s
   INNER JOIN

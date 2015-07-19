@@ -9,12 +9,12 @@
 
 SELECT
   DISTINCT
-  nodes_selected.node_id         AS str_node_id,
+  nodes_selected.node_id AS node_id,
 
-  vrli.edge_id1                  AS str_edge_id1,
-  vrli.edge_id2                  AS str_edge_id2,
-  vrli.lane_ordinality1          AS str_lane_ordinality1,
-  vrli.lane_ordinality2          AS str_lane_ordinality2,
+  vrli.edge_id1          AS edge_id1,
+  vrli.edge_id2          AS edge_id2,
+  vrli.lane_ordinality1  AS lane_ordinality1,
+  vrli.lane_ordinality2  AS lane_ordinality2,
 
   ST_AsEWKB(vrli.interconnexion) AS wkb_interconnexion
 -- url: http://www.postgis.org/docs/ST_Simplify.html
@@ -28,4 +28,4 @@ FROM
       nodes_selected.node_id = vrli.node_id
 WHERE
   vrli.connecting = TRUE  -- seules les interconnexions connectees nous interessent
---ORDER BY str_node_id, str_array_edge_id1, str_array_edge_id2, str_array_lane_ordinality1, str_array_lane_ordinality2
+--ORDER BY node_id, str_array_edge_id1, str_array_edge_id2, str_array_lane_ordinality1, str_array_lane_ordinality2
