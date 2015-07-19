@@ -86,8 +86,8 @@ def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
     :return:
     """
     nb_odds = count_number_odds(nb_lanes)
-    return (nb_odds + lane_ordinality / 2 - 1) if number_is_even(lane_ordinality) else (
-    nb_odds - (lane_ordinality + 1) / 2)
+    return (nb_odds + lane_ordinality / 2 - 1) if number_is_even(lane_ordinality) \
+        else (nb_odds - (lane_ordinality + 1) / 2)
 
 
 def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
@@ -98,11 +98,12 @@ def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
     :return:
     """
     nb_odds = count_number_odds(nb_lanes)
-    return ((nb_odds - python_id) * 2 - 1) if python_id < nb_odds else (python_id - nb_odds + 1) * 2
+    return ((nb_odds - python_id) * 2 - 1) if python_id < nb_odds \
+        else (python_id - nb_odds + 1) * 2
 
 
 # url: http://anandology.com/python-practice-book/iterators.html
-class list_lanes_python_ordering_iter(object):
+class ListLanesPythonOrderingIter(object):
     """
     Construit un iterator pour parcourir dans un ordre pythonien les indices (ordinality) de voies SG3
 
@@ -217,9 +218,10 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
                 for key_groupby, value_groupby in
                 groupby(
                     # reorganisation de la liste pour suivre un ordre 'pythonien' d'indices (0...n-1)
+                    # url: http://stackoverflow.com/questions/2177590/how-can-i-reorder-a-list-in-python
                     [
                         dict_lanes[sg3_edge_id][lane_ordinality]
-                        for lane_ordinality in list_lanes_python_ordering_iter(dict_lanes[sg3_edge_id])
+                        for lane_ordinality in ListLanesPythonOrderingIter(dict_lanes[sg3_edge_id])
                     ],
                     lambda x: x['lane_direction']
                 )
