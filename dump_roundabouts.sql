@@ -26,9 +26,7 @@ WITH edges_selected AS (
       ed.left_face = mr.face_id OR ed.right_face = mr.face_id
 )
 SELECT
--- test! Demander a Remi une version plus stable/PostGis orientee !
-  St_Azimuth(ST_Line_Interpolate_Point(edges_selected.geom, 0.5), node.geom) AS Azimuth,
   edges_selected.*
 FROM edges_selected, bdtopo_topological.node AS node
 WHERE node.node_id = edges_selected.start_node
-ORDER BY gid, Azimuth;
+ORDER BY gid;

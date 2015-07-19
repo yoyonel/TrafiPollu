@@ -356,7 +356,7 @@ class trafipolluImp_SQL(object):
                 logger.info("[SQL] - try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except:
-                pass
+                pass1
             else:
                 self._post_request_for_nodes(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
 
