@@ -10,7 +10,7 @@ from imt_tools import init_logger
 logger = init_logger(__name__)
 
 
-class trafipolluImp_DUMP(object):
+class DumpFromSG3(object):
     """
 
     """
@@ -18,11 +18,19 @@ class trafipolluImp_DUMP(object):
     def __init__(self, *args, **kwargs):
         """
         """
-        self.dict_nodes = {}
-        self.dict_edges = {}
-        self.dict_lanes = {}
-        self.dict_interconnexions = {}
-        self.dict_roundabouts = {}
+        self.__dict_nodes = {}
+        self.__dict_edges = {}
+        self.__dict_lanes = {}
+        self.__dict_interconnexions = {}
+        self.__dict_roundabouts = {}
+
+    @property
+    def dict_lanes(self):
+        return self.__dict_lanes
+
+    @property
+    def dict_edges(self):
+        return self.__dict_edges
 
     def dump_for_nodes(self, objects_from_sql_request):
         """
@@ -30,7 +38,9 @@ class trafipolluImp_DUMP(object):
         :param objects_from_sql_request: resultats d'une requete SQL par rapport aux 'nodes' (connexions SG3)
         :return:
         """
-        self.dict_nodes = self.static_dump_for_nodes(objects_from_sql_request)
+        dict_nodes = self.static_dump_for_nodes(objects_from_sql_request)
+        self.__dict_nodes = dict_nodes
+        return dict_nodes
 
     @staticmethod
     def static_dump_for_nodes(objects_from_sql_request):
@@ -47,9 +57,9 @@ class trafipolluImp_DUMP(object):
                 # edges_ids : liste des edges associes au node courant
                 subkeys = ('edges_ids', 'wkb_geom')
                 dict_sql_request = dict(filter(lambda i: i[0] in subkeys, objects_from_sql_request.iteritems()))
-                dict_sql_request.update(trafipolluImp_DUMP.load_geom_buffers_with_shapely(dict_sql_request))
+                dict_sql_request.update(DumpFromSG3.load_geom_buffers_with_shapely(dict_sql_request))
                 dict_sql_request.update(
-                    trafipolluImp_DUMP.load_arrays_with_numpely(
+                    DumpFromSG3.load_arrays_with_numpely(
                         dict_sql_request,
                         [
                             ('wkb_geom', 'np_geom')
@@ -69,7 +79,9 @@ class trafipolluImp_DUMP(object):
         :param objects_from_sql_request: resultats d'une requete SQL par rapport aux 'edges' (troncons SG3)
         :return:
         """
-        self.dict_edges = self.static_dump_for_edges(objects_from_sql_request)
+        dict_edges = self.static_dump_for_edges(objects_from_sql_request)
+        self.__dict_edges = dict_edges
+        return dict_edges
 
     @staticmethod
     def static_dump_for_edges(objects_from_sql_request):
@@ -83,12 +95,14 @@ class trafipolluImp_DUMP(object):
             # url: http://stackoverflow.com/questions/10252247/how-do-i-get-a-list-of-column-names-from-a-psycopg2-cursor
             # column_names = [desc[0] for desc in cursor.description]
             for object_from_sql_request in objects_from_sql_request:
+                # logger.info('object_from_sql_request: %s' % object_from_sql_request)
                 subkeys = object_from_sql_request.keys()
-                dict_sql_request = dict(filter(lambda i: i[0] in subkeys, objects_from_sql_request.iteritems()))
+                # logger.info('subkeys: %s' % subkeys)
+                dict_sql_request = dict(filter(lambda i: i[0] in subkeys, object_from_sql_request.iteritems()))
 
-                dict_sql_request.update(trafipolluImp_DUMP.load_geom_buffers_with_shapely(dict_sql_request))
+                dict_sql_request.update(DumpFromSG3.load_geom_buffers_with_shapely(dict_sql_request))
                 dict_sql_request.update(
-                    trafipolluImp_DUMP.load_arrays_with_numpely(
+                    DumpFromSG3.load_arrays_with_numpely(
                         dict_sql_request,
                         [
                             ('wkb_amont', 'np_amont'),
@@ -102,7 +116,7 @@ class trafipolluImp_DUMP(object):
         except Exception, e:
             logger.warning('Exception : %s' % e)
 
-        logger.info("nb edges added: %d" % len(dict_edges.keys()))
+        logger.info("nb edges retrieve from sql request: %d" % len(dict_edges.keys()))
         #
         return dict_edges
 
@@ -112,7 +126,9 @@ class trafipolluImp_DUMP(object):
         :param objects_from_sql_request: resultats d'une requete SQL par rapport aux interconnexions
         :return:
         """
-        self.dict_interconnexions = self.static_dump_for_interconnexions(objects_from_sql_request)
+        dict_interconnexions = self.static_dump_for_interconnexions(objects_from_sql_request)
+        self.__dict_interconnexions.update(dict_interconnexions)
+        return dict_interconnexions
 
     @staticmethod
     def static_dump_for_interconnexions(objects_from_sql_request):
@@ -129,11 +145,11 @@ class trafipolluImp_DUMP(object):
         try:
             for object_from_sql_request in objects_from_sql_request:
                 subkeys = ('edge_id1', 'edge_id2', 'lane_ordinality1', 'lane_ordinality2', 'wkb_interconnexion')
-                dict_sql_request = dict(filter(lambda i: i[0] in subkeys, objects_from_sql_request.iteritems()))
+                dict_sql_request = dict(filter(lambda i: i[0] in subkeys, object_from_sql_request.iteritems()))
                 #
-                dict_sql_request.update(trafipolluImp_DUMP.load_geom_buffers_with_shapely(dict_sql_request))
+                dict_sql_request.update(DumpFromSG3.load_geom_buffers_with_shapely(dict_sql_request))
                 dict_sql_request.update(
-                    trafipolluImp_DUMP.load_arrays_with_numpely(
+                    DumpFromSG3.load_arrays_with_numpely(
                         dict_sql_request,
                         [
                             ('wkb_interconnexion', 'np_interconnexion')
@@ -153,7 +169,7 @@ class trafipolluImp_DUMP(object):
         except Exception, e:
             logger.warning('Exception: %s' % e)
         #
-        logger.info("nb interconnexions added: %d" % len(dict_interconnexions.keys()))
+        logger.info("nb CAF added: %d" % len(dict_interconnexions.keys()))
         logger.info("total interconnexions added: %d" % nb_total_interconnexion)
 
         # on concatene la liste des edges ids dans le dictionnaire resultat: 'dict_interconnexions'
@@ -162,29 +178,23 @@ class trafipolluImp_DUMP(object):
 
         return dict_interconnexions
 
-    def dump_for_lanes(self, objects_from_sql_request):
+    def dump_for_lanes(self, objects_from_sql_request, b_static=False):
         """
 
         :param objects_from_sql_request: resultats d'une requete SQL par rapport aux voies
-        :return:
-
-        """
-        self.dict_lanes = self.static_dump_for_lanes(objects_from_sql_request)
-
-    @staticmethod
-    def static_dump_for_lanes(objects_from_sql_request):
-        """
-
-        :param objects_from_sql_request: resultats d'une requete SQL par rapport aux voies
-        :return:
+        :param b_static:
+            = True -> met a jour le dictionnaire de la classe
+            = False -> renvoie le resultat et ne met pas a jour la classe (comme si c'etait une @staticmethod)
+        :return: dictionnaire des voies issues du traitement de la requete (DUMP) SQL
 
         """
         dict_dump_lanes = {}
+        nb_lanes_informations_retrieve = 0
         try:
             # get sides informations for each 'edge'/'troncon'
             for object_from_sql_request in objects_from_sql_request:
                 subkeys = (
-                    'axis_lane_number',
+                    'edge_id',
                     'lane_side',
                     'lane_position',
                     'lane_direction',
@@ -192,9 +202,9 @@ class trafipolluImp_DUMP(object):
                     'wkb_lane_center_axis')
                 dict_sql_request = dict(filter(lambda i: i[0] in subkeys, object_from_sql_request.iteritems()))
 
-                dict_sql_request.update(trafipolluImp_DUMP.load_geom_buffers_with_shapely(dict_sql_request))
+                dict_sql_request.update(DumpFromSG3.load_geom_buffers_with_shapely(dict_sql_request))
                 dict_sql_request.update(
-                    trafipolluImp_DUMP.load_arrays_with_numpely(
+                    DumpFromSG3.load_arrays_with_numpely(
                         dict_sql_request,
                         [
                             ('wkb_lane_center_axis', 'lane_center_axis')
@@ -202,20 +212,32 @@ class trafipolluImp_DUMP(object):
                     )
                 )
 
-                nb_lanes = dict_sql_request['axis_lane_number']
                 edge_id = dict_sql_request['edge_id']
+
+                # on recupere le nombre de voies par rapport a l'edge SG3 (connexion entre les edges et les voies)
+                nb_lanes = self.get_lane_number(edge_id)
+
                 lane_ordinality = dict_sql_request['lane_ordinality']
 
                 # lane_ordinality est l'indice SG3 de la lane par rapport a l'edge (edge_id)
                 # preallocation d'une liste de taille nb_lanes+1 sur les indices lane_ordinality (1 ... n+1)
-                dict_dump_lanes.setdefault(objects_from_sql_request['edge_id'], [None] * (nb_lanes + 1))
+                dict_dump_lanes.setdefault(edge_id, [None] * (nb_lanes + 1))
+
                 # on rajoute dans le dictionnaire
                 # - key: id de l'edge SG3
                 # - value: liste des informations de voies/lanes
                 # -- indice: indice de voie suivant son 'ordinality' (SG3)
                 dict_dump_lanes[edge_id][lane_ordinality] = dict_sql_request
+
+                nb_lanes_informations_retrieve += 1
         except Exception, e:
             logger.warning('Exception : %s' % e)
+
+        logger.info('Nb lanes informations retrieve: %d' % nb_lanes_informations_retrieve)
+
+        # maj
+        if not b_static:
+            self.__dict_lanes.update(dict_dump_lanes)
 
         return dict_dump_lanes
 
@@ -232,9 +254,9 @@ class trafipolluImp_DUMP(object):
             for object_from_sql_request in objects_from_sql_request:
                 subkeys = ()
                 dict_sql_request = dict(filter(lambda i: i[0] in subkeys, object_from_sql_request.iteritems()))
-                dict_sql_request.update(trafipolluImp_DUMP.load_geom_buffers_with_shapely(dict_sql_request))
+                dict_sql_request.update(DumpFromSG3.load_geom_buffers_with_shapely(dict_sql_request))
                 dict_sql_request.update(
-                    trafipolluImp_DUMP.load_arrays_with_numpely(
+                    DumpFromSG3.load_arrays_with_numpely(
                         dict_sql_request,
                         [
                             ()
@@ -275,6 +297,35 @@ class trafipolluImp_DUMP(object):
             if isinstance(object_from_sql_request, buffer):
                 dict_buffers_loaded[column_name] = sp_wkb_loads(bytes(object_from_sql_request))
         return dict_buffers_loaded
+
+    def get_lane_geometry(self, sg3_edge_id, lane_ordinality):
+        """
+
+        :param sg3_edge_id:
+        :param lane_ordinality:
+        :return:
+
+        """
+        return self.__dict_lanes[sg3_edge_id][lane_ordinality]['lane_center_axis']
+
+    def get_lane_direction(self, sg3_edge_id, lane_ordinality):
+        """
+
+        :param sg3_edge_id:
+        :param lane_ordinality:
+        :return:
+
+        """
+        return self.__dict_lanes[sg3_edge_id][lane_ordinality]['lane_direction']
+
+    def get_lane_number(self, sg3_edges_id):
+        """
+
+        :param sg3_edges_id:
+        :return:
+
+        """
+        return self.__dict_edges[sg3_edges_id]['lane_number']
 
 
 def get_edge_id(sg3_edge):
@@ -534,7 +585,7 @@ def get_edge_id(sg3_edge):
     #     for edge_id, object_from_sql_request in dict_dump_lanes.iteritems():
     #         # edge_id = lane['edge_id']
     #
-    #         nb_lanes = dict_edges[edge_id]['ui_lane_number']
+    # nb_lanes = dict_edges[edge_id]['lane_number']
     #         #
     #         dict_lanes.setdefault(
     #             edge_id,

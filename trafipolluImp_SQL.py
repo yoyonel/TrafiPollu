@@ -1,11 +1,13 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
+
 import psycopg2
 import psycopg2.extras
 
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
+
 
 
 
@@ -25,9 +27,9 @@ class trafipolluImp_SQL(object):
         """
 
         """
-        self.dict_edges = kwargs['dict_edges']
-        self.dict_nodes = kwargs['dict_nodes']
-        self.dict_lanes = kwargs['dict_lanes']
+        # self.dict_edges = kwargs['dict_edges']
+        # self.dict_nodes = kwargs['dict_nodes']
+        # self.dict_lanes = kwargs['dict_lanes']
 
         iface = kwargs['iface']
         self._map_canvas = iface.mapCanvas()
@@ -100,7 +102,8 @@ class trafipolluImp_SQL(object):
                 logger.fatal('PostGres : problem de connexion -> %s' % e)
             else:
                 try:
-                    self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                    # self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+                    self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
                 except Exception, e:
                     logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
@@ -277,7 +280,9 @@ class trafipolluImp_SQL(object):
                         # url: http://initd.org/psycopg/docs/usage.html#query-parameters
                         # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
                         self.cursor.execute(command, dict_parameters)
-                        list_results.append(sql_method(connection=self.connection, cursor=self.cursor))
+                        results_sql_request = sql_method(connection=self.connection, cursor=self.cursor)
+                        # logger.info('type(results_sql_request): %s' % type(results_sql_request))
+                        list_results.append(results_sql_request)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
                     # #

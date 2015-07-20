@@ -6,11 +6,11 @@ import cPickle as pickle
 from signalsmanager import SignalsManager
 import imt_tools
 from trafipolluImp_SQL import trafipolluImp_SQL
-import trafipolluImp_EXPORT as tpi_EXPORT
-import trafipolluImp_TOPO as tpi_TOPO
 
 
-
+# import trafipolluImp_EXPORT as tpi_EXPORT
+from trafipolluImp_DUMP import DumpFromSG3 as ModuleDump
+from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as ModuleTopo
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
@@ -35,16 +35,17 @@ class TrafiPolluImp(object):
         self.__dict_nodes = {}
         #
         kwargs = {
-            'iface': iface,
-            'dict_edges': self.__dict_edges,
-            'dict_lanes': self.__dict_lanes,
-            'dict_nodes': self.__dict_nodes,
+            'iface': iface
         }
 
         self.module_SQL = trafipolluImp_SQL(**kwargs)
-        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
-        kwargs.update({'module_topo': self.module_topo})
-        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
+
+        self.module_DUMP = ModuleDump()
+        self.module_TOPO = ModuleTopo(object_DUMP=self.module_DUMP)  # liaison du module TOPO au DUMP
+
+        # self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
+        # kwargs.update({'module_topo': self.module_topo})
+        # self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
 
     def _init_signals_(self):
         """
@@ -73,8 +74,6 @@ class TrafiPolluImp(object):
         self.__dict_lanes.clear()
         self.__dict_nodes.clear()
         #
-        self.module_topo.clear()
-        self.module_export.clear()
 
     def slot_clear(self):
         """
@@ -109,8 +108,9 @@ class TrafiPolluImp(object):
         """
 
         :return:
+
         """
-        self.module_SQL.execute_sql_commands(sqlFile, sql_choice_combobox)
+        return self.module_SQL.execute_sql_commands(sqlFile, sql_choice_combobox)
 
     def slot_refreshSqlScriptList(self):
         """
@@ -168,7 +168,8 @@ class TrafiPolluImp(object):
 
         :return:
         """
-        self.module_export.export(True)
+        # self.module_export.export(True)
+        pass
 
     def _dump_topo_export_(self):
         """
@@ -176,35 +177,46 @@ class TrafiPolluImp(object):
         :return:
         """
         #
-        list_sql_commands = [
+        list_tuple_sql_commands = [
             # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
             # 'update_def_zone_test',
             #
-            'update_table_edges_from_qgis',
+            ('update_table_edges_from_qgis', None),
             #
             # 'update_tables_from_def_zone_test',
             #
-            'dump_informations_from_edges',
-            'dump_sides_from_edges',
-            'dump_informations_from_nodes',
-            'dump_informations_from_lane_interconnexion',
+            ('dump_informations_from_nodes', self.module_DUMP.dump_for_nodes),
+            ('dump_informations_from_edges', self.module_DUMP.dump_for_edges),
+            ('dump_sides_from_edges', self.module_DUMP.dump_for_lanes),
+            ('dump_informations_from_lane_interconnexion', self.module_DUMP.dump_for_interconnexions)
         ]
         #
-        for sql_command in list_sql_commands:
+        for tuple_sql_command in list_tuple_sql_commands:
+            sql_command, dump_method = tuple_sql_command
+            logger.info('sql_command: %s' % sql_command)
+            #
             sql_filename = self.get_sql_filename(sql_command)
             sql_file = self.get_sql_file(sql_filename)
-            logger.info('sql_filename: %s' % sql_filename)
-            logger.info('sql_file: %s' % sql_file)
-            self._execute_SQL_commands(
+            # logger.info('sql_file: %s' % sql_file)
+            list_results_sql_request = self._execute_SQL_commands(
                 sql_file,
                 sql_command
             )
+            # DUMP
+            if dump_method:
+                for results_sql_request in list_results_sql_request:
+                    dump_method(results_sql_request)  # met a jour module_DUMP
+
+        # TOPO
+        # construction des troncons SYMUVIA
+        # self.module_TOPO.convert_sg3_edges_to_symutroncons(self.module_DUMP)
+        self.module_TOPO.build_symutroncons()  # module_TOPO est lie a module_DUMP a l'init
 
         # # TEST: construction d'un graph topologique
         # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
 
         #
-        self.module_export.export(True)
+        # self.module_export.export(True)
 
     def slot_dump_topo_export(self):
         """

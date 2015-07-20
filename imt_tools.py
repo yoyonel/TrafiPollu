@@ -44,6 +44,9 @@ import logging
 import networkx as nx
 import matplotlib.pyplot as plt
 
+import linecache
+import sys
+
 defaultQtDateFormatString = "yyyy-MM-ddThh:mm:ss.zzz"
 
 #
@@ -746,18 +749,18 @@ def build_networkx_graph(dict_nodes, dict_edges):
 
     for edge_id, values in dict_edges.iteritems():
         try:
-            ui_start_node = values['ui_start_node']
-            ui_end_node = values['ui_end_node']
+            start_node = values['start_node']
+            end_node = values['end_node']
         except:
             pass
         else:
             try:
-                dict_position_node[ui_start_node] = list(dict_nodes[ui_start_node]['np_geom'])[0:2]
-                dict_position_node[ui_end_node] = list(dict_nodes[ui_end_node]['np_geom'])[0:2]
+                dict_position_node[start_node] = list(dict_nodes[start_node]['np_geom'])[0:2]
+                dict_position_node[end_node] = list(dict_nodes[end_node]['np_geom'])[0:2]
             except:
                 pass
             else:
-                graph.add_edge(ui_start_node, ui_end_node)
+                graph.add_edge(start_node, end_node)
 
     for k, v in dict_nodes.iteritems():
         print 'dict_nodes[%s].np_geom: %s' % (k, v['np_geom'])
@@ -781,3 +784,13 @@ def build_networkx_graph(dict_nodes, dict_edges):
     plt.show()
 
     return graph
+
+
+def print_exception():
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    linecache.checkcache(filename)
+    line = linecache.getline(filename, lineno, f.f_globals)
+    return 'EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj)

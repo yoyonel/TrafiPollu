@@ -226,7 +226,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         return sym_MOUVEMENTS
 
     # ########################################################################################################
-    ## Version avec les interconnexions SG3
+    # # Version avec les interconnexions SG3
     #########################################################################################################
     @pyxbDecorator(pyxb_parser)
     def export_MOUVEMENT_AUTORISE(self, *args):
@@ -398,7 +398,8 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                 )
 
                 if b_add_points_internes_for_interconnexions:
-                    sym_MOUVEMENT.POINTS_INTERNES = self.module_topo.build_pyxb_POINTS_INTERNES(interconnexion.geometry)
+                    sym_MOUVEMENT.POINTS_INTERNES = self.module_topo.__build_pyxb_troncon_points_internes(
+                        interconnexion.geometry)
 
                 #
                 list_MOUVEMENT.append(sym_MOUVEMENT)
