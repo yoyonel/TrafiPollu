@@ -58,31 +58,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(object):
         if len(list_connexions_for_REPARTITEUR):
             sym_CONNEXIONS.REPARTITEURS = self.export_REPARTITEURS(list_connexions_for_REPARTITEUR, str_path_to_child)
 
-
-        # list_id_nodes_for_CONNEXIONS = {
-        # 'CAF': [],
-        #     'REPARTITEUR': []
-        # }
-        # for node_id in self.dict_nodes:
-        #     try:
-        #         type_connexion = self.dict_nodes[node_id]['sg3_to_symuvia']['type_connexion']
-        #     except Exception, e:
-        #         logger.fatal('Exception: %s' % print_exception())
-        #     else:
-        #         list_id_nodes_for_CONNEXIONS[type_connexion].append(node_id)
-        #
-        # if len(list_id_nodes_for_CONNEXIONS['CAF']):
-        #     sym_CONNEXIONS.CARREFOURSAFEUX = self.export_CARREFOURSAFEUX(
-        #         list_id_nodes_for_CONNEXIONS['CAF'],
-        #         str_path_to_child
-        #     )
-        #
-        # if len(list_id_nodes_for_CONNEXIONS['REPARTITEUR']):
-        #     sym_CONNEXIONS.REPARTITEURS = self.export_REPARTITEURS(
-        #         list_id_nodes_for_CONNEXIONS['REPARTITEUR'],
-        #         str_path_to_child
-        #     )
-
         list_symu_extremites = self.module_topo.get_extremites_set_edges_ids()
         if list_symu_extremites:
             sym_CONNEXIONS.EXTREMITES = self.export_EXTREMITES(list_symu_extremites, str_path_to_child)
@@ -104,8 +79,6 @@ class trafipolluImp_EXPORT_CONNEXIONS(object):
             sym_CAF = self.export_CARREFOURAFEUX(str_path_to_child)
 
             sym_CAFS.append(sym_CAF)
-
-            # self.list_symu_connexions.append(sym_CAF)
 
         return sym_CAFS
 
@@ -231,7 +204,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(object):
 
     # ########################################################################################################
     # # Version avec les interconnexions SG3
-    #########################################################################################################
+    # ########################################################################################################
     @pyxbDecorator(pyxb_parser)
     def export_MOUVEMENT_AUTORISE(self, *args):
         """

@@ -935,14 +935,14 @@ class trafipolluImp_TOPO_for_CONNEXIONS(object):
             # Pour chaque node
             # logger.info('self.object_DUMP.dict_nodes: %s' % self.object_DUMP.dict_nodes)
             for sg3_node_id, sg3_node in self.__object_DUMP.dict_nodes.iteritems():
+                # resultat
+                list_symu_connexions = []
+
                 # On recupere la liste des interconnexions pour le node
                 list_sg3_interconnexions = self.__object_DUMP.get_interconnexions(sg3_node_id)
-                # On recupere la liste des edges connectees par ce node
-                set_edges_ids = self.__object_DUMP.get_set_edges_ids(sg3_node_id)
 
-                list_symu_connexions = []
                 # on determine le type de la connexion
-                type_connexion = self.__find_type_connexion(set_edges_ids)
+                type_connexion = self.__find_type_connexion(sg3_node_id)
                 # si connexion REPARTITEUR
                 if type_connexion == 'REPARTITEUR':
                     # construction de la liste des SYMUVIA connexions a partir de la liste des SG3 interconnexions
@@ -954,6 +954,7 @@ class trafipolluImp_TOPO_for_CONNEXIONS(object):
                     list_symu_connexions = self.__build_list_symu_connexions(list_sg3_interconnexions)
                     # on stocke le resultat
                     dict_symu_connexions_caf[sg3_node_id] = list_symu_connexions
+
                 if len(list_symu_connexions):
                     # on stocke le resultat
                     dict_symu_connexions[sg3_node_id] = list_symu_connexions
@@ -1063,8 +1064,7 @@ class trafipolluImp_TOPO_for_CONNEXIONS(object):
             interconnexion_geom = interconnexion_geom[1:-1]
         return interconnexion_geom
 
-    @staticmethod
-    def __find_type_connexion(set_edges_ids):
+    def __find_type_connexion(self, sg3_node_id):
         """
 
         :param set_edges_ids:
@@ -1072,6 +1072,9 @@ class trafipolluImp_TOPO_for_CONNEXIONS(object):
 
         """
         type_connexion = ''
+
+        # On recupere la liste des edges connectees par ce node
+        set_edges_ids = self.__object_DUMP.get_set_edges_ids(sg3_node_id)
 
         # Strategie tres basique pour l'instant
         # on compte le nombre de voies connectees a l'interconnexion/node
