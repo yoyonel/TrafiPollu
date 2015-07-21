@@ -32,6 +32,15 @@ NT_INTERCONNEXION = CreateNamedTupleOnGlobals(
     ]
 )
 
+NT_CONNEXION_SYMUVIA = CreateNamedTupleOnGlobals(
+    'NT_CONNEXION_SYMUVIA',
+    [
+        'nt_symuvia_lane_amont',
+        'nt_symuvia_lane_aval',
+        'interconnexion_geom'
+    ]
+)
+
 NT_LANE_SYMUVIA = CreateNamedTupleOnGlobals(
     'NT_LANE_SYMUVIA',
     [
@@ -166,7 +175,7 @@ class ListLanesPythonOrderingIter(object):
             raise StopIteration
 
 
-class trafipolluImp_TOPO_for_TRONCONS(object):
+class trafipolluImp_TOPO(object):
     """
 
     """
@@ -176,13 +185,53 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
 
         """
         #
-        self.__dict_symu_troncons = {}
-        self.__dict_grouped_lanes = {}
-        #
         self.__dict_sg3_to_symuvia = {}
-
         # from DUMP
         self.object_DUMP = kwargs.setdefault('object_DUMP', None)
+
+        self.module_topo_for_troncons = trafipolluImp_TOPO_for_TRONCONS(object_DUMP=self.object_DUMP)
+        self.module_topo_for_interconnexions = trafipolluImp_TOPO_for_INTERCONNEXIONS(
+            object_DUMP=self.object_DUMP,
+            dict_sg3_to_symuvia=self.module_topo_for_troncons.dict_sg3_to_symuvia
+        )
+
+    def clear(self):
+        """
+
+        :return:
+
+        """
+        self.__dict_sg3_to_symuvia = {}
+        self.object_DUMP = None
+
+    def build(self, *args, **kwargs):
+        """
+
+        :return:
+        """
+        self.module_topo_for_troncons.build(**kwargs)
+        self.module_topo_for_interconnexions.build(**kwargs)
+
+
+class trafipolluImp_TOPO_for_TRONCONS(object):
+    """
+
+    """
+
+    def __init__(self, **kwargs):
+        """
+
+        """
+        # from DUMP
+        self.object_DUMP = kwargs.setdefault('object_DUMP', None)
+        #
+        self.__dict_symu_troncons = {}
+        self.__dict_grouped_lanes = {}
+        self.__dict_sg3_to_symuvia = {}
+
+    @property
+    def dict_sg3_to_symuvia(self):
+        return self.__dict_sg3_to_symuvia
 
     def clear(self):
         """
@@ -192,18 +241,24 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
         """
         self.__dict_symu_troncons = {}
         self.__dict_grouped_lanes = {}
-        #
         self.__dict_sg3_to_symuvia = {}
-        #
-        self.object_DUMP = None
 
-    def build_symutroncons(self, **kwargs):
+    def build(self, **kwargs):
         """
+        Construit un dictionnaire contenant les troncons SYMUVIA.
+        Cette methode effectue aussi la construction des liens entre les edges SG3 et les troncons SYMUVIA
 
-        :param dict_edges: dictionnaire contenant les edges SG3
-         - key: edge id
-         - values:
-        :return:
+        :param dict_edges: dict( str : dict(...) )
+            Dictionnaire contenant les edges SG3
+             - key: edge id
+             - values: PYXB Symuvia TRONCON
+        :param kwargs: dict( str: values )
+            - 'object_DUMP': par defaut conserve l'instance du module DUMP transmis prealablement
+                Instance du module DUMP, si present remplace le module actuel
+            - 'staticmethod': False par defaut
+                si False -> on met a jour la classe avec les valeurs construites
+                si True -> on renvoie le resultat (sans affecter la classe, comportement d'un @staticmethod)
+        :return: dict( str : pyxb object )
 
         """
         dict_symutroncons = {}
@@ -224,7 +279,7 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
                 # logger.info('group_lanes_for_edge: %s' % group_lanes_for_edge)
                 dict_symutroncons.update(self.__build_symutroncons_from_sg3_edge(sg3_edge, group_lanes_for_edge))
             #
-            if not kwargs.setdefault('is_static', False):
+            if not kwargs.setdefault('staticmethod', False):
                 self.__dict_symu_troncons.update(dict_symutroncons)
             # debug infos
             # logger.info('__dict_sg3_to_symuvia: %s' % str(self.__dict_sg3_to_symuvia))
@@ -234,7 +289,8 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
 
         return dict_symutroncons
 
-    def __build_dict_grouped_lanes(self, dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
+    @staticmethod
+    def static_build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
         """
 
         :param dict_lanes: informations des voies des edges
@@ -265,6 +321,7 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
 
         list_edges_counting_grouped_lanes = [
             [
+                # url: http://stackoverflow.com/questions/13870962/python-how-to-get-the-length-of-itertools-grouper
                 sum(1 for i in value_groupby)
                 for key_groupby, value_groupby in
                 groupby(
@@ -286,8 +343,37 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
             list_edges_counting_grouped_lanes
         )
 
-        self.__dict_grouped_lanes.update(dict_grouped_lanes)
+        return dict_grouped_lanes
 
+    def __build_dict_grouped_lanes(self, dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
+        """
+
+        :param dict_lanes: informations des voies des edges
+            - key: edge id SG3
+            - values: liste de voies pour l'edge
+        :return:
+        Retourne un dictionnaire dont les
+        - key: indice edge SG3
+        - value: liste de groupes de lanes dans le meme sens.
+            Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
+
+        TEST:
+        dict_lanes = {
+            'edge_0': [
+                {},
+                {'lane_direction': False},
+                {'lane_direction': True},
+                {'lane_direction': True},
+                {'lane_direction': False},
+                {'lane_direction': True}
+            ]
+        }
+        >> trafipolluImp_TOPO_for_TRONCONS.build_dict_grouped_lanes(dict_lanes)
+        {'edge_0': {'grouped_lanes': [2, 1, 1, 1]}}
+
+        """
+        dict_grouped_lanes = self.static_build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes)
+        self.__dict_grouped_lanes.update(dict_grouped_lanes)
         return dict_grouped_lanes
 
     def __build_symutroncons_from_sg3_edge(self, sg3_edge, grouped_lanes_for_edge):
@@ -641,12 +727,198 @@ class trafipolluImp_TOPO_for_TRONCONS(object):
             # on enregistre le lien topologique entre la voie SG3 -> SYMUVIA
             self.__dict_sg3_to_symuvia[sg3_edge_id][sg3_lane_ordinality] = lane_symuvia
 
+    def _convert_sg3_lane_to_symuvia_voie(self, nt_lane_sg3):
+        """
+
+        :param nt_lane_sg3: trafipolluImp_DUMP.NT_LANE_SG3
+        :return:
+        """
+        return self.__dict_sg3_to_symuvia[nt_lane_sg3.edge_id][nt_lane_sg3.lane_ordinality]
+
 
 class trafipolluImp_TOPO_for_INTERCONNEXIONS(object):
     """
 
     """
-    pass
+
+    def __init__(self, *args, **kwargs):
+        """
+
+        :param args:
+        :param kwargs:
+        :return:
+
+        """
+        self.object_DUMP = None
+        self.__dict_sg3_to_symuvia = {}
+        self.__dict_symu_connexions = {}
+        # Update members with arguments
+        self.update_members(**kwargs)
+
+    def clear(self):
+        """
+
+        :return:
+
+        """
+        self.__dict_symu_connexions = {}
+        self.__dict_sg3_to_symuvia = {}
+        self.object_DUMP = None
+
+    def update_members(self, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+
+        """
+        # Update members with arguments
+        self.object_DUMP = kwargs.setdefault('object_DUMP', self.object_DUMP)
+        self.__dict_sg3_to_symuvia = kwargs.setdefault('dict_sg3_to_symuvia', self.__dict_sg3_to_symuvia)
+
+    def build(self, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+
+        """
+        dict_symu_connexions = {}
+
+        # on redefinie un lien vers le module DUMP si une instance est transmise en parametre (dict params)
+        # sinon on utilise le module dump fournit a l'init
+        self.update_members(**kwargs)
+
+        if self.object_DUMP and len(self.__dict_sg3_to_symuvia):
+            # Pour chaque node
+            # logger.info('self.object_DUMP.dict_nodes: %s' % self.object_DUMP.dict_nodes)
+            for sg3_node_id, sg3_node in self.object_DUMP.dict_nodes.iteritems():
+                # On recupere la liste des interconnexions pour le node
+                list_sg3_interconnexions = self.object_DUMP.get_interconnexions(sg3_node_id)
+                # On recupere la liste des edges connectees par ce node
+                set_edges_ids = self.object_DUMP.get_set_edges_ids(sg3_node_id)
+
+                # on determine le type de la connexion
+                type_connexion = self.find_type_connexion(set_edges_ids)
+
+                if type_connexion == 'REPARTITEUR' or type_connexion == 'CAF':
+                    # construction de la liste des SYMUVIA connexions a partir de la liste des SG3 interconnexions
+                    list_symu_connexions = self.build_list_symu_connexions(list_sg3_interconnexions)
+                    # on stocke le resultat
+                    dict_symu_connexions[sg3_node_id] = list_symu_connexions
+            #
+            if not kwargs.setdefault('staticmethod', False):
+                self.__dict_symu_connexions.update(dict_symu_connexions)
+
+            # debug infos
+            # logger.info('__dict_sg3_to_symuvia: %s' % str(self.__dict_sg3_to_symuvia))
+            logger.info('%d (symu) connexions added' % len(dict_symu_connexions.keys()))
+        else:
+            logger.fatal('Pas de DUMP disponible pour la construction de SYMUVIA Connexions !')
+
+        logger.info("dict_symu_connexions: %s" % str(dict_symu_connexions))
+        return dict_symu_connexions
+
+    def build_list_symu_connexions(self, list_sg3_interconnexions):
+        """
+
+        :param list_sg3_interconnexions:
+        :return:
+
+        """
+        list_symu_connexions = []
+        # pour chaque interconnexion (sg3)
+        for sg3_interconnexion in list_sg3_interconnexions:
+            symu_connexion = self.build_symu_connexion(sg3_interconnexion)
+            # on stocke le resultat
+            list_symu_connexions.append(symu_connexion)
+        return list_symu_connexions
+
+    def build_symu_connexion(self, sg3_interconnexion):
+        """
+
+        :param sg3_interconnexion:
+        :return:
+
+        """
+        # on recupere les informations d'interconnexion SG3
+        # amont/aval: (edge id, lane_ordinality)
+        nt_sg3_amont = self.object_DUMP.get_interconnexion_amont(sg3_interconnexion)
+        nt_sg3_aval = self.object_DUMP.get_interconnexion_aval(sg3_interconnexion)
+
+        # on convertit ces informations vers SYMUVIA
+        # on utilise les constructions de liens realise dans TOPO_TRONCONS
+        # c'est la classe mere qui detient le dictionnaire de conversion
+        # on utilise donct une methode d'acces (_convert_sg3_lane_to_symuvia_voie) via cette classe mere (par heritage)
+        symuvia_lane_amont = self._convert_sg3_lane_to_symuvia_voie(nt_sg3_amont)
+        symuvia_lane_aval = self._convert_sg3_lane_to_symuvia_voie(nt_sg3_aval)
+
+        # GEOMETRIE
+        interconnexion_geom = self.build_interconnexion_geometry(sg3_interconnexion)
+
+        # On construit le TupleNamed resultat pour l'interconnexion
+        return NT_CONNEXION_SYMUVIA(
+            symuvia_lane_amont,
+            symuvia_lane_aval,
+            interconnexion_geom
+        )
+
+    def build_interconnexion_geometry(self, sg3_interconnexion):
+        """
+
+        :param sg3_interconnexion:
+        :return:
+        """
+        interconnexion_geom = self.object_DUMP.get_interconnexion_geometry(sg3_interconnexion)
+        # simplification de la geometrie
+        if b_use_simplification_for_points_internes_interconnexion:
+            # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
+            # inutile dans ce cas pour SYMUVIA
+            interconnexion_geom = self.__simplify_list_points(interconnexion_geom, 0.10)
+            # On retire les 1er et dernier points qui sont les amont/aval de l'interconnexion
+            interconnexion_geom = interconnexion_geom[1:-1]
+        return interconnexion_geom
+
+    def find_type_connexion(self, set_edges_ids):
+        """
+        """
+        type_connexion = ''
+
+        nb_edges_connected = len(set_edges_ids)
+
+        if nb_edges_connected == 2:
+            type_connexion = 'REPARTITEUR'
+        elif nb_edges_connected > 2:
+            type_connexion = 'CAF'
+
+        return type_connexion
+
+    @staticmethod
+    def __simplify_list_points(
+            list_points,
+            tolerance_distance=0.10
+    ):
+        """
+
+        :param list_points: list des points a simplfier.
+                -> A priori cette liste provient d'une interconnexion SG3
+                donc elle possede (normalement) au moins 4 points (amont 2 points internes aval)
+        :param tolerance_distance:
+        :return:
+
+        """
+        shp_list_points = LineString(list_points)
+        shp_simplify_list_points = shp_list_points.simplify(tolerance_distance, preserve_topology=False)
+        return np.asarray(shp_simplify_list_points)
+
+    def _convert_sg3_lane_to_symuvia_voie(self, nt_lane_sg3):
+        """
+
+        :param nt_lane_sg3: trafipolluImp_DUMP.NT_LANE_SG3
+            NamedTuple contenant un indice edge (SG3) et un indice voie lane_ordinality (SG3)
+        :return: NamedTuple resultat contenant un id de troncon (SYMUVIA) et un indice de voie (SYMUVIA)
+        """
+        return self.__dict_sg3_to_symuvia[nt_lane_sg3.edge_id][nt_lane_sg3.lane_ordinality]
 
 
 class trafipolluImp_TOPO_for_EXTREMITES(object):

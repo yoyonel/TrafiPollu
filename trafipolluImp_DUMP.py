@@ -9,6 +9,16 @@ from imt_tools import init_logger
 
 logger = init_logger(__name__)
 
+from imt_tools import CreateNamedTupleOnGlobals
+
+NT_LANE_SG3 = CreateNamedTupleOnGlobals(
+    'NT_LANE_SG3',
+    [
+        'edge_id',
+        'lane_ordinality',
+    ]
+)
+
 
 class DumpFromSG3(object):
     """
@@ -31,6 +41,14 @@ class DumpFromSG3(object):
     @property
     def dict_edges(self):
         return self.__dict_edges
+
+    @property
+    def dict_nodes(self):
+        return self.__dict_nodes
+
+    @property
+    def dict_interconnexions(self):
+        return self.__dict_interconnexions
 
     def dump_for_nodes(self, objects_from_sql_request):
         """
@@ -326,6 +344,42 @@ class DumpFromSG3(object):
 
         """
         return self.__dict_edges[sg3_edges_id]['lane_number']
+
+    def get_interconnexions(self, sg3_node_id):
+        """
+
+        :param sg3_node_id:
+        :return:
+
+        """
+        return self.__dict_interconnexions[sg3_node_id]
+
+    def get_set_edges_ids(self, sg3_node_id):
+        """
+
+        :param sg3_node_id:
+        :return:
+
+        """
+        return self.__dict_interconnexions['dict_set_edges_ids'][sg3_node_id]
+
+    @staticmethod
+    def get_interconnexion_amont(sg3_interconnexion):
+        """
+        """
+        return NT_LANE_SG3(sg3_interconnexion['edge_id1'], sg3_interconnexion['lane_ordinality1'])
+
+    @staticmethod
+    def get_interconnexion_aval(sg3_interconnexion):
+        """
+        """
+        return NT_LANE_SG3(sg3_interconnexion['edge_id2'], sg3_interconnexion['lane_ordinality2'])
+
+    @staticmethod
+    def get_interconnexion_geometry(sg3_interconnexion):
+        """
+        """
+        return sg3_interconnexion['np_interconnexion']
 
 
 def get_edge_id(sg3_edge):

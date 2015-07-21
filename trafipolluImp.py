@@ -8,9 +8,12 @@ import imt_tools
 from trafipolluImp_SQL import trafipolluImp_SQL
 
 
+
 # import trafipolluImp_EXPORT as tpi_EXPORT
 from trafipolluImp_DUMP import DumpFromSG3 as ModuleDump
-from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as ModuleTopo
+from trafipolluImp_TOPO import trafipolluImp_TOPO as ModuleTopo
+# from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as MT_For_TRONCONS
+# from trafipolluImp_TOPO import trafipolluImp_TOPO_for_INTERCONNEXIONS as MT_For_INTERCONNEXIONS
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
@@ -41,7 +44,9 @@ class TrafiPolluImp(object):
         self.module_SQL = trafipolluImp_SQL(**kwargs)
 
         self.module_DUMP = ModuleDump()
-        self.module_TOPO = ModuleTopo(object_DUMP=self.module_DUMP)  # liaison du module TOPO au DUMP
+        self.module_TOPO = ModuleTopo(object_DUMP=self.module_DUMP)
+        # self.module_TOPO_TRONCONS = MT_For_TRONCONS(object_DUMP=self.module_DUMP)  # liaison du module TOPO au DUMP
+        # self.module_TOPO_INTERCONNEXIONS = MT_For_INTERCONNEXIONS()     # les modules TOPO sont relies par heritage
 
         # self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
         # kwargs.update({'module_topo': self.module_topo})
@@ -208,9 +213,11 @@ class TrafiPolluImp(object):
                     dump_method(results_sql_request)  # met a jour module_DUMP
 
         # TOPO
-        # construction des troncons SYMUVIA
-        # self.module_TOPO.convert_sg3_edges_to_symutroncons(self.module_DUMP)
-        self.module_TOPO.build_symutroncons()  # module_TOPO est lie a module_DUMP a l'init
+        # # construction des troncons SYMUVIA
+        # self.module_TOPO_TRONCONS.build()  # module_TOPO est lie a module_DUMP a l'init
+        # # construction des connexions SYMUVIA
+        # self.module_TOPO_INTERCONNEXIONS.build()
+        self.module_TOPO.build()
 
         # # TEST: construction d'un graph topologique
         # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
