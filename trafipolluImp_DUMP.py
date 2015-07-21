@@ -363,6 +363,14 @@ class DumpFromSG3(object):
         """
         return self.__dict_interconnexions['dict_set_edges_ids'][sg3_node_id]
 
+    def get_node(self, sg3_node_id):
+        """
+
+        :param sg3_node_id:
+        :return:
+        """
+        return self.__dict_nodes[sg3_node_id]
+
     @staticmethod
     def get_interconnexion_amont(sg3_interconnexion):
         """

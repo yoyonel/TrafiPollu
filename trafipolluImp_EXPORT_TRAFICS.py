@@ -2,7 +2,6 @@ __author__ = 'latty'
 
 from trafipolluImp_PYXB import pyxb_parser
 from trafipolluImp_PYXB import pyxbDecorator
-from trafipolluImp_MixInF import MixInF
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
@@ -10,7 +9,7 @@ from imt_tools import init_logger
 logger = init_logger(__name__)
 
 
-class trafipolluImp_EXPORT_TRAFICS(MixInF):
+class trafipolluImp_EXPORT_TRAFICS(object):
     """
 
     """
@@ -19,9 +18,7 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
         """
 
         """
-        self.transfer_arguments(['module_topo', 'list_symu_connexions'], **kwargs)
-        #
-        super(trafipolluImp_EXPORT_TRAFICS, self).__init__(**kwargs)
+        self.module_topo = kwargs['module_topo']
 
     # Le decorator pyxbDecorator utilise les noms des methodes export_<Type_PYXB> pour retrouver les paths des types
     # (complexes, ...) XML a construire/instancien.
@@ -45,13 +42,14 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
 
         @pyxbDecorator(pyxb_parser)
         def export_TRAFIC(
-                list_troncons,
-                list_connexions,
-                list_extrimites,
+                dict_symuvia_objects,
                 *args
         ):
             """
 
+            :param dict_symuvia_objects:
+            :param args:
+            :return:
             """
 
             @pyxbDecorator(pyxb_parser)
@@ -73,7 +71,6 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                     )
                     return sym_TRONCON
 
-                #
                 str_path_to_child, sym_TRONCONS = pyxbDecorator.get_path_instance(*args)
                 for sym_TRONCON in list_troncons:
                     sym_TRONCONS.append(export_TRONCON(sym_TRONCON, str_path_to_child))
@@ -137,24 +134,44 @@ class trafipolluImp_EXPORT_TRAFICS(MixInF):
                 accbornee="true",
                 coeffrelax="0.55"
             )
-            if list_troncons != []:
-                sym_TRAFIC.TRONCONS = export_TRONCONS(list_troncons, str_path_to_child)
-            if list_connexions != []:
-                sym_TRAFIC.CONNEXIONS_INTERNES = export_CONNEXIONS_INTERNES(list_connexions, str_path_to_child)
-            if list_extrimites != ():
-                sym_TRAFIC.EXTREMITES = export_EXTREMITES(list_extrimites, str_path_to_child)
+
+            list_symu_troncons = dict_symuvia_objects.setdefault('list_symu_troncons', [])
+            # logger.info('list_symu_troncons: %s' % list_symu_troncons)
+            if list_symu_troncons:
+                sym_TRAFIC.TRONCONS = export_TRONCONS(list_symu_troncons, str_path_to_child)
+
+            list_symu_extremites = dict_symuvia_objects.setdefault('list_symu_extremites', [])
+            if list_symu_extremites:
+                sym_TRAFIC.EXTREMITES = export_EXTREMITES(list_symu_extremites, str_path_to_child)
+
+            # if list_connexions != []:
+            # sym_TRAFIC.CONNEXIONS_INTERNES = export_CONNEXIONS_INTERNES(list_connexions, str_path_to_child)
 
             return sym_TRAFIC
 
         str_path_to_child, sym_TRAFICS = pyxbDecorator.get_path_instance(*args)
-        list_extremites = self.module_topo.dict_extremites['ENTREES']
-        list_extremites.extend(self.module_topo.dict_extremites['SORTIES'])
+
+        # list_extremites = self.module_topo.dict_extremites['ENTREES']
+        # list_extremites.extend(self.module_topo.dict_extremites['SORTIES'])
+
         sym_TRAFICS.append(
             export_TRAFIC(
-                self.module_topo.dict_pyxb_symutroncons.values(),
-                self.list_symu_connexions,
-                list_extremites,
+                {
+                    'list_symu_troncons': self.module_topo.dict_symu_troncons.values(),
+                    'list_symu_extremites': self.module_topo.get_extremites_set_edges_ids()
+                },
                 str_path_to_child
             )
         )
         return sym_TRAFICS
+
+    @staticmethod
+    def update_pyxb_node(node, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+        """
+        # print 'update_pyxb_node - kwargs: ', kwargs
+        for k, v in kwargs.iteritems():
+            node._setAttribute(k, v)

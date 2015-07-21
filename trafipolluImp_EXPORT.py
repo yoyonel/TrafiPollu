@@ -30,10 +30,7 @@ from imt_tools import init_logger
 logger = init_logger(__name__)
 
 
-class trafipolluImp_EXPORT(
-    trafipolluImp_EXPORT_CONNEXIONS,
-    trafipolluImp_EXPORT_TRAFICS
-):
+class trafipolluImp_EXPORT(object):
     """
 
     """
@@ -59,8 +56,8 @@ class trafipolluImp_EXPORT(
         self.symu_ROOT_RESEAU_CONNEXIONS = None
         self.symu_ROOT_TRAFICS = None
 
-        kwargs.update({'list_symu_connexions': self.list_symu_connexions})
-        super(trafipolluImp_EXPORT, self).__init__(**kwargs)
+        self.module_export_trafics = trafipolluImp_EXPORT_TRAFICS(module_topo=self.module_topo)
+        self.module_export_connexions = trafipolluImp_EXPORT_CONNEXIONS(module_topo=self.module_topo)
 
     def clear(self):
         """
@@ -76,22 +73,12 @@ class trafipolluImp_EXPORT(
         :return:
 
         """
-        # TODO: construction TOPO ici !
-        # Ya une feinte presente dans la construction topologique liee a une contrainte d'ordonnancement.
-        # Actuellement pour determiner les extremites, on doit examiner les TRONCONS qui n'ont pas un lieu amont ou
-        # aval. Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (
-        # CONNEXIONS).
-        # Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes
-        # ids aux amonts/avals des interconnexions pour que le module extremites ne les prennent pas en compte.
-        # Dans l'export des CONNEXIONS par la suite, ces ids amonts/avals d'interconnexions sont reattribuees pour
-        # coincider au vrai lien topologiques (avec un CAF/REPARTITEUR ou un TRONCON)
-        self.module_topo.build_topo()
-        #
         self.update_TRONCONS()
 
         if b_export_connexion:
             self.update_CONNEXIONS()
-            self.update_TRAFICS()
+
+        self.update_TRAFICS()
 
     def update_TRONCONS(self):
         """
@@ -105,14 +92,14 @@ class trafipolluImp_EXPORT(
 
         :return:
         """
-        self.symu_ROOT_RESEAU_CONNEXIONS = self.export_CONNEXIONS('RESEAU')
+        self.symu_ROOT_RESEAU_CONNEXIONS = self.module_export_connexions.export_CONNEXIONS('RESEAU')
 
     def update_TRAFICS(self):
         """
 
         :return:
         """
-        self.symu_ROOT_TRAFICS = self.export_TRAFICS('ROOT_SYMUBRUIT')
+        self.symu_ROOT_TRAFICS = self.module_export_trafics.export_TRAFICS('ROOT_SYMUBRUIT')
 
     @timerDecorator()
     def export(self, update_symu=False, outfilename=outfilename_for_symuvia):
@@ -124,18 +111,15 @@ class trafipolluImp_EXPORT(
 
         if update_symu:
             self.update_SYMUVIA()
-            #
-            b_add_trafics = False
-            if self.module_topo.dict_pyxb_symutroncons:
-                self.symu_ROOT.RESEAUX.RESEAU[0].TRONCONS = self.symu_ROOT_RESEAU_TRONCONS
-                b_add_trafics = True
 
-            if b_export_connexion:
-                if self.list_symu_connexions != []:
+            if self.symu_ROOT_RESEAU_TRONCONS:
+                self.symu_ROOT.RESEAUX.RESEAU[0].TRONCONS = self.symu_ROOT_RESEAU_TRONCONS
+
+                # Si des symu-troncons exportes alors on a forcement un entete TRAFICS a remplir
+                self.symu_ROOT.TRAFICS = self.symu_ROOT_TRAFICS
+
+                if b_export_connexion:
                     self.symu_ROOT.RESEAUX.RESEAU[0].CONNEXIONS = self.symu_ROOT_RESEAU_CONNEXIONS
-                    b_add_trafics = True
-                if b_add_trafics:
-                    self.symu_ROOT.TRAFICS = self.symu_ROOT_TRAFICS
         #
         self.save_ROOT(self.symu_ROOT, outfilename)
 
@@ -184,8 +168,9 @@ class trafipolluImp_EXPORT(
         """
         sym_TRONCONS = pyxbDecorator.get_instance(*args)
         try:
-            for pyxb_symuTRONCON in self.module_topo.dict_pyxb_symutroncons.values():
-                sym_TRONCONS.append(pyxb_symuTRONCON)
+            # logger.info(u'self.module_topo.dict_symu_troncons: {0:s}'.format(self.module_topo.dict_symu_troncons))
+            for symu_troncon in self.module_topo.dict_symu_troncons.values():
+                sym_TRONCONS.append(symu_troncon)
         except pyxb.ValidationError as e:
             logger.fatal("Exception in 'export_TRONCONS' - details: ", e.details())
         #

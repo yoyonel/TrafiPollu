@@ -6,12 +6,10 @@ import cPickle as pickle
 from signalsmanager import SignalsManager
 import imt_tools
 from trafipolluImp_SQL import trafipolluImp_SQL
-
-
-
-# import trafipolluImp_EXPORT as tpi_EXPORT
+import trafipolluImp_EXPORT as tpi_EXPORT
 from trafipolluImp_DUMP import DumpFromSG3 as ModuleDump
 from trafipolluImp_TOPO import trafipolluImp_TOPO as ModuleTopo
+
 # from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as MT_For_TRONCONS
 # from trafipolluImp_TOPO import trafipolluImp_TOPO_for_INTERCONNEXIONS as MT_For_INTERCONNEXIONS
 
@@ -51,6 +49,7 @@ class TrafiPolluImp(object):
         # self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
         # kwargs.update({'module_topo': self.module_topo})
         # self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
+        self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(module_topo=self.module_TOPO)
 
     def _init_signals_(self):
         """
@@ -173,8 +172,7 @@ class TrafiPolluImp(object):
 
         :return:
         """
-        # self.module_export.export(True)
-        pass
+        self.module_export.export(True)
 
     def _dump_topo_export_(self):
         """
@@ -223,7 +221,7 @@ class TrafiPolluImp(object):
         # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
 
         #
-        # self.module_export.export(True)
+        self.module_export.export(True)
 
     def slot_dump_topo_export(self):
         """
