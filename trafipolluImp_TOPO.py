@@ -848,8 +848,8 @@ class trafipolluImp_TOPO_for_INTERCONNEXIONS(object):
 
         # on convertit ces informations vers SYMUVIA
         # on utilise les constructions de liens realise dans TOPO_TRONCONS
-        # c'est la classe mere qui detient le dictionnaire de conversion
-        # on utilise donct une methode d'acces (_convert_sg3_lane_to_symuvia_voie) via cette classe mere (par heritage)
+        # par l'init on est normalement relie aux resultats de TOPO_TRONCONS
+        # en particulier les liens entre SG3 et SYMUVIA (pour les troncons)
         symuvia_lane_amont = self._convert_sg3_lane_to_symuvia_voie(nt_sg3_amont)
         symuvia_lane_aval = self._convert_sg3_lane_to_symuvia_voie(nt_sg3_aval)
 
@@ -881,11 +881,18 @@ class trafipolluImp_TOPO_for_INTERCONNEXIONS(object):
 
     def find_type_connexion(self, set_edges_ids):
         """
+
+        :param set_edges_ids:
+        :return:
+
         """
         type_connexion = ''
 
+        # Strategie tres basique pour l'instant
+        # on compte le nombre de voies connectees a l'interconnexion/node
+        # et selon on decide si on a a faire a un 'REPARTITEUR' ou 'CAF'
+        # TODO: prend en compte le cas 'ROND-POINT'
         nb_edges_connected = len(set_edges_ids)
-
         if nb_edges_connected == 2:
             type_connexion = 'REPARTITEUR'
         elif nb_edges_connected > 2:
