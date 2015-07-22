@@ -61,6 +61,10 @@ SOURCES = \
 	trafipolluImp_EXPORT_TRAFICS.py \
 	trafipolluImp_PYXB.py \
 	trafipolluImp_TOPO.py \
+	trafipolluImp_TOPO_TRONCONS.py \
+	trafipolluImp_TOPO_CONNEXIONS.py \
+	trafipolluImp_TOPO_EXTREMITES.py \
+	trafipolluImp_TOPO_tools.py \
 	trafipolluImp_MixInF.py \
 	trafipolluImp_Tools_Symuvia.py \
 	decorators.py
@@ -91,6 +95,10 @@ PY_FILES = \
 	trafipolluImp_EXPORT_TRAFICS.py \
 	trafipolluImp_PYXB.py \
 	trafipolluImp_TOPO.py \
+	trafipolluImp_TOPO_TRONCONS.py \
+	trafipolluImp_TOPO_CONNEXIONS.py \
+	trafipolluImp_TOPO_EXTREMITES.py \
+	trafipolluImp_TOPO_tools.py \
 	trafipolluImp_MixInF.py \
 	trafipolluImp_Tools_Symuvia.py \
 	decorators.py \

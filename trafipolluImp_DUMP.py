@@ -34,6 +34,17 @@ class DumpFromSG3(object):
         self.__dict_interconnexions = {}
         self.__dict_roundabouts = {}
 
+    def clear(self):
+        """
+
+        :return:
+        """
+        self.__dict_nodes = {}
+        self.__dict_edges = {}
+        self.__dict_lanes = {}
+        self.__dict_interconnexions = {}
+        self.__dict_roundabouts = {}
+
     @property
     def dict_lanes(self):
         return self.__dict_lanes
@@ -207,6 +218,7 @@ class DumpFromSG3(object):
 
         """
         dict_dump_lanes = {}
+        # dict_link_sg3_python = {}
         nb_lanes_informations_retrieve = 0
         try:
             # get sides informations for each 'edge'/'troncon'
@@ -246,6 +258,9 @@ class DumpFromSG3(object):
                 # - value: liste des informations de voies/lanes
                 # -- indice: indice de voie suivant son 'ordinality' (SG3)
                 dict_dump_lanes[edge_id][lane_ordinality] = dict_sql_request
+
+                # python_id_for_lane = generate_python_id_from_sg3_lane(dict_sql_request, nb_lanes)
+                # dict_link_sg3_python[edge_id][lane_ordinality] = python_id_for_lane
 
                 nb_lanes_informations_retrieve += 1
         except Exception, e:
@@ -397,6 +412,31 @@ def get_edge_id(sg3_edge):
     :return:
     """
     return sg3_edge['edge_id']
+
+
+def generate_python_id_from_sg3_lane(sg3_lane, nb_lanes):
+    """
+
+    :return:
+    """
+    # url: https://wiki.python.org/moin/BitManipulation
+    lambdas_generate_id = {
+        'left': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 - (position / 2),
+        'right': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 + (position / 2) - even,
+        'center': lambda nb_lanes_by_2, position, even: nb_lanes_by_2
+    }
+
+    lane_position = sg3_lane['lane_position']
+    lane_side = sg3_lane['lane_side']
+
+    # update list sides for (grouping)
+    lambda_generate_id = lambdas_generate_id[lane_side]
+    nb_lanes_by_2 = nb_lanes >> 1
+    # test si l'entier est pair ?
+    # revient a tester le bit de point faible
+    even = not (nb_lanes & 1)
+
+    return lambda_generate_id(nb_lanes_by_2, lane_position, even)
 
 
     # # need to be in Globals for Pickled 'dict_edges'

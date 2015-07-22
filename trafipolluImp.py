@@ -8,7 +8,8 @@ import imt_tools
 from trafipolluImp_SQL import trafipolluImp_SQL
 import trafipolluImp_EXPORT as tpi_EXPORT
 from trafipolluImp_DUMP import DumpFromSG3 as ModuleDump
-from trafipolluImp_TOPO import trafipolluImp_TOPO as ModuleTopo
+from trafipolluImp_TOPO import ModuleTopo as ModuleTopo
+
 
 # from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as MT_For_TRONCONS
 # from trafipolluImp_TOPO import trafipolluImp_TOPO_for_INTERCONNEXIONS as MT_For_INTERCONNEXIONS
@@ -74,10 +75,12 @@ class TrafiPolluImp(object):
         """
         logger.info('clean ressources ...')
         #
-        self.__dict_edges.clear()
-        self.__dict_lanes.clear()
-        self.__dict_nodes.clear()
+        # self.__dict_edges.clear()
+        # self.__dict_lanes.clear()
+        # self.__dict_nodes.clear()
         #
+        self.module_DUMP.clear()
+        self.module_TOPO.clear()
 
     def slot_clear(self):
         """
