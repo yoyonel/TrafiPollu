@@ -238,6 +238,7 @@ def convert_lane_python_id_to_lane_symuvia_id(
         python_lane_id,
         start_python_lane_id,
         nb_lanes_in_group,
+        nb_lanes,
         lane_direction=True
 ):
     """
@@ -250,8 +251,9 @@ def convert_lane_python_id_to_lane_symuvia_id(
     # TODO: peut etre pas suffisant ... faudrait reflechir
     symu_lane_id = python_lane_id - start_python_lane_id  # 0 ... nb_lanes_in_group-1
     symu_lane_id = nb_lanes_in_group - symu_lane_id  # 1 ... nb_lanes_in_group
-    if not lane_direction:
-        symu_lane_id = (nb_lanes_in_group + 1) - symu_lane_id
+    # if not lane_direction or number_is_even(nb_lanes):
+    # if not number_is_even(nb_lanes):
+    symu_lane_id = (nb_lanes_in_group + 1) - symu_lane_id
 
     return symu_lane_id
 

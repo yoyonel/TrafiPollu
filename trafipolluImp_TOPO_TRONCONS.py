@@ -12,6 +12,7 @@ import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 from imt_tools import print_exception
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
@@ -551,11 +552,13 @@ class ModuleTopoTroncons(object):
                 python_lane_id,
                 start_python_lane_id,
                 nb_lanes_in_group,
+                nb_lanes,
                 self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
             )
 
             # on construit le tuple representant la voie SYMUVIA : (symutroncon, id de la voie (SYMUVIA order))
             nt_lane_symuvia = NT_LANE_SYMUVIA(pyxb_symutroncon, symu_lane_id)
+
             # on enregistre le lien topologique entre la voie SG3 -> SYMUVIA
             self.__dict_sg3_to_symuvia[sg3_edge_id][sg3_lane_ordinality] = nt_lane_symuvia
 
