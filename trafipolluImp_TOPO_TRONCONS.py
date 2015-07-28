@@ -13,6 +13,7 @@ from imt_tools import print_exception
 
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
@@ -145,6 +146,7 @@ class ModuleTopoTroncons(object):
             list_edges_counting_grouped_lanes
         )
 
+        # DEBUG
         # list_lane_ordinality = [
         # [
         #         lane_ordinality
@@ -559,7 +561,6 @@ class ModuleTopoTroncons(object):
             # b_inverse_order = not lane_direction
             lane_direction = self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
             b_inverse_order = not lane_direction
-            # b_inverse_order = False
 
             # on convertie le python id (de la voie) en numero de voie (SYMUVIA order)
             symu_lane_id = convert_lane_python_id_to_lane_symuvia_id(
@@ -575,8 +576,7 @@ class ModuleTopoTroncons(object):
             self.__dict_sg3_to_symuvia[sg3_edge_id][sg3_lane_ordinality] = nt_lane_symuvia
 
             logger.info('-> python_lane_id=%d -> sg3_lane_ordinality=%d -> symu_lane_id=%d' %
-                        (python_lane_id, sg3_lane_ordinality, symu_lane_id)
-            )
+                        (python_lane_id, sg3_lane_ordinality, symu_lane_id))
 
     def __convert_sg3_lane_to_symuvia_lane(self, nt_lane_sg3):
         """

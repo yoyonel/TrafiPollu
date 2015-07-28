@@ -250,7 +250,7 @@ class ModuleTopoConnexions(object):
         except Exception, e:
             logger.fatal('Exception: %s' % print_exception())
 
-    def __build_interconnexion_geometry(self, sg3_interconnexion):
+    def __build_interconnexion_geometry(self, sg3_interconnexion, tolerance_distance=0.10):
         """
 
         :param sg3_interconnexion:
@@ -261,7 +261,7 @@ class ModuleTopoConnexions(object):
         if b_use_simplification_for_points_internes_interconnexion:
             # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
             # inutile dans ce cas pour SYMUVIA
-            interconnexion_geom = self.__simplify_list_points(interconnexion_geom, 0.10)
+            interconnexion_geom = self.__simplify_list_points(interconnexion_geom, tolerance_distance)
             # On retire les 1er et dernier points qui sont les amont/aval de l'interconnexion
             interconnexion_geom = interconnexion_geom[1:-1]
         return interconnexion_geom

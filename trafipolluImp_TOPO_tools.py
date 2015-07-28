@@ -267,17 +267,6 @@ def convert_lane_python_id_to_lane_symuvia_id(
     :return:
 
     """
-    # # TODO: peut etre pas suffisant ... faudrait reflechir
-    # symu_lane_id = python_lane_id - start_python_lane_id  # 0 ... nb_lanes_in_group-1
-    #
-    # if nb_lanes_in_group == 2 and lane_direction:
-    # symu_lane_id = (nb_lanes_in_group-1) - symu_lane_id
-    #
-    # if nb_lanes_in_group == 3 and not lane_direction:
-    #     symu_lane_id = (nb_lanes_in_group-1) - symu_lane_id
-    #
-    # symu_lane_id += 1   # 1 ... nb_lanes_in_group
-
     symu_lane_id = python_lane_id - start_python_lane_id
     if b_inverse:
         symu_lane_id = (nb_lanes_in_group - 1) - symu_lane_id
