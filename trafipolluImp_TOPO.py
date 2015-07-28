@@ -675,6 +675,7 @@ class trafipolluImp_TOPO(object):
                     #
                     symu_troncons.append(symu_lane.symu_troncon)
                     symu_troncons_lane_id.append(symu_lane_id)
+                    #
 
             if len(symu_troncons) == 2:
                 dict_interconnexions.setdefault(

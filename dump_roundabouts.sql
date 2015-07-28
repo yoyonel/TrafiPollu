@@ -27,10 +27,10 @@ WITH edges_selected AS (
       ed.left_face = mr.face_id OR ed.right_face = mr.face_id
 )
 SELECT
-  es_gid        AS id,
-  ra.geom       AS wkb_centroid   -- geometrie du centre du rond-point,,
-  es_list_nodes AS list_nodes     -- list des (id des) nodes (BDTopo) dans le rond-point,,
-  es_list_edges AS list_edges -- list des (id des) edges (BDTopo) dans le rond-point
+  es_gid        AS id
+  ,ra.geom       AS wkb_centroid   -- geometrie du centre du rond-point,,
+  ,es_list_nodes AS list_nodes     -- list des (id des) nodes (BDTopo) dans le rond-point,,
+  ,es_list_edges AS list_edges -- list des (id des) edges (BDTopo) dans le rond-point
 FROM (SELECT
         gid                   AS es_gid,
         array_agg(start_node) AS es_list_nodes,
