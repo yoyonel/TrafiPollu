@@ -560,7 +560,7 @@ class ModuleTopoTroncons(object):
             # #
             # b_inverse_order = not lane_direction
             lane_direction = self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
-            b_inverse_order = not lane_direction
+            b_inverse_order = lane_direction
 
             # on convertie le python id (de la voie) en numero de voie (SYMUVIA order)
             symu_lane_id = convert_lane_python_id_to_lane_symuvia_id(
