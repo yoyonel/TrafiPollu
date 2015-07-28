@@ -13,6 +13,7 @@ from imt_tools import timerDecorator
 
 
 
+
 # need to be in Globals for Pickled 'dict_edges'
 NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     'NT_LANE_INFORMATIONS',
@@ -218,22 +219,56 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
     :return:
     """
-    lane_position = object_sql_lane['lane_position']
-    lane_side = object_sql_lane['lane_side']
-    # url: https://wiki.python.org/moin/BitManipulation
-    lambdas_generate_id = {
-        'left': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 - (position >> 1),
-        'right': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 + (position >> 1) - even,
-        'center': lambda nb_lanes_by_2, position, even: nb_lanes_by_2
-    }
-    # update list sides for (grouping)
-    lambda_generate_id = lambdas_generate_id[lane_side]
-    nb_lanes_by_2 = nb_lanes >> 1
-    # test si l'entier est pair ?
-    # revient a tester le bit de point faible
-    even = not (nb_lanes & 1)
+    # lane_position = object_sql_lane['lane_position']
+    # lane_side = object_sql_lane['lane_side']
+    # # url: https://wiki.python.org/moin/BitManipulation
+    # lambdas_generate_id = {
+    # 'left': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 - (position >> 1),
+    #     'right': lambda nb_lanes_by_2, position, even: nb_lanes_by_2 + (position >> 1) - even,
+    #     'center': lambda nb_lanes_by_2, position, even: nb_lanes_by_2
+    # }
+    # # update list sides for (grouping)
+    # lambda_generate_id = lambdas_generate_id[lane_side]
+    # nb_lanes_by_2 = nb_lanes >> 1
+    # # test si l'entier est pair ?
+    # # revient a tester le bit de point faible
+    # even = not (nb_lanes & 1)
+    #
+    # return lambda_generate_id(nb_lanes_by_2, lane_position, even)
+    return convert_lane_ordinality_to_python_id(object_sql_lane['lane_ordinality'], nb_lanes)
 
-    return lambda_generate_id(nb_lanes_by_2, lane_position, even)
+
+def number_is_even(number):
+    """
+    :param number:
+    :return:
+    """
+    return number % 2 == 0
+
+
+def count_number_odds(number):
+    """
+    :param number:
+    :return:
+    """
+    return int(float((number / 2.0) + 0.5))
+
+
+def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
+    """
+    :param nb_lanes:
+    :param lane_ordinality:
+    :return:
+    TESTS:
+     #>> test_convert_lane_ordinality_to_python_id()
+     [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
+    """
+    nb_odds = count_number_odds(nb_lanes)
+    if number_is_even(lane_ordinality):
+        python_id = nb_odds + (lane_ordinality / 2) - 1
+    else:
+        python_id = nb_odds - (lane_ordinality + 1) / 2
+    return python_id
 
 
 @timerDecorator()
@@ -278,12 +313,7 @@ def dump_lanes(objects_from_sql_request, dict_edges):
         # SQL (ce qui etait avant) et/ou l'ordre fournit par SG3 (ordonality id)
         set_lane_informations(
             dict_lanes, sg3_edge_id, python_lane_id,
-            NT_LANE_INFORMATIONS(
-                lane_side,
-                lane_direction,
-                lane_center_axis,
-                nb_lanes
-            )
+            NT_LANE_INFORMATIONS(lane_side, lane_direction, lane_center_axis, nb_lanes)
         )
 
         # for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary
