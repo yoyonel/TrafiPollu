@@ -46,6 +46,14 @@ NT_LANE_SYMUVIA = CreateNamedTupleOnGlobals(
         'id_lane',
     ]
 )
+#
+NT_LANES_SYMUVIA = CreateNamedTupleOnGlobals(
+    'NT_LANES_SYMUVIA',
+    [
+        'symu_troncon',
+        'ids_lane'
+    ]
+)
 
 NT_RESULT_BUILD_PYXB = CreateNamedTuple(
     'NT_RESULT_BUILD_PYXB',
@@ -94,6 +102,10 @@ def count_number_odds(number):
     return int(float((number / 2.0) + 0.5))
 
 
+def count_number_even(number):
+    return number - count_number_odds(number)
+
+
 def test_count_number_odds(max_number=16):
     """
 
@@ -112,7 +124,18 @@ def test_count_number_odds(max_number=16):
     ]
 
 
+def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
+    return convert_lane_ordinality_to_python_id_left(lane_ordinality, nb_lanes)
+    # return convert_lane_ordinality_to_python_id_right(lane_ordinality, nb_lanes)
+
+
 def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
+    # ordre de SG3 [3, 1, 2, 4] sur edge de 4 voies
+    return convert_python_id_to_lane_ordinality_left(python_id, nb_lanes)
+    # return convert_python_id_to_lane_ordinality_right(python_id, nb_lanes)
+
+
+def convert_python_id_to_lane_ordinality_left(python_id, nb_lanes):
     """
 
     :param python_id:
@@ -125,28 +148,26 @@ def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
 
     """
     nb_odds = count_number_odds(nb_lanes)
-    return ((nb_odds - python_id) * 2 - 1) if python_id < nb_odds else (python_id - nb_odds + 1) * 2
+    if python_id < nb_odds:
+        lane_ordinality = (nb_odds - python_id) * 2 - 1
+    else:
+        lane_ordinality = (python_id - nb_odds + 1) * 2
+    return lane_ordinality
 
 
-# def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
-# """
-#
-#     :param python_id:
-#     :param nb_lanes:
-#     :return:
-#
-#     TEST:
-#         >> test_convert_python_id_to_lane_ordinality()
-#          [[1], [2, 1], [2, 1, 3], [2, 4, 1, 3], [2, 4, 1, 3, 5]]
-#
-#     """
-#     nb_odds = count_number_odds(nb_lanes)
-#     limit_left_right = nb_lanes - nb_odds
-#     if python_id < limit_left_right:
-#         lane_ordinality = (python_id+1)*2
-#     else:
-#         lane_ordinality = (python_id-limit_left_right)*2+1
-#     return lane_ordinality
+def convert_python_id_to_lane_ordinality_right(python_id, nb_lanes):
+    """
+
+    :param python_id:
+    :param nb_lanes:
+    :return:
+
+    TEST:
+        >> test_convert_python_id_to_lane_ordinality()
+         [[1], [2, 1], [2, 1, 3], [4, 2, 1, 3], [4, 2, 1, 3, 5]]
+
+    """
+    return convert_python_id_to_lane_ordinality_left((nb_lanes - 1) - python_id, nb_lanes)
 
 
 def test_convert_python_id_to_lane_ordinality(max_nb_lanes=6):
@@ -167,7 +188,7 @@ def test_convert_python_id_to_lane_ordinality(max_nb_lanes=6):
     ]
 
 
-def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
+def convert_lane_ordinality_to_python_id_left(lane_ordinality, nb_lanes):
     """
 
     :param nb_lanes:
@@ -187,25 +208,24 @@ def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
     return python_id
 
 
-# def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
-#     """
-#
-#     :param nb_lanes:
-#     :param lane_ordinality:
-#     :return:
-#
-#     TESTS:
-#      #>> test_convert_lane_ordinality_to_python_id()
-#      [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
-#
-#     """
-#     nb_odds = count_number_odds(nb_lanes)
-#     limit_left_right = nb_lanes - nb_odds
-#     if number_is_even(lane_ordinality):
-#         python_id = limit_left_right - (lane_ordinality - 1) - 1
-#     else:
-#         python_id = (lane_ordinality - 1) / 2 + limit_left_right
-#     return python_id
+def convert_lane_ordinality_to_python_id_right(lane_ordinality, nb_lanes):
+    """
+
+    :param nb_lanes:
+    :param lane_ordinality:
+    :return:
+
+    TESTS:
+     #>> test_convert_lane_ordinality_to_python_id()
+     [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
+
+    """
+    nb_evens = count_number_even(nb_lanes)
+    if number_is_even(lane_ordinality):
+        python_id = nb_evens - lane_ordinality / 2
+    else:
+        python_id = nb_evens + (lane_ordinality - 1) / 2
+    return python_id
 
 
 def test_convert_lane_ordinality_to_python_id(max_nb_lanes=6):
@@ -238,7 +258,7 @@ def convert_lane_python_id_to_lane_symuvia_id(
         python_lane_id,
         start_python_lane_id,
         nb_lanes_in_group,
-        lane_direction=True
+        b_inverse=False
 ):
     """
 
@@ -247,11 +267,21 @@ def convert_lane_python_id_to_lane_symuvia_id(
     :return:
 
     """
-    # TODO: peut etre pas suffisant ... faudrait reflechir
-    symu_lane_id = python_lane_id - start_python_lane_id  # 0 ... nb_lanes_in_group-1
-    symu_lane_id = nb_lanes_in_group - symu_lane_id  # 1 ... nb_lanes_in_group
-    if not lane_direction:
-        symu_lane_id = (nb_lanes_in_group + 1) - symu_lane_id
+    # # TODO: peut etre pas suffisant ... faudrait reflechir
+    # symu_lane_id = python_lane_id - start_python_lane_id  # 0 ... nb_lanes_in_group-1
+    #
+    # if nb_lanes_in_group == 2 and lane_direction:
+    # symu_lane_id = (nb_lanes_in_group-1) - symu_lane_id
+    #
+    # if nb_lanes_in_group == 3 and not lane_direction:
+    #     symu_lane_id = (nb_lanes_in_group-1) - symu_lane_id
+    #
+    # symu_lane_id += 1   # 1 ... nb_lanes_in_group
+
+    symu_lane_id = python_lane_id - start_python_lane_id
+    if b_inverse:
+        symu_lane_id = (nb_lanes_in_group - 1) - symu_lane_id
+    symu_lane_id += 1
 
     return symu_lane_id
 

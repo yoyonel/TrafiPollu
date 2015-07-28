@@ -12,6 +12,7 @@ import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 from imt_tools import print_exception
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
@@ -223,7 +224,8 @@ class ModuleTopoTroncons(object):
                     sg3_edge_id,
                     python_lane_id,
                     nb_lanes_in_group,
-                    symutroncon
+                    symutroncon,
+                    len(grouped_lanes_for_edge) > 1
                 )
 
                 # on rajoute l'element dans le dictionnaire resultat
@@ -525,7 +527,8 @@ class ModuleTopoTroncons(object):
             sg3_edge_id,
             start_python_lane_id,
             nb_lanes_in_group,
-            pyxb_symutroncon
+            pyxb_symutroncon,
+            multi_groups
     ):
         """
 
@@ -536,6 +539,8 @@ class ModuleTopoTroncons(object):
         :return:
 
         """
+        logger.info('sg3_edge_id: %d' % sg3_edge_id)
+
         nb_lanes = self.__object_DUMP.get_lane_number(sg3_edge_id)
         # SG3 order (lane_ordinality)
         self.__dict_sg3_to_symuvia.setdefault(sg3_edge_id, [None] * (nb_lanes + 1))
@@ -546,18 +551,32 @@ class ModuleTopoTroncons(object):
             # on convertie le python id de la voie en SG3 lane ordinality (SG3 order)
             sg3_lane_ordinality = convert_python_id_to_lane_ordinality(python_lane_id, nb_lanes)
 
+            # if multi_groups:
+            # lane_direction = False
+            # else:
+            #     lane_direction = self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
+            # #
+            # b_inverse_order = not lane_direction
+            lane_direction = self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
+            b_inverse_order = not lane_direction
+            # b_inverse_order = False
+
             # on convertie le python id (de la voie) en numero de voie (SYMUVIA order)
             symu_lane_id = convert_lane_python_id_to_lane_symuvia_id(
                 python_lane_id,
                 start_python_lane_id,
                 nb_lanes_in_group,
-                self.__object_DUMP.get_lane_direction(sg3_edge_id, sg3_lane_ordinality)
+                b_inverse_order
             )
 
             # on construit le tuple representant la voie SYMUVIA : (symutroncon, id de la voie (SYMUVIA order))
             nt_lane_symuvia = NT_LANE_SYMUVIA(pyxb_symutroncon, symu_lane_id)
             # on enregistre le lien topologique entre la voie SG3 -> SYMUVIA
             self.__dict_sg3_to_symuvia[sg3_edge_id][sg3_lane_ordinality] = nt_lane_symuvia
+
+            logger.info('-> python_lane_id=%d -> sg3_lane_ordinality=%d -> symu_lane_id=%d' %
+                        (python_lane_id, sg3_lane_ordinality, symu_lane_id)
+            )
 
     def __convert_sg3_lane_to_symuvia_lane(self, nt_lane_sg3):
         """

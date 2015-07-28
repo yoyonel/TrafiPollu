@@ -210,8 +210,8 @@ class ModuleTopoConnexions(object):
             nt_sg3_amont = self.__object_DUMP.get_interconnexion_amont(sg3_interconnexion)
             nt_sg3_aval = self.__object_DUMP.get_interconnexion_aval(sg3_interconnexion)
 
-            # logger.info(u'nt_sg3_amont: {0:s}'.format(nt_sg3_amont))
-            # logger.info(u'nt_sg3_aval: {0:s}'.format(nt_sg3_aval))
+            logger.info(u'nt_sg3_amont: {0:s}'.format(nt_sg3_amont))
+            logger.info(u'nt_sg3_aval: {0:s}'.format(nt_sg3_aval))
 
             # on convertit ces informations vers SYMUVIA
             # on utilise les constructions de liens realise dans TOPO_TRONCONS
@@ -220,8 +220,9 @@ class ModuleTopoConnexions(object):
             symuvia_lane_amont = self.__convert_sg3_lane_to_symuvia_lane(nt_sg3_amont)
             symuvia_lane_aval = self.__convert_sg3_lane_to_symuvia_lane(nt_sg3_aval)
 
-            # logger.info(u'symuvia_lane_amont: {0:s}'.format(symuvia_lane_amont))
-            # logger.info(u'symuvia_lane_amont: {0:s}'.format(nt_sg3_aval))
+            logger.info(u'symuvia_lane_amont: {0:d}'.format(symuvia_lane_amont.id_lane))
+            logger.info(u'symuvia_lane_aval: {0:d}'.format(symuvia_lane_aval.id_lane))
+
             if symuvia_lane_amont is None:
                 nt_lane_sg3 = nt_sg3_amont
                 # self.__dict_sg3_to_symuvia_from_topo_for_troncons[nt_lane_sg3.edge_id][nt_lane_sg3.lane_ordinality]
