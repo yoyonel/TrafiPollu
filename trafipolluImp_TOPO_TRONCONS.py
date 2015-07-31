@@ -39,6 +39,9 @@ class ModuleTopoTroncons(object):
         self.__dict_grouped_lanes = {}
         self.__dict_sg3_to_symuvia = {}
 
+    ###############
+    # PROPORTIES
+    ###############
     @property
     def dict_sg3_to_symuvia(self):
         return self.__dict_sg3_to_symuvia
@@ -61,6 +64,16 @@ class ModuleTopoTroncons(object):
         self.__dict_grouped_lanes = {}
         self.__dict_sg3_to_symuvia = {}
 
+    def update_parameters(self, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+        """
+        # on redefinie un lien vers le module DUMP si une instance est transmise en parametre (dict params)
+        # sinon on utilise le module dump fournit a l'init
+        self.__object_DUMP = kwargs.setdefault('object_DUMP', self.__object_DUMP)
+
     def build(self, **kwargs):
         """
         Construit un dictionnaire contenant les troncons SYMUVIA.
@@ -81,15 +94,14 @@ class ModuleTopoTroncons(object):
         """
         dict_symutroncons = {}
 
-        # on redefinie un lien vers le module DUMP si une instance est transmise en parametre (dict params)
-        # sinon on utilise le module dump fournit a l'init
-        self.__object_DUMP = kwargs.setdefault('object_DUMP', self.__object_DUMP)
+        self.update_parameters(**kwargs)
 
         if self.__object_DUMP:
             # construction des groupes lanes
             # logger.info('object_DUMP.dict_lanes: %s' % object_DUMP.dict_lanes)
             dict_grouped_lanes = self.__build_dict_grouped_lanes(self.__object_DUMP.dict_lanes)
-            # logger.info('dict_grouped_lanes: %s' % dict_grouped_lanes)
+            # logger.info('dict_grouped_lanwglGetProcAddressglCreateShaderObject
+            # es: %s' % dict_grouped_lanes)
 
             # on parcourt l'ensemble des id des edges disponibles
             for edge_id, sg3_edge in self.__object_DUMP.dict_edges.iteritems():

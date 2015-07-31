@@ -11,8 +11,7 @@ from trafipolluImp_DUMP import DumpFromSG3 as ModuleDump
 from trafipolluImp_TOPO import ModuleTopo as ModuleTopo
 
 
-# from trafipolluImp_TOPO import trafipolluImp_TOPO_for_TRONCONS as MT_For_TRONCONS
-# from trafipolluImp_TOPO import trafipolluImp_TOPO_for_INTERCONNEXIONS as MT_For_INTERCONNEXIONS
+from tp_configparser import TPConfig
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
@@ -36,20 +35,20 @@ class TrafiPolluImp(object):
         self.__dict_lanes = {}
         self.__dict_nodes = {}
         #
+        self.qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
+        self.__tp_config = TPConfig(self.qgis_plugins_directory + '/' + 'defaults.cfg')
+        #
         kwargs = {
-            'iface': iface
+            'iface': iface,
+            'ConfigParser': self.__tp_config.parser
         }
 
         self.module_SQL = trafipolluImp_SQL(**kwargs)
 
         self.module_DUMP = ModuleDump()
-        self.module_TOPO = ModuleTopo(object_DUMP=self.module_DUMP)
-        # self.module_TOPO_TRONCONS = MT_For_TRONCONS(object_DUMP=self.module_DUMP)  # liaison du module TOPO au DUMP
-        # self.module_TOPO_INTERCONNEXIONS = MT_For_INTERCONNEXIONS()     # les modules TOPO sont relies par heritage
 
-        # self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
-        # kwargs.update({'module_topo': self.module_topo})
-        # self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
+        self.module_TOPO = ModuleTopo(object_DUMP=self.module_DUMP)
+
         self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(module_topo=self.module_TOPO)
 
     def _init_signals_(self):

@@ -110,6 +110,7 @@ class ModuleTopoConnexions(object):
 
         """
         dict_symu_connexions = {}
+        #
         dict_symu_connexions_caf = {}
         dict_symu_connexions_repartiteur = {}
         dict_symu_mouvements_entrees = {}

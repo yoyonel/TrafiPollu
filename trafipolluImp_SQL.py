@@ -8,7 +8,7 @@ import psycopg2.extras
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
-
+import tp_configparser as tp_config
 
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
@@ -22,15 +22,10 @@ class trafipolluImp_SQL(object):
 
     """
 
-    # def __init__(self, iface, dict_edges, dict_lanes, dict_nodes):
     def __init__(self, **kwargs):
         """
 
         """
-        # self.dict_edges = kwargs['dict_edges']
-        # self.dict_nodes = kwargs['dict_nodes']
-        # self.dict_lanes = kwargs['dict_lanes']
-
         iface = kwargs['iface']
         self._map_canvas = iface.mapCanvas()
         #
@@ -43,9 +38,32 @@ class trafipolluImp_SQL(object):
             'dump_informations_from_edges': self._request_sql,
             'dump_sides_from_edges': self._request_sql,
             'dump_informations_from_nodes': self._request_sql,
-            'dump_informations_from_lane_interconnexion': self._request_sql,
+            'dump_informations_from_lane_interconnexion': self._request_sql
         }
 
+        self._dict_params_server = {}
+        self._init_from_default_values()
+        if 'ConfigParser' in kwargs:
+            self._init_from_configs(kwargs['ConfigParser'])
+
+        self.connection = None
+        self.cursor = None
+        self.b_connection_to_postgres_server = False
+
+        self.connect_sql_server()
+
+    def __del__(self):
+        """
+
+        :return:
+        """
+        self.disconnect_sql_server()
+
+    def _init_from_default_values(self):
+        """
+
+        :return:
+        """
         self._dict_params_server = {
             'LOCAL': {
                 'host': "localhost",
@@ -63,18 +81,31 @@ class trafipolluImp_SQL(object):
             },
         }
 
-        self.connection = None
-        self.cursor = None
-        self.b_connection_to_postgres_server = False
-
-        self.connect_sql_server()
-
-    def __del__(self):
+    def _init_from_configs(self, configparser):
         """
 
+        :param configparser:
         :return:
+
         """
-        self.disconnect_sql_server()
+        # LOCAL
+        if configparser.has_section('sql_postgres_server_local'):
+            self._dict_params_server['LOCAL'] = tp_config.get_dict_with_configs(
+                configparser,
+                'sql_postgres_server_local',
+                self._dict_params_server['LOCAL']
+            )
+            #
+            logger.info(u"self._dict_params_server['LOCAL']: {0:s}".format(self._dict_params_server['LOCAL']))
+        # IGN
+        if configparser.has_section('sql_postgres_server_ign'):
+            self._dict_params_server['IGN'] = tp_config.get_dict_with_configs(
+                configparser,
+                'sql_postgres_server_local',
+                self._dict_params_server['IGN']
+            )
+            #
+            logger.info(u"self._dict_params_server['IGN']: {0:s}".format(self._dict_params_server['IGN']))
 
     def disconnect_sql_server(self):
         """
