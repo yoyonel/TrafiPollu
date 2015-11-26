@@ -100,8 +100,13 @@ UI_FILES = interactive_map_tracking_dialog_base.ui
 
 EXTRAS = icon.png metadata.txt *.sql *.xml *.xsd
 
-COMPILED_RESOURCE_FILES = resources_rc.py \
-    parser_symuvia_xsd_2_04_pyxb.py
+COMPILED_RESOURCE_FILES = resources_rc.py
+#################
+# XSD           #
+#################
+# On selectionne par inclusion quelle version du XSD on souhaite utiliser pour générer le parser
+COMPILED_RESOURCE_FILES += parser_symuvia_xsd_2_04_pyxb.py
+#################
 
 PEP8EXCLUDE=pydev,resources_rc.py,conf.py,third_party,ui
 
@@ -130,6 +135,10 @@ compile: $(COMPILED_RESOURCE_FILES)
 %.qm : %.ts
 	$(LRELEASE) $<
 
+#################
+# XSD           #
+#################
+# on extrait la version dans le nom du fichier
 GET_XSD_VERSION = $(subst _,.,$(subst _pyxb.py,,$(subst parser_symuvia_xsd_,,$1)))
 
 %_pyxb.py:
@@ -139,6 +148,7 @@ GET_XSD_VERSION = $(subst _,.,$(subst _pyxb.py,,$(subst parser_symuvia_xsd_,,$1)
     # $@ : fichier courant
     # $< : dependance
 	pyxbgen -u reseau_$(call GET_XSD_VERSION,$@).xsd -m $(subst .py,,$@)
+#################
 
 test: compile transcompile
 	@echo

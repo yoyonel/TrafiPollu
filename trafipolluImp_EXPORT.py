@@ -17,6 +17,10 @@ from trafipolluImp_EXPORT_CONNEXIONS import trafipolluImp_EXPORT_CONNEXIONS
 from trafipolluImp_EXPORT_TRAFICS import trafipolluImp_EXPORT_TRAFICS
 from imt_tools import timerDecorator
 
+import ConfigParser
+from collections import defaultdict
+
+
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #
 infilename_for_symuvia = qgis_plugins_directory + '/' + "project_empty_from_symunet" + "_xsd_" + "2_04" + ".xml"
@@ -28,6 +32,51 @@ b_export_connexion = True
 from imt_tools import init_logger
 
 logger = init_logger(__name__)
+
+
+class CConfig:
+    def __init__(self, filename):
+        self.Config = ConfigParser.ConfigParser()
+        self.current_section = None
+        self.config_filename = filename
+        self.dict = defaultdict(defaultdict)
+
+    def load(self):
+        try:
+            self.Config.read(self.config_filename)
+        except ConfigParser.ParsingError:
+            logger.warning("can't read the file: ${0}".format(self.config_filename))
+            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
+
+    def load_section(self, section_name, set_current=True):
+        try:
+            options = self.Config.options(section_name)
+            for option in options:
+                try:
+                    self.dict[section_name][option] = self.Config.get(section_name, option)
+                    if self.dict[section_name][option] == -1:
+                        print("skip: [option]->%s" % option)
+                # except ConfigParser.NoOptionError:
+                except:
+                    print("exception on [option]->%s!" % option)
+                    self.dict[section_name][option] = None
+            if set_current:
+                self.set_current_section(section_name)
+        # except ConfigParser.NoSectionError:
+        except:
+            print("exception on: [Section]->%s!" % section_name)
+
+    def get_option(self, option_name, default_value=None, section_name=None):
+        if not section_name:
+            section_name = self.current_section
+
+        try:
+            return dict[section_name][option_name]
+        except:
+            return default_value
+
+    def set_current_section(self, section):
+        self.current_section = section
 
 
 class trafipolluImp_EXPORT(
@@ -48,13 +97,53 @@ class trafipolluImp_EXPORT(
         self.pyxb_parser = pyxb_parser
         #
         self.list_symu_connexions = []
+
+        self.configs = defaultdict()
         #
-        infilename = kwargs.setdefault('infilename_for_symuvia', infilename_for_symuvia)
-        logger.info("trafipolluImp_EXPORT - Open file: %s ..." % infilename)
-        xml = open(infilename).read()
+        self.config_filename = qgis_plugins_directory + '/' + \
+                               kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
+        logger.info("Config INI filename: {0}".format(self.config_filename))
+        self.Config = CConfig(self.config_filename)
+        Config = self.Config    # alias sur la Config
+        try:
+            Config.load()
+        except ConfigParser.ParsingError:
+            logger.warning("can't read the file: ${0}".format(self.config_filename))
+            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
+
+        # load la section et place cette section en section courante
+        Config.load_section('EXPORT')
+
+        # recuperation des options liees a la section courante 'EXPORT'
+        # XSD informations
+        self.xsd_version = Config.get_option('xsd_version', "2_04")
+        self.xsd_prefix = Config.get_option('xsd_prefix', "_xsd_")
+        # IMPORT informations
+        self.symuvia_import_filename = Config.get_option('symuvia_import_filename', "project_empty_from_symunet")
+        self.symuvia_import_ext = Config.get_option('symuvia_import_ext', "xml")
+        self.symuvia_import_path = Config.get_option('symuvia_import_path', qgis_plugins_directory + '/')
+        # EXPORT informations
+        self.symuvia_export_filename = Config.get_option('symuvia_export_filename', "export_from_sg3_to_symuvia")
+        self.symuvia_export_ext = Config.get_option('symuvia_export_ext', "xml")
+        self.symuvia_export_path = Config.get_option('symuvia_export_path', qgis_plugins_directory + '/')
+
+        # construction du nom du fichier
+        # IMPORT
+        self.symuvia_infilename = self.symuvia_import_path + \
+            self.symuvia_import_filename + \
+            self.xsd_prefix + self.xsd_version + \
+            '.' + self.symuvia_import_ext
+        # EXPORT
+        self.symuvia_outfilename = self.symuvia_export_path + \
+            self.symuvia_export_filename + \
+            self.xsd_prefix + self.xsd_version + \
+            '.' + self.symuvia_export_ext
+
+        logger.info("trafipolluImp_EXPORT - Open file: %s ..." % self.symuvia_infilename)
+        xml = open(self.symuvia_infilename).read()
         self.symu_ROOT = symuvia_parser.CreateFromDocument(xml)
-        logger.info("trafipolluImp_EXPORT - Open file: %s [DONE]" % infilename)
-        #
+        logger.info("trafipolluImp_EXPORT - Open file: %s [DONE]" % self.symuvia_infilename)
+
         self.symu_ROOT_RESEAU_TRONCONS = None
         self.symu_ROOT_RESEAU_CONNEXIONS = None
         self.symu_ROOT_TRAFICS = None
@@ -115,7 +204,7 @@ class trafipolluImp_EXPORT(
         self.symu_ROOT_TRAFICS = self.export_TRAFICS('ROOT_SYMUBRUIT')
 
     @timerDecorator()
-    def export(self, update_symu=False, outfilename=outfilename_for_symuvia):
+    def export(self, update_symu=False, outfilename=""):
         """
 
         :param filename:
@@ -137,7 +226,10 @@ class trafipolluImp_EXPORT(
                 if b_add_trafics:
                     self.symu_ROOT.TRAFICS = self.symu_ROOT_TRAFICS
         #
-        self.save_ROOT(self.symu_ROOT, outfilename)
+        self.save_ROOT(
+            self.symu_ROOT,
+            outfilename if outfilename else self.symuvia_outfilename
+        )
 
     def save_ROOT(self, sym_ROOT, outfilename):
         """

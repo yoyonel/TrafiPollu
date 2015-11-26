@@ -36,7 +36,7 @@ NT_LANE_SYMU = CreateNamedTupleOnGlobals(
     'NT_LANE_SYMU',
     [
         'symu_troncon',
-        'id_lane',
+        'id_lane'
     ]
 )
 
@@ -77,7 +77,7 @@ class trafipolluImp_TOPO(object):
         self.dict_extremites = {
             'ENTREES': [],
             'SORTIES': [],
-        }
+            }
 
     def clear(self):
         """
@@ -90,7 +90,7 @@ class trafipolluImp_TOPO(object):
         self.dict_extremites = {
             'ENTREES': [],
             'SORTIES': [],
-        }
+            }
 
     @timerDecorator()
     def build_topo(self):
@@ -491,9 +491,9 @@ class trafipolluImp_TOPO(object):
                 node_list_interconnexions = dict_values['interconnexions']
                 set_id_edges = dict_values['set_id_edges']
             except Exception, e:
-                logger.fatal('build_topo_for_interconnexions - Exception: ', e)
-                logger.fatal('\tnode_id: ', node_id)
-                logger.fatal("\tdict_node[%s]: %s", node_id, dict_values)
+                logger.fatal('build_topo_for_interconnexions - Exception: ${0}'.format(e))
+                logger.fatal('\tnode_id: ${0}'.format(node_id))
+                logger.fatal("\tdict_node[${0}]: ${1}".format(node_id, dict_values))
                 #
                 list_remove_nodes.append(node_id)
             else:
@@ -585,7 +585,7 @@ class trafipolluImp_TOPO(object):
         self.dict_nodes.update(dict_interconnexions)
 
         if list_remove_nodes:
-            logger.info('# build_topo_for_nodes - nb nodes_removed: ', len(list_remove_nodes))
+            logger.info('# build_topo_for_nodes - nb nodes_removed: ${0}'.format(len(list_remove_nodes)))
 
     def find_symu_troncon_lane(
             self,

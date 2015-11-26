@@ -1,7 +1,7 @@
 # ./parser_symuvia_xsd_2_04_pyxb.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-07-15 10:10:12.396197 by PyXB version 1.2.4 using Python 2.7.6.final.0
+# Generated 2015-11-26 15:25:30.077515 by PyXB version 1.2.4 using Python 2.7.6.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:ea54e5d8-2ac8-11e5-9f2c-60a44c5c87bf')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:8b39a440-9449-11e5-a985-60a44c5c87bf')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -761,10 +761,10 @@ class typeVitesses (pyxb.binding.basis.STD_union):
     _Documentation = None
 
     _MemberTypes = ( typeFloatStrictPositif, )
-typeVitesses._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitesses)
 typeVitesses._CF_pattern = pyxb.binding.facets.CF_pattern()
-typeVitesses._InitializeFacetMap(typeVitesses._CF_enumeration,
-   typeVitesses._CF_pattern)
+typeVitesses._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitesses)
+typeVitesses._InitializeFacetMap(typeVitesses._CF_pattern,
+   typeVitesses._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', 'typeVitesses', typeVitesses)
 
 # Union simple type: typeVitMax
@@ -778,11 +778,11 @@ class typeVitMax (pyxb.binding.basis.STD_union):
     _Documentation = ''
 
     _MemberTypes = ( typeFloatStrictPositif, typeInfini, )
-typeVitMax._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitMax)
 typeVitMax._CF_pattern = pyxb.binding.facets.CF_pattern()
+typeVitMax._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=typeVitMax)
 typeVitMax.infini = 'infini'                      # originally typeInfini.infini
-typeVitMax._InitializeFacetMap(typeVitMax._CF_enumeration,
-   typeVitMax._CF_pattern)
+typeVitMax._InitializeFacetMap(typeVitMax._CF_pattern,
+   typeVitMax._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', 'typeVitMax', typeVitMax)
 
 # List simple type: typeCoordonnees
@@ -796,12 +796,12 @@ class typeCoordonnees (pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.float
+typeCoordonnees._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(2))
 typeCoordonnees._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
 typeCoordonnees._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
-typeCoordonnees._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(2))
-typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_maxLength,
-   typeCoordonnees._CF_whiteSpace,
-   typeCoordonnees._CF_minLength)
+typeCoordonnees._InitializeFacetMap(typeCoordonnees._CF_minLength,
+   typeCoordonnees._CF_maxLength,
+   typeCoordonnees._CF_whiteSpace)
 Namespace.addCategoryObject('typeBinding', 'typeCoordonnees', typeCoordonnees)
 
 # Atomic simple type: typeString256
@@ -933,12 +933,12 @@ class typeRGBAColor (pyxb.binding.basis.STD_list):
     _Documentation = None
 
     _ItemType = typeFloat01
+typeRGBAColor._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
 typeRGBAColor._CF_maxLength = pyxb.binding.facets.CF_maxLength(value=pyxb.binding.datatypes.nonNegativeInteger(4))
 typeRGBAColor._CF_whiteSpace = pyxb.binding.facets.CF_whiteSpace(value=pyxb.binding.facets._WhiteSpace_enum.collapse)
-typeRGBAColor._CF_minLength = pyxb.binding.facets.CF_minLength(value=pyxb.binding.datatypes.nonNegativeInteger(3))
-typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_maxLength,
-   typeRGBAColor._CF_whiteSpace,
-   typeRGBAColor._CF_minLength)
+typeRGBAColor._InitializeFacetMap(typeRGBAColor._CF_minLength,
+   typeRGBAColor._CF_maxLength,
+   typeRGBAColor._CF_whiteSpace)
 Namespace.addCategoryObject('typeBinding', 'typeRGBAColor', typeRGBAColor)
 
 # Complex type typeAny with content type ELEMENT_ONLY

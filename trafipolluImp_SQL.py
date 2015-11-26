@@ -41,7 +41,7 @@ class trafipolluImp_SQL(object):
             'dump_sides_from_edges': self._request_for_lanes,
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
-        }
+            }
 
         self._dict_params_server = {
             'LOCAL': {
@@ -50,15 +50,15 @@ class trafipolluImp_SQL(object):
                 'user': "postgres",
                 'password': "postgres",
                 'connect_timeout': 2,
-            },
+                },
             'IGN': {
                 'host': "172.16.3.50",
                 'port': "5432",
                 'user': "streetgen",
                 'password': "streetgen",
                 'connect_timeout': 2,
-            },
-        }
+                },
+            }
 
         self.connection = None
         self.cursor = None
@@ -82,16 +82,15 @@ class trafipolluImp_SQL(object):
             self.cursor.close()
             self.connection.close()
 
-    def connect_sql_server(self):
+    def connect_sql_server(self, street_gen_version = 4):
         """
 
         :return:
         """
-        #
         for name_server in self._dict_params_server:
             try:
                 self.connection = psycopg2.connect(
-                    dbname="street_gen_3",
+                    dbname="street_gen_" + str(street_gen_version),
                     database="bdtopo_topological",
                     **self._dict_params_server[name_server]
                 )
