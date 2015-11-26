@@ -3024,7 +3024,6 @@
                                         </xsd:attribute>
                                         <!--<xsd:attribute default="1" name="num_voie_amont" type="typeFloatStrictPositif"-->
                                         <xsd:attribute default="1" name="num_voie_amont" type="typeIntStrictPositif"
-                                                       toto
                                                        use="optional">
                                             <xsd:annotation>
                                                 <xsd:documentation>Numéro de voie de l'entrée considérée

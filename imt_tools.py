@@ -40,8 +40,9 @@ import qgis_log_tools
 from collections import namedtuple
 
 import logging
-from logging import FileHandler
 
+import networkx as nx
+import matplotlib.pyplot as plt
 
 defaultQtDateFormatString = "yyyy-MM-ddThh:mm:ss.zzz"
 
@@ -149,7 +150,7 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
 # """ Retrieve timestamp from the system and convert into a ISO QString/QDateTime format.
 #
 # urls:
-#     - https://docs.python.org/2/library/datetime.html
+# - https://docs.python.org/2/library/datetime.html
 #     - http://stackoverflow.com/questions/2935041/how-to-convert-from-timestamp-to-date-in-qt
 #     - http://stackoverflow.com/questions/3387655/safest-way-to-convert-float-to-integer-in-python
 #     - http://pyqt.sourceforge.net/Docs/PyQt4/qt.html -> Qt.DateFormat
@@ -693,25 +694,23 @@ def init_logger(logger_name):
 
     # creation d'un handler qui va rediriger une ecriture du log vers
     # un fichier en mode 'append'
-    import os
 
     pathname = os.path.normcase(os.path.dirname(__file__))
     filename = pathname + '/' + '%s.log' % logger_name
-    file_handler = FileHandler(filename, 'a')
-
+    file_handler = logging.FileHandler(filename, 'a')
     # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
     # cree precedement et on ajoute ce handler au logger
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
-
-    # # creation d'un second handler qui va rediriger chaque ecriture de log
-    # # sur la console
-    # steam_handler = logging.StreamHandler()
-    # steam_handler.setLevel(logging.DEBUG)
-    # logger.addHandler(steam_handler)
-
     print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
+
+    # creation d'un second handler qui va rediriger chaque ecriture de log
+    # sur la console
+    steam_handler = logging.StreamHandler()
+    steam_handler.setLevel(logging.DEBUG)
+    steam_handler.setFormatter(formatter)
+    logger.addHandler(steam_handler)
 
     logger.info('\n\n################## NEW SESSION ##################\n\n')
 
@@ -731,3 +730,54 @@ class ReadOnlyDict(dict):
     update = __readonly__
     setdefault = __readonly__
     del __readonly__
+
+
+def build_networkx_graph(dict_nodes, dict_edges):
+    """
+
+    :param dict_nodes:
+    :return:
+    """
+    print '############### build_networkx_graph ...'
+
+    graph = nx.DiGraph()
+
+    dict_position_node = {}
+
+    for edge_id, values in dict_edges.iteritems():
+        try:
+            ui_start_node = values['ui_start_node']
+            ui_end_node = values['ui_end_node']
+        except:
+            pass
+        else:
+            try:
+                dict_position_node[ui_start_node] = list(dict_nodes[ui_start_node]['np_geom'])[0:2]
+                dict_position_node[ui_end_node] = list(dict_nodes[ui_end_node]['np_geom'])[0:2]
+            except:
+                pass
+            else:
+                graph.add_edge(ui_start_node, ui_end_node)
+
+    for k, v in dict_nodes.iteritems():
+        print 'dict_nodes[%s].np_geom: %s' % (k, v['np_geom'])
+    print 'dict_position_node: ', dict_position_node
+
+    list_simple_cycles = list(nx.simple_cycles(graph))
+
+    print 'graph.number_of_nodes: ', graph.number_of_nodes()
+    print 'graph.number_of_edges: ', graph.number_of_edges()
+    print 'graph.nodes: ', graph.nodes()
+    print 'graph.edges: ', graph.edges()
+
+    print 'number of cycles detected: ', len(list_simple_cycles)
+    print 'cycles detected: ', list_simple_cycles
+
+    nx.draw_networkx_edges(graph, pos=dict_position_node, edge_color='b')
+
+    set_nodes_from_cycles = list(set([item for sublist in list_simple_cycles for item in sublist]))
+    nx.draw_networkx_nodes(graph, pos=dict_position_node, node_list=set_nodes_from_cycles, edge_color='r')
+
+    plt.show()
+
+    return graph

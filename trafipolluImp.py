@@ -14,7 +14,6 @@ import trafipolluImp_TOPO as tpi_TOPO
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
 
-# __name__: nom du module courant
 logger = init_logger(__name__)
 
 
@@ -33,13 +32,15 @@ class TrafiPolluImp(object):
         self.__dict_edges = {}  # key: id_edge  -   value: (topo) informations from SG3
         self.__dict_lanes = {}
         self.__dict_nodes = {}
+        self.__dict_roundabouts = {}
         #
         kwargs = {
             'iface': iface,
             'dict_edges': self.__dict_edges,
             'dict_lanes': self.__dict_lanes,
             'dict_nodes': self.__dict_nodes,
-            }
+            'dict_roundabouts': self.__dict_roundabouts,
+        }
 
         self.module_SQL = trafipolluImp_SQL(**kwargs)
         self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
@@ -188,7 +189,8 @@ class TrafiPolluImp(object):
             'dump_sides_from_edges',
             'dump_informations_from_nodes',
             'dump_informations_from_lane_interconnexion',
-            ]
+            'dump_roundabouts',
+        ]
         #
         for sql_command in list_sql_commands:
             sql_filename = self.get_sql_filename(sql_command)
@@ -199,6 +201,10 @@ class TrafiPolluImp(object):
                 sql_file,
                 sql_command
             )
+
+        # # TEST: construction d'un graph topologique
+        # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
+
         #
         self.module_export.export(True)
 
@@ -269,7 +275,7 @@ class TrafiPolluImp(object):
             'dict_edges': self.__dict_edges,
             'dict_lanes': self.__dict_lanes,
             'dict_nodes': self.__dict_nodes,
-            }
+        }
         return dict_states_for_pickle
 
     def __setstate__(self, states):
