@@ -45,7 +45,7 @@ def dump_for_roundabouts(objects_from_sql_request):
     dict_roundabouts = {}
 
     for object_from_sql_request in objects_from_sql_request:
-        print 'object_from_sql_request: ', object_from_sql_request
+        # print 'object_from_sql_request: ', object_from_sql_request
 
         dict_sql_request = dict(object_from_sql_request)
 
@@ -123,14 +123,14 @@ def dump_for_nodes(objects_from_sql_request):
             )
         )
         #
-        print '%s - dict_sql_request: %s' % (str_node_id, dict_sql_request['np_geom'])
+        # print '%s - dict_sql_request: %s' % (str_node_id, dict_sql_request['np_geom'])
         #
         dict_nodes[str_node_id] = dict_sql_request
     #
     logger.info("nb nodes added: %d" % len(dict_nodes.keys()))
 
-    for k, v in dict_nodes.iteritems():
-        print 'dict_nodes[%s].np_geom: %s' % (k, v['np_geom'])
+    # for k, v in dict_nodes.iteritems():
+    #     print 'dict_nodes[%s].np_geom: %s' % (k, v['np_geom'])
     #
     return dict_nodes
 

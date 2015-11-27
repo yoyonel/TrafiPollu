@@ -8,11 +8,18 @@ import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
-
-# creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import init_logger
-
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = init_logger(__name__)
+
+import ConfigParser
+from collections import defaultdict
+from Config_Tools import CConfig
+
+import os
+
+
+qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 
 
 class trafipolluImp_SQL(object):
@@ -32,6 +39,7 @@ class trafipolluImp_SQL(object):
 
         iface = kwargs['iface']
         self._map_canvas = iface.mapCanvas()
+
         #
         self._dict_sql_methods = {
             'update_def_zone_test': self._update_tables_from_qgis,
@@ -44,26 +52,57 @@ class trafipolluImp_SQL(object):
             'dump_sides_from_edges': self._request_for_lanes,
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
-            #
-            'dump_roundabouts': self._request_for_roundabouts
+            # TODO: travail sur les rond points [desactiver]
+            #'dump_roundabouts': self._request_for_roundabouts
         }
 
-        self._dict_params_server = {
-            'LOCAL': {
-                'host': "localhost",
-                'port': "5433",
-                'user': "postgres",
-                'password': "postgres",
-                'connect_timeout': 2,
-            },
-            'IGN': {
-                'host': "172.16.3.50",
-                'port': "5432",
-                'user': "streetgen",
-                'password': "streetgen",
-                'connect_timeout': 2,
-            },
-        }
+        self.configs = defaultdict(dict)
+        #
+        self.config_filename = qgis_plugins_directory + '/' + \
+                               kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
+        logger.info("Config INI filename: {0}".format(self.config_filename))
+        self.Config = CConfig(self.config_filename)
+        configs = self.Config    # alias sur la Config
+        try:
+            configs.load()
+        except ConfigParser.ParsingError:
+            logger.warning("can't read the file: {0}".format(self.config_filename))
+            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
+
+        self._dict_params_server = defaultdict(dict)
+
+        # load une section du fichier config
+        configs.load_section('SQL_LOCAL_SERVER')
+        configs.update(
+            self._dict_params_server['LOCAL'],
+            {
+                'host': ('host', 'localhost'),
+                'port': ('port', '5433'),
+                'user': ('user', 'postgres'),
+                'password': ('password', 'postgres'),
+                'connect_timeout': ('connect_timeout', '2'),
+                #
+                'dbname': ('dbname', 'street_gen_3'),
+                'database': ('database', 'bdtopo_topological')
+            }
+        )
+        # recuperation des options liees a la section courante 'SQL_LOCAL_SERVER'
+        # load une section du fichier config
+        configs.load_section('SQL_IGN_SERVER')
+        # recuperation des options liees a la section courante 'SQL_IGN_SERVER'
+        configs.update(
+            self._dict_params_server['IGN'],
+            {
+                'host': ('host', '172.16.3.50'),
+                'port': ('port', '5432'),
+                'user': ('user', 'streetgen'),
+                'password': ('password', 'streetgen'),
+                'connect_timeout': ('connect_timeout', '2'),
+                #
+                'dbname': ('dbname', 'street_gen_4'),
+                'database': ('database', 'bdtopo_topological')
+            }
+        )
 
         self.connection = None
         self.cursor = None
@@ -87,6 +126,9 @@ class trafipolluImp_SQL(object):
             self.cursor.close()
             self.connection.close()
 
+    def get_value(self, name_server, option):
+        return self.__dict__['sql_' + name_server + '_' + option]
+
     def connect_sql_server(self):
         """
 
@@ -95,11 +137,7 @@ class trafipolluImp_SQL(object):
         #
         for name_server in self._dict_params_server:
             try:
-                self.connection = psycopg2.connect(
-                    dbname="street_gen_3",
-                    database="bdtopo_topological",
-                    **self._dict_params_server[name_server]
-                )
+                self.connection = psycopg2.connect(**self._dict_params_server[name_server])
             except psycopg2.Error as e:
                 logger.warning("[SQL] PsyCopg2 Error : %s - Detail: %s" % (e.pgerror, e.diag.message_detail))
             else:
@@ -109,6 +147,10 @@ class trafipolluImp_SQL(object):
                     logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
                     logger.info('PostGres: connected with %s server' % name_server)
+                    logger.info('PostGres: informations de connections:\n'
+                                '\n'.join(map(lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
+                                              self._dict_params_server[name_server].iteritems()))
+                    )
                     self.b_connection_to_postgres_server = True
                     break
 

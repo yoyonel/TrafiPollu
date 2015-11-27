@@ -19,7 +19,11 @@ from imt_tools import timerDecorator
 
 import ConfigParser
 from collections import defaultdict
+from Config_Tools import CConfig
 
+from imt_tools import init_logger
+# creation de l'objet logger qui va nous servir a ecrire dans les logs
+logger = init_logger(__name__)
 
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #
@@ -27,56 +31,6 @@ infilename_for_symuvia = qgis_plugins_directory + '/' + "project_empty_from_symu
 outfilename_for_symuvia = qgis_plugins_directory + '/' + "export_from_sg3_to_symuvia" + "_xsd_" + "2_04" + ".xml"
 
 b_export_connexion = True
-
-# creation de l'objet logger qui va nous servir a ecrire dans les logs
-from imt_tools import init_logger
-
-logger = init_logger(__name__)
-
-
-class CConfig:
-    def __init__(self, filename):
-        self.Config = ConfigParser.ConfigParser()
-        self.current_section = None
-        self.config_filename = filename
-        self.dict = defaultdict(defaultdict)
-
-    def load(self):
-        try:
-            self.Config.read(self.config_filename)
-        except ConfigParser.ParsingError:
-            logger.warning("can't read the file: ${0}".format(self.config_filename))
-            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
-
-    def load_section(self, section_name, set_current=True):
-        try:
-            options = self.Config.options(section_name)
-            for option in options:
-                try:
-                    self.dict[section_name][option] = self.Config.get(section_name, option)
-                    if self.dict[section_name][option] == -1:
-                        print("skip: [option]->%s" % option)
-                # except ConfigParser.NoOptionError:
-                except:
-                    print("exception on [option]->%s!" % option)
-                    self.dict[section_name][option] = None
-            if set_current:
-                self.set_current_section(section_name)
-        # except ConfigParser.NoSectionError:
-        except:
-            print("exception on: [Section]->%s!" % section_name)
-
-    def get_option(self, option_name, default_value=None, section_name=None):
-        if not section_name:
-            section_name = self.current_section
-
-        try:
-            return dict[section_name][option_name]
-        except:
-            return default_value
-
-    def set_current_section(self, section):
-        self.current_section = section
 
 
 class trafipolluImp_EXPORT(
@@ -108,36 +62,35 @@ class trafipolluImp_EXPORT(
         try:
             Config.load()
         except ConfigParser.ParsingError:
-            logger.warning("can't read the file: ${0}".format(self.config_filename))
+            logger.warning("can't read the file: {0}".format(self.config_filename))
             logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
 
         # load la section et place cette section en section courante
         Config.load_section('EXPORT')
 
         # recuperation des options liees a la section courante 'EXPORT'
-        # XSD informations
-        self.xsd_version = Config.get_option('xsd_version', "2_04")
-        self.xsd_prefix = Config.get_option('xsd_prefix', "_xsd_")
-        # IMPORT informations
-        self.symuvia_import_filename = Config.get_option('symuvia_import_filename', "project_empty_from_symunet")
-        self.symuvia_import_ext = Config.get_option('symuvia_import_ext', "xml")
-        self.symuvia_import_path = Config.get_option('symuvia_import_path', qgis_plugins_directory + '/')
-        # EXPORT informations
-        self.symuvia_export_filename = Config.get_option('symuvia_export_filename', "export_from_sg3_to_symuvia")
-        self.symuvia_export_ext = Config.get_option('symuvia_export_ext', "xml")
-        self.symuvia_export_path = Config.get_option('symuvia_export_path', qgis_plugins_directory + '/')
-
-        # construction du nom du fichier
-        # IMPORT
-        self.symuvia_infilename = self.symuvia_import_path + \
-            self.symuvia_import_filename + \
-            self.xsd_prefix + self.xsd_version + \
-            '.' + self.symuvia_import_ext
-        # EXPORT
-        self.symuvia_outfilename = self.symuvia_export_path + \
-            self.symuvia_export_filename + \
-            self.xsd_prefix + self.xsd_version + \
-            '.' + self.symuvia_export_ext
+        Config.update(
+            self.__dict__,
+            {
+                # XSD
+                'xsd_version': ('xsd_version', '2_04'),
+                'xsd_prefix': ('xsd_prefix', '_xsd_'),
+                # IMPORT
+                'symuvia_import_filename': ('symuvia_import_filename', 'project_empty_from_symunet'),
+                'symuvia_import_ext': ('symuvia_import_ext', 'xml'),
+                'symuvia_import_path': ('symuvia_import_path', qgis_plugins_directory + '/'),
+                # EXPORT
+                'symuvia_export_filename': ('symuvia_export_filename', 'export_from_sg3_to_symuvia'),
+                'symuvia_export_ext': ('symuvia_export_ext', 'xml'),
+                'symuvia_export_path': ('symuvia_export_path', qgis_plugins_directory + '/')
+            }
+        )
+        self.symuvia_infilename = self.generate_filename('import')      # generate filename for: 'symuvia_import_'
+        self.symuvia_outfilename = self.generate_filename('export')     # generate filename for: 'symuvia_export_'
+        #
+        #logger.info("__dict__: {0}".format(self.__dict__))
+        logger.info("Symuvia - infilename: {0}".format(self.symuvia_infilename))
+        logger.info("Symuvia - outfilename: {0}".format(self.symuvia_outfilename))
 
         logger.info("trafipolluImp_EXPORT - Open file: %s ..." % self.symuvia_infilename)
         xml = open(self.symuvia_infilename).read()
@@ -157,6 +110,19 @@ class trafipolluImp_EXPORT(
         :return:
         """
         self.list_symu_connexions = []
+
+    def generate_filename(self, target):
+        """
+
+        :param target:
+            - 'import'
+            - 'export'
+        :return:
+        """
+        return self.__dict__[str('symuvia_' + target + '_path')] + \
+            self.__dict__[str('symuvia_' + target + '_filename')] + \
+            self.__dict__['xsd_prefix'] + self.__dict__['xsd_version'] + \
+            '.' + self.__dict__[str('symuvia_' + target + '_ext')]
 
     @timerDecorator()
     def update_SYMUVIA(self):

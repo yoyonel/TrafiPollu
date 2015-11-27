@@ -189,7 +189,8 @@ class TrafiPolluImp(object):
             'dump_sides_from_edges',
             'dump_informations_from_nodes',
             'dump_informations_from_lane_interconnexion',
-            'dump_roundabouts',
+            # TODO: travail sur les rond-points [desactiver]
+            # 'dump_roundabouts',
         ]
         #
         for sql_command in list_sql_commands:

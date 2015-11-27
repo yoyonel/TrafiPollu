@@ -63,7 +63,8 @@ SOURCES = \
 	trafipolluImp_TOPO.py \
 	trafipolluImp_MixInF.py \
 	trafipolluImp_Tools_Symuvia.py \
-	decorators.py
+	decorators.py \
+	Config_Tools.py
 
 PLUGINNAME = interactive_map_tracking
 
@@ -94,11 +95,18 @@ PY_FILES = \
 	trafipolluImp_MixInF.py \
 	trafipolluImp_Tools_Symuvia.py \
 	decorators.py \
+	Config_Tools.py \
 	__init__.py
 
 UI_FILES = interactive_map_tracking_dialog_base.ui
 
-EXTRAS = icon.png metadata.txt *.sql *.xml *.xsd
+EXTRAS = \
+    icon.png \
+    metadata.txt \
+    *.sql \
+    *.xml \
+    *.xsd \
+    *.ini
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 #################
