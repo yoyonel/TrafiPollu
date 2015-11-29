@@ -23,7 +23,7 @@ class CConfig(object):
         self.Config = ConfigParser.ConfigParser()
         self.current_section = None
         self.config_filename = filename
-        self.dict = defaultdict(defaultdict)
+        self.dict_config = defaultdict(defaultdict)
         #
         # on recupere le logger associe au module utilisant le CConfig
         # par defaut on utilise un logger lie au module courant: 'CConfig'
@@ -59,13 +59,13 @@ class CConfig(object):
             options = self.Config.options(section_name)
             for option in options:
                 try:
-                    self.dict[section_name][option] = self.Config.get(section_name, option)
-                    if self.dict[section_name][option] == -1:
+                    self.dict_config[section_name][option] = self.Config.get(section_name, option)
+                    if self.dict_config[section_name][option] == -1:
                         self.logger.warning("skip: [option]->{0}".format(option))
                 # except ConfigParser.NoOptionError:
                 except:
                     self.logger.warning("exception on [option]->{0}!".format(option))
-                    self.dict[section_name][option] = None
+                    self.dict_config[section_name][option] = None
             if set_current:
                 self.set_current_section(section_name)
         # except ConfigParser.NoSectionError:
@@ -84,7 +84,7 @@ class CConfig(object):
             section_name = self.current_section
 
         try:
-            return dict[section_name][option_name]
+            return self.dict_config[section_name][option_name]
         except:
             return default_value
 
