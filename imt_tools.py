@@ -151,7 +151,7 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
 #
 # urls:
 # - https://docs.python.org/2/library/datetime.html
-#     - http://stackoverflow.com/questions/2935041/how-to-convert-from-timestamp-to-date-in-qt
+# - http://stackoverflow.com/questions/2935041/how-to-convert-from-timestamp-to-date-in-qt
 #     - http://stackoverflow.com/questions/3387655/safest-way-to-convert-float-to-integer-in-python
 #     - http://pyqt.sourceforge.net/Docs/PyQt4/qt.html -> Qt.DateFormat
 #       Qt.ISODate 	= 1 : ISO 8601 extended format: either YYYY-MM-DD for dates or YYYY-MM-DDTHH:mm:ss, YYYY-MM-DDTHH:mm:ssTZD
@@ -719,7 +719,8 @@ def init_logger(logger_name):
 
 # url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python
 class ReadOnlyDict(dict):
-    def __readonly__(self, *args, **kwargs):
+    @staticmethod
+    def __readonly__(*args, **kwargs):
         raise RuntimeError("Cannot modify ReadOnlyDict")
 
     __setitem__ = __readonly__

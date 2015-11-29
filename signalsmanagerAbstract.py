@@ -118,7 +118,7 @@ class AbstractSignalsManagerWithSingletonPattern(Singleton):
         #
         s_group = dict_params.setdefault('s_group', "all")
         if s_group == "all":
-            self._action_for_all_()
+            self._action_for_all_(dict_params)
         else:
             # noinspection PyBroadException
             try:

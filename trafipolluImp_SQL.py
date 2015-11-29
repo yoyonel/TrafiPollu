@@ -1,14 +1,15 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
+
 import psycopg2
 import psycopg2.extras
 
 import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
-
 from imt_tools import init_logger
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = init_logger(__name__)
 
@@ -27,7 +28,6 @@ class trafipolluImp_SQL(object):
 
     """
 
-    # def __init__(self, iface, dict_edges, dict_lanes, dict_nodes):
     def __init__(self, **kwargs):
         """
 
@@ -53,28 +53,39 @@ class trafipolluImp_SQL(object):
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
             # TODO: travail sur les rond points [desactiver]
-            #'dump_roundabouts': self._request_for_roundabouts
+            # 'dump_roundabouts': self._request_for_roundabouts
         }
 
-        self.configs = defaultdict(dict)
-        #
         self.config_filename = qgis_plugins_directory + '/' + \
                                kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
+        self._dict_params_server = self.get_params_server_from_ini_config(self.config_filename)
+
+        self.connection = None
+        self.cursor = None
+        self.b_connection_to_postgres_server = False
+
+        self.connect_sql_server()
+
+    def get_params_server_from_ini_config(self, config_filename):
+        """
+
+        :return:
+        """
         logger.info("Config INI filename: {0}".format(self.config_filename))
-        self.Config = CConfig(self.config_filename)
-        configs = self.Config    # alias sur la Config
+        configs = CConfig(config_filename)
         try:
             configs.load()
         except ConfigParser.ParsingError:
             logger.warning("can't read the file: {0}".format(self.config_filename))
             logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
 
-        self._dict_params_server = defaultdict(dict)
+        dict_params_server = defaultdict(dict)
 
         # load une section du fichier config
         configs.load_section('SQL_LOCAL_SERVER')
+        # recuperation des options liees a la section courante 'SQL_LOCAL_SERVER'
         configs.update(
-            self._dict_params_server['LOCAL'],
+            dict_params_server['LOCAL'],
             {
                 'host': ('host', 'localhost'),
                 'port': ('port', '5433'),
@@ -86,12 +97,12 @@ class trafipolluImp_SQL(object):
                 'database': ('database', 'bdtopo_topological')
             }
         )
-        # recuperation des options liees a la section courante 'SQL_LOCAL_SERVER'
+
         # load une section du fichier config
         configs.load_section('SQL_IGN_SERVER')
         # recuperation des options liees a la section courante 'SQL_IGN_SERVER'
         configs.update(
-            self._dict_params_server['IGN'],
+            dict_params_server['IGN'],
             {
                 'host': ('host', '172.16.3.50'),
                 'port': ('port', '5432'),
@@ -104,11 +115,7 @@ class trafipolluImp_SQL(object):
             }
         )
 
-        self.connection = None
-        self.cursor = None
-        self.b_connection_to_postgres_server = False
-
-        self.connect_sql_server()
+        return dict_params_server
 
     def __del__(self):
         """
@@ -126,9 +133,6 @@ class trafipolluImp_SQL(object):
             self.cursor.close()
             self.connection.close()
 
-    def get_value(self, name_server, option):
-        return self.__dict__['sql_' + name_server + '_' + option]
-
     def connect_sql_server(self):
         """
 
@@ -139,17 +143,21 @@ class trafipolluImp_SQL(object):
             try:
                 self.connection = psycopg2.connect(**self._dict_params_server[name_server])
             except psycopg2.Error as e:
-                logger.warning("[SQL] PsyCopg2 Error : %s - Detail: %s" % (e.pgerror, e.diag.message_detail))
+                logger.warning("PsyCopg2 Error : %s - Detail: %s" % (e.pgerror, e.diag.message_detail))
             else:
                 try:
                     self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
                 except Exception, e:
-                    logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
+                    logger.fatal('Probleme pour recuperer un cursor -> %s' % e)
                 else:
-                    logger.info('PostGres: connected with %s server' % name_server)
-                    logger.info('PostGres: informations de connections:\n'
-                                '\n'.join(map(lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
-                                              self._dict_params_server[name_server].iteritems()))
+                    logger.info('connected with %s server' % name_server)
+                    logger.info('informations de connections:')
+                    map(
+                        lambda s: logger.info(s),
+                        map(
+                            lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
+                            self._dict_params_server[name_server].iteritems()
+                        )
                     )
                     self.b_connection_to_postgres_server = True
                     break
@@ -159,7 +167,8 @@ class trafipolluImp_SQL(object):
 
         return self.b_connection_to_postgres_server
 
-    def _update_tables_from_qgis(self, *args, **kwargs):
+    @staticmethod
+    def _update_tables_from_qgis(*args, **kwargs):
         """
 
         :param cursor:
@@ -182,7 +191,6 @@ class trafipolluImp_SQL(object):
 
         :return:
         """
-
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
         # get the list points from the current extent (from QGIS MapCanvas)
@@ -198,7 +206,6 @@ class trafipolluImp_SQL(object):
         xform = QgsCoordinateTransform(extent_src_crs, extent_dst_crs)
         #
         list_points = [xform.transform(point) for point in list_points_from_mapcanvas]
-
         # list of lists of points
         gPolyline = QgsGeometry.fromPolyline(list_points)
         gPolylineWkt = gPolyline.exportToWkt()
@@ -220,7 +227,6 @@ class trafipolluImp_SQL(object):
 
         :return:
         """
-
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
         # get the list points from the current extent (from QGIS MapCanvas)
@@ -263,7 +269,6 @@ class trafipolluImp_SQL(object):
         :return:
 
         """
-
         gPolygonWkt = ''
 
         if b_update_def_zone_test_with_convex_hull_on_symuvia_network:
@@ -295,13 +300,7 @@ class trafipolluImp_SQL(object):
 
         if self.b_connection_to_postgres_server:
 
-            dict_parameters = {}
-            if id_sql_method == 'update_table_edges_from_qgis':
-                dict_parameters = self.build_sql_parameters_with_map_extent()
-            elif id_sql_method == 'update_table_detecting_roundabouts_from_qgis':
-                dict_parameters = self.build_sql_parameters_with_map_extent_for_roundabouts()
-            elif id_sql_method == 'update_def_zone_test':
-                dict_parameters = self.build_sql_parameters_with_update_def_zone_test()
+            dict_parameters = self.build_parameters_for_sql_method(id_sql_method)
 
             try:
                 sql_method = self._dict_sql_methods[id_sql_method]
@@ -331,7 +330,21 @@ class trafipolluImp_SQL(object):
                             sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
-                    # #
+
+    def build_parameters_for_sql_method(self, id_sql_method):
+        """
+
+        :param id_sql_command:
+        :return:
+        """
+        dict_parameters = {}
+        if id_sql_method == 'update_table_edges_from_qgis':
+            dict_parameters = self.build_sql_parameters_with_map_extent()
+        elif id_sql_method == 'update_table_detecting_roundabouts_from_qgis':
+            dict_parameters = self.build_sql_parameters_with_map_extent_for_roundabouts()
+        elif id_sql_method == 'update_def_zone_test':
+            dict_parameters = self.build_sql_parameters_with_update_def_zone_test()
+        return dict_parameters
 
     def _request_for_roundabouts(self, *args, **kwargs):
         """
