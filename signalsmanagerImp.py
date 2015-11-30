@@ -82,7 +82,7 @@ class SignalsManagerActionStartImp(AbstractSignalsManagerWithSingletonPattern):
 
     """
     AbstractSignalsManagerWithSingletonPattern.dict_actions['start'] = {
-        'func_test_action': lambda x: False,    # no condition to start a thread (?)
+        'func_test_action': lambda x: False,  # no condition to start a thread (?)
         'func_perform_action': lambda x: x['key'].qobject.start(x['interval'])
     }
 

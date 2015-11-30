@@ -61,3 +61,5 @@ help/build/
 
 interactive_map_tracking_dialog_base.ui_
 interactive_map_tracking_dialog_base.ui.autosave
+parser_symuvia_xsd_2_04_pyxb.py
+resources_rc.py

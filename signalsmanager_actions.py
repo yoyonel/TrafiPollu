@@ -7,6 +7,7 @@ class ISignalsManagerActionConnect(SignalsManagerActionConnectImp):
     Returns:
         TYPE: Description
     """
+
     def connect(self, qobject, signal_signature):
         """Summary
         Args:
@@ -52,6 +53,7 @@ class ISignalsManagerActionDisconnect(SignalsManagerActionDisconnectImp):
     Returns:
         TYPE: Description
     """
+
     def disconnect(self, qobject, signal_signature):
         """Summary
         Args:
@@ -97,6 +99,7 @@ class ISignalsManagerActionStart(SignalsManagerActionStartImp):
     Returns:
         TYPE: Description
     """
+
     def start(self, qobject, interval=0.0):
         """Summary
         Args:
@@ -147,6 +150,7 @@ class ISignalsManagerActionStop(SignalsManagerActionStopImp):
     Returns:
         TYPE: Description
     """
+
     def stop(self, qobject):
         """Summary
         Args:

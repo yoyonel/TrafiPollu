@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 
 
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 from imt_tools import build_logger
 
@@ -22,9 +23,7 @@ logger = build_logger(__name__)
 # >>> result = extract_convexhull_from_symuvia_network(symuvia_xml_filename='/home/atty/Prog/reseau_symuvia/reseau_paris6_v11_new.xml');
 # >>> print 'time: ', time.time() - t1
 # time:  2.25858998299
-def extract_convexhull_from_symuvia_network(
-        **kwargs
-):
+def extract_convexhull_from_symuvia_network(**kwargs):
     """
 
     :param xml_filename:
@@ -205,9 +204,7 @@ def build_QgsTransfrom_from_Symuvia_to_SG3(
 
 
 # appel: debug_draw(extract_convexhull_from_symuvia_network())
-def debug_draw(
-        results_from_ecfsn
-):
+def debug_draw(results_from_ecfsn):
     """
 
     :param results_from_ecfsn:

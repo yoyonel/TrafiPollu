@@ -1,6 +1,7 @@
 __author__ = 'latty'
 
 from qgis.core import QgsCoordinateReferenceSystem, QgsCoordinateTransform, QgsGeometry
+
 import psycopg2
 import psycopg2.extras
 
@@ -146,10 +147,14 @@ class trafipolluImp_SQL(object):
                 except Exception, e:
                     logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
-                    logger.info('PostGres: connected with %s server' % name_server)
-                    logger.info('PostGres: informations de connections:\n'
-                                '\n'.join(map(lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
-                                              self._dict_params_server[name_server].iteritems()))
+                    logger.info('connected with %s server' % name_server)
+                    logger.info('informations de connections:')
+                    map(
+                        lambda s: logger.info(s),
+                        map(
+                            lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
+                            self._dict_params_server[name_server].iteritems()
+                        )
                     )
                     self.b_connection_to_postgres_server = True
                     break
@@ -198,7 +203,6 @@ class trafipolluImp_SQL(object):
         xform = QgsCoordinateTransform(extent_src_crs, extent_dst_crs)
         #
         list_points = [xform.transform(point) for point in list_points_from_mapcanvas]
-
         # list of lists of points
         gPolyline = QgsGeometry.fromPolyline(list_points)
         gPolylineWkt = gPolyline.exportToWkt()
@@ -220,7 +224,6 @@ class trafipolluImp_SQL(object):
 
         :return:
         """
-
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
         # get the list points from the current extent (from QGIS MapCanvas)
@@ -263,7 +266,6 @@ class trafipolluImp_SQL(object):
         :return:
 
         """
-
         gPolygonWkt = ''
 
         if b_update_def_zone_test_with_convex_hull_on_symuvia_network:
@@ -336,7 +338,7 @@ class trafipolluImp_SQL(object):
                         sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
-                    #
+                    # #
 
     def _request_for_roundabouts(self, *args, **kwargs):
         """
