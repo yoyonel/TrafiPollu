@@ -7,9 +7,9 @@ from trafipolluImp_MixInF import MixInF
 b_add_points_internes_for_interconnexions = True
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-from imt_tools import init_logger
+from imt_tools import build_logger
 
-logger = init_logger(__name__)
+logger = build_logger(__name__)
 
 
 # voir dans 'trafipolluImp_MixInF' pour des explications/liens

@@ -9,7 +9,7 @@ import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 from imt_tools import CreateNamedTupleOnGlobals
 from imt_tools import CreateNamedTuple
 from imt_tools import timerDecorator
-from imt_tools import init_logger
+from imt_tools import build_logger
 import trafipolluImp_DUMP as tpi_DUMP
 
 
@@ -56,7 +56,7 @@ b_use_simplification_for_points_internes_interconnexion = True
 # ######## ######### ######### #########
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-logger = init_logger(__name__)
+logger = build_logger(__name__)
 
 
 class trafipolluImp_TOPO(object):

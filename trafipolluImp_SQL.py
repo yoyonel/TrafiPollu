@@ -8,9 +8,9 @@ import trafipolluImp_DUMP as tpi_DUMP
 import imt_tools
 import trafipolluImp_Tools_Symuvia as tpi_TS
 
-from imt_tools import init_logger
+from imt_tools import build_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-logger = init_logger(__name__)
+logger = build_logger(__name__)
 
 import ConfigParser
 from collections import defaultdict
@@ -53,7 +53,7 @@ class trafipolluImp_SQL(object):
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
             # TODO: travail sur les rond points [desactiver]
-            #'dump_roundabouts': self._request_for_roundabouts
+            # 'dump_roundabouts': self._request_for_roundabouts
         }
 
         self.configs = defaultdict(dict)
@@ -62,7 +62,7 @@ class trafipolluImp_SQL(object):
                                kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
         logger.info("Config INI filename: {0}".format(self.config_filename))
         self.Config = CConfig(self.config_filename)
-        configs = self.Config    # alias sur la Config
+        configs = self.Config  # alias sur la Config
         try:
             configs.load()
         except ConfigParser.ParsingError:
@@ -159,7 +159,8 @@ class trafipolluImp_SQL(object):
 
         return self.b_connection_to_postgres_server
 
-    def _update_tables_from_qgis(self, *args, **kwargs):
+    @staticmethod
+    def _update_tables_from_qgis(*args, **kwargs):
         """
 
         :param cursor:
@@ -182,7 +183,6 @@ class trafipolluImp_SQL(object):
 
         :return:
         """
-
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
         # get the list points from the current extent (from QGIS MapCanvas)
@@ -305,9 +305,9 @@ class trafipolluImp_SQL(object):
 
             try:
                 sql_method = self._dict_sql_methods[id_sql_method]
-            except:
+            except KeyError, e:
                 sql_method = None
-                logger.warning('Pas de methode (python) associee au script sql: %s' % id_sql_method)
+                logger.warning('Pas de methode (python) associee au script sql: {0}'.format(e))
 
             # all SQL commands (split on ';')
             sqlCommands = sql_file.split(';')
@@ -326,12 +326,17 @@ class trafipolluImp_SQL(object):
                     if not command.isspace():
                         # url: http://initd.org/psycopg/docs/usage.html#query-parameters
                         # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
-                        self.cursor.execute(command, dict_parameters)
-                        if sql_method:
-                            sql_method(connection=self.connection, cursor=self.cursor)
+                        try:
+                            self.cursor.execute(command, dict_parameters)
+                        except psycopg2.ProgrammingError, e:
+                            logger.warning("psycopg2.ProgrammingError: {0}", e)
+                            if id_sql_method == 'update_def_zone_test':
+                                logger.warning("-> probleme connu avec 'update_def_zone_test'. Lie a la lib psycopg2")
+
+                        sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
-                    # #
+                    #
 
     def _request_for_roundabouts(self, *args, **kwargs):
         """

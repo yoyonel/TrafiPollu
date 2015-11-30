@@ -9,12 +9,14 @@ from trafipolluImp_SQL import trafipolluImp_SQL
 import trafipolluImp_EXPORT as tpi_EXPORT
 import trafipolluImp_TOPO as tpi_TOPO
 
-
-
+from imt_tools import build_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-from imt_tools import init_logger
-
-logger = init_logger(__name__)
+logger = build_logger(__name__)
+#
+# logger = build_logger(__name__, list_handlers=['toto'])
+# Affichage dans la console:
+#   WARNING - Pas de module de gestion pour l'handler: ''toto''
+#   (module a ajouter dans /home/latty/.qgis2/python/plugins/interactive_map_tracking/imt_tools.py)
 
 
 class TrafiPolluImp(object):
@@ -46,6 +48,8 @@ class TrafiPolluImp(object):
         self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
         kwargs.update({'module_topo': self.module_topo})
         self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
+
+        logger.info("Init")
 
     def _init_signals_(self):
         """
@@ -179,11 +183,14 @@ class TrafiPolluImp(object):
         #
         list_sql_commands = [
             # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
+            # -> utilise un polygone statique pour definir def_zone_test
             # 'update_def_zone_test',
-            #
+            # -> utilise le mapcanvas de qgis (viewport) pour definir la zone d'export
             'update_table_edges_from_qgis',
-            #
+            # -> utliise la couche layer 'def_zone_test' pour extraire un polygon et definir la zone d'export
+            # ne fonctionne pas/plus ... je ne sais pas pourquoi ...
             # 'update_tables_from_def_zone_test',
+
             #
             'dump_informations_from_edges',
             'dump_sides_from_edges',
@@ -196,8 +203,9 @@ class TrafiPolluImp(object):
         for sql_command in list_sql_commands:
             sql_filename = self.get_sql_filename(sql_command)
             sql_file = self.get_sql_file(sql_filename)
-            logger.info('sql_filename: %s' % sql_filename)
-            logger.info('sql_file: %s' % sql_file)
+            logger.info("sql_filename")
+            #logger.info('sql_filename: {0}'.format(sql_filename))
+            #logger.info('sql_file: {0}'.format(sql_file))
             self._execute_SQL_commands(
                 sql_file,
                 sql_command

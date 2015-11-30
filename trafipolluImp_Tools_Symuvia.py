@@ -12,9 +12,9 @@ import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
 
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-from imt_tools import init_logger
+from imt_tools import build_logger
 
-logger = init_logger(__name__)
+logger = build_logger(__name__)
 
 
 # xml_filen ame="/home/atty/Prog/reseau_symuvia/reseau_paris6_v11_new.xml"

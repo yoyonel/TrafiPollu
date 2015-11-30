@@ -32,7 +32,7 @@ str_ids_for_lanes = {
 }
 
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-logger = imt_tools.init_logger(__name__)
+logger = imt_tools.build_logger(__name__)
 
 
 @timerDecorator()

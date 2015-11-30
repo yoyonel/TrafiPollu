@@ -21,9 +21,9 @@ import ConfigParser
 from collections import defaultdict
 from Config_Tools import CConfig
 
-from imt_tools import init_logger
+from imt_tools import build_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
-logger = init_logger(__name__)
+logger = build_logger(__name__)
 
 qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 #

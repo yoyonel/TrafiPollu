@@ -3,7 +3,7 @@ __author__ = 'latty'
 
 import ConfigParser
 from collections import defaultdict
-from imt_tools import init_logger
+from imt_tools import build_logger
 
 
 class CConfig(object):
@@ -23,11 +23,11 @@ class CConfig(object):
         self.Config = ConfigParser.ConfigParser()
         self.current_section = None
         self.config_filename = filename
-        self.dict = defaultdict(defaultdict)
+        self.dict_configs = defaultdict(defaultdict)
         #
         # on recupere le logger associe au module utilisant le CConfig
         # par defaut on utilise un logger lie au module courant: 'CConfig'
-        self.logger = kwargs.get('logger', init_logger(__name__))
+        self.logger = kwargs.get('logger', build_logger(__name__))
 
     def load(self):
         """
@@ -59,20 +59,21 @@ class CConfig(object):
             options = self.Config.options(section_name)
             for option in options:
                 try:
-                    self.dict[section_name][option] = self.Config.get(section_name, option)
-                    if self.dict[section_name][option] == -1:
+                    self.dict_configs[section_name][option] = self.Config.get(section_name, option)
+                    if self.dict_configs[section_name][option] == -1:
                         self.logger.warning("skip: [option]->{0}".format(option))
-                # except ConfigParser.NoOptionError:
-                except:
+                except ConfigParser.NoOptionError:
+                # except:
                     self.logger.warning("exception on [option]->{0}!".format(option))
-                    self.dict[section_name][option] = None
+                    self.dict_configs[section_name][option] = None
             if set_current:
                 self.set_current_section(section_name)
-        # except ConfigParser.NoSectionError:
-        except:
+        except ConfigParser.NoSectionError:
+        # except:
             self.logger.warning("exception on: [Section]->{0}!".format(section_name))
 
-    def get_option(self, option_name, default_value=None, section_name=None):
+    # def get_option(self, option_name, default_value=None, section_name=None):
+    def get_option(self, option_name, **kwargs):
         """
 
         :param option_name:
@@ -80,12 +81,14 @@ class CConfig(object):
         :param section_name:
         :return:
         """
-        if not section_name:
-            section_name = self.current_section
+        section_name = kwargs.get('section_name', None)
+        # if not section_name:
+        #     section_name = self.current_section
+        default_value = kwargs.get('default_value', None)
 
         try:
-            return dict[section_name][option_name]
-        except:
+            return self.dict_configs[section_name][option_name]
+        except KeyError:
             return default_value
 
     def update(self, _dict2update, _dictparams):
@@ -95,6 +98,7 @@ class CConfig(object):
         :param _dictparams:
         :return:
         """
-        for name_member, (name_option, default_value) in _dictparams.iteritems():
-            _dict2update[name_member] = self.get_option(name_option, default_value)
+        for name_member, (option_name, default_value) in _dictparams.iteritems():
+            # _dict2update[name_member] = self.get_option(name_option, default_value)
+            _dict2update[name_member] = self.get_option(option_name, default_value=default_value)
 

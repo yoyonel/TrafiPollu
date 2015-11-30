@@ -678,43 +678,108 @@ class timerDecorator(object):
         return wrapped_f
 
 
-def init_logger(logger_name):
+default_header_for_log = '################## NEW SESSION ##################'
+
+
+def build_logger(logger_name, **kwargs):
     """
 
+    :param logger_name:
+    :param kwargs:
+        - list_handlers: ['stream', 'file', ...]
+        - level: logging level of this logger
     :return:
     """
+    # url: http://stackoverflow.com/a/1098639
+    #      "Proper way to use **kwargs in Python"
+    options = {'list_handlers': ['stream', 'file']}
+    options.update(kwargs)
+
     logger = logging.getLogger(logger_name)
 
-    # on met le niveau du logger a DEBUG, comme ca il ecrit tout
-    logger.setLevel(logging.DEBUG)
-
-    # creation d'un formateur qui va ajouter le temps, le niveau
+    # creation d'un formateur qui va ajouter:
+    # - le temps
+    # - le niveau
+    # - la fonction appelante
     # de chaque message quand on ecrira un message dans le log
     formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s')
 
-    # creation d'un handler qui va rediriger une ecriture du log vers
-    # un fichier en mode 'append'
+    #
+    level = kwargs.get('level', logging.DEBUG)
+    logger.setLevel(level)
 
-    pathname = os.path.normcase(os.path.dirname(__file__))
-    filename = pathname + '/' + '%s.log' % logger_name
-    file_handler = logging.FileHandler(filename, 'a')
-    # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
-    # cree precedement et on ajoute ce handler au logger
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
-    print "[LOGGING] - Init logger for %s in %s" % (logger_name, filename)
+    dict_functions_to_generate_handlers = {
+        'stream': (config_stream_handler, {'formatter': formatter}),
+        'file': (config_file_handler, {'formatter': formatter, 'logger_name': logger_name})
+    }
+    list_handlers = options.get('list_handlers', [])
+    for name_handler in list_handlers:
+        try:
+            func_generate_handler, params = dict_functions_to_generate_handlers[name_handler]
+            handler = func_generate_handler(**params)
+            logger.addHandler(handler)
+        except KeyError, e:
+            print "WARNING - Pas de module de gestion pour l'handler: {0}".format(e)
+            print "(module a ajouter dans {0})".format(__file__)
 
-    # creation d'un second handler qui va rediriger chaque ecriture de log
-    # sur la console
-    steam_handler = logging.StreamHandler()
-    steam_handler.setLevel(logging.DEBUG)
-    steam_handler.setFormatter(formatter)
-    logger.addHandler(steam_handler)
-
-    logger.info('\n\n################## NEW SESSION ##################\n\n')
+    header = options.get('header', default_header_for_log)
+    logger.info(header)
 
     return logger
+
+
+def config_file_handler(**kwargs):
+    """
+
+    :param kwargs:
+        Needed:
+            - logger_name: name of the logger
+    :return:
+        if logger_name is not provided => return a NullHandler
+        else return a FileHandler
+    """
+    try:
+        logger_name = kwargs['logger_name']
+        #
+        filename = kwargs.get('filepath', build_filename_for_logger(logger_name))
+        mode = kwargs.get('mode', 'a')
+        file_handler = logging.FileHandler(filename, mode)
+        # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
+        # cree precedement et on ajoute ce handler au logger
+        level = kwargs.get('level', logging.DEBUG)
+        file_handler.setLevel(level)
+        if 'formatter' in kwargs:
+            file_handler.setFormatter(kwargs['formatter'])
+    except KeyError:
+        file_handler = logging.NullHandler()
+
+    return file_handler
+
+
+def build_filename_for_logger(logger_name):
+    """
+
+    :param logger_name:
+    :return:
+    """
+    pathname = os.path.normcase(os.path.dirname(__file__))
+    filename = pathname + '/' + '%s.log' % logger_name
+    return filename
+
+
+def config_stream_handler(**kwargs):
+    """
+
+    :param logger_name:
+    :param kwargs:
+    :return:
+    """
+    stream_handler = logging.StreamHandler()
+    level = kwargs.get('level', logging.DEBUG)
+    stream_handler.setLevel(level)
+    if 'formatter' in kwargs:
+        stream_handler.setFormatter(kwargs['formatter'])
+    return stream_handler
 
 
 # url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python
