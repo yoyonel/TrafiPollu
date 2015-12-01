@@ -442,8 +442,11 @@ class trafipolluImp_TOPO(object):
     ):
         """
 
+        :param list_points:
+        :param min_distance:
+        :param tolerance_distance:
+        :param epsilon:
         :return:
-
         """
         min_distance += epsilon
         shp_list_points_optimized = []
@@ -470,7 +473,7 @@ class trafipolluImp_TOPO(object):
                     preserve_topology=False
                 )
             # except Exception, e:
-            #     logger.fatal('Exception: %s' % e)
+            # logger.fatal('Exception: %s' % e)
             except:
                 pass
         finally:
@@ -480,6 +483,7 @@ class trafipolluImp_TOPO(object):
     def build_topo_for_interconnexions(self):
         """
 
+        :return:
         """
         list_remove_nodes = []
         dict_interconnexions = {}
@@ -492,7 +496,7 @@ class trafipolluImp_TOPO(object):
                 node_list_interconnexions = dict_values['interconnexions']
                 set_id_edges = dict_values['set_id_edges']
             except Exception, e:
-                logger.fatal('build_topo_for_interconnexions - Exception: {0}'.format(e))
+                logger.fatal('Exception: {0}'.format(e))
                 logger.fatal('\tnode_id: {0}'.format(node_id))
                 logger.fatal("\tdict_node[{0}]: {1}".format(node_id, dict_values))
                 #
@@ -541,7 +545,7 @@ class trafipolluImp_TOPO(object):
 
                         # #################################################
                         # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
-                        ##################################################
+                        # #################################################
                         if b_use_simplification_for_points_internes_interconnexion:
                             # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
                             # inutile dans ce cas pour SYMUVIA
@@ -622,7 +626,7 @@ class trafipolluImp_TOPO(object):
         # #######################################################################
         if symu_lane.lane_direction:
             symu_lane_id = (symu_lane.nb_lanes - 1) - symu_lane_id
-        ########################################################################
+        # #######################################################################
 
         return symu_lane, symu_lane_id
 
