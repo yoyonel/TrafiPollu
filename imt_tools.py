@@ -40,6 +40,7 @@ import qgis_log_tools
 from collections import namedtuple
 
 import logging
+from qgis_log_tools import QGISLogHandler
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -688,21 +689,23 @@ def build_logger(logger_name, **kwargs):
     :param kwargs:
         - list_handlers: ['stream', 'file', ...]
         - level: logging level of this logger
+        - log_threadName[bool]:
+        - for qgis handler log:
+            - qgis_tag[string]:
+            - qgis_separate_tab[bool]:
     :return:
     """
+    # filter logger name
+    logger_name = filter_logger_name(logger_name)
+
     # url: http://stackoverflow.com/a/1098639
     #      "Proper way to use **kwargs in Python"
-    options = {'list_handlers': ['stream', 'file']}
+    options = {'list_handlers': ['stream', 'file', 'qgis']}
     options.update(kwargs)
 
     logger = logging.getLogger(logger_name)
 
-    # creation d'un formateur qui va ajouter:
-    # - le temps
-    # - le niveau
-    # - la fonction appelante
-    # de chaque message quand on ecrira un message dans le log
-    formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s')
+    formatter = construct_formatter_for_logger(**kwargs)
 
     #
     level = kwargs.get('level', logging.DEBUG)
@@ -710,7 +713,13 @@ def build_logger(logger_name, **kwargs):
 
     dict_functions_to_generate_handlers = {
         'stream': (config_stream_handler, {'formatter': formatter}),
-        'file': (config_file_handler, {'formatter': formatter, 'logger_name': logger_name})
+        'file': (config_file_handler, {'formatter': formatter, 'logger_name': logger_name}),
+        'qgis': (QGISLogHandler,
+                 {
+                     'level': level,
+                     'tag': kwargs.get('qgis_tag', construct_qgis_tag(logger_name, **kwargs)),
+                     'module': logger_name
+                 })
     }
     list_handlers = options.get('list_handlers', [])
     for name_handler in list_handlers:
@@ -728,6 +737,20 @@ def build_logger(logger_name, **kwargs):
     return logger
 
 
+def filter_logger_name(logger_name):
+    """
+
+    :param logger_name:
+    :return:
+    """
+    try:
+        logger_name = logger_name.split('.')[1]
+    except:
+        pass
+    logger_name = logger_name.replace('trafipolluImp_', 'tpi_')
+    return logger_name
+
+
 def config_file_handler(**kwargs):
     """
 
@@ -741,7 +764,7 @@ def config_file_handler(**kwargs):
     try:
         logger_name = kwargs['logger_name']
         #
-        filename = kwargs.get('filepath', build_filename_for_logger(logger_name))
+        filename = kwargs.get('filepath', construct_filename_for_logger(logger_name))
         mode = kwargs.get('mode', 'a')
         file_handler = logging.FileHandler(filename, mode)
         # on lui met le niveau sur DEBUG, on lui dit qu'il doit utiliser le formateur
@@ -756,7 +779,30 @@ def config_file_handler(**kwargs):
     return file_handler
 
 
-def build_filename_for_logger(logger_name):
+def construct_formatter_for_logger(**kwargs):
+    """
+
+    :param kwargs:
+    :return:
+    """
+    # creation d'un formateur qui va ajouter:
+    # - le temps
+    # - le niveau
+    # - la fonction appelante
+    # de chaque message quand on ecrira un message dans le log
+    # see def basicConfig(**kwargs) in __init__.py for logging python module
+    # fs =  format    Use the specified format string for the handler.
+    # dfs=  datefmt   Use the specified date/time format.
+    #
+    fs = "[%(asctime)s "
+    fs += "%(threadName)s " if kwargs.get("log_threadName", False) else ""
+    fs += "%(funcName)s, %(levelname)s] %(message)s"
+    dfs = None
+    # formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s')
+    return logging.Formatter(fs, dfs)
+
+
+def construct_filename_for_logger(logger_name):
     """
 
     :param logger_name:
@@ -765,6 +811,18 @@ def build_filename_for_logger(logger_name):
     pathname = os.path.normcase(os.path.dirname(__file__))
     filename = pathname + '/' + '%s.log' % logger_name
     return filename
+
+
+def construct_qgis_tag(logger_name, **kwargs):
+    """
+
+    :param logger_name:
+    :param kwargs:
+    :return:
+    """
+    tag = 'Plugins/TrafiPollu'
+    tag += '/{0}'.format(logger_name) if kwargs.get('qgis_separate_tab', False) else ''
+    return tag
 
 
 def config_stream_handler(**kwargs):

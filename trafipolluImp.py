@@ -211,7 +211,7 @@ class TrafiPolluImp(object):
                 sql_command
             )
 
-        # # TEST: construction d'un graph topologique
+        # TEST: construction d'un graph topologique
         # imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)
 
         #

@@ -140,6 +140,7 @@ URLs:
 
 """
 
+
 #url: http://fr.wikipedia.org/wiki/Singleton_(patron_de_conception)#Consid.C3.A9rations_.22avanc.C3.A9es.22
 class InheritableSingleton(object):
     # Dictionnaire Python référencant les instances déjà créés
@@ -161,15 +162,43 @@ reload(logging)
 class QGISLogHandler(logging.Handler):
     """
 
+    """
+    #
+    dict_levels_log_4_qgis = {
+        logging.DEBUG: QgsMessageLog.INFO,
+        logging.INFO: QgsMessageLog.INFO,
+        logging.WARNING: QgsMessageLog.WARNING,
+        logging.FATAL: QgsMessageLog.CRITICAL
+    }
+
+    def __init__(self, **kwargs):
         """
 
-    def __init__(self):
+        :param kwargs:
+            - tag:
+            - level:
+            - module:
+        :return:
+        """
         logging.Handler.__init__(self)
+        self.tag = kwargs.get('tag', '')
+        self.level = QGISLogHandler.dict_levels_log_4_qgis.get(
+            kwargs.get('level', logging.INFO),
+            QgsMessageLog.INFO
+        )
+        self.module = kwargs.get('module', None)
 
     def emit(self, record):
+        """
+
+        :param record:
+        :return:
+        """
         try:
             msg = self.format(record)
-            QgsMessageLog.logMessage(msg)
+            if self.module:
+                msg = self.module + ' - ' + msg
+            QgsMessageLog.logMessage(msg, self.tag, self.level)
         except:
             self.handleError(record)
 

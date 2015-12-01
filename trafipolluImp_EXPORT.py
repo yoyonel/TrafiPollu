@@ -92,10 +92,10 @@ class trafipolluImp_EXPORT(
         logger.info("Symuvia - infilename: {0}".format(self.symuvia_infilename))
         logger.info("Symuvia - outfilename: {0}".format(self.symuvia_outfilename))
 
-        logger.info("trafipolluImp_EXPORT - Open file: %s ..." % self.symuvia_infilename)
+        logger.info("Open file: %s ..." % self.symuvia_infilename)
         xml = open(self.symuvia_infilename).read()
         self.symu_ROOT = symuvia_parser.CreateFromDocument(xml)
-        logger.info("trafipolluImp_EXPORT - Open file: %s [DONE]" % self.symuvia_infilename)
+        logger.info("Open file: %s [DONE]" % self.symuvia_infilename)
 
         self.symu_ROOT_RESEAU_TRONCONS = None
         self.symu_ROOT_RESEAU_CONNEXIONS = None

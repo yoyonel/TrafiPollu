@@ -178,7 +178,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                logger.info("[SQL] - try to commit ...")
+                logger.info("try to commit ...")
                 connection.commit()
             except:
                 pass
@@ -278,7 +278,7 @@ class trafipolluImp_SQL(object):
 
         gPolygonSRID = 2154  # SRID du Lambert93
 
-        logger.info('################ gPolygonWkt: ', gPolygonWkt)
+        logger.info('################ gPolygonWkt: {0}'.format(gPolygonWkt))
 
         dict_parameters = {
             'gPolygonWkt': gPolygonWkt,
@@ -331,7 +331,7 @@ class trafipolluImp_SQL(object):
                         try:
                             self.cursor.execute(command, dict_parameters)
                         except psycopg2.ProgrammingError, e:
-                            logger.warning("psycopg2.ProgrammingError: {0}", e)
+                            logger.warning("psycopg2.ProgrammingError: {0}".format(e))
                             if id_sql_method == 'update_def_zone_test':
                                 logger.warning("-> probleme connu avec 'update_def_zone_test'. Lie a la lib psycopg2")
 
@@ -350,7 +350,7 @@ class trafipolluImp_SQL(object):
         """
         cursor = kwargs['cursor']
         try:
-            logger.info("[SQL] - try to cursor.fetchall ...")
+            logger.info("try to cursor.fetchall ...")
             objects_from_sql_request = cursor.fetchall()
         except Exception, e:
             logger.warning("[SQL] Exception: %s" % e)
@@ -390,7 +390,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except Exception, e:
                 logger.warning("[SQL] Exception: %s" % e)
@@ -418,7 +418,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except Exception, e:
                 logger.warning("[SQL] Exception: %s" % e)
@@ -446,7 +446,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except Exception, e:
                 logger.warning("[SQL] Exception: %s" % e)
@@ -483,7 +483,7 @@ class trafipolluImp_SQL(object):
             pass
         else:
             try:
-                logger.info("[SQL] - try to cursor.fetchall ...")
+                logger.info("try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
             except Exception, e:
                 logger.warning("[SQL] Exception: %s" % e)

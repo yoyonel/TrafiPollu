@@ -63,16 +63,13 @@ class CConfig(object):
                     if self.dict_configs[section_name][option] == -1:
                         self.logger.warning("skip: [option]->{0}".format(option))
                 except ConfigParser.NoOptionError:
-                # except:
                     self.logger.warning("exception on [option]->{0}!".format(option))
                     self.dict_configs[section_name][option] = None
             if set_current:
                 self.set_current_section(section_name)
         except ConfigParser.NoSectionError:
-        # except:
             self.logger.warning("exception on: [Section]->{0}!".format(section_name))
 
-    # def get_option(self, option_name, default_value=None, section_name=None):
     def get_option(self, option_name, **kwargs):
         """
 
@@ -82,8 +79,6 @@ class CConfig(object):
         :return:
         """
         section_name = kwargs.get('section_name', None)
-        # if not section_name:
-        #     section_name = self.current_section
         default_value = kwargs.get('default_value', None)
 
         try:
@@ -99,6 +94,5 @@ class CConfig(object):
         :return:
         """
         for name_member, (option_name, default_value) in _dictparams.iteritems():
-            # _dict2update[name_member] = self.get_option(name_option, default_value)
             _dict2update[name_member] = self.get_option(option_name, default_value=default_value)
 
