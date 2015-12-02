@@ -21,16 +21,23 @@ logger = build_logger(__name__)
 
 class TrafiPolluImp(object):
     """
-
+    Classe principale d'implementation du plugin
     """
 
     def __init__(self, iface, dlg):
         """
+        Methode d'entree du plugin.
+        Lancee au chargement des plugins par QGIS
 
+        :param iface: interface vers QGIS windows
+        :param dlg: boite de dialogue QT => interface vers notre GUI Qt
+        :return:
         """
         self.dlg = dlg
+        # utilitaire pour la gestion des signaux Qt
+        # utilise pour la gestion des interactions avec le GUI (Qt) du plugin
         self.signals_manager = SignalsManager.instance()
-        #
+        # Structures de donnees principales
         self.__dict_edges = {}  # key: id_edge  -   value: (topo) informations from SG3
         self.__dict_lanes = {}
         self.__dict_nodes = {}
