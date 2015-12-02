@@ -42,7 +42,7 @@ class TrafiPolluImp(object):
         self.__dict_lanes = {}
         self.__dict_nodes = {}
         self.__dict_roundabouts = {}
-        #
+        # Struture de donnees support des modules: SQL, DUMP, TOPO et EXPORT
         kwargs = {
             'iface': iface,
             'dict_edges': self.__dict_edges,
@@ -50,7 +50,7 @@ class TrafiPolluImp(object):
             'dict_nodes': self.__dict_nodes,
             'dict_roundabouts': self.__dict_roundabouts,
         }
-
+        # Initialisation des modules
         self.module_SQL = trafipolluImp_SQL(**kwargs)
         self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
         kwargs.update({'module_topo': self.module_topo})
