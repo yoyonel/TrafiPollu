@@ -25,13 +25,16 @@ qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 
 class trafipolluImp_SQL(object):
     """
-
+    Implementation du module SQL
+    Utilise pour gerer la communication entre la BDD StreetGen et Python/QGIS.
+    Module principalement utilise pour le DUMP des donnees, et partiellement pour la TOPO (pb de design ... :/ a revoir)
     """
 
-    # def __init__(self, iface, dict_edges, dict_lanes, dict_nodes):
     def __init__(self, **kwargs):
         """
 
+        :param kwargs:
+        :return:
         """
         self.dict_edges = kwargs['dict_edges']
         self.dict_nodes = kwargs['dict_nodes']
@@ -128,6 +131,12 @@ class trafipolluImp_SQL(object):
             self.connection.close()
 
     def get_value(self, name_server, option):
+        """
+
+        :param name_server:
+        :param option:
+        :return:
+        """
         return self.__dict__['sql_' + name_server + '_' + option]
 
     def connect_sql_server(self):
@@ -165,22 +174,24 @@ class trafipolluImp_SQL(object):
         return self.b_connection_to_postgres_server
 
     @staticmethod
-    def _update_tables_from_qgis(*args, **kwargs):
+    def _update_tables_from_qgis(**kwargs):
         """
 
-        :param cursor:
+        :param args:
+        :param kwargs:
         :return:
-
         """
         try:
             connection = kwargs['connection']
-        except:
+        except KeyError, e:
+            logger.warning('No connection ! -> {0}'.format(e))
             pass
         else:
             try:
                 logger.info("try to commit ...")
                 connection.commit()
-            except:
+            except Exception, e:
+                logger.warning('Probleme au moment du commit ! -> {0}'.format(e))
                 pass
 
     def build_sql_parameters_with_map_extent(self):
@@ -263,8 +274,11 @@ class trafipolluImp_SQL(object):
     ):
         """
 
+        :param b_update_def_zone_test_with_convex_hull_on_symuvia_network:
+        :type b_update_def_zone_test_with_convex_hull_on_symuvia_network: bool
+        :param kwargs:
+        :type kwargs: dict
         :return:
-
         """
         gPolygonWkt = ''
 
@@ -290,6 +304,10 @@ class trafipolluImp_SQL(object):
     def execute_sql_commands(self, sql_file, id_sql_method):
         """
 
+        :param sql_file:
+        :type sql_file: str
+        :param id_sql_method:
+        :type id_sql_method: str
         :return:
         """
         if not self.b_connection_to_postgres_server:
@@ -340,22 +358,48 @@ class trafipolluImp_SQL(object):
                     logger.warning("Command skipped: %s", msg)
                     # #
 
-    def _request_for_roundabouts(self, *args, **kwargs):
+    def _request_for_entity(self, **kwargs):
         """
 
-        :param args:
-        :param kwargs:
+        :param name_entity:
         :return:
-
         """
-        cursor = kwargs['cursor']
         try:
-            logger.info("try to cursor.fetchall ...")
-            objects_from_sql_request = cursor.fetchall()
-        except Exception, e:
-            logger.warning("[SQL] Exception: %s" % e)
+            cursor = kwargs["cursor"]
+        except KeyError:
+            logger.warning('Pas de cursor disponible!')
+            return -1
         else:
-            self._post_request_for_roundabouts(tpi_DUMP.dump_for_roundabouts(objects_from_sql_request))
+            try:
+                logger.info("try to cursor.fetchall ...")
+                objects_from_sql_request = cursor.fetchall()
+            except Exception, e:
+                logger.warning("Probleme lors d'un 'fetchall' -> Exception: %s".format(e))
+                return -2
+            else:
+                try:
+                    post_resquest_for_entity = kwargs['meth_post_request']
+                    dump_for_entity = kwargs['func_for_dumping']
+                    post_resquest_for_entity(dump_for_entity(objects_from_sql_request))
+                except KeyError, e:
+                    logger.warning('Pb! -> {0}'.format(e))
+                return 1
+
+    def _request_for_roundabouts(self, **kwargs):
+        """
+
+        :param kwargs:
+        :type kwargs: str
+        :return:
+        :rtype: int
+        """
+        kwargs.update(
+            {
+                'meth_post_request': self._post_request_for_roundabouts,
+                'func_for_dumping': tpi_DUMP.dump_for_roundabouts
+            }
+        )
+        return self._request_for_entity(**kwargs)
 
     def _post_request_for_roundabouts(self, results_dump):
         """
@@ -384,18 +428,13 @@ class trafipolluImp_SQL(object):
         :return:
 
         """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except Exception, e:
-                logger.warning("[SQL] Exception: %s" % e)
-            else:
-                self._post_request_for_edges(tpi_DUMP.dump_for_edges(objects_from_sql_request))
+        kwargs.update(
+            {
+                'meth_post_request': self._post_request_for_edges,
+                'func_for_dumping': tpi_DUMP.dump_for_edges
+            }
+        )
+        return self._request_for_entity(**kwargs)
 
     def _post_request_for_edges(self, results_dump):
         """
@@ -412,18 +451,13 @@ class trafipolluImp_SQL(object):
         :param kwargs:
         :return:
         """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except Exception, e:
-                logger.warning("[SQL] Exception: %s" % e)
-            else:
-                self._post_request_for_nodes(tpi_DUMP.dump_for_nodes(objects_from_sql_request))
+        kwargs.update(
+            {
+                'meth_post_request': self._post_request_for_nodes,
+                'func_for_dumping': tpi_DUMP.dump_for_nodes
+            }
+        )
+        return self._request_for_entity(**kwargs)
 
     def _post_request_for_nodes(self, results_dump):
         """
@@ -440,18 +474,13 @@ class trafipolluImp_SQL(object):
         :param kwargs:
         :return:
         """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except Exception, e:
-                logger.warning("[SQL] Exception: %s" % e)
-            else:
-                self._post_request_for_interconnexions(tpi_DUMP.dump_for_interconnexions(objects_from_sql_request))
+        kwargs.update(
+            {
+                'meth_post_request': self._post_request_for_interconnexions,
+                'func_for_dumping': tpi_DUMP.dump_for_interconnexions
+            }
+        )
+        return self._request_for_entity(**kwargs)
 
     def _post_request_for_interconnexions(self, results_dump):
         """
@@ -477,18 +506,13 @@ class trafipolluImp_SQL(object):
         :param b_load_geom:
         :return:
         """
-        try:
-            cursor = kwargs['cursor']
-        except:
-            pass
-        else:
-            try:
-                logger.info("try to cursor.fetchall ...")
-                objects_from_sql_request = cursor.fetchall()
-            except Exception, e:
-                logger.warning("[SQL] Exception: %s" % e)
-            else:
-                self._post_request_for_lanes(tpi_DUMP.dump_lanes(objects_from_sql_request, self.dict_edges))
+        kwargs.update(
+            {
+                'meth_post_request': self._post_request_for_lanes,
+                'func_for_dumping': lambda x: tpi_DUMP.dump_lanes(x, self.dict_edges)
+            }
+        )
+        return self._request_for_entity(**kwargs)
 
     def _post_request_for_lanes(self, results_dump):
         """

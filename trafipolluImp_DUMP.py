@@ -341,7 +341,7 @@ def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes
         dict_lanes,
         [
             [
-                sum(1 for _ in value_groupby)
+                sum(1 for i in value_groupby)
                 for key_groupby, value_groupby in
                 groupby(get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id), lambda x: x.lane_direction)
             ]

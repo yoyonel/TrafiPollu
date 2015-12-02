@@ -11,7 +11,10 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__name__), '..'))
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -25,7 +28,12 @@ import sys, os
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.todo', 'sphinx.ext.pngmath', 'sphinx.ext.viewcode']
+extensions = [
+    'sphinx.ext.todo',
+    'sphinx.ext.pngmath',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autodoc'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -214,3 +222,18 @@ man_pages = [
     ('index', 'TemplateClass', u'interactive_map_tracking Documentation',
      [u'Lionel Atty, IGN, SIDT'], 1)
 ]
+
+
+# url: http://stackoverflow.com/questions/5599254/how-to-use-sphinxs-autodoc-to-document-a-classs-init-self-method
+# fonctionne bien mais assez contraignant car on doit specifier manuellement quelle methode inclure
+def skip(app, what, name, obj, skip, options):
+    if name == "__init__":
+        return False
+    return skip
+
+
+def setup(app):
+    app.connect("autodoc-skip-member", skip)
+#
+# fonctionne moyen
+#autoclass_content = 'both'
