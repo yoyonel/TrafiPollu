@@ -1,0 +1,825 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Les Composants du plugin TrafiPollu &mdash; interactive_map_tracking 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="interactive_map_tracking 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Bienvenue dans la documentation d’ Interactive Map Tracking pour TrafiPollu" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Bienvenue dans la documentation d’ Interactive Map Tracking pour TrafiPollu"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="les-composants-du-plugin-trafipollu">
+<h1>Les Composants du plugin TrafiPollu<a class="headerlink" href="#les-composants-du-plugin-trafipollu" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>Listes des principaux composants:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#trafipolluimp"><em>trafipolluImp</em></a>.</li>
+<li><a class="reference internal" href="#trafipolluimp-sql"><em>trafipolluImp_SQL</em></a>.</li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="trafipolluimp">
+<span id="id1"></span><h2>trafipolluImp<a class="headerlink" href="#trafipolluimp" title="Permalink to this headline">¶</a></h2>
+<p>Interface principale du Plugin</p>
+<p>Détails de l&#8217;interface:</p>
+<span class="target" id="module-trafipolluImp"></span><p>Module d&#8217;implementation principale du plugin: Interactive Map Tracking pour le project TrafiPollu</p>
+<dl class="class">
+<dt id="trafipolluImp.TrafiPolluImp">
+<em class="property">class </em><tt class="descclassname">trafipolluImp.</tt><tt class="descname">TrafiPolluImp</tt><big>(</big><em>iface</em>, <em>dlg</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Classe principale d&#8217;implementation du plugin</p>
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>iface</em>, <em>dlg</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Methode d&#8217;entree du plugin.
+Lancee au chargement des plugins par QGIS</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>iface</strong> &#8211; interface vers QGIS windows</li>
+<li><strong>dlg</strong> &#8211; boite de dialogue QT =&gt; interface vers notre GUI Qt</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._clear_">
+<tt class="descname">_clear_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._clear_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._clear_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lance un &#8216;clear&#8217; sur les structures de donnees utilisees par le plugin
+~ re-initialise les donnees du cote du plug (clean)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._disable_trafipollu_">
+<tt class="descname">_disable_trafipollu_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._disable_trafipollu_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._disable_trafipollu_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnection with QGIS interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._dump_topo_export_">
+<tt class="descname">_dump_topo_export_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._dump_topo_export_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._dump_topo_export_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lance une serie d&#8217;operations pour effectuer un export &#8216;complet&#8217; de QGIS -&gt; SYMUVIA
+Les operations sont:
+- DUMP: StreetGen[DB] -&gt; StreetGen[PYTHON]</p>
+<blockquote>
+<div><ul class="simple">
+<li>edges: troncons/axe des routes</li>
+<li>lanes: voies pour chaque troncon</li>
+<li>nodes: noeuds d&#8217;intersections entre les troncons (carrefours, rond-point, etc ...)</li>
+<li>interconnexions: interconnections des voies (rattachees a des troncons) dans une intersection (node)</li>
+<li>rond-points: informations sur les rond-points &#8216;detectes&#8217; [desactiver]</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>TOPO: StreetGen[PYTHON] -&gt; Format compatible StreetGen-TrafiPollu[PYTHON]</li>
+<li>EXPORT: Format compatible StreetGen-TrafiPollu[PYTHON] -&gt; XML pour SYMUVIA[XML]</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="trafipolluImp.TrafiPolluImp._enable_trafipollu_">
+<em class="property">static </em><tt class="descname">_enable_trafipollu_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._enable_trafipollu_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._enable_trafipollu_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connection with QGIS interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._execute_sql_commands">
+<tt class="descname">_execute_sql_commands</tt><big>(</big><em>sql_file</em>, <em>sql_choice_combobox</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._execute_sql_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._execute_sql_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lance l&#8217;execution d&#8217;un script SQL decrit par son source sql_file.
+On utilise le parametre sql_choice_combobox pour identifier (plus rapidement) le script qu&#8217;on souhaite execute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sql_file</strong> (<em>str</em>) &#8211; </li>
+<li><strong>sql_choice_combobox</strong> (<em>str</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._init_signals_">
+<tt class="descname">_init_signals_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._init_signals_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._init_signals_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialisation des signaux pour la gestion des interactions avec la fenetre GUI du plugin
+:return:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._pickled_trafipollu_">
+<tt class="descname">_pickled_trafipollu_</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._pickled_trafipollu_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._pickled_trafipollu_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Module de serialisation du plugin.
+Cette partie n&#8217;est pas finalisee.
+La serialisation (dans le cadre du plugin/projet) peut etre interessante pour effectuer des debugs/tests/...
+offline par rapport a la base de donnees.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Non stabilise, non teste, a utiliser en toute connaissance de cause</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp._refresh_sql_script_list">
+<tt class="descname">_refresh_sql_script_list</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp._refresh_sql_script_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp._refresh_sql_script_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rafraichi la liste des scripts SQL disponible dans l&#8217;interface/GUI du plugin
+:return:</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="trafipolluImp.TrafiPolluImp.get_sql_file">
+<em class="property">static </em><tt class="descname">get_sql_file</tt><big>(</big><em>sql_filename</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.get_sql_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.get_sql_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Charge un fichier/script SQL et renvoie son contenu</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sql_filename</strong> (<em>str</em>) &#8211; Nom du fichier/script SQL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Renvoie le contenu du script SQL</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="trafipolluImp.TrafiPolluImp.get_sql_filename">
+<em class="property">static </em><tt class="descname">get_sql_filename</tt><big>(</big><em>sql_name</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.get_sql_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.get_sql_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construction d&#8217;un nom de fichier SQL par rapport a un nom de script SQL du plugin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sql_name</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_Pickled_TrafiPollu">
+<tt class="descname">slot_Pickled_TrafiPollu</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_Pickled_TrafiPollu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_Pickled_TrafiPollu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI-Plugin: Serialisation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_clear">
+<tt class="descname">slot_clear</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI-Plugin: &#8216;clear&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_currentIndexChanged_SQL">
+<tt class="descname">slot_currentIndexChanged_SQL</tt><big>(</big><em>id_index</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_currentIndexChanged_SQL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_currentIndexChanged_SQL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI: Mise a jour de l&#8217;affichage du source du script SQL courant dans l&#8217;interface GUI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id_index</strong> &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_dump_topo_export">
+<tt class="descname">slot_dump_topo_export</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_dump_topo_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_dump_topo_export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI-Plugin: &#8216;Dump Topo Export&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_execute_SQL_commands">
+<tt class="descname">slot_execute_SQL_commands</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_execute_SQL_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_execute_SQL_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI-Plugin: lancement d&#8217;execution d&#8217;un script SQL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_export_to_symuvia">
+<tt class="descname">slot_export_to_symuvia</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_export_to_symuvia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_export_to_symuvia" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI-Plugin: lancement l&#8217;execution du module &#8216;EXPORT&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp.TrafiPolluImp.slot_refreshSqlScriptList">
+<tt class="descname">slot_refreshSqlScriptList</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp.html#TrafiPolluImp.slot_refreshSqlScriptList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp.TrafiPolluImp.slot_refreshSqlScriptList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface GUI: Mise a jour de la liste des scripts SQL dans l&#8217;interface GUI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="trafipolluimp-sql">
+<span id="id2"></span><h2>trafipolluImp_SQL<a class="headerlink" href="#trafipolluimp-sql" title="Permalink to this headline">¶</a></h2>
+<p>Détails de l&#8217;interface:</p>
+<span class="target" id="module-trafipolluImp_SQL"></span><dl class="class">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL">
+<em class="property">class </em><tt class="descclassname">trafipolluImp_SQL.</tt><tt class="descname">trafipolluImp_SQL</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation du module SQL</p>
+<p>Utilise pour gerer la communication entre la BDD StreetGen et Python/QGIS.</p>
+<p>Module principalement utilise pour le DUMP des donnees, et partiellement pour la TOPO (pb de design ... :/ a revoir)</p>
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Initialisation du module SQL:</dt>
+<dd><ul class="first last simple">
+<li>Recuperation des donnees du parent (dicts: edges, node, lanes, ...)</li>
+<li>Declaration de la liste des scripts SQL pris en charges</li>
+<li>Recuperation des donnees de connexions a la BDD (utilisation du module &#8216;Config&#8217;)</li>
+<li>Tentative d&#8217;etablissement de la connection</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Il faudra (peut etre) revoir ce mecanisme de connection.</p>
+<p class="last">Ce n&#8217;est surement pas judicieux de le placer dans l&#8217;init de ce module
+(qui est dans l&#8217;init du parent, donc du plugin, donc au chargement de QGIS)</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict</em>) &#8211; dictionnaire (unpack) des parametres/donnees du plugin (mecanisme de transmission)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_edges">
+<tt class="descname">_post_request_for_edges</tt><big>(</big><em>results_dump</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._post_request_for_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation de la post-request pour les edges.</p>
+<p>Transfert des donnees recuperees pour les edges dans les structures de donnees Python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results_dump</strong> (<em>dict.</em>) &#8211; Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les edges</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_interconnexions">
+<tt class="descname">_post_request_for_interconnexions</tt><big>(</big><em>results_dump</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._post_request_for_interconnexions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_interconnexions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation de la post-request pour les interconnexions.</p>
+<p>Transfert des donnees recuperees pour les interconnexions dans les structures de donnees Python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results_dump</strong> (<em>dict.</em>) &#8211; Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les interconnexions</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_lanes">
+<tt class="descname">_post_request_for_lanes</tt><big>(</big><em>results_dump</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._post_request_for_lanes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_lanes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation de la post-request pour les lanes/voies.</p>
+<p>Transfert des donnees recuperees pour les lanes/voies dans les structures de donnees Python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results_dump</strong> (<em>dict.</em>) &#8211; Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les lanes/voies</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_nodes">
+<tt class="descname">_post_request_for_nodes</tt><big>(</big><em>results_dump</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._post_request_for_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation de la post-request pour les nodes.</p>
+<p>Transfert des donnees recuperees pour les nodes dans les structures de donnees Python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results_dump</strong> (<em>dict.</em>) &#8211; Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les nodes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_roundabouts">
+<tt class="descname">_post_request_for_roundabouts</tt><big>(</big><em>results_dump</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._post_request_for_roundabouts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_roundabouts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation de la post-request pour les rond-points.</p>
+<p>Transfert des donnees recuperees pour les rond-points dans les structures de donnees Python</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results_dump</strong> (<em>dict.</em>) &#8211; Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les rond-points</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_edges">
+<tt class="descname">_request_for_edges</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_edges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation specialisee pour le DUMP d&#8217;informations sur les edges/aretes/troncons.</p>
+<p>Voir: <a class="reference internal" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity"><tt class="xref py py-func docutils literal"><span class="pre">_request_for_entity()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity">
+<tt class="descname">_request_for_entity</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_entity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation generique pour le dump (fetch SQL) des donnees.</p>
+<dl class="docutils">
+<dt>kwargs doit contenir (au moins) 2 keys:</dt>
+<dd><ul class="first last simple">
+<li>func_for_dumping: function de dump pour recuperer les informations sur la base DB-StreetGen</li>
+<li>meth_post_request: methode de post traitement apres la recuperation des informations</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>dict.</em>) &#8211; Dictionnaire de parametres (transmis)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Code de retour:<p>1   &#8211; aucun probleme
+-1  &#8211; pas de cursor disponible
+-2  &#8211; probleme pendant le fetchall SQL</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_interconnexions">
+<tt class="descname">_request_for_interconnexions</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_interconnexions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_interconnexions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation specialisee pour le DUMP d&#8217;informations sur les interconnexions</p>
+<p>Voir: <a class="reference internal" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity"><tt class="xref py py-func docutils literal"><span class="pre">_request_for_entity()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_lanes">
+<tt class="descname">_request_for_lanes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_lanes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_lanes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation specialisee pour le DUMP d&#8217;informations sur les lanes/voies</p>
+<p>Voir: <a class="reference internal" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity"><tt class="xref py py-func docutils literal"><span class="pre">_request_for_entity()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_nodes">
+<tt class="descname">_request_for_nodes</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation specialisee pour le DUMP d&#8217;informations sur les nodes/noeuds/centre d&#8217;intersections</p>
+<p>Voir: <a class="reference internal" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity"><tt class="xref py py-func docutils literal"><span class="pre">_request_for_entity()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._request_for_roundabouts">
+<tt class="descname">_request_for_roundabouts</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._request_for_roundabouts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_roundabouts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation specialisee pour le DUMP d&#8217;informations sur les rond-points.</p>
+<p>Voir: <a class="reference internal" href="#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity" title="trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity"><tt class="xref py py-func docutils literal"><span class="pre">_request_for_entity()</span></tt></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>str</em>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL._update_tables_from_qgis">
+<em class="property">static </em><tt class="descname">_update_tables_from_qgis</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL._update_tables_from_qgis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL._update_tables_from_qgis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Methode utlisee par les id scripts SQL:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference download internal" href="_downloads/update_def_zone_test.sql"><tt class="xref download docutils literal"><span class="pre">update_def_zone_test.sql</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/update_table_edges_from_qgis.sql"><tt class="xref download docutils literal"><span class="pre">update_table_edges_from_qgis.sql</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/update_tables_from_def_zone_test.sql"><tt class="xref download docutils literal"><span class="pre">update_tables_from_def_zone_test.sql</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/update_table_detecting_roundabouts_from_qgis.sql"><tt class="xref download docutils literal"><span class="pre">update_table_detecting_roundabouts_from_qgis.sql</span></tt></a>.</li>
+</ul>
+</div></blockquote>
+<p>pour mettre a jour les vues SQL utilisees pour definir la zone de DUMP StreetGen -&gt; Python/Symuvia</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> (<em>(unpack) dict.</em>) &#8211; Dictionnaire des parametres (transmis)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent">
+<tt class="descname">build_sql_parameters_with_map_extent</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.build_sql_parameters_with_map_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonctions convertissant l&#8217;extent de visualisation courante dans QGIS en polygone PostGIS
+(dans le bon systeme de coordonne Srid).</p>
+<p>Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dictionnaire de parametres contenant un polygone PostGIS de l&#8217;extent QGIS</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent_for_roundabouts">
+<tt class="descname">build_sql_parameters_with_map_extent_for_roundabouts</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.build_sql_parameters_with_map_extent_for_roundabouts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent_for_roundabouts" title="Permalink to this definition">¶</a></dt>
+<dd><p>idem que &#8216;build_sql_parameters_with_map_extent&#8217;
+.. note::
+Faudrait penser a fusionner/refactorer cette partie</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_update_def_zone_test">
+<em class="property">static </em><tt class="descname">build_sql_parameters_with_update_def_zone_test</tt><big>(</big><em>b_update_def_zone_test_with_convex_hull_on_symuvia_network=False</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.build_sql_parameters_with_update_def_zone_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_update_def_zone_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonctions construisant un polygone PostGIS pour definir une zone de travail pour les scripts de DUMP.</p>
+<p>Cette zone (polygone) est constuire a partir de l&#8217;extraction d&#8217;une empreinte geographique liee a un reseau
+Symuvia.</p>
+<p>Voir dans <tt class="xref py py-mod docutils literal"><span class="pre">trafipolluImp_Tools_Symuvia</span></tt> pour des details sur l&#8217;empreinte d&#8217;un reseau Symuvia.</p>
+<p>Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Non stable, a revoir.
+Fonctionne avec SG3 mais pas SG4 ...</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>b_update_def_zone_test_with_convex_hull_on_symuvia_network</strong> (<em>bool</em>) &#8211; </li>
+<li><strong>kwargs</strong> (<em>dict.</em>) &#8211; Dictionnaire de parametres (transmis)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server">
+<tt class="descname">connect_sql_server</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.connect_sql_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tente de se connecter au serveur DB-StreetGen, suivant les parametres de connexions recuperes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Renvoie:<p>True  &#8211; Si on a trouve une connection valide vers BD-StreetGen
+False &#8211; Sinon</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server_log">
+<tt class="descname">connect_sql_server_log</tt><big>(</big><em>name_server</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.connect_sql_server_log"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>LOG: on log les informations du serveur avec lequel on a etablit une connection &#8216;valide&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name_server</strong> (<em>str</em>) &#8211; id d&#8217;un jeu de parametres valides pour se connecteur a un serveur DB-StreetGen</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.disconnect_sql_server">
+<tt class="descname">disconnect_sql_server</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.disconnect_sql_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.disconnect_sql_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deconnection au serveur DB-StreetGen</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="trafipolluImp_SQL.trafipolluImp_SQL.execute_sql_commands">
+<tt class="descname">execute_sql_commands</tt><big>(</big><em>sql_file</em>, <em>id_sql_method</em><big>)</big><a class="reference internal" href="_modules/trafipolluImp_SQL.html#trafipolluImp_SQL.execute_sql_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trafipolluImp_SQL.trafipolluImp_SQL.execute_sql_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute les commandes SQL contenues dans le script &#8216;sql_file&#8217; identifie par &#8216;id_sql_method&#8217;.</p>
+<p>Si l&#8217;id du script est soit:</p>
+<blockquote>
+<div><ul class="simple">
+<li>update_table_edges_from_qgis</li>
+<li>update_table_detecting_roundabouts_from_qgis</li>
+<li>update_def_zone_test</li>
+</ul>
+</div></blockquote>
+<p>-&gt; alors le calcul des parametres de zone d&#8217;extraction (a partir de l&#8217;extent QGIS ou d&#8217;une empreinte de reseau
+Symuvia, ou autre) pour les transmettre par la suite au script SQL (aux commandes du script).</p>
+<p>Dans tous les cas, on parse le script SQL pour executer toutes les commandes inclues dans le fichier script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sql_file</strong> (<em>str</em>) &#8211; nom du fichier script SQL a executer</li>
+<li><strong>id_sql_method</strong> (<em>str</em>) &#8211; identifiant du script SQL a executer</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Les Composants du plugin TrafiPollu</a><ul>
+<li><a class="reference internal" href="#trafipolluimp">trafipolluImp</a></li>
+<li><a class="reference internal" href="#trafipolluimp-sql">trafipolluImp_SQL</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Bienvenue dans la documentation d&#8217; <strong>Interactive Map Tracking</strong> pour <strong>TrafiPollu</strong></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tp_composants.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Bienvenue dans la documentation d’ Interactive Map Tracking pour TrafiPollu"
+             >previous</a> |</li>
+        <li><a href="index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

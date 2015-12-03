@@ -54,8 +54,8 @@ docs/_build/
 # PyBuilder
 target/
 
-#QGIS doc (not used on this project)
-#help/build/
+# QGIS doc (not used on this project)
+# help/build/
 #
 .idea/
 
