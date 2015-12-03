@@ -44,3 +44,19 @@ This document is meant to give a tutorial-like overview of all common tasks whil
 Since reST does not have facilities to interconnect several documents, or split documents into multiple output files, Sphinx uses a custom directive to add relations between the single files the documentation is made of, as well as tables of contents. The toctree directive is the central element.
 ```
 http://sphinx-doc.org/markup/toctree.html
+
+### Referencing downloadable files
+```
+This role lets you link to files within your source tree that are not reST documents that can be viewed, but files that can be downloaded.
+
+When you use this role, the referenced file is automatically marked for inclusion in the output when building (obviously, for HTML output only).
+All downloadable files are put into the _downloads subdirectory of the output directory; duplicate filenames are handled.
+```
+
+http://sphinx-doc.org/markup/inline.html#role-download
+http://stackoverflow.com/questions/8475865/in-python-sphinx-how-to-link-to-a-file-in-static-directory
+
+### The Python Domain
+`The Python domain (name py) provides the following directives for module declarations:`
+
+http://sphinx-doc.org/domains.html#the-python-domain
