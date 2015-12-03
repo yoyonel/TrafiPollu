@@ -464,9 +464,7 @@ class trafipolluImp_SQL(object):
 
         :param kwargs: Dictionnaire de parametres (transmis)
         :type kwargs: dict.
-        :return:
-
-        Code de retour::
+        :return: Code de retour:
 
              1 -- aucun probleme
             -1 -- pas de cursor disponible
