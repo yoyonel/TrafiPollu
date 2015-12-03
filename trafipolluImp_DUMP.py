@@ -1,3 +1,13 @@
+"""
+
+Module de gestion pour le DUMP des donnees DB-StreetGen vers Python
+
+.. warning::
+    Il y a une partie construction TOPOlogique aussi dans ce module
+    -> Probleme de design a revoir !
+
+"""
+
 __author__ = 'latty'
 
 import numpy as np
@@ -6,16 +16,12 @@ from itertools import groupby
 from shapely.wkb import loads as sp_wkb_loads
 
 import imt_tools
-from imt_tools import timerDecorator
-
-
-
-
-
-
+from imt_tools import timer_decorator
 
 # need to be in Globals for Pickled 'dict_edges'
-NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
+"""
+"""
+NT_LANE_INFORMATIONS = imt_tools.create_namedtuple_on_globals(
     'NT_LANE_INFORMATIONS',
     [
         'lane_side',
@@ -25,6 +31,8 @@ NT_LANE_INFORMATIONS = imt_tools.CreateNamedTupleOnGlobals(
     ]
 )
 
+"""
+"""
 str_ids_for_lanes = {
     'SG3 Informations': "LANES - SG3 Informations",
     'SG3 to SYMUVIA': "LANES - SG3 to SYMUVIA",
@@ -35,20 +43,22 @@ str_ids_for_lanes = {
 logger = imt_tools.build_logger(__name__)
 
 
-@timerDecorator()
+@timer_decorator
 def dump_for_roundabouts(objects_from_sql_request):
     """
 
-    :param objects_from_sql_request:
-    :return:
+    :param objects_from_sql_request: Le type de l'object depend du cursor utilise via psycopg2
+
+        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
+
+    :type objects_from_sql_request: psycopg2.extras.DictCursor.
+    :return: Dictionnaire d'informations (converties) sur les ronds-points
+    :rtype: dict.
     """
     dict_roundabouts = {}
 
     for object_from_sql_request in objects_from_sql_request:
-        # print 'object_from_sql_request: ', object_from_sql_request
-
         dict_sql_request = dict(object_from_sql_request)
-
         dict_sql_request.update(load_geom_buffers_with_shapely(dict_sql_request))
         dict_sql_request.update(
             load_arrays_with_numpely(
@@ -64,10 +74,11 @@ def dump_for_roundabouts(objects_from_sql_request):
     return dict_roundabouts
 
 
-@timerDecorator()
+@timer_decorator
 def dump_for_edges(objects_from_sql_request):
     """
 
+    :param objects_from_sql_request:
     :return:
     """
     dict_edges = {}
@@ -97,10 +108,11 @@ def dump_for_edges(objects_from_sql_request):
     return dict_edges
 
 
-@timerDecorator()
+@timer_decorator
 def dump_for_nodes(objects_from_sql_request):
     """
 
+    :param objects_from_sql_request:
     :return:
     """
     dict_nodes = {}
@@ -135,7 +147,7 @@ def dump_for_nodes(objects_from_sql_request):
     return dict_nodes
 
 
-@timerDecorator()
+@timer_decorator
 def dump_for_interconnexions(objects_from_sql_request):
     """
 
@@ -217,6 +229,8 @@ def load_geom_buffers_with_shapely(dict_objects_from_sql_request):
 def generate_id_for_lane(object_sql_lane, nb_lanes):
     """
 
+    :param object_sql_lane:
+    :param nb_lanes:
     :return:
     """
     # lane_position = object_sql_lane['lane_position']
@@ -259,9 +273,12 @@ def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
     :param lane_ordinality:
     :param nb_lanes:
     :return:
-    TESTS:
-     #>> test_convert_lane_ordinality_to_python_id()
-     [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
+
+    [TEST] Voir: :py:func:`test_convert_lane_ordinality_to_python_id`
+
+    >>> test_convert_lane_ordinality_to_python_id()
+    [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
+
     """
     nb_odds = count_number_odds(nb_lanes)
     if number_is_even(lane_ordinality):
@@ -271,7 +288,22 @@ def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
     return python_id
 
 
-@timerDecorator()
+def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
+    """
+
+    :param python_id:
+    :param nb_lanes:
+    :return:
+
+    TESTS:
+        >> test_convert_python_id_to_lane_ordinality()
+        [[1], [1, 2], [3, 1, 2], [3, 1, 2, 4], [5, 3, 1, 2, 4]]
+
+    """
+    nb_odds = count_number_odds(nb_lanes)
+    return ((nb_odds - python_id) * 2 - 1) if python_id < nb_odds else (python_id - nb_odds + 1) * 2
+
+@timer_decorator
 def dump_lanes(objects_from_sql_request, dict_edges):
     """
 
@@ -328,13 +360,14 @@ def dump_lanes(objects_from_sql_request, dict_edges):
 
 def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
     """
-
     :param dict_lanes:
+    :param str_id_for_grouped_lanes:
     :return:
-    Retourne un dictionnaire dont les
-    - key: indice d'une edge SG3
-    - value: liste de groupes de lanes dans le meme sens.
-        Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
+        Retourne un dictionnaire dont les::
+            - key: indice d'une edge SG3
+            - value: liste de groupes de lanes dans le meme sens.
+                     Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
+
     """
     dict_grouped_lanes = {}
     map(lambda x, y: dict_grouped_lanes.__setitem__(x, {str_id_for_grouped_lanes: y}),
@@ -356,6 +389,7 @@ def set_lane_informations(dict_lanes, sg3_edge_id, python_lane_id, informations)
     :param dict_lanes:
     :param sg3_edge_id:
     :param python_lane_id:
+    :param informations:
     :return:
     """
     get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id)[python_lane_id] = informations
@@ -432,8 +466,8 @@ def get_symu_troncon_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
 
     :param dict_lanes:
     :param sg3_edge_id:
+    :param python_lane_id:
     :return:
-
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']][python_lane_id]
 
@@ -453,6 +487,7 @@ def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality)
 
     :param dict_lanes:
     :param sg3_edge_id:
+    :param lane_ordinality:
     :return:
     """
     return get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality]
@@ -463,6 +498,46 @@ def set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id)
 
     :param dict_lanes:
     :param sg3_edge_id:
+    :param lane_ordinality:
+    :param python_lane_id:
     :return:
     """
     get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality] = python_lane_id
+
+
+#############################################
+# TESTS
+#############################################
+def test_convert_lane_ordinality_to_python_id(max_nb_lanes=6):
+    """
+
+    Fonction test pour :py:func:`convert_lane_ordinality_to_python_id`
+    Utilise la fonction: :py:func:`convert_python_id_to_lane_ordinality`
+
+    -> l'integrite de ce test depend des deux fonctions (mentionnees)
+
+    On test la reversibilite du calcul d'indices: SG3<->PYTHON
+
+    :param max_nb_lanes: Nombre de groupes de voies. La taille des groupes de voies est egale a leur indice.
+    :type max_nb_lanes: uint.
+    :return: List de listes d'indices generes pour chaque groupes de voies.
+    :rtype: list of list[int]
+
+    """
+    range_nb_lanes = range(1, max_nb_lanes)
+    ranges_python_id = [range(0, nb_lanes) for nb_lanes in range_nb_lanes]
+    # on test la reversibilite du calcul d'indices: SG3<->PYTHON
+    ranges_lane_ordinality = [
+        [
+            convert_python_id_to_lane_ordinality(python_id, len(ranges_python_id[nb_lanes - 1]))
+            for python_id in ranges_python_id[nb_lanes - 1]
+        ]
+        for nb_lanes in range_nb_lanes
+    ]
+    return [
+        [
+            convert_lane_ordinality_to_python_id(lane_ordinality, len(range_lane_ordinality))
+            for lane_ordinality in range_lane_ordinality
+        ]
+        for range_lane_ordinality in ranges_lane_ordinality
+    ]

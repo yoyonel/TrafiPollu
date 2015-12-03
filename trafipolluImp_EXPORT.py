@@ -15,7 +15,7 @@ from trafipolluImp_PYXB import pyxbDecorator
 
 from trafipolluImp_EXPORT_CONNEXIONS import trafipolluImp_EXPORT_CONNEXIONS
 from trafipolluImp_EXPORT_TRAFICS import trafipolluImp_EXPORT_TRAFICS
-from imt_tools import timerDecorator
+from imt_tools import timer_decorator
 
 import ConfigParser
 from collections import defaultdict
@@ -124,7 +124,7 @@ class trafipolluImp_EXPORT(
             self.__dict__['xsd_prefix'] + self.__dict__['xsd_version'] + \
             '.' + self.__dict__[str('symuvia_' + target + '_ext')]
 
-    @timerDecorator()
+    @timer_decorator
     def update_SYMUVIA(self):
         """
 
@@ -133,7 +133,6 @@ class trafipolluImp_EXPORT(
         """
         # TODO: construction TOPO ici !
         # Ya une feinte presente dans la construction topologique liee a une contrainte d'ordonnancement.
-        # Actuellement pour determiner les extremites, on doit examiner les TRONCONS qui n'ont pas un lieu amont ou
         # aval. Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (
         # CONNEXIONS).
         # Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes
@@ -169,7 +168,7 @@ class trafipolluImp_EXPORT(
         """
         self.symu_ROOT_TRAFICS = self.export_TRAFICS('ROOT_SYMUBRUIT')
 
-    @timerDecorator()
+    @timer_decorator
     def export(self, update_symu=False, outfilename=""):
         """
 

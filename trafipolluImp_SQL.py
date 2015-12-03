@@ -464,11 +464,13 @@ class trafipolluImp_SQL(object):
 
         :param kwargs: Dictionnaire de parametres (transmis)
         :type kwargs: dict.
-        :return: Code de retour:
+        :return:
 
-            1   -- aucun probleme
-            -1  -- pas de cursor disponible
-            -2  -- probleme pendant le fetchall SQL
+        Code de retour::
+
+             1 -- aucun probleme
+            -1 -- pas de cursor disponible
+            -2 -- probleme pendant le fetchall SQL
 
         :rtype: int.
         """

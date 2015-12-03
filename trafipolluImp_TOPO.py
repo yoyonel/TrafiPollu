@@ -6,14 +6,14 @@ from shapely.geometry import Point, LineString
 import pyxb
 
 import parser_symuvia_xsd_2_04_pyxb as symuvia_parser
-from imt_tools import CreateNamedTupleOnGlobals
-from imt_tools import CreateNamedTuple
-from imt_tools import timerDecorator
+from imt_tools import create_namedtuple_on_globals
+from imt_tools import create_namedtuple
+from imt_tools import timer_decorator
 from imt_tools import build_logger
 import trafipolluImp_DUMP as tpi_DUMP
 
 
-NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
+NT_LANE_SG3_SYMU = create_namedtuple_on_globals(
     'NT_LANE_SG3_SYMU',
     [
         'symu_troncon',
@@ -23,7 +23,7 @@ NT_LANE_SG3_SYMU = CreateNamedTupleOnGlobals(
     ]
 )
 
-NT_INTERCONNEXION = CreateNamedTupleOnGlobals(
+NT_INTERCONNEXION = create_namedtuple_on_globals(
     'NT_INTERCONNEXION',
     [
         'lane_amont',
@@ -32,7 +32,7 @@ NT_INTERCONNEXION = CreateNamedTupleOnGlobals(
     ]
 )
 
-NT_LANE_SYMU = CreateNamedTupleOnGlobals(
+NT_LANE_SYMU = create_namedtuple_on_globals(
     'NT_LANE_SYMU',
     [
         'symu_troncon',
@@ -40,7 +40,7 @@ NT_LANE_SYMU = CreateNamedTupleOnGlobals(
     ]
 )
 
-NT_RESULT_BUILD_PYXB = CreateNamedTuple(
+NT_RESULT_BUILD_PYXB = create_namedtuple(
     'NT_RESULT_BUILD_PYXB',
     [
         'amont',
@@ -92,7 +92,7 @@ class trafipolluImp_TOPO(object):
             'SORTIES': [],
         }
 
-    @timerDecorator()
+    @timer_decorator
     def build_topo(self):
         """
 
@@ -102,7 +102,7 @@ class trafipolluImp_TOPO(object):
         self.build_topo_for_interconnexions()
         self.build_topo_extrimites()
 
-    @timerDecorator()
+    @timer_decorator
     def convert_sg3_edges_to_pyxb_symutroncons(self):
         """
 
@@ -479,7 +479,7 @@ class trafipolluImp_TOPO(object):
         finally:
             return np.array(shp_list_points_optimized)
 
-    @timerDecorator()
+    @timer_decorator
     def build_topo_for_interconnexions(self):
         """
 
@@ -630,7 +630,7 @@ class trafipolluImp_TOPO(object):
 
         return symu_lane, symu_lane_id
 
-    @timerDecorator()
+    @timer_decorator
     def build_topo_extrimites(self):
         """
 

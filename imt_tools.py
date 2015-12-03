@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 """
+
+    imt_tools: Outils utilises par les modules du plugin
+
+"""
+
+"""
 /***************************************************************************
  interactive map tracking
                                  A QGIS plugin
@@ -45,6 +51,18 @@ from qgis_log_tools import QGISLogHandler
 import networkx as nx
 import matplotlib.pyplot as plt
 
+import time
+from functools import wraps
+#from time import time
+
+from PyQt4.QtCore import QDateTime
+from math import modf
+
+import shlex
+from subprocess import call, PIPE, STDOUT
+
+from PyQt4.QtNetwork import QTcpSocket
+
 defaultQtDateFormatString = "yyyy-MM-ddThh:mm:ss.zzz"
 
 #
@@ -62,7 +80,9 @@ if os.name != "nt":
 
 
 def get_lan_ip():
-    """ Finding the ip lan address (OS independant)
+    """
+
+    Finding the ip lan address (OS independant)
      url: http://stackoverflow.com/questions/166506/finding-local-ip-addresses-using-pythons-stdlib#
 
     :return: String of the IP
@@ -70,6 +90,7 @@ def get_lan_ip():
     """
     # print 'gethostname(): ', socket.gethostname()
     # print 'gethostbyname: ', socket.gethostbyname
+    global ip
     try:
         ip = socket.gethostbyname(socket.gethostname())
     except:
@@ -120,14 +141,20 @@ def get_os_username():
 
 
 def get_timestamp():
+    """
+
+    :return:
+    """
     # Python time
     return time.time()
 
 
 def convert_timestamp_to_qdatetime(timestamp):
-    from PyQt4.QtCore import QDateTime
-    from math import modf
+    """
 
+    :param timestamp:
+    :return:
+    """
     timestamp_frac, timestamp_whole = modf(timestamp)
     # Qt time
     qdatetime = QDateTime()
@@ -143,6 +170,12 @@ def convert_timestamp_to_qdatetime(timestamp):
 
 
 def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQtDateFormatString):
+    """
+
+    :param timestamp:
+    :param QtDateFormatString:
+    :return:
+    """
     # String Qt time
     return convert_timestamp_to_qdatetime(timestamp).toString(QtDateFormatString)
 
@@ -168,6 +201,11 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
 
 
 def get_timestamp_from_qt_string_format(QtDateFormatString=defaultQtDateFormatString):
+    """
+
+    :param QtDateFormatString:
+    :return:
+    """
     return convert_timestamp_to_qt_string_format(get_timestamp(), QtDateFormatString)
 
 
@@ -211,81 +249,150 @@ def find_layer_in_qgis_legend_interface(_iface, _layername):
         return None
 
 
-import time
-
-
 class TpTimer:
+    """
+
+    """
     def __init__(self):
+        """
+
+        """
         self.currentTime = self.default_timers()
         self.dict_process_timeupdate = {}
         self.dict_process_delay = {}
 
     @staticmethod
     def default_timers():
+        """
+
+        :return:
+        """
         return [time.time(), time.time()]
 
     @staticmethod
     def default_delay():
+        """
+
+        :return:
+        """
         return 0.0
 
     def get_current_time(self):
+        """
+
+        :return:
+        """
         self.update_current_time()
         return self.currentTime[0]
 
     def __getitem__(self, key):
+        """
+
+        :param key:
+        :return:
+        """
         return self.dict_process_timeupdate.setdefault(key, self.default_timers())
 
     def update_current_time(self):
+        """
+
+        :return:
+        """
         self.currentTime = [time.time(), self.currentTime[0]]
 
-    def delta(self):
+    def delta_without_key(self):
+        """
+
+        :return:
+        """
         return self.currentTime[0] - self.currentTime[1]
 
     def delta(self, key):
+        """
+
+        :param key:
+        :return:
+        """
         list_times = self.__getitem__(key)
         return list_times[0] - list_times[1]
 
     def delta_with_current_time(self, key):
+        """
+
+        :param key:
+        :return:
+        """
         self.update_current_time()
         list_times = self.__getitem__(key)
         return self.currentTime[0] - list_times[0]
 
     def update(self, key):
+        """
+
+        :param key:
+        :return:
+        """
         self.update_current_time()
         list_times = self.__getitem__(key)
         self.dict_process_timeupdate[key] = [self.currentTime[0], list_times[0]]
         return self.dict_process_timeupdate[key]
 
     def get_delay(self, process_name):
+        """
+
+        :param process_name:
+        :return:
+        """
         return self.dict_process_delay.setdefault(process_name, self.default_delay())
 
     def set_delay(self, delay_name, time_delay):
+        """
+
+        :param delay_name:
+        :param time_delay:
+        :return:
+        """
         self.dict_process_delay[delay_name] = time_delay
 
     def is_time_to_update(self, process_name, delay_name):
+        """
+
+        :param process_name:
+        :param delay_name:
+        :return:
+        """
         return self.delta_with_current_time(process_name) >= self.get_delay(delay_name)
 
 
-import shlex
-from subprocess import call, PIPE, STDOUT
-
-
 def get_return_code_of_simple_cmd(cmd, stderr=STDOUT):
-    """Execute a simple external command and return its exit status."""
+    """
+        Execute a simple external command and return its exit status.
+
+    :param cmd:
+    :param stderr:
+    :return:
+    """
     args = shlex.split(cmd)
     return call(args, stdout=PIPE, stderr=stderr)
 
 
 def is_network_alive(url="www.google.com"):
+    """
+
+    :param url:
+    :return:
+    """
     #cmd = "ping -c 1 " + url
     cmd = "curl --output /dev/null --silent --head --fail" + url
     return get_return_code_of_simple_cmd(cmd) == 0
 
 
-from PyQt4.QtNetwork import QTcpSocket
-
-
 def isConnected(url):
+    """
+
+    :param url:
+    :return:
+    """
     socket = QTcpSocket()
     socket.connectToHost(url, 80)
     return socket.waitForConnected(1000)
@@ -295,6 +402,13 @@ DEFAULT_SEGMENT_EPSILON = 1e-08
 
 
 def extent_equal(r1, r2, epsilon=DEFAULT_SEGMENT_EPSILON):
+    """
+
+    :param r1:
+    :param r2:
+    :param epsilon:
+    :return:
+    """
     return abs(r1.xMaximum() - r2.xMaximum()) <= epsilon and \
            abs(r1.yMaximum() - r2.yMaximum()) <= epsilon and \
            abs(r1.xMinimum() - r2.xMinimum()) <= epsilon and \
@@ -400,6 +514,8 @@ def saves_states_in_qsettings_pickle(imt, pickle_name_in_qsettings=qsettings_id_
     """
 
     :param imt:
+    :param pickle_name_in_qsettings:
+    :return:
     """
     pickle_string_dump = ""
     try:
@@ -413,6 +529,8 @@ def saves_states_in_qsettings_pickle(imt, pickle_name_in_qsettings=qsettings_id_
 def restore_states_from_pickle(imt, pickle_name_in_qsettings=qsettings_id_pickle):
     """
 
+    :param imt:
+    :param pickle_name_in_qsettings:
     :return:
     """
 
@@ -514,7 +632,9 @@ def build_list_member_name_filter_qcheckbox(dlg):
 
 def test_qt_dump(imt):
     """
+
     Show a connection between Python class and Qt Gui (wrapper)
+
     :param imt:
     """
     list_qt_types = [
@@ -553,9 +673,12 @@ def test_qt_dump(imt):
 
 def update_list_checkbox_from_qsettings(imt):
     """
+
     CONDITION: init_signals need to be call before init_plugin
     otherwise signals_manager have no information about signals
     and we can't rely slot signature with qobject
+
+    :param imt:
     :return:
     """
     s = imt.qsettings
@@ -567,7 +690,9 @@ def update_list_checkbox_from_qsettings(imt):
 def restore_gui_states_from_qsettings(imt, b_launch_slot=True):
     """
 
-    :param list_dlg_id_slot:
+    :param imt:
+    :param b_launch_slot:
+    :return:
     """
     s = imt.qsettings
     for tuple_dlg_id_slot in imt.list_tuples_dlg_id_slot:
@@ -629,54 +754,115 @@ def create_named_tuple_from_names(name, list_names):
 
 # url: http://stackoverflow.com/questions/16377215/how-to-pickle-a-namedtuple-instance-correctly
 # url: https://docs.python.org/2/library/functions.html#globals
-def CreateNamedTupleOnGlobals(*args):
+def create_namedtuple_on_globals(*args):
+    """
+
+    :param args:
+    :return:
+    """
     namedtupleClass = collections.namedtuple(*args)
     globals()[namedtupleClass.__name__] = namedtupleClass
     return namedtupleClass
 
 
-def CreateNamedTuple(*args):
+def create_namedtuple(*args):
+    """
+
+    :param args:
+    :return:
+    """
     return collections.namedtuple(*args)
 
 
 class Timer:
+    """
+    """
     def __enter__(self):
+        """
+
+        :return:
+        """
         self.start = time.clock()
         return self
 
     def __exit__(self, *args):
+        """
+
+        :param args:
+        :return:
+        """
         self.end = time.clock()
         self.interval = self.end - self.start
 
 
-class timerDecorator(object):
+# class timer_decorator(object):
+#     """
+#
+#     """
+#
+#     def __init__(self, prefix="-> TIMER\n\t", postfix=""):
+#         """
+#
+#         :param prefix:
+#         :param postfix:
+#         :return:
+#         """
+#         self.__prefix = prefix
+#         self.__postfix = postfix
+#
+#     def __call__(self, f):
+#         """
+#
+#         :param f:
+#         :return:
+#         """
+#         def wrapped_f(*args):
+#             """
+#
+#             :param args:
+#             :return:
+#             """
+#
+#             try:
+#                 with Timer() as t:
+#                     return f(*args)
+#             finally:
+#                 print '%s%s took %.03f sec.%s' % (
+#                     self.__prefix,
+#                     f.__name__,
+#                     t.interval,
+#                     self.__postfix
+#                 )
+#
+#         return wrapped_f
+
+def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
     """
 
+    :param f:
+    :param prefix:
+    :param postfix:
+    :return:
     """
-
-    def __init__(self, prefix="-> TIMER\n\t", postfix=""):
-        self.__prefix = prefix
-        self.__postfix = postfix
-
-    def __call__(self, f):
-        """
+    @wraps(f)
+    def wrap(*args, **kw):
         """
 
-        def wrapped_f(*args):
-            """
-            """
-            try:
-                with Timer() as t:
-                    return f(*args)
-            finally:
-                print '%s%s took %.03f sec.%s' % (
-                    self.__prefix,
-                    f.__name__,
-                    t.interval,
-                    self.__postfix
-                )
-
-        return wrapped_f
+        :param args:
+        :param kw:
+        :return:
+        """
+        global t
+        try:
+            with Timer() as t:
+                result = f(*args, **kw)
+        finally:
+            print '{0:s}{1:s} took {2:.03f} sec.{3:s}'.format(prefix,
+                                                              f.__name__,
+                                                              t.interval,
+                                                              postfix)
+        return result
+    return wrap
 
 
 default_header_for_log = '################## NEW SESSION ##################'
