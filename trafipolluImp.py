@@ -350,7 +350,7 @@ class TrafiPolluImp(object):
         La serialisation (dans le cadre du plugin/projet) peut etre interessante pour effectuer des debugs/tests/...
         offline par rapport a la base de donnees.
 
-        .. note::
+        .. warning::
             Non stabilise, non teste, a utiliser en toute connaissance de cause
 
         :return:

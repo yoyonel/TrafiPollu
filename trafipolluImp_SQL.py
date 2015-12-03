@@ -25,15 +25,31 @@ qgis_plugins_directory = os.path.normcase(os.path.dirname(__file__))
 
 class trafipolluImp_SQL(object):
     """
+
     Implementation du module SQL
+
     Utilise pour gerer la communication entre la BDD StreetGen et Python/QGIS.
+
     Module principalement utilise pour le DUMP des donnees, et partiellement pour la TOPO (pb de design ... :/ a revoir)
+
     """
 
     def __init__(self, **kwargs):
         """
+        Initialisation du module SQL:
+            - Recuperation des donnees du parent (dicts: edges, node, lanes, ...)
+            - Declaration de la liste des scripts SQL pris en charges
+            - Recuperation des donnees de connexions a la BDD (utilisation du module 'Config')
+            - Tentative d'etablissement de la connection
 
-        :param kwargs:
+        .. note::
+            Il faudra (peut etre) revoir ce mecanisme de connection.
+
+            Ce n'est surement pas judicieux de le placer dans l'init de ce module
+            (qui est dans l'init du parent, donc du plugin, donc au chargement de QGIS)
+
+        :param kwargs: dictionnaire (unpack) des parametres/donnees du plugin (mecanisme de transmission)
+        :type kwargs: dict
         :return:
         """
         self.dict_edges = kwargs['dict_edges']
@@ -117,6 +133,9 @@ class trafipolluImp_SQL(object):
     def __del__(self):
         """
 
+        Appel: disconnect_sql_server
+
+
         :return:
         """
         self.disconnect_sql_server()
@@ -124,48 +143,57 @@ class trafipolluImp_SQL(object):
     def disconnect_sql_server(self):
         """
 
+        Deconnection au serveur DB-StreetGen
+
         :return:
         """
         if self.b_connection_to_postgres_server:
             self.cursor.close()
             self.connection.close()
 
-    def get_value(self, name_server, option):
-        """
-
-        :param name_server:
-        :param option:
-        :return:
-        """
-        return self.__dict__['sql_' + name_server + '_' + option]
+    # TODO: a tester avant de valider la suppression de ce code
+    # def get_value(self, name_server, option):
+    #     """
+    #
+    #     :param name_server:
+    #     :type name_server: str
+    #     :param option:
+    #     :type option: str
+    #     :return:
+    #     """
+    #     return self.__dict__['sql_' + name_server + '_' + option]
 
     def connect_sql_server(self):
         """
 
-        :return:
+        Tente de se connecter au serveur DB-StreetGen, suivant les parametres de connexions recuperes.
+
+        :return: Renvoie:
+
+           True  -- Si on a trouve une connection valide vers BD-StreetGen
+           False -- Sinon
+
+        :rtype: bool
         """
-        #
+        # boucle sur la listes des parametres serveurs (possibles)
         for name_server in self._dict_params_server:
             try:
+                # on tente d'etablir une connection au serveur
                 self.connection = psycopg2.connect(**self._dict_params_server[name_server])
             except psycopg2.Error as e:
                 logger.warning("[SQL] PsyCopg2 Error : %s - Detail: %s" % (e.pgerror, e.diag.message_detail))
             else:
                 try:
+                    # cursor utilise: DictCursor
                     self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
                 except Exception, e:
                     logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
-                    logger.info('connected with %s server' % name_server)
-                    logger.info('informations de connections:')
-                    map(
-                        lambda s: logger.info(s),
-                        map(
-                            lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
-                            self._dict_params_server[name_server].iteritems()
-                        )
-                    )
+                    #
                     self.b_connection_to_postgres_server = True
+                    # Logs: informations sur le serveur 'valide'
+                    self.connect_sql_server_log(name_server)
+                    # on sort des qu'on a etablie une connection valide
                     break
 
         if not self.b_connection_to_postgres_server:
@@ -173,15 +201,43 @@ class trafipolluImp_SQL(object):
 
         return self.b_connection_to_postgres_server
 
+    def connect_sql_server_log(self, name_server):
+        """
+
+        LOG: on log les informations du serveur avec lequel on a etablit une connection 'valide'
+
+        :param name_server: id d'un jeu de parametres valides pour se connecteur a un serveur DB-StreetGen
+        :type name_server: str
+        :return:
+        """
+        logger.info('connected with %s server' % name_server)
+        logger.info('informations de connections:')
+        map(
+            lambda s: logger.info(s),
+            map(
+                lambda x: '- ' + str(x[0]) + ': ' + str(x[1]),
+                self._dict_params_server[name_server].iteritems()
+            )
+        )
+
     @staticmethod
     def _update_tables_from_qgis(**kwargs):
         """
+        Methode utlisee par les id scripts SQL:
 
-        :param args:
-        :param kwargs:
+            - :download:`update_def_zone_test.sql <../../update_def_zone_test.sql>`.
+            - :download:`update_table_edges_from_qgis.sql <../../update_table_edges_from_qgis.sql>`.
+            - :download:`update_tables_from_def_zone_test.sql <../../update_tables_from_def_zone_test.sql>`.
+            - :download:`update_table_detecting_roundabouts_from_qgis.sql <../../update_table_detecting_roundabouts_from_qgis.sql>`.
+
+        pour mettre a jour les vues SQL utilisees pour definir la zone de DUMP StreetGen -> Python/Symuvia
+
+        :param kwargs: Dictionnaire des parametres (transmis)
+        :type kwargs: (unpack) dict.
         :return:
         """
         try:
+            # on recupere la 'connection' prealablement etablie
             connection = kwargs['connection']
         except KeyError, e:
             logger.warning('No connection ! -> {0}'.format(e))
@@ -197,7 +253,13 @@ class trafipolluImp_SQL(object):
     def build_sql_parameters_with_map_extent(self):
         """
 
-        :return:
+        Fonctions convertissant l'extent de visualisation courante dans QGIS en polygone PostGIS
+        (dans le bon systeme de coordonne Srid).
+
+        Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL
+
+        :return: Dictionnaire de parametres contenant un polygone PostGIS de l'extent QGIS
+        :rtype: dict.
         """
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
@@ -223,15 +285,22 @@ class trafipolluImp_SQL(object):
             'extent_postgisSrid': extent_postgisSrid
         }
 
+        #######
+        # LOG #
+        #######
         logger.info("* list_points_from_mapcanvas: %s", list_points_from_mapcanvas)
         logger.info("* gPolygonWkt: %s", gPolylineWkt)
         logger.info("* extent_postgisSrid: %s", extent_postgisSrid)
         logger.info("extent_src_crs.postgisSrid: %s", extent_src_crs.postgisSrid())
+        #######
 
         return dict_parameters
 
     def build_sql_parameters_with_map_extent_for_roundabouts(self):
         """
+        idem que 'build_sql_parameters_with_map_extent'
+        .. note::
+        Faudrait penser a fusionner/refactorer cette partie
 
         :return:
         """
@@ -274,10 +343,23 @@ class trafipolluImp_SQL(object):
     ):
         """
 
+        Fonctions construisant un polygone PostGIS pour definir une zone de travail pour les scripts de DUMP.
+
+        Cette zone (polygone) est constuire a partir de l'extraction d'une empreinte geographique liee a un reseau
+        Symuvia.
+
+        Voir dans :py:mod:`trafipolluImp_Tools_Symuvia` pour des details sur l'empreinte d'un reseau Symuvia.
+
+        Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL
+
+        .. warning::
+            Non stable, a revoir.
+            Fonctionne avec SG3 mais pas SG4 ...
+
         :param b_update_def_zone_test_with_convex_hull_on_symuvia_network:
         :type b_update_def_zone_test_with_convex_hull_on_symuvia_network: bool
-        :param kwargs:
-        :type kwargs: dict
+        :param kwargs: Dictionnaire de parametres (transmis)
+        :type kwargs: dict.
         :return:
         """
         gPolygonWkt = ''
@@ -304,9 +386,22 @@ class trafipolluImp_SQL(object):
     def execute_sql_commands(self, sql_file, id_sql_method):
         """
 
-        :param sql_file:
+        Execute les commandes SQL contenues dans le script 'sql_file' identifie par 'id_sql_method'.
+
+        Si l'id du script est soit:
+
+            - update_table_edges_from_qgis
+            - update_table_detecting_roundabouts_from_qgis
+            - update_def_zone_test
+
+        -> alors le calcul des parametres de zone d'extraction (a partir de l'extent QGIS ou d'une empreinte de reseau
+        Symuvia, ou autre) pour les transmettre par la suite au script SQL (aux commandes du script).
+
+        Dans tous les cas, on parse le script SQL pour executer toutes les commandes inclues dans le fichier script.
+
+        :param sql_file: nom du fichier script SQL a executer
         :type sql_file: str
-        :param id_sql_method:
+        :param id_sql_method: identifiant du script SQL a executer
         :type id_sql_method: str
         :return:
         """
@@ -361,8 +456,21 @@ class trafipolluImp_SQL(object):
     def _request_for_entity(self, **kwargs):
         """
 
-        :param name_entity:
-        :return:
+        Implementation generique pour le dump (fetch SQL) des donnees.
+
+        kwargs doit contenir (au moins) 2 keys:
+            - func_for_dumping: function de dump pour recuperer les informations sur la base DB-StreetGen
+            - meth_post_request: methode de post traitement apres la recuperation des informations
+
+        :param kwargs: Dictionnaire de parametres (transmis)
+        :type kwargs: dict.
+        :return: Code de retour:
+
+            1   -- aucun probleme
+            -1  -- pas de cursor disponible
+            -2  -- probleme pendant le fetchall SQL
+
+        :rtype: int.
         """
         try:
             cursor = kwargs["cursor"]
@@ -388,6 +496,10 @@ class trafipolluImp_SQL(object):
     def _request_for_roundabouts(self, **kwargs):
         """
 
+        Implementation specialisee pour le DUMP d'informations sur les rond-points.
+
+        Voir: :py:func:`_request_for_entity`
+
         :param kwargs:
         :type kwargs: str
         :return:
@@ -404,7 +516,12 @@ class trafipolluImp_SQL(object):
     def _post_request_for_roundabouts(self, results_dump):
         """
 
-        :param results_dump:
+        Implementation de la post-request pour les rond-points.
+
+        Transfert des donnees recuperees pour les rond-points dans les structures de donnees Python
+
+        :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les rond-points
+        :type results_dump: dict.
         :return:
         """
         dict_roundabouts = results_dump
@@ -424,8 +541,14 @@ class trafipolluImp_SQL(object):
     def _request_for_edges(self, **kwargs):
         """
 
+        Implementation specialisee pour le DUMP d'informations sur les edges/aretes/troncons.
+
+        Voir: :py:func:`_request_for_entity`
+
         :param kwargs:
+        :type kwargs: str
         :return:
+        :rtype: int
 
         """
         kwargs.update(
@@ -439,7 +562,12 @@ class trafipolluImp_SQL(object):
     def _post_request_for_edges(self, results_dump):
         """
 
-        :param results_dump:
+        Implementation de la post-request pour les edges.
+
+        Transfert des donnees recuperees pour les edges dans les structures de donnees Python
+
+        :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les edges
+        :type results_dump: dict.
         :return:
         """
         dict_edges = results_dump
@@ -448,8 +576,15 @@ class trafipolluImp_SQL(object):
     def _request_for_nodes(self, **kwargs):
         """
 
+        Implementation specialisee pour le DUMP d'informations sur les nodes/noeuds/centre d'intersections
+
+        Voir: :py:func:`_request_for_entity`
+
         :param kwargs:
+        :type kwargs: str
         :return:
+        :rtype: int
+
         """
         kwargs.update(
             {
@@ -462,7 +597,12 @@ class trafipolluImp_SQL(object):
     def _post_request_for_nodes(self, results_dump):
         """
 
-        :param results_dump:
+        Implementation de la post-request pour les nodes.
+
+        Transfert des donnees recuperees pour les nodes dans les structures de donnees Python
+
+        :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les nodes
+        :type results_dump: dict.
         :return:
         """
         dict_nodes = results_dump
@@ -471,8 +611,14 @@ class trafipolluImp_SQL(object):
     def _request_for_interconnexions(self, **kwargs):
         """
 
+        Implementation specialisee pour le DUMP d'informations sur les interconnexions
+
+        Voir: :py:func:`_request_for_entity`
+
         :param kwargs:
+        :type kwargs: str
         :return:
+        :rtype: int
         """
         kwargs.update(
             {
@@ -485,7 +631,12 @@ class trafipolluImp_SQL(object):
     def _post_request_for_interconnexions(self, results_dump):
         """
 
-        :param results_dump:
+        Implementation de la post-request pour les interconnexions.
+
+        Transfert des donnees recuperees pour les interconnexions dans les structures de donnees Python
+
+        :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les interconnexions
+        :type results_dump: dict.
         :return:
         """
         dict_interconnexions, dict_set_id_edges = results_dump
@@ -502,9 +653,14 @@ class trafipolluImp_SQL(object):
     def _request_for_lanes(self, **kwargs):
         """
 
-        :param objects_from_sql_request:
-        :param b_load_geom:
+        Implementation specialisee pour le DUMP d'informations sur les lanes/voies
+
+        Voir: :py:func:`_request_for_entity`
+
+        :param kwargs:
+        :type kwargs: str
         :return:
+        :rtype: int
         """
         kwargs.update(
             {
@@ -517,7 +673,12 @@ class trafipolluImp_SQL(object):
     def _post_request_for_lanes(self, results_dump):
         """
 
-        :param results_dump:
+        Implementation de la post-request pour les lanes/voies.
+
+        Transfert des donnees recuperees pour les lanes/voies dans les structures de donnees Python
+
+        :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les lanes/voies
+        :type results_dump: dict.
         :return:
         """
         dict_lanes, dict_grouped_lanes = results_dump
