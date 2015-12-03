@@ -58,5 +58,3 @@ Détails de l'interface:
 .. automodule:: imt_tools
     :members:
     :private-members:
-
-
