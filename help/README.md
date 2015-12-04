@@ -271,6 +271,11 @@ Exemple de rendu:
 
 - Installation (IGN)
   + Configuration pour Sphinx
+    - Installation
+      + Python Package
+        ```bash
+        sudo -E pip install sphinxcontrib-plantuml
+        ```
 
     ```python
     extensions = ['sphinx.ext.graphviz', 'sphinxcontrib.plantuml']

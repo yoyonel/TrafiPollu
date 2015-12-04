@@ -16,6 +16,7 @@ BlockDiag:
     }
 
 graphviz:
+
 .. graphviz::
 
    digraph {

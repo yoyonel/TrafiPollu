@@ -146,6 +146,7 @@ $ sudo -E pip install PyXB
 + Sphynx:
 ```bash
 $ sudo -E pip install Sphynx
+$ sudo apt-get install python-sphinx
 ```
 
 ##### Compilation (deploy) du plugin
@@ -195,6 +196,9 @@ $ ln -s <path_to_libz.so.1>/libz.so.1 <path_to_libz.so.1>/libz.so
 ```bash
 $ echo "import psycopg2; print psycopg2.__version__" | python  
 ```
+- matplotlib
+
+- apt-get install python-tk
 
 #### Setting: Config file INI for TrafiPollu
 Pensez à changer 'host' dans le fichier .ini utiliser par le module SQL

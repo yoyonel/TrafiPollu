@@ -43,7 +43,7 @@ plantuml = 'java -jar ' + os.path.dirname(__name__) + 'utils/plantuml.jar'
 # Fontpath for blockdiag (truetype font)
 blockdiag_fontpath = '/usr/share/fonts/truetype/ipafont/ipagp.ttf'
 
-# Add any paths that contain templates here, relative to this directory.
+# Add any paths that contain templa tes here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix of source filenames.
