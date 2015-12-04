@@ -1,0 +1,163 @@
+digraph G {
+	 size="10,10";
+	 overlap="false";
+12345671023 -> 12345671047;
+12345671043 -> 12345671047;
+12345671021 -> 12345671009;
+12345671023 -> 12345671044;
+12345671013 -> 12345671006;
+12345671028 -> 12345671030;
+12345671023 -> 12345671048;
+12345671044 -> 12345671048;
+12345671022 -> 12345671035;
+12345671031 -> 12345671035;
+12345671023 -> 12345671053;
+12345671043 -> 12345671053;
+12345671023 -> 12345671045;
+12345671022 -> 12345671039;
+12345671033 -> 12345671039;
+12345671023 -> 12345671027;
+12345671022 -> 12345671041;
+12345671031 -> 12345671041;
+12345671018 -> 12345671005;
+12345671023 -> 12345671051;
+12345671045 -> 12345671051;
+12345671023 -> 12345671050;
+12345671044 -> 12345671050;
+12345671023 -> 12345671054;
+12345671044 -> 12345671054;
+12345671028 -> 12345671060;
+12345671056 -> 12345671060;
+12345671020 -> 12345671008;
+12345671021 -> 12345671026;
+12345671022 -> 12345671042;
+12345671032 -> 12345671042;
+12345671028 -> 12345671055;
+12345671006 -> 12345671014;
+12345671000 -> 12345671013;
+12345671001 -> 12345671013;
+12345671002 -> 12345671013;
+12345671028 -> 12345671066;
+12345671056 -> 12345671066;
+12345671028 -> 12345671059;
+12345671055 -> 12345671059;
+12345671028 -> 12345671062;
+12345671056 -> 12345671062;
+12345671022 -> 12345671010;
+12345671023 -> 12345671011;
+12345671028 -> 12345671057;
+12345671022 -> 12345671040;
+12345671034 -> 12345671040;
+12345671028 -> 12345671061;
+12345671055 -> 12345671061;
+12345671004 -> 12345671017;
+12345671022 -> 12345671023;
+12345671016 -> 12345671004;
+12345671015 -> 12345671016;
+12345671022 -> 12345671031;
+12345671022 -> 12345671034;
+12345671028 -> 12345671063;
+12345671057 -> 12345671063;
+12345671019 -> 12345671020;
+12345671022 -> 12345671032;
+12345671023 -> 12345671043;
+12345671020 -> 12345671021;
+12345671003 -> 12345671021;
+12345671022 -> 12345671038;
+12345671032 -> 12345671038;
+12345671022 -> 12345671033;
+12345671023 -> 12345671028;
+12345671001 -> 12345671003;
+12345671028 -> 12345671056;
+12345671028 -> 12345671065;
+12345671055 -> 12345671065;
+12345671022 -> 12345671037;
+12345671031 -> 12345671037;
+12345671019 -> 12345671007;
+12345671023 -> 12345671046;
+12345671018 -> 12345671012;
+12345671014 -> 12345671015;
+12345671019 -> 12345671024;
+12345671018 -> 12345671019;
+12345671020 -> 12345671025;
+12345671028 -> 12345671064;
+12345671058 -> 12345671064;
+12345671022 -> 12345671036;
+12345671032 -> 12345671036;
+12345671028 -> 12345671029;
+12345671021 -> 12345671022;
+12345671017 -> 12345671018;
+12345671003 -> 12345671018;
+12345671023 -> 12345671052;
+12345671046 -> 12345671052;
+12345671028 -> 12345671058;
+12345671023 -> 12345671049;
+12345671043 -> 12345671049;
+12345671000 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671001 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671002 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671003 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671004 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671005 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671006 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671007 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671008 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671009 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671010 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671011 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671012 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671013 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671014 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671015 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671016 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671017 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671018 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671019 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671020 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671021 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671022 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671023 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671024 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671025 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671026 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671027 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671028 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671029 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671030 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671031 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671032 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671033 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671034 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671035 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671036 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671037 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671038 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671039 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671040 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671041 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671042 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671043 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671044 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671045 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671046 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671047 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671048 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671049 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671050 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671051 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671052 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671053 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671054 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671055 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671056 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671057 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671058 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671059 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671060 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671061 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671062 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671063 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671064 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671065 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+12345671066 [shape=box,fontsize=14,fontcolor=black,size="10,10"]
+}

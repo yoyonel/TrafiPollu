@@ -32,8 +32,16 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.pngmath',
     'sphinx.ext.viewcode',
-    'sphinx.ext.autodoc'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.graphviz',
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.plantuml'
 ]
+
+plantuml = 'java -jar ' + os.path.dirname(__name__) + 'utils/plantuml.jar'
+
+# Fontpath for blockdiag (truetype font)
+blockdiag_fontpath = '/usr/share/fonts/truetype/ipafont/ipagp.ttf'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

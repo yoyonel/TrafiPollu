@@ -1,3 +1,9 @@
+# Table of Contents
+1. [Doc sur Sphinx](#Documenting Your Project Using Sphinx)
+2. [Diagramme UML avec Sphinx](# UML: Diagramme avec/dans Sphinx)
+  1. [blockdiag](# blockdiag - simple diagram images generator)
+
+
 # Sphinx: Documentation sous Python
 
 ## Sources, références, liens, ...
@@ -162,3 +168,161 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
         return result
     return wrap
 ```
+
+
+
+## UML: Diagramme avec/dans Sphinx
+
+Solutions pour intégrer des visualisations de diagrammes UML dans la documentation générée par Sphinx.
+
+- page wiki: [Sequence Diagram](https://en.wikipedia.org/wiki/Sequence_diagram)
+- stackoverflow recherche: [generate uml sequence diagrams with python or perl](http://stackoverflow.com/questions/13136247/generate-uml-sequence-diagrams-with-python-or-perl)
+- site intéressant sur le sujet: [Creating diagrams in Sphinx](http://build-me-the-docs-please.readthedocs.org/en/latest/Using_Sphinx/UsingGraphicsAndDiagramsInSphinx.html)
+
+### blockdiag - simple diagram images generator
+
++ website: [http://blockdiag.com/en/](http://blockdiag.com/en/)
+  + index: [http://blockdiag.com/en/blockdiag/index.html](http://blockdiag.com/en/blockdiag/index.html)
+
+#### [Introduction of blockdiag](http://blockdiag.com/en/blockdiag/introduction.html#features)
+
+
+##### Features
+  + Generate block-diagram from dot like text (basic feature).
+  + Multilingualization for node-label (utf-8 only).
+  + Sphinx embedding (using sphinxcontrib-blockdiag package)
+
+##### Installation
+
+```bash
+$ sudo -E pip install sphinxcontrib-blockdiag
+$ sudo apt-get install fonts-ipafont-gothic
+```
+Installation du package `fonts-ipafont-gothic` pour la font: `ipagp.ttf`
+
+##### Utilisations, Tests
+
+###### Python (test)
+répertoire: `UML_diagrams/seqdiag`
+
+Listes des fichiers:
+```bash
+UML_diagrams/seqdiag (version_IGN *) $ ls -1
+diagram_definition.seqdiag
+diagram.png
+diagram_sequence.py
+script_build_diagram_sequence.sh
+```
+
+- diagram_definition.seqdiag: source script définissant le diagramme à généreport
+- diagram_sequence.py: script python pour
+  + charger le diagramme (décrit par `diagram_definition.seqdiag`)
+  + le rendre via la lib
+  + sauvegarde dans: `diagram.png`
+- diagram.png: build du diagramme généré
+- script_build_diagram_sequence.sh: script bash pour lancer la génération d'une image d'un diagramme
+
+Exemple de rendu:
+![](../UML_diagrams/seqdiag/diagram.png)
+
+###### Sphinx
+
+=> [sphinxcontrib-blockdiag](http://blockdiag.com/en/blockdiag/sphinxcontrib.html#sphinxcontrib-blockdiag)
+
+- Installation
+  + Python Package
+    ```bash
+    sudo -E pip install sphinxcontrib-blockdiag
+    ```
+  + Configure Sphinx
+    ```python
+    extensions = ['sphinx.ext.graphviz', 'sphinxcontrib.blockdiag']
+    # Fontpath for blockdiag (truetype font)
+    blockdiag_fontpath = '/usr/share/fonts/truetype/ipafont/ipagp.ttf'
+    ```
+- Utilisation: `tp_composants.rst`
+  ```sphinx
+    BlockDiag:
+
+    .. blockdiag::
+
+      blockdiag admin {
+          A -> B
+      }
+    ```
+- Pro/Con
+  * \+ Intégration simple: Python/Sphinx
+  * \+ Rendu: visuellement jolie
+  * \- Out of Date: la page web du projet date de 2011 (les images de rendues ne sont pas plus présentes par exemple)
+  * \- Limitation(s): ça semble spécialisé pour le rendu de diagrammes de séquences (uniquement)
+
+
+### PlantUML
+
+[Welcome to plantuml’s documentation](http://pythonhosted.org/plantuml/#module-plantuml)
+
+![exemple de rendu de diagramme](http://pythonhosted.org/plantuml/_images/basic_out.png)
+
++ website: [http://fr.plantuml.com/](http://fr.plantuml.com/)
+  + download: [http://plantuml.com/download.html](http://plantuml.com/download.html)
+    - last version: [http://sourceforge.net/projects/plantuml/files/plantuml.jar/download](http://sourceforge.net/projects/plantuml/files/plantuml.jar/download)
+  + examples de diagrammes de séquences: [Sequence Diagram][http://plantuml.com/sequence.html#Basic_examples]
+  + TESTS: [page sur le test de l'installation (important)](http://fr.plantuml.com/graphvizdot.html)
+
+- Installation (IGN)
+  + Configuration pour Sphinx
+
+    ```python
+    extensions = ['sphinx.ext.graphviz', 'sphinxcontrib.plantuml']
+    plantuml = 'java -jar ' + os.path.dirname(__name__) + 'utils/plantuml.jar'
+    ```
+    - Utilisation: `tp_composants.rst`
+
+    ```sphinx
+    PlantUML:
+
+    .. uml::
+
+        @startuml
+        Alice -> Bob: Hi!
+        Alice <- Bob: How are you?
+        @enduml
+    ```
+    - Pro/Con
+      * \+ Maintenue: semble plutot a jour et maintenue encore
+      * \+ Complet: semble complet et capable de décrire beaucoup de diagrammes UML
+      * \- Rendu: de base, moins joli (que blockdiag), mais à voir avec configuration/customisation
+
+  + Configuration pour Linux
+    Plus complexe, passe par un serveur online pour générer les images.
+    Pas (encore) réussi à configurer correctement pour passer à travers le proxy IGN
+    Potentiellement intérêt limité !
+
+#### Salt
+Salt is a subproject included in PlantUML that may help you to design graphical interface.
+
++ website: [http://plantuml.com/salt.html](http://plantuml.com/salt.html)
+
+![exemple de rendu](http://plantuml.com/imgp/salt_006.png)
+
++ Configuration pour Sphinx
+  - Utilisation: `tp_composants.rst`
+
+    ```sphinx
+    Salt:
+
+    .. uml::
+
+      @startsalt
+      {+
+      {/ <b>General | Fullscreen | Behavior | Saving }
+      {
+          { Open image in: | ^Smart Mode^ }
+          [X] Smooth images when zoomed
+          [X] Confirm image deletion
+          [ ] Show hidden images
+      }
+      [Close]
+      }
+      @endsalt
+    ```

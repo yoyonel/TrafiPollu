@@ -459,12 +459,15 @@ class trafipolluImp_SQL(object):
         Implementation generique pour le dump (fetch SQL) des donnees.
 
         kwargs doit contenir (au moins) 2 keys:
+
             - func_for_dumping: function de dump pour recuperer les informations sur la base DB-StreetGen
             - meth_post_request: methode de post traitement apres la recuperation des informations
 
         :param kwargs: Dictionnaire de parametres (transmis)
         :type kwargs: dict.
-        :return: Code de retour:
+        :return:
+
+        Code de retour::
 
              1 -- aucun probleme
             -1 -- pas de cursor disponible
