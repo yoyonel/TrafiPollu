@@ -62,6 +62,8 @@ import shlex
 from subprocess import call, PIPE, STDOUT
 
 from PyQt4.QtNetwork import QTcpSocket
+import getpass
+
 
 defaultQtDateFormatString = "yyyy-MM-ddThh:mm:ss.zzz"
 
@@ -109,7 +111,9 @@ def get_lan_ip():
 
 
 def find_index_field_by_name(field_names, field_name):
-    """ Search a field (by name) in a list of fields.
+    """
+
+    Search a field (by name) in a list of fields.
 
     :param field_names: list of field name
     :type field_names: list[str]
@@ -134,9 +138,8 @@ def get_os_username():
     """
 
     :return:
+    :rtype:
     """
-    import getpass
-
     return getpass.getuser()
 
 
@@ -144,6 +147,7 @@ def get_timestamp():
     """
 
     :return:
+    :rtype: .
     """
     # Python time
     return time.time()
@@ -153,6 +157,7 @@ def convert_timestamp_to_qdatetime(timestamp):
     """
 
     :param timestamp:
+    :type timestamp: .
     :return:
     """
     timestamp_frac, timestamp_whole = modf(timestamp)
@@ -173,8 +178,11 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
     """
 
     :param timestamp:
+    :type timestamp: .
     :param QtDateFormatString:
+    :type QtDateFormatString: str.
     :return:
+    :rtype: .
     """
     # String Qt time
     return convert_timestamp_to_qdatetime(timestamp).toString(QtDateFormatString)
@@ -204,7 +212,9 @@ def get_timestamp_from_qt_string_format(QtDateFormatString=defaultQtDateFormatSt
     """
 
     :param QtDateFormatString:
+    :type QtDateFormatString: str.
     :return:
+    :rtype: .
     """
     return convert_timestamp_to_qt_string_format(get_timestamp(), QtDateFormatString)
 
@@ -237,8 +247,11 @@ def find_layer_in_qgis_legend_interface(_iface, _layername):
     """
 
     :param _iface:
+    :type _iface: .
     :param _layername:
+    :type _layername: .
     :return:
+    :rtype:
     """
     try:
         layer_searched = [layer_searched
@@ -266,6 +279,7 @@ class TpTimer:
         """
 
         :return:
+        :rtype: list[float, float].
         """
         return [time.time(), time.time()]
 
@@ -274,6 +288,7 @@ class TpTimer:
         """
 
         :return:
+        :rtype: float.
         """
         return 0.0
 
@@ -281,6 +296,7 @@ class TpTimer:
         """
 
         :return:
+        :rtype: float.
         """
         self.update_current_time()
         return self.currentTime[0]
@@ -296,7 +312,6 @@ class TpTimer:
     def update_current_time(self):
         """
 
-        :return:
         """
         self.currentTime = [time.time(), self.currentTime[0]]
 
@@ -304,6 +319,7 @@ class TpTimer:
         """
 
         :return:
+        :rtype: float.
         """
         return self.currentTime[0] - self.currentTime[1]
 
@@ -311,7 +327,9 @@ class TpTimer:
         """
 
         :param key:
+        :type key: str.
         :return:
+        :rtype: float.
         """
         list_times = self.__getitem__(key)
         return list_times[0] - list_times[1]
@@ -320,7 +338,9 @@ class TpTimer:
         """
 
         :param key:
+        :type key: str.
         :return:
+        :rtype: float.
         """
         self.update_current_time()
         list_times = self.__getitem__(key)
@@ -330,7 +350,9 @@ class TpTimer:
         """
 
         :param key:
+        :type key: str.
         :return:
+        :rtype: float.
         """
         self.update_current_time()
         list_times = self.__getitem__(key)
@@ -341,7 +363,9 @@ class TpTimer:
         """
 
         :param process_name:
+        :type process_name: str.
         :return:
+        :rtype: .
         """
         return self.dict_process_delay.setdefault(process_name, self.default_delay())
 
@@ -349,8 +373,10 @@ class TpTimer:
         """
 
         :param delay_name:
+        :type delay_name: str.
         :param time_delay:
-        :return:
+        :type time_delay: float.
+
         """
         self.dict_process_delay[delay_name] = time_delay
 
@@ -358,8 +384,11 @@ class TpTimer:
         """
 
         :param process_name:
+        :type process_name: str.
         :param delay_name:
+        :type delay_name: str.
         :return:
+        :rtype: float.
         """
         return self.delta_with_current_time(process_name) >= self.get_delay(delay_name)
 
@@ -369,8 +398,11 @@ def get_return_code_of_simple_cmd(cmd, stderr=STDOUT):
         Execute a simple external command and return its exit status.
 
     :param cmd:
+    :type cmd: str.
     :param stderr:
+    :type stderr: .
     :return:
+    :rtype: .
     """
     args = shlex.split(cmd)
     return call(args, stdout=PIPE, stderr=stderr)
@@ -380,7 +412,9 @@ def is_network_alive(url="www.google.com"):
     """
 
     :param url:
+    :type url: str.
     :return:
+    :rtype: bool.
     """
     #cmd = "ping -c 1 " + url
     cmd = "curl --output /dev/null --silent --head --fail" + url
@@ -391,7 +425,9 @@ def isConnected(url):
     """
 
     :param url:
+    :type url: str.
     :return:
+    :rtype: bool.
     """
     socket = QTcpSocket()
     socket.connectToHost(url, 80)
@@ -405,9 +441,13 @@ def extent_equal(r1, r2, epsilon=DEFAULT_SEGMENT_EPSILON):
     """
 
     :param r1:
+    :type r1: QgsRectangle.
     :param r2:
+    :type r2: QgsRectangle.
     :param epsilon:
+    :type epsilon: float.
     :return:
+    :rtype: bool.
     """
     return abs(r1.xMaximum() - r2.xMaximum()) <= epsilon and \
            abs(r1.yMaximum() - r2.yMaximum()) <= epsilon and \
@@ -426,6 +466,7 @@ def save_gui_states_in_qsettings(dict_qobject_slot):
     """
 
     :param dict_qobject_slot:
+    :type dict_qobject_slot: dict.
     """
     s = QSettings()
     #
@@ -439,7 +480,9 @@ def serialize_checkbox(checkbox):
     """
 
     :param checkbox:
+    :type checkbox: .
     :return:
+    :rtype: dict.
     """
     return {
         'isEnabled': checkbox.isEnabled(),
@@ -450,7 +493,12 @@ def serialize_checkbox(checkbox):
 def serialize_list_checkbox(dlg, list_id_checkbox):
     """
 
+    :param dlg:
+    :type dlg:
+    :param list_id_checkbox:
+    :type list_id_checkbox:
     :return:
+    :rtype: dict.
     """
     return_dict = {}
     for string_id_checkbox in list_id_checkbox:
@@ -465,8 +513,10 @@ def serialize_list_checkbox(dlg, list_id_checkbox):
 def serialize_tabs_size(imt):
     """
 
-    :param dlg:
+    :param imt:
+    :type imt:
     :return:
+    :rtype: dict.
     """
     return imt.dict_tabs_size
 
@@ -474,10 +524,13 @@ def serialize_tabs_size(imt):
 def update_checkbox_from_serialization(qobject, id_qobject, state):
     """
 
-    :param state:
     :param qobject:
+    :type qobject:
     :param id_qobject:
-    :return:
+    :type id_qobject:
+    :param state:
+    :type state:
+
     """
     qobject.setEnabled(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isEnabled', True))
     qobject.setChecked(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False))
@@ -491,9 +544,12 @@ def update_list_checkbox_from_serialization(dlg, list_string_id_checkbox, pickle
     """
 
     :param dlg:
+    :type dlg:
     :param list_string_id_checkbox:
+    :type list_string_id_checkbox:
     :param pickle_state:
-    :return:
+    :type pickle_state:
+
     """
     for string_id_dlg in list_string_id_checkbox:
         qt_checkbox = dlg.__getattribute__(string_id_dlg)
@@ -504,8 +560,10 @@ def update_tabs_size_from_serialization(imt, pickle_state):
     """
 
     :param imt:
+    :type imt:
     :param pickle_state:
-    :return:
+    :type pickle_state:
+
     """
     imt.dict_tabs_size = pickle_state[pickle_id_gui][pickle_id_list_tabs_size]
 
@@ -514,8 +572,10 @@ def saves_states_in_qsettings_pickle(imt, pickle_name_in_qsettings=qsettings_id_
     """
 
     :param imt:
+    :type imt:
     :param pickle_name_in_qsettings:
-    :return:
+    :type pickle_name_in_qsettings: str.
+
     """
     pickle_string_dump = ""
     try:
@@ -530,8 +590,9 @@ def restore_states_from_pickle(imt, pickle_name_in_qsettings=qsettings_id_pickle
     """
 
     :param imt:
+    :type imt: .
     :param pickle_name_in_qsettings:
-    :return:
+    :type pickle_name_in_qsettings: str.
     """
 
     qsettings = imt.qsettings
@@ -563,8 +624,11 @@ def build_list_id_filter_by_qt_type(dlg, qt_type):
     """
 
     :param dlg:
+    :type dlg:
     :param qt_type:
+    :type qt_type:
     :return:
+    :rtype: list.
     """
     list_id = []
     list_children = dlg.findChildren(qt_type)
@@ -578,8 +642,11 @@ def build_dict_id_qt_type(dlg, qt_type):
     """
 
     :param dlg:
+    :type dlg: .
     :param qt_type:
+    :type qt_type: .
     :return:
+    :rtype: dict.
     """
     dict_id_qt_type = {}
     list_id_for_qt_type = build_list_id_filter_by_qt_type(dlg, qt_type)
@@ -592,7 +659,11 @@ def build_list_member_name_filter_by_qtype(dlg, *qt_types):
     """
 
     :param dlg:
+    :type dlg: .
+    :param qt_types:
+    :type qt_types: .
     :return:
+    :rtype: list.
     """
     list_member_name = []
     for qt_type in qt_types:
@@ -612,8 +683,12 @@ def build_list_member_name_filter_by_qtypes(dlg, *qt_types):
     """
 
     :param dlg:
+    :type dlg: .
     :param qt_types:
+    :type qt_types: .
     :return:
+    :rtype: list.
+
     """
     return_list = []
     for qt_type in qt_types:
@@ -625,7 +700,9 @@ def build_list_member_name_filter_qcheckbox(dlg):
     """
 
     :param dlg:
+    :type dlg: .
     :return:
+    :rtype: .
     """
     return build_list_member_name_filter_by_qtypes(dlg, QCheckBox)
 
@@ -679,7 +756,7 @@ def update_list_checkbox_from_qsettings(imt):
     and we can't rely slot signature with qobject
 
     :param imt:
-    :return:
+    :type imt: .
     """
     s = imt.qsettings
     s.beginGroup(imt.qsettings_group_name)
@@ -691,8 +768,10 @@ def restore_gui_states_from_qsettings(imt, b_launch_slot=True):
     """
 
     :param imt:
+    :type imt: .
     :param b_launch_slot:
-    :return:
+    :type b_launch_slot: bool.
+
     """
     s = imt.qsettings
     for tuple_dlg_id_slot in imt.list_tuples_dlg_id_slot:
@@ -715,7 +794,8 @@ def print_group_name_values_in_qsettings(group_name=""):
     """
 
     :param group_name:
-    :return:
+    :type group_name: str.
+
     """
     qsettings = QSettings()
     keys = [x for x in qsettings.allKeys() if group_name in x]
@@ -729,7 +809,9 @@ def get_itemData(combobox):
     """
 
     :param combobox:
+    :type combobox: .
     :return:
+    :rtype: .
     """
     return combobox.itemData(combobox.currentIndex())
 
@@ -738,7 +820,9 @@ def get_itemText(combobox):
     """
 
     :param combobox:
+    :type combobox: .
     :return:
+    :rtype: .
     """
     return combobox.itemText(combobox.currentIndex())
 
@@ -747,7 +831,9 @@ def create_named_tuple_from_names(name, list_names):
     """
 
     :param list_names:
+    :type list_names: list.
     :return:
+    :rtype: namedtuple.
     """
     return namedtuple(name, list_names)
 
@@ -758,7 +844,9 @@ def create_namedtuple_on_globals(*args):
     """
 
     :param args:
+    :type args: .
     :return:
+    :rtype: nametuple.
     """
     namedtupleClass = collections.namedtuple(*args)
     globals()[namedtupleClass.__name__] = namedtupleClass
@@ -769,7 +857,9 @@ def create_namedtuple(*args):
     """
 
     :param args:
+    :type args: .
     :return:
+    :rtype: nametuple.
     """
     return collections.namedtuple(*args)
 
@@ -781,6 +871,7 @@ class Timer:
         """
 
         :return:
+        :rtype: .
         """
         self.start = time.clock()
         return self
@@ -789,7 +880,7 @@ class Timer:
         """
 
         :param args:
-        :return:
+
         """
         self.end = time.clock()
         self.interval = self.end - self.start
@@ -840,8 +931,11 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
     """
 
     :param f:
+    :type f: func.
     :param prefix:
+    :type prefix: str.
     :param postfix:
+    :type postfix: str.
     :return:
     """
     @wraps(f)
@@ -849,8 +943,11 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
         """
 
         :param args:
+        :type args: .
         :param kw:
+        :type kw: .
         :return:
+        :rtype: .
         """
         global t
         try:
@@ -872,6 +969,7 @@ def build_logger(logger_name, **kwargs):
     """
 
     :param logger_name:
+    :type logger_name: str.
     :param kwargs:
         - list_handlers: ['stream', 'file', ...]
         - level: logging level of this logger
@@ -879,7 +977,9 @@ def build_logger(logger_name, **kwargs):
         - for qgis handler log:
             - qgis_tag[string]:
             - qgis_separate_tab[bool]:
-    :return:
+    :type kwargs: .
+    :return: logger.
+    :rtype: .
     """
     # filter logger name
     logger_name = filter_logger_name(logger_name)
@@ -927,7 +1027,9 @@ def filter_logger_name(logger_name):
     """
 
     :param logger_name:
+    :type logger_name: str.
     :return:
+    :rtype: str.
     """
     try:
         logger_name = logger_name.split('.')[1]
@@ -943,9 +1045,11 @@ def config_file_handler(**kwargs):
     :param kwargs:
         Needed:
             - logger_name: name of the logger
+    :type kwargs: .
     :return:
         if logger_name is not provided => return a NullHandler
         else return a FileHandler
+    :rtype: FileHandller.
     """
     try:
         logger_name = kwargs['logger_name']
@@ -969,7 +1073,9 @@ def construct_formatter_for_logger(**kwargs):
     """
 
     :param kwargs:
+    :type kwargs: .
     :return:
+    :rtype: Formatter.
     """
     # creation d'un formateur qui va ajouter:
     # - le temps
@@ -992,7 +1098,9 @@ def construct_filename_for_logger(logger_name):
     """
 
     :param logger_name:
+    :type logger_name: str.
     :return:
+    :rtype: str.
     """
     pathname = os.path.normcase(os.path.dirname(__file__))
     filename = pathname + '/' + '%s.log' % logger_name
@@ -1003,8 +1111,11 @@ def construct_qgis_tag(logger_name, **kwargs):
     """
 
     :param logger_name:
+    :type logger_name: str.
     :param kwargs:
+    :type kwargs: dict.
     :return:
+    :rtype: str.
     """
     tag = 'Plugins/TrafiPollu'
     tag += '/{0}'.format(logger_name) if kwargs.get('qgis_separate_tab', False) else ''
@@ -1014,9 +1125,10 @@ def construct_qgis_tag(logger_name, **kwargs):
 def config_stream_handler(**kwargs):
     """
 
-    :param logger_name:
     :param kwargs:
+    :type kwargs: dict.
     :return:
+    :rtype: StreamHandler.
     """
     stream_handler = logging.StreamHandler()
     level = kwargs.get('level', logging.DEBUG)
@@ -1028,8 +1140,19 @@ def config_stream_handler(**kwargs):
 
 # url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python
 class ReadOnlyDict(dict):
+    """
+
+    """
     @staticmethod
     def __readonly__(*args, **kwargs):
+        """
+
+        :param args:
+        :type args: list.
+        :param kwargs:
+        :type kwargs: dict.
+
+        """
         raise RuntimeError("Cannot modify ReadOnlyDict")
 
     __setitem__ = __readonly__
@@ -1046,7 +1169,11 @@ def build_networkx_graph(dict_nodes, dict_edges):
     """
 
     :param dict_nodes:
+    :type dict_nodes: dict.
+    :param dict_edges:
+    :type dict_edges: dict.
     :return:
+    :rtype: nx.DiGraph.
     """
     print '############### build_networkx_graph ...'
 
