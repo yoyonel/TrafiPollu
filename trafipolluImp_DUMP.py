@@ -79,11 +79,18 @@ def dump_for_edges(objects_from_sql_request):
     """
 
     :param objects_from_sql_request: Le type de l'object depend du cursor utilise via psycopg2
-
         Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
-
     :type objects_from_sql_request: psycopg2.extras.DictCursor.
+
     :return:
+        Renvoie un DICTionnaire avec les donnees  des 'edges'/'troncons"
+        DUMPees depuis la BD-SG vers Python en format "compatibles" (exploitables) par
+        Python, utilisation des formats:
+
+            * shapely.wkb
+            * numpy.array
+    :rtype: dict.
+
     """
     dict_edges = {}
     # url: http://stackoverflow.com/questions/10252247/how-do-i-get-a-list-of-column-names-from-a-psycopg2-cursor
@@ -122,6 +129,13 @@ def dump_for_nodes(objects_from_sql_request):
 
     :type objects_from_sql_request: psycopg2.extras.DictCursor.:
     :return:
+        Renvoie un DICTionnaire avec les donnees  des 'nodes'/'intersections"
+        DUMPees depuis la BD-SG vers Python en format "compatibles" (exploitables) par
+        Python, utilisation des formats:
+
+            * shapely.wkb
+            * numpy.array
+    :rtype: dict.
     """
     dict_nodes = {}
     # get values from SQL request
@@ -164,7 +178,19 @@ def dump_for_interconnexions(objects_from_sql_request):
         Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
 
     :type objects_from_sql_request: psycopg2.extras.DictCursor.
+
     :return:
+        #.  Renvoie un DICTionnaire avec les donnees  des 'edges'/'troncons"
+            DUMPees depuis la BD-SG vers Python en format "compatibles" (exploitables) par
+            Python, utilisation des formats:
+
+            * shapely.wkb
+            * numpy.array
+        #.  DICTionnaire de set ids des inrerconnexions:
+
+            * key: str.
+            * vallues: set().
+    :rtype: (dict, dict).
 
     """
     dict_interconnexions = {}
@@ -212,10 +238,18 @@ def load_arrays_with_numpely(dict_sql_request, list_params_to_convert):
     """
 
     :param dict_sql_request:
-    :type dict_sql_request: .
+        * key: .
+        * values: .
+    :type dict_sql_request: dict.
+
     :param list_params_to_convert:
-    :type list_params_to_convert: dict.
+    :type list_params_to_convert: list(tuples).
+
     :return:
+        * key: .
+        * values: .
+    :rtype: dict.
+
     """
     dict_arrays_loaded = {}
     for param_name, column_name in list_params_to_convert:
@@ -231,7 +265,10 @@ def load_geom_buffers_with_shapely(dict_objects_from_sql_request):
         Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
 
     :type dict_objects_from_sql_request: psycopg2.extras.DictCursor.
+
     :return:
+        * key: .
+        * values: .
     :rtype: dict.
     """
     dict_buffers_loaded = {}
@@ -250,9 +287,13 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
     :param object_sql_lane:
     :type object_sql_lane: .
+
     :param nb_lanes:
     :type nb_lanes: int.
+
     :return:
+    :rtype: .
+
     """
     # lane_position = object_sql_lane['lane_position']
     # lane_side = object_sql_lane['lane_side']
@@ -275,34 +316,43 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
 
 def number_is_even(number):
     """
+
     :param number:
     :type number: int.
+
     :return:
     :rtype: int.
+
     """
     return number % 2 == 0
 
 
 def count_number_odds(number):
     """
+
     :param number:
     :type number: int.
+
     :return:
     :rtype: int.
+
     """
     return int(float((number / 2.0) + 0.5))
 
 
 def convert_lane_ordinality_to_python_id(lane_ordinality, nb_lanes):
     """
+
     :param lane_ordinality:
     :type lane_ordinality: int.
+
     :param nb_lanes:
     :type nb_lanes: int.
-    :return:
+
+    :return: IDentfiant (numerique) Python Index ([0 ... n-1])
     :rtype: int.
 
-    [TEST] Voir: :py:func:`test_convert_lane_ordinality_to_python_id`
+    [TEST]  Voir: :py:func:`test_convert_lane_ordinality_to_python_id`
 
     >>> test_convert_lane_ordinality_to_python_id()
     [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]
@@ -321,14 +371,16 @@ def convert_python_id_to_lane_ordinality(python_id, nb_lanes):
 
     :param python_id:
     :type python_id: int.
+
     :param nb_lanes:
     :type nb_lanes: int.
+
     :return:
     :rtype: int.
 
-    TESTS:
-        >> test_convert_python_id_to_lane_ordinality()
-        [[1], [1, 2], [3, 1, 2], [3, 1, 2, 4], [5, 3, 1, 2, 4]]
+    .. todo::
+
+        [TEST]  Voir: :py:func:`test_convert_python_id_to_lane_ordinality`
 
     """
     nb_odds = count_number_odds(nb_lanes)
@@ -344,8 +396,10 @@ def dump_lanes(objects_from_sql_request, dict_edges):
         Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
 
     :type objects_from_sql_request: psycopg2.extras.DictCursor.
+
     :param dict_edges:
     :type dict_edges: dict.
+
     :return:
     :rtype: (dict, dict).
 
@@ -398,6 +452,13 @@ def dump_lanes(objects_from_sql_request, dict_edges):
 
 def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes'):
     """
+
+    |   A partir d'un dump des informations de 'voies' (informations contenues dans les 'edges' SG),
+        construction des groupes de voies homogenes au sens SYMUVIA (du terme).
+    |   Concretement si l'edge SG contient plusieurs voies ou groupes de voies dans des sens contraires (amont -> aval
+        ou aval -> amont), la fonction identifie et decompose les groupes de voies (consecutives) dans le meme et cree
+        une liste de groupes de voies uni-directionnelles.
+
     :param dict_lanes:
     :type dict_lanes: dict.
     :param str_id_for_grouped_lanes:
@@ -408,6 +469,7 @@ def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes
             - value: liste de groupes de lanes dans le meme sens.
                      Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.
     :rtype: dict.
+
     """
     dict_grouped_lanes = {}
     map(lambda x, y: dict_grouped_lanes.__setitem__(x, {str_id_for_grouped_lanes: y}),

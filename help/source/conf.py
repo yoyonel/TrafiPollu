@@ -33,10 +33,14 @@ extensions = [
     'sphinx.ext.pngmath',
     'sphinx.ext.viewcode',
     'sphinx.ext.autodoc',
+    'sphinx.ext.todo',
     'sphinx.ext.graphviz',
     'sphinxcontrib.blockdiag',
     'sphinxcontrib.plantuml'
 ]
+
+# url: http://sphinx-doc.org/ext/todo.html#confval-todo_include_todos
+todo_include_todos = True
 
 plantuml = 'java -jar ' + os.path.dirname(__name__) + 'utils/plantuml.jar'
 
