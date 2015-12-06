@@ -1,1 +1,3 @@
-firefox help/build/html/index.html
+cd help
+./view_doc.sh
+cd -

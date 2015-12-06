@@ -275,7 +275,12 @@ Exemple de rendu:
       + Python Package
         ```bash
         sudo -E pip install sphinxcontrib-plantuml
+        sudo apt-get install graphviz
         ```
+      + `set_env.sh`:
+      ```bash
+      export GRAPHVIZ_DOT=/usr/bin/dot
+      ```
 
     ```python
     extensions = ['sphinx.ext.graphviz', 'sphinxcontrib.plantuml']
