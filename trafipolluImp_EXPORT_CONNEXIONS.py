@@ -60,7 +60,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         for node_id in self.dict_nodes:
             try:
                 type_connexion = self.dict_nodes[node_id]['sg3_to_symuvia']['type_connexion']
-            except Exception, e:
+            except Exception as e:
                 logger.fatal('Exception: %s' % e)
             else:
                 list_id_nodes_for_CONNEXIONS[type_connexion].append(node_id)
@@ -125,7 +125,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
         try:
             id_GIRATOIRE = self.build_id_for_GIRATOIRE(self.cursor_symuvia['ra_id'])
-        except Exception, e:
+        except Exception as e:
             logger.warning('Exception: %s' % e)
         else:
             sg3_ra = self.cursor_symuvia['sg3_ra']
@@ -141,7 +141,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
                     LargeurVoie=sg3_ra['largeur_voie'],
                     vit_max="8"
                 )
-            except Exception, e:
+            except Exception as e:
                 logger.warning('Exception: %s' % e)
 
                 # sym_GIRATOIRE.TRONCONS_INTERNES = self.export_TRONCONS_INTERNES(str_path_to_child)
@@ -197,7 +197,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
                 # on ajoute le TRONCON INTERNE a la liste
                 list_TRONCON_INTERNE.append(sym_TRONCON_INTERNE)
-            except Exception, e:
+            except Exception as e:
                 logger.warning('Exception: %s' % e)
 
         return list_TRONCON_INTERNE
@@ -231,7 +231,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
         try:
             id_CAF = self.build_id_for_CAF(self.cursor_symuvia['node_id'])
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             str_path_to_child, sym_CARREFOURAFEUX = pyxbDecorator.get_path_instance(
@@ -277,7 +277,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
 
         try:
             id_REPARTITEUR = self.build_id_for_REPARTITEUR(self.cursor_symuvia['node_id'])
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             str_path_to_child, sym_REPARTITEUR = pyxbDecorator.get_path_instance(
@@ -355,7 +355,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         # CAF - IN
         try:
             sg3_node_interconnexions = self.cursor_symuvia['sg3_node']['sg3_to_symuvia']['list_interconnexions']
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             str_path_to_child = pyxbDecorator.get_path(*args)
@@ -406,7 +406,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             key_amont_troncon_lane = self.cursor_symuvia['id_amont_troncon_lane']
             list_interconnexions_for_node = self.cursor_symuvia['sg3_node']['sg3_to_symuvia']['list_interconnexions']
             list_interconnexions = list_interconnexions_for_node[key_amont_troncon_lane]
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             for interconnexion in list_interconnexions:
@@ -445,7 +445,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         try:
             # CAF - IN
             sg3_node_interconnexions = self.cursor_symuvia['sg3_node']['sg3_to_symuvia']['list_interconnexions']
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             str_path_to_child = pyxbDecorator.get_path(*args)
@@ -492,7 +492,7 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
             key_amont_troncon_lane = self.cursor_symuvia['id_amont_troncon_lane']
             list_interconnexions_for_node = self.cursor_symuvia['sg3_node']['sg3_to_symuvia']['list_interconnexions']
             list_interconnexions = list_interconnexions_for_node[key_amont_troncon_lane]
-        except Exception, e:
+        except Exception as e:
             pass
         else:
             for interconnexion in list_interconnexions:

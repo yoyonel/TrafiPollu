@@ -36,6 +36,7 @@ class trafipolluImp_SQL(object):
 
     def __init__(self, **kwargs):
         """
+
         Initialisation du module SQL:
             - Recuperation des donnees du parent (dicts: edges, node, lanes, ...)
             - Declaration de la liste des scripts SQL pris en charges
@@ -50,7 +51,7 @@ class trafipolluImp_SQL(object):
 
         :param kwargs: dictionnaire (unpack) des parametres/donnees du plugin (mecanisme de transmission)
         :type kwargs: dict
-        :return:
+
         """
         self.dict_edges = kwargs['dict_edges']
         self.dict_nodes = kwargs['dict_nodes']
@@ -135,8 +136,6 @@ class trafipolluImp_SQL(object):
 
         Appel: disconnect_sql_server
 
-
-        :return:
         """
         self.disconnect_sql_server()
 
@@ -145,7 +144,6 @@ class trafipolluImp_SQL(object):
 
         Deconnection au serveur DB-StreetGen
 
-        :return:
         """
         if self.b_connection_to_postgres_server:
             self.cursor.close()
@@ -186,7 +184,7 @@ class trafipolluImp_SQL(object):
                 try:
                     # cursor utilise: DictCursor
                     self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-                except Exception, e:
+                except Exception as e:
                     logger.fatal('PostGres : problem pour recuperer un cursor -> %s' % e)
                 else:
                     #
@@ -239,14 +237,14 @@ class trafipolluImp_SQL(object):
         try:
             # on recupere la 'connection' prealablement etablie
             connection = kwargs['connection']
-        except KeyError, e:
+        except KeyError as e:
             logger.warning('No connection ! -> {0}'.format(e))
             pass
         else:
             try:
                 logger.info("try to commit ...")
                 connection.commit()
-            except Exception, e:
+            except Exception as e:
                 logger.warning('Probleme au moment du commit ! -> {0}'.format(e))
                 pass
 
@@ -420,7 +418,7 @@ class trafipolluImp_SQL(object):
 
             try:
                 sql_method = self._dict_sql_methods[id_sql_method]
-            except KeyError, e:
+            except KeyError as e:
                 sql_method = None
                 logger.warning('Pas de methode (python) associee au script sql: {0}'.format(e))
 
@@ -443,7 +441,7 @@ class trafipolluImp_SQL(object):
                         # url: http://initd.org/psycopg/docs/advanced.html#adapting-new-types
                         try:
                             self.cursor.execute(command, dict_parameters)
-                        except psycopg2.ProgrammingError, e:
+                        except psycopg2.ProgrammingError as e:
                             logger.warning("psycopg2.ProgrammingError: {0}".format(e))
                             if id_sql_method == 'update_def_zone_test':
                                 logger.warning("-> probleme connu avec 'update_def_zone_test'. Lie a la lib psycopg2")
@@ -484,7 +482,7 @@ class trafipolluImp_SQL(object):
             try:
                 logger.info("try to cursor.fetchall ...")
                 objects_from_sql_request = cursor.fetchall()
-            except Exception, e:
+            except Exception as e:
                 logger.warning("Probleme lors d'un 'fetchall' -> Exception: %s".format(e))
                 return -2
             else:
@@ -492,7 +490,7 @@ class trafipolluImp_SQL(object):
                     post_resquest_for_entity = kwargs['meth_post_request']
                     dump_for_entity = kwargs['func_for_dumping']
                     post_resquest_for_entity(dump_for_entity(objects_from_sql_request))
-                except KeyError, e:
+                except KeyError as e:
                     logger.warning('Pb! -> {0}'.format(e))
                 return 1
 

@@ -244,7 +244,7 @@ class TrafiPolluImp(object):
             if fd:
                 sql_file = fd.read()
                 fd.close()
-        except Exception, e:
+        except Exception as e:
             logger.warning("Probleme de lecture du fichier sql: {0}".format(sql_filename))
             logger.warning("-> Exception: {0}", e)
         finally:

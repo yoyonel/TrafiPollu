@@ -71,7 +71,7 @@ def commit_changes(layer, iface, s, bShowCommitError=True):
             # send request to DB
             result_commit = layer.commitChanges()
 
-        except Exception, e:
+        except Exception as e:
             qgis_log_tools.logMessageCRITICAL("Exception captured= ", e)
             #
             result_commit = False

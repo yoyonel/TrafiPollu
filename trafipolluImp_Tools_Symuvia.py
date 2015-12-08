@@ -40,7 +40,7 @@ def extract_convexhull_from_symuvia_network(**kwargs):
         try:
             xml = open(xml_filename).read()
             symu_ROOT = symuvia_parser.CreateFromDocument(xml)
-        except Exception, e:
+        except Exception as e:
             logger.fatal('extract_convexhull_from_symuvia_network - Exception: ', e)
     elif 'symuvia_root_node' in kwargs:
         symu_ROOT = kwargs['symuvia_root_node']

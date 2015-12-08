@@ -202,7 +202,7 @@ class trafipolluImp_TOPO(object):
                 lane_direction
             )
 
-        except Exception, e:
+        except Exception as e:
             logger.fatal('_build_pyxb_symutroncon_from_sg3_edge_lane - Exception: {0}'.format(e))
         else:
             return pyxb_symuTRONCON
@@ -236,8 +236,8 @@ class trafipolluImp_TOPO(object):
                     self.update_dict_pyxb_symuTroncons(dict_pyxb_symuTroncons, pyxb_symuTRONCON, sg3_edge)
                     # next lanes group
                     python_lane_id += nb_lanes_in_group
-            except Exception, e:
-                logger.fatal('Exception, e: {0}'.format(e))
+            except Exception as e:
+                logger.fatal('Exception as e: {0}'.format(e))
         finally:
             return dict_pyxb_symuTroncons
 
@@ -305,7 +305,7 @@ class trafipolluImp_TOPO(object):
                 shp_lanes.append(shp_lane)
                 # save the 1D coefficients from the lane
                 list_1D_coefficients += linestring_proj_1D_coefficients
-        except Exception, e:
+        except Exception as e:
             logger.fatal('Exception: {0}'.format(e))
 
         # ##########################
@@ -338,7 +338,7 @@ class trafipolluImp_TOPO(object):
                 # on calcule la moyenne
                 np_point_for_troncon *= norm_lanes_center_axis
                 lane_geometry.append(list(np_point_for_troncon))
-        except Exception, e:
+        except Exception as e:
             logger.fatal('Exception: {0}'.format(e))
         else:
             id_vertice_for_amont, id_vertice_for_aval = 0, -1
@@ -387,9 +387,9 @@ class trafipolluImp_TOPO(object):
                     lane_geometry[id_vertice_for_aval],
                     lane_points_internes
                 )
-            except Exception, e:
+            except Exception as e:
                 logger.fatal('Exception: {0}'.format(e))
-        except Exception, e:
+        except Exception as e:
             logger.fatal('Exception: {0}'.format(e))
 
     @staticmethod
@@ -461,7 +461,7 @@ class trafipolluImp_TOPO(object):
                                           min_distance)
             ]
             list_shp_points = list_shp_points_resampled
-        # except Exception, e:
+        # except Exception as e:
         # logger.fatal('Exception: %s' % e)
         except:
             pass
@@ -472,7 +472,7 @@ class trafipolluImp_TOPO(object):
                     tolerance_distance,
                     preserve_topology=False
                 )
-            # except Exception, e:
+            # except Exception as e:
             # logger.fatal('Exception: %s' % e)
             except:
                 pass
@@ -495,7 +495,7 @@ class trafipolluImp_TOPO(object):
             try:
                 node_list_interconnexions = dict_values['interconnexions']
                 set_id_edges = dict_values['set_id_edges']
-            except Exception, e:
+            except Exception as e:
                 logger.fatal('Exception: {0}'.format(e))
                 logger.fatal('\tnode_id: {0}'.format(node_id))
                 logger.fatal("\tdict_node[{0}]: {1}".format(node_id, dict_values))
@@ -527,7 +527,7 @@ class trafipolluImp_TOPO(object):
                                 sg3_edge_id,
                                 sg3_lane_ordinality
                             )
-                        except Exception, e:
+                        except Exception as e:
                             logger.fatal('# Find Symu_Troncon - EXCEPTION: {0}'.format(e))
                         else:
                             #
@@ -654,7 +654,7 @@ class trafipolluImp_TOPO(object):
                     # update troncon id for aval
                     # TOPO : Link between TRONCON and EXTREMITE
                     symu_troncon.id_eltamont = id_for_extrimite
-        except Exception, e:
+        except Exception as e:
             logger.fatal('Exception: {0}'.format(e))
 
     @staticmethod

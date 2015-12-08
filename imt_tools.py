@@ -1013,7 +1013,7 @@ def build_logger(logger_name, **kwargs):
             func_generate_handler, params = dict_functions_to_generate_handlers[name_handler]
             handler = func_generate_handler(**params)
             logger.addHandler(handler)
-        except KeyError, e:
+        except KeyError as e:
             print "WARNING - Pas de module de gestion pour l'handler: {0}".format(e)
             print "(module a ajouter dans {0})".format(__file__)
 
