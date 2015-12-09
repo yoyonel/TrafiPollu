@@ -14,6 +14,10 @@ import trafipolluImp_EXPORT as tpi_EXPORT
 import trafipolluImp_TOPO as tpi_TOPO
 
 from imt_tools import build_logger
+
+from Config_Tools import CConfig
+
+
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = build_logger(__name__)
 #
@@ -72,10 +76,36 @@ class TrafiPolluImp(object):
         # Initialisation des modules
         # Transmissions des parametres/membres 'communs'
         self.module_SQL = trafipolluImp_SQL(**kwargs)
-        self.module_topo = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
-        kwargs.update({'module_topo': self.module_topo})
+        self.module_TOPO = tpi_TOPO.trafipolluImp_TOPO(**kwargs)
+        kwargs.update({'module_topo': self.module_TOPO})
         self.module_export = tpi_EXPORT.trafipolluImp_EXPORT(**kwargs)
         ##############
+
+        ##########
+        # CONFIG #
+        ##########
+        configs = CConfig.load_from_module(__name__, **kwargs)
+
+        # load une section du fichier config
+        configs.load_section('EXCEPTIONS')
+        configs.update(
+            self.__dict__,
+            {
+                'global_raise_exceptions': ('global_raise_exceptions', False),
+                #
+                'SQL_raise_exceptions': ('SQL_raise_exceptions', True),
+                'DUMP_raise_exceptions': ('DUMP_raise_exceptions', True),
+                'TOPO_raise_exceptions': ('TOPO_raise_exceptions', True),
+                'EXPORT_raise_exceptions': ('EXPORT_raise_exceptions', True)
+            }
+        )
+        # logger.info(
+        #     "self._dict_params_server['EXCEPTIONS']['global_raise_exceptions']: {0} - type: {1}".
+        #     format(
+        #         self._dict_params_server['EXCEPTIONS']['global_raise_exceptions'],
+        #         type(self._dict_params_server['EXCEPTIONS']['global_raise_exceptions'])
+        #     )
+        # )
 
         ##############
         # LOGS
@@ -336,7 +366,7 @@ class TrafiPolluImp(object):
         self.__dict_lanes.clear()
         self.__dict_nodes.clear()
         # On clear les donnees rattachees aux modules: TOPO, EXPORT
-        self.module_topo.clear()
+        self.module_TOPO.clear()
         self.module_export.clear()
 
     #############################

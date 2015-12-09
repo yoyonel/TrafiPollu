@@ -17,8 +17,6 @@ from trafipolluImp_EXPORT_CONNEXIONS import trafipolluImp_EXPORT_CONNEXIONS
 from trafipolluImp_EXPORT_TRAFICS import trafipolluImp_EXPORT_TRAFICS
 from imt_tools import timer_decorator
 
-import ConfigParser
-from collections import defaultdict
 from Config_Tools import CConfig
 
 from imt_tools import build_logger
@@ -52,22 +50,12 @@ class trafipolluImp_EXPORT(
         #
         self.list_symu_connexions = []
 
-        self.configs = defaultdict()
-        #
-        self.config_filename = qgis_plugins_directory + '/' + \
-                               kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
-        logger.info("Config INI filename: {0}".format(self.config_filename))
-        self.Config = CConfig(self.config_filename)
-        Config = self.Config    # alias sur la Config
-        try:
-            Config.load()
-        except ConfigParser.ParsingError:
-            logger.warning("can't read the file: {0}".format(self.config_filename))
-            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
-
+        ##########
+        # CONFIG #
+        ##########
+        Config = CConfig.load_from_module(__name__, **kwargs)
         # load la section et place cette section en section courante
         Config.load_section('EXPORT')
-
         # recuperation des options liees a la section courante 'EXPORT'
         Config.update(
             self.__dict__,
@@ -85,6 +73,8 @@ class trafipolluImp_EXPORT(
                 'symuvia_export_path': ('symuvia_export_path', qgis_plugins_directory + '/')
             }
         )
+        ##########
+
         self.symuvia_infilename = self.generate_filename('import')      # generate filename for: 'symuvia_import_'
         self.symuvia_outfilename = self.generate_filename('export')     # generate filename for: 'symuvia_export_'
         #

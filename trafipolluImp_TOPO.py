@@ -12,6 +12,9 @@ from imt_tools import timer_decorator
 from imt_tools import build_logger
 import trafipolluImp_DUMP as tpi_DUMP
 
+from Config_Tools import CConfig
+from collections import defaultdict
+
 
 NT_LANE_SG3_SYMU = create_namedtuple_on_globals(
     'NT_LANE_SG3_SYMU',
@@ -79,6 +82,35 @@ class trafipolluImp_TOPO(object):
             'SORTIES': [],
         }
 
+        ##########
+        # CONFIG #
+        ##########
+        configs = CConfig.load_from_module(__name__, **kwargs)
+
+        self._dict_configs = defaultdict(dict)
+
+        # load une section du fichier config
+        # TRONCONS
+        configs.load_section('TRONCONS')
+        configs.update(
+            self._dict_configs['TRONCONS'],
+            {
+                'add_points': ('add_points_internes', True),
+                'use_simplification': ('use_simplification_for_points_internes', True)
+            }
+        )
+        # INTERCONNEXIONS
+        configs.load_section('INTERCONNEXIONS')
+        configs.update(
+            self._dict_configs['INTERCONNEXIONS'],
+            {
+                'add_points': ('add_points_internes', True),
+                'use_simplification': ('use_simplification_for_points_internes', True)
+
+            }
+        )
+        logger.info("{0}".format(list(self._dict_configs.iteritems())))
+
     def clear(self):
         """
 
@@ -96,24 +128,39 @@ class trafipolluImp_TOPO(object):
     def build_topo(self):
         """
 
-        :return:
+        On lance la constructin TOPOlogique pour:
+        - les troncons (SYMUVIA) a partir des edges (StreetGen)
+        - des interconnexions (SYMUVIA) a partir des node (StreetGen)
+        - des extremites du reseau SYMUVIA
+
         """
-        self.convert_sg3_edges_to_pyxb_symutroncons()
+        self.build_topo_for_troncons()
         self.build_topo_for_interconnexions()
         self.build_topo_extrimites()
 
     @timer_decorator
-    def convert_sg3_edges_to_pyxb_symutroncons(self):
+    def build_topo_for_troncons(self):
+        """
+            Lance la conversion TOPOlogique des edges StreetGEN (dumpees)
+            en troncons SYMUVIA (via PyXB)
+
         """
 
-        :return:
+        # self.dict_edges:
+        # - key: sur les id des edges
 
-        """
-        # self.dict_edges: clee sur les id des edges
         # on parcourt l'ensemble des id des edges disponibles
         for sg3_edge_id in self.dict_edges:
-            self.dict_pyxb_symutroncons.update(self.build_pyxb_symutroncon_from_sg3_edge(sg3_edge_id))
+            # build d'un troncon SYMUVIA a partir d'un edge StreetGen
+            pyxb_symutroncon = self.build_pyxb_symutroncon_from_sg3_edge(sg3_edge_id)
 
+            # on met a jour le dictionnaire de conversion TOPOlogique
+            # entre les edges StreetGen et les entites TRONCONS Symuvia/PyXB
+            self.dict_pyxb_symutroncons.update(pyxb_symutroncon)
+
+        #######
+        # LOG #
+        #######
         logger.info(
             'convert_sg3_edges_to_pyxb_symutroncons - {0} troncons added'.format(
                 len(self.dict_pyxb_symutroncons.keys())
@@ -149,11 +196,22 @@ class trafipolluImp_TOPO(object):
     def _build_pyxb_symutroncon_from_sg3_edge_lane(self, *args):
         """
 
-        :return:
+        :param args:
+            liste qui contient (dans l'ordre)::
+                - sg3_edge
+                - sg3_edge_id
+                - python_lane_id
+                - nb_lanes
+                - func_build_pyxb_symutroncon
+        :type args: `list`
 
+        :return:
+        :rtype:
         """
         try:
+            # recuperation des arguments
             sg3_edge, sg3_edge_id, python_lane_id, nb_lanes, func_build_pyxb_symutroncon = args
+
             # Construction TOPO d'un symu TRONCON
             result_build = func_build_pyxb_symutroncon(
                 sg3_edge=sg3_edge,
@@ -161,12 +219,15 @@ class trafipolluImp_TOPO(object):
                 python_lane_id=python_lane_id,
                 nb_lanes=nb_lanes
             )
+            symutroncon_amont, symutroncon_aval, symutroncon_points_internes = result_build
+
             # mise a jour des champs (debug LICIT)
             nom_rue_g = sg3_edge['str_nom_rue_g']
             nom_rue_d = sg3_edge['str_nom_rue_d']
             nom_rue = nom_rue_g
             if nom_rue_g != nom_rue_d:
                 nom_rue += '-_-' + nom_rue_d
+
             # construction de l'objet PYXB pour export Symuvia TRONCON
             pyxb_symuTRONCON = symuvia_parser.typeTroncon(
                 id=self.build_id_for_TRONCON(sg3_edge['str_ign_id'], python_lane_id),
@@ -174,24 +235,28 @@ class trafipolluImp_TOPO(object):
                 largeur_voie=sg3_edge['f_road_width'] / sg3_edge['ui_lane_number'],
                 id_eltamont="-1",
                 id_eltaval="-1",
-                extremite_amont=result_build.amont,
-                extremite_aval=result_build.aval,
+                extremite_amont=symutroncon_amont,
+                extremite_aval=symutroncon_aval,
                 nb_voie=nb_lanes
             )
 
-            # if result_build.points_internes:
             # transfert des POINTS_INTERNES
-            if b_add_points_internes_troncons:
-                points_internes = result_build.points_internes
-                if points_internes:
-                    if b_use_simplification_for_points_internes_troncon:
-                        points_internes = self.optimize_list_points(result_build.points_internes, 2.0, 0.10)
-                    pyxb_symuTRONCON.POINTS_INTERNES = self.build_pyxb_POINTS_INTERNES(points_internes)
+            # on test si l'option transfert de point interne est active
+            #if b_add_points_internes_troncons:
+            if self._dict_configs['TRONCONS']['add_points']:
+                if symutroncon_points_internes:
+                    #if b_use_simplification_for_points_internes_troncon:
+                    if self._dict_configs['TRONCONS']['use_simplification']:
+                        symutroncon_points_internes = self.optimize_list_points(symutroncon_points_internes, 2.0, 0.10)
+                    pyxb_symuTRONCON.POINTS_INTERNES = self.build_pyxb_POINTS_INTERNES(symutroncon_points_internes)
 
             # MOG : probleme autour des sens edge, lanes, symuvia
             # lane_direction = self.dict_lanes[sg3_edge_id]['informations'][python_lane_id].lane_direction
-            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(self.dict_lanes, sg3_edge_id,
-                                                                             python_lane_id)
+            lane_direction = tpi_DUMP.get_lane_direction_from_python_lane_id(
+                self.dict_lanes,
+                sg3_edge_id,
+                python_lane_id
+            )
 
             # LINK STREETGEN3 to SYMUVIA (TOPO)
             self.build_link_from_sg3_to_symuvia_for_lane(
@@ -211,29 +276,43 @@ class trafipolluImp_TOPO(object):
         """
 
         :param sg3_edge_id:
-        :return:
+        :type sg3_edge_id: ``
+
+        :return: dictionnaire de correspondance entre une edge StreetGen et un/des troncons SYMUVIA
+        :rtype: `dict`
         """
 
+        # dictionnaire de resultat
         dict_pyxb_symuTroncons = {}
 
+        # edge StreetGen (via l'identifiant sg3_edge_id)
         sg3_edge = self.dict_edges[sg3_edge_id]
 
         try:
+            # on recupere les groupes de voies (homogenes) rattaches au troncon (edge)
             grouped_lanes = sg3_edge['grouped_lanes']
-        except:
+        except Exception as e:
+            logger.fatal("Exception: {0}".format(e))
             # Il y a des edge_sg3 sans voie(s) dans le reseau SG3 ... faudrait demander a Remi !
             # Peut etre des edges_sg3 aidant uniquement aux connexions/creation (de zones) d'intersections
             logger.fatal("!!! 'BUG' with edge id: {0} - no 'group_lanes' found !!!".format(sg3_edge_id))
         else:
+            # indice (python) sur les groupes de voies
             python_lane_id = 0
             try:
+                # on parcours la liste des groupes de voies (homogenes)
                 for nb_lanes_in_group in grouped_lanes:
+                    #  construction du TRONCON au sens SYMUVIA
                     pyxb_symuTRONCON = self._build_pyxb_symutroncon_from_sg3_edge_lane(
-                        sg3_edge, sg3_edge_id, python_lane_id, nb_lanes_in_group,
+                        sg3_edge, sg3_edge_id,
+                        python_lane_id,
+                        nb_lanes_in_group,
                         self.build_pyxb_symuTroncon_with_lanes_in_groups
                     )
+
                     # Update list_troncon
                     self.update_dict_pyxb_symuTroncons(dict_pyxb_symuTroncons, pyxb_symuTRONCON, sg3_edge)
+
                     # next lanes group
                     python_lane_id += nb_lanes_in_group
             except Exception as e:
@@ -259,8 +338,10 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
+        # recuperation de la liste des voies (Python) a partir d'un indice (StreetGen) d'edge
         symu_lanes = tpi_DUMP.get_Symuvia_list_lanes_from_edge_id(self.dict_lanes, sg3_edge_id)
 
+        #
         for python_id in range(python_lane_id, python_lane_id + nb_lanes):
             symu_lanes[python_id] = NT_LANE_SG3_SYMU(
                 pyxb_symuTRONCON,
@@ -271,6 +352,7 @@ class trafipolluImp_TOPO(object):
 
     def build_pyxb_symuTroncon_with_lanes_in_groups(self, **kwargs):
         """
+
         1 Groupe de plusieurs voies (dans la meme direction) dans une serie de groupes (de voies) pour l'edge_sg3
         On recupere les coefficients 1D de projection de chaque point sur sa voie.
         On rassemble tout ces coefficients et re-echantillone les voies (nombres de points d'echantillon homogene entre
@@ -279,13 +361,16 @@ class trafipolluImp_TOPO(object):
         :return:
 
         """
+        # recuperation des parametres
         sg3_edge_id = kwargs['sg3_edge_id']
         python_lane_id = kwargs['python_lane_id']
         nb_lanes = kwargs['nb_lanes']
         #
+
         shp_lanes = []
         # transfert lane_center_axis for each lane in 2D
         list_1D_coefficients = []
+
         # on parcourt le groupe de 'voies' dans le meme sens
         try:
             for id_lane in range(python_lane_id, python_lane_id + nb_lanes):
@@ -360,37 +445,6 @@ class trafipolluImp_TOPO(object):
         """
         for k, v in kwargs.iteritems():
             node._setAttribute(k, v)
-
-    def build_pyxb_symuTroncon_with_lane_in_groups(self, **kwargs):
-        """
-        1 voie dans une serie de groupe.
-        Cas le plus simple, on recupere les informations directement de la voie_sg3 (correspondance directe)
-        Note: Faudrait voir pour un generateur d'id pour les nouveaux troncons_symu
-
-        :return:
-
-        """
-        sg3_edge_id = kwargs['sg3_edge_id']
-        python_lane_id = kwargs['python_lane_id']
-        #
-        try:
-            sg3_lane = tpi_DUMP.get_lane_from_python_lane_id(self.dict_lanes, sg3_edge_id, python_lane_id)
-
-            try:
-                lane_geometry = sg3_lane.lane_center_axis
-                lane_points_internes = lane_geometry[1:-1]  # du 2nd a l'avant dernier point
-
-                id_vertice_for_amont, id_vertice_for_aval = 0, -1
-
-                return NT_RESULT_BUILD_PYXB(
-                    lane_geometry[id_vertice_for_amont],
-                    lane_geometry[id_vertice_for_aval],
-                    lane_points_internes
-                )
-            except Exception as e:
-                logger.fatal('Exception: {0}'.format(e))
-        except Exception as e:
-            logger.fatal('Exception: {0}'.format(e))
 
     @staticmethod
     def build_id_for_TRONCON(str_pyxb_symutroncon_id, lane_id):
@@ -546,17 +600,24 @@ class trafipolluImp_TOPO(object):
                         # #################################################
                         # SIMPLIFICATION DES VOIES D'INTERCONNEXIONS
                         # #################################################
-                        if b_use_simplification_for_points_internes_interconnexion:
-                            # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
-                            # inutile dans ce cas pour SYMUVIA
-                            sg3_interconnexion_geometry = self.simplify_list_points(
-                                interconnexion['np_interconnexion'],
-                                0.10
-                            )[1:-1]  # les 1er et dernier points sont les amont/aval de l'interconnexion/troncons
+                        if self._dict_configs['INTERCONNEXIONS']['add_points']:
+                            if self._dict_configs['INTERCONNEXIONS']['use_simplification']:
+                                # permet de simplifier les lignes droites et eviter d'exporter un noeud 'POINTS_INTERNES'
+                                # inutile dans ce cas pour SYMUVIA
+                                sg3_interconnexion_geometry = self.simplify_list_points(
+                                    interconnexion['np_interconnexion'],
+                                    0.10
+                                )[1:-1]  # les 1er et dernier points sont les amont/aval de l'interconnexion/troncons
+                            else:
+                                sg3_interconnexion_geometry = interconnexion['np_interconnexion']
+                            ##################################################
                         else:
-                            sg3_interconnexion_geometry = interconnexion['np_interconnexion']
-                        ##################################################
-
+                            # obligation de definir des points internes pour l'interconnexion
+                            # en mode 'light', on ne rajoute que l'amont/aval de la connection (segment lineaire)
+                            sg3_interconnexion_geometry = (
+                                interconnexion['np_interconnexion'][0],     # amont
+                                interconnexion['np_interconnexion'][-1]     # aval
+                            )
                         #
                         list_interconnexions = dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']
 

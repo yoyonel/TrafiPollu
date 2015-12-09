@@ -13,7 +13,7 @@ from imt_tools import build_logger
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = build_logger(__name__)
 
-import ConfigParser
+#import ConfigParser
 from collections import defaultdict
 from Config_Tools import CConfig
 
@@ -77,18 +77,10 @@ class trafipolluImp_SQL(object):
             # 'dump_roundabouts': self._request_for_roundabouts
         }
 
-        self.configs = defaultdict(dict)
-        #
-        self.config_filename = qgis_plugins_directory + '/' + \
-                               kwargs.setdefault('config_filename', 'config_' + __name__ + '.ini')
-        logger.info("Config INI filename: {0}".format(self.config_filename))
-        self.Config = CConfig(self.config_filename)
-        configs = self.Config  # alias sur la Config
-        try:
-            configs.load()
-        except ConfigParser.ParsingError:
-            logger.warning("can't read the file: {0}".format(self.config_filename))
-            logger.warning("Utilisation des valeurs par defaut (orientees pour une target precise)")
+        ##########
+        # CONFIG #
+        ##########
+        configs = CConfig.load_from_module(__name__, **kwargs)
 
         self._dict_params_server = defaultdict(dict)
 
@@ -124,6 +116,7 @@ class trafipolluImp_SQL(object):
                 'database': ('database', 'bdtopo_topological')
             }
         )
+        ##########
 
         self.connection = None
         self.cursor = None
@@ -257,7 +250,7 @@ class trafipolluImp_SQL(object):
         Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL
 
         :return: Dictionnaire de parametres contenant un polygone PostGIS de l'extent QGIS
-        :rtype: dict.
+        :rtype: `dict`
         """
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
@@ -357,7 +350,7 @@ class trafipolluImp_SQL(object):
         :param b_update_def_zone_test_with_convex_hull_on_symuvia_network:
         :type b_update_def_zone_test_with_convex_hull_on_symuvia_network: bool
         :param kwargs: Dictionnaire de parametres (transmis)
-        :type kwargs: dict.
+        :type kwargs: `dict`
         :return:
         """
         gPolygonWkt = ''
@@ -399,8 +392,10 @@ class trafipolluImp_SQL(object):
 
         :param sql_file: nom du fichier script SQL a executer
         :type sql_file: str
+
         :param id_sql_method: identifiant du script SQL a executer
         :type id_sql_method: str
+
         :return:
         """
         if not self.b_connection_to_postgres_server:
@@ -445,11 +440,13 @@ class trafipolluImp_SQL(object):
                             logger.warning("psycopg2.ProgrammingError: {0}".format(e))
                             if id_sql_method == 'update_def_zone_test':
                                 logger.warning("-> probleme connu avec 'update_def_zone_test'. Lie a la lib psycopg2")
+                            else:
+                                b_programming_error = True
 
                         sql_method(connection=self.connection, cursor=self.cursor)
                 except psycopg2.OperationalError, msg:
                     logger.warning("Command skipped: %s", msg)
-                    # #
+                    #
 
     def _request_for_entity(self, **kwargs):
         """
@@ -462,7 +459,7 @@ class trafipolluImp_SQL(object):
             - meth_post_request: methode de post traitement apres la recuperation des informations
 
         :param kwargs: Dictionnaire de parametres (transmis)
-        :type kwargs: dict.
+        :type kwargs: `dict`
         :return:
 
         Code de retour::
@@ -471,7 +468,7 @@ class trafipolluImp_SQL(object):
             -1 -- pas de cursor disponible
             -2 -- probleme pendant le fetchall SQL
 
-        :rtype: int.
+        :rtype: `int`
         """
         try:
             cursor = kwargs["cursor"]
@@ -522,7 +519,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les rond-points dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les rond-points
-        :type results_dump: dict.
+        :type results_dump: `dict`
         :return:
         """
         dict_roundabouts = results_dump
@@ -568,7 +565,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les edges dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les edges
-        :type results_dump: dict.
+        :type results_dump: `dict`
         :return:
         """
         dict_edges = results_dump
@@ -603,7 +600,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les nodes dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les nodes
-        :type results_dump: dict.
+        :type results_dump: `dict`
         :return:
         """
         dict_nodes = results_dump
@@ -637,7 +634,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les interconnexions dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les interconnexions
-        :type results_dump: dict.
+        :type results_dump: `dict`
         :return:
         """
         dict_interconnexions, dict_set_id_edges = results_dump
@@ -679,7 +676,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les lanes/voies dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les lanes/voies
-        :type results_dump: dict.
+        :type results_dump: `dict`
         :return:
         """
         dict_lanes, dict_grouped_lanes = results_dump
