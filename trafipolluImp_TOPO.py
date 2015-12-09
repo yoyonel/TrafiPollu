@@ -52,12 +52,6 @@ NT_RESULT_BUILD_PYXB = create_namedtuple(
     ]
 )
 
-# ######## OPTIONS D'EXPORT ############
-b_add_points_internes_troncons = True
-b_use_simplification_for_points_internes_troncon = True
-b_use_simplification_for_points_internes_interconnexion = True
-# ######## ######### ######### #########
-
 # creation de l'objet logger qui va nous servir a ecrire dans les logs
 logger = build_logger(__name__)
 
@@ -242,10 +236,8 @@ class trafipolluImp_TOPO(object):
 
             # transfert des POINTS_INTERNES
             # on test si l'option transfert de point interne est active
-            #if b_add_points_internes_troncons:
             if self._dict_configs['TRONCONS']['add_points']:
                 if symutroncon_points_internes:
-                    #if b_use_simplification_for_points_internes_troncon:
                     if self._dict_configs['TRONCONS']['use_simplification']:
                         symutroncon_points_internes = self.optimize_list_points(symutroncon_points_internes, 2.0, 0.10)
                     pyxb_symuTRONCON.POINTS_INTERNES = self.build_pyxb_POINTS_INTERNES(symutroncon_points_internes)
@@ -359,6 +351,7 @@ class trafipolluImp_TOPO(object):
          chaque voie). On moyenne tous les points de chaque voie pour former un axe (edge) mediant.
 
         :return:
+        :rtype: NT_RESULT_BUILD_PYXB
 
         """
         # recuperation des parametres

@@ -92,6 +92,7 @@ class CConfig(object):
         try:
             # version 'simple' sans cast
             # return self.dict_configs[section_name][option_name]
+
             # version avec cast lie a la valeur par defaut
             value = self.dict_configs[section_name][option_name]
             type_default_value = type(default_value)
@@ -101,7 +102,6 @@ class CConfig(object):
                 return _boolean_states[value.lower()]
             else:
                 return type(default_value)(value)
-
         except KeyError as e:
             # debug du debug :p
             logger.info("option_name: {0}".format(option_name))
