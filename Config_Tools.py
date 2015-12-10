@@ -124,13 +124,13 @@ class CConfig(object):
         recuperees dans le fichier CONFIG.
 
         :param _dict2update:
-        :type _dict2update: `dict`
+        :type _dict2update: `dict`.
 
         :param _dictparams:
             Dictionnaire definit par::
-                - key: `str` - nombre du parametre
+                - key: `str`. - nombre du parametre
                 - value: tuple(nom de l'option [str.], valeur par defaut [str.])
-        :type _dictparams: `dict`
+        :type _dictparams: `dict`.
 
         :return:
         """
@@ -145,13 +145,13 @@ class CConfig(object):
         """
 
         :param module_name:
-        :type module_name: `str`
+        :type module_name: `str`.
 
         :param kwargs
-        :type kwargs: (unpack) dict.
+        :type kwargs: `dict`.
 
         :return:
-        :rtype: CConfig.
+        :rtype: `CConfig`.
 
         """
         config_filename = qgis_plugins_directory + '/' + \

@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trafipolluImp_EXPORT &mdash; interactive_map_tracking 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for trafipolluImp_EXPORT</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">pyxb</span>
+
+<span class="c"># import parser_symuvia_xsd_2_04_pyxb as symuvia_parser</span>
+<span class="c"># import trafipolluImp_PYXB as module_pyxb_parser</span>
+
+<span class="c"># pyxb_parser = module_pyxb_parser.trafipolluImp_PYXB(symuvia_parser)</span>
+
+<span class="kn">from</span> <span class="nn">trafipolluImp_PYXB</span> <span class="kn">import</span> <span class="n">pyxb_parser</span>
+<span class="kn">from</span> <span class="nn">trafipolluImp_PYXB</span> <span class="kn">import</span> <span class="n">symuvia_parser</span>
+<span class="kn">from</span> <span class="nn">trafipolluImp_PYXB</span> <span class="kn">import</span> <span class="n">pyxbDecorator</span>
+
+<span class="kn">from</span> <span class="nn">trafipolluImp_EXPORT_CONNEXIONS</span> <span class="kn">import</span> <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span>
+<span class="kn">from</span> <span class="nn">trafipolluImp_EXPORT_TRAFICS</span> <span class="kn">import</span> <span class="n">trafipolluImp_EXPORT_TRAFICS</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">timer_decorator</span>
+
+<span class="kn">from</span> <span class="nn">Config_Tools</span> <span class="kn">import</span> <span class="n">CConfig</span>
+
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">build_logger</span>
+<span class="c"># creation de l&#39;objet logger qui va nous servir a ecrire dans les logs</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">build_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="n">qgis_plugins_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+<span class="c">#</span>
+<span class="n">infilename_for_symuvia</span> <span class="o">=</span> <span class="n">qgis_plugins_directory</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="s">&quot;project_empty_from_symunet&quot;</span> <span class="o">+</span> <span class="s">&quot;_xsd_&quot;</span> <span class="o">+</span> <span class="s">&quot;2_04&quot;</span> <span class="o">+</span> <span class="s">&quot;.xml&quot;</span>
+<span class="n">outfilename_for_symuvia</span> <span class="o">=</span> <span class="n">qgis_plugins_directory</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="s">&quot;export_from_sg3_to_symuvia&quot;</span> <span class="o">+</span> <span class="s">&quot;_xsd_&quot;</span> <span class="o">+</span> <span class="s">&quot;2_04&quot;</span> <span class="o">+</span> <span class="s">&quot;.xml&quot;</span>
+
+<span class="n">b_export_connexion</span> <span class="o">=</span> <span class="bp">True</span>
+
+
+<div class="viewcode-block" id="trafipolluImp_EXPORT"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT">[docs]</a><span class="k">class</span> <span class="nc">trafipolluImp_EXPORT</span><span class="p">(</span>
+    <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="p">,</span>
+    <span class="n">trafipolluImp_EXPORT_TRAFICS</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="trafipolluImp_EXPORT.__init__"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_topo</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;module_topo&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pyxb_parser</span> <span class="o">=</span> <span class="n">pyxb_parser</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c">##########</span>
+        <span class="c"># CONFIG #</span>
+        <span class="c">##########</span>
+        <span class="n">Config</span> <span class="o">=</span> <span class="n">CConfig</span><span class="o">.</span><span class="n">load_from_module</span><span class="p">(</span><span class="n">__name__</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c"># load la section et place cette section en section courante</span>
+        <span class="n">Config</span><span class="o">.</span><span class="n">load_section</span><span class="p">(</span><span class="s">&#39;EXPORT&#39;</span><span class="p">)</span>
+        <span class="c"># recuperation des options liees a la section courante &#39;EXPORT&#39;</span>
+        <span class="n">Config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="c"># XSD</span>
+                <span class="s">&#39;xsd_version&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;xsd_version&#39;</span><span class="p">,</span> <span class="s">&#39;2_04&#39;</span><span class="p">),</span>
+                <span class="s">&#39;xsd_prefix&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;xsd_prefix&#39;</span><span class="p">,</span> <span class="s">&#39;_xsd_&#39;</span><span class="p">),</span>
+                <span class="c"># IMPORT</span>
+                <span class="s">&#39;symuvia_import_filename&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_import_filename&#39;</span><span class="p">,</span> <span class="s">&#39;project_empty_from_symunet&#39;</span><span class="p">),</span>
+                <span class="s">&#39;symuvia_import_ext&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_import_ext&#39;</span><span class="p">,</span> <span class="s">&#39;xml&#39;</span><span class="p">),</span>
+                <span class="s">&#39;symuvia_import_path&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_import_path&#39;</span><span class="p">,</span> <span class="n">qgis_plugins_directory</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span><span class="p">),</span>
+                <span class="c"># EXPORT</span>
+                <span class="s">&#39;symuvia_export_filename&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_export_filename&#39;</span><span class="p">,</span> <span class="s">&#39;export_from_sg3_to_symuvia&#39;</span><span class="p">),</span>
+                <span class="s">&#39;symuvia_export_ext&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_export_ext&#39;</span><span class="p">,</span> <span class="s">&#39;xml&#39;</span><span class="p">),</span>
+                <span class="s">&#39;symuvia_export_path&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;symuvia_export_path&#39;</span><span class="p">,</span> <span class="n">qgis_plugins_directory</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="c">##########</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_infilename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_filename</span><span class="p">(</span><span class="s">&#39;import&#39;</span><span class="p">)</span>      <span class="c"># generate filename for: &#39;symuvia_import_&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_outfilename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_filename</span><span class="p">(</span><span class="s">&#39;export&#39;</span><span class="p">)</span>     <span class="c"># generate filename for: &#39;symuvia_export_&#39;</span>
+        <span class="c">#</span>
+        <span class="c">#logger.info(&quot;__dict__: {0}&quot;.format(self.__dict__))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Symuvia - infilename: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symuvia_infilename</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Symuvia - outfilename: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symuvia_outfilename</span><span class="p">))</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Open file: </span><span class="si">%s</span><span class="s"> ...&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_infilename</span><span class="p">)</span>
+        <span class="n">xml</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symuvia_infilename</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span> <span class="o">=</span> <span class="n">symuvia_parser</span><span class="o">.</span><span class="n">CreateFromDocument</span><span class="p">(</span><span class="n">xml</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Open file: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_infilename</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_TRONCONS</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_CONNEXIONS</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;list_symu_connexions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span><span class="p">})</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.clear"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span> <span class="o">=</span> <span class="p">[]</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.generate_filename"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.generate_filename">[docs]</a>    <span class="k">def</span> <span class="nf">generate_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param target:</span>
+<span class="sd">            - &#39;import&#39;</span>
+<span class="sd">            - &#39;export&#39;</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_path&#39;</span><span class="p">)]</span> <span class="o">+</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_filename&#39;</span><span class="p">)]</span> <span class="o">+</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;xsd_prefix&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;xsd_version&#39;</span><span class="p">]</span> <span class="o">+</span> \
+            <span class="s">&#39;.&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_ext&#39;</span><span class="p">)]</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.update_SYMUVIA"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_SYMUVIA">[docs]</a>    <span class="k">def</span> <span class="nf">update_SYMUVIA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            construction TOPO ici !</span>
+
+<span class="sd">        Il y a une feinte presente dans la construction topologique liee a une contrainte d&#39;ordonnancement.</span>
+<span class="sd">        Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (</span>
+<span class="sd">        CONNEXIONS).</span>
+<span class="sd">        Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes</span>
+<span class="sd">        ids aux amonts/avals des interconnexions pour que le module extremites ne les prennent pas en compte.</span>
+<span class="sd">        Dans l&#39;export des CONNEXIONS par la suite, ces ids amonts/avals d&#39;interconnexions sont reattribuees pour</span>
+<span class="sd">        coincider au vrai lien topologiques (avec un CAF/REPARTITEUR ou un TRONCON)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_topo</span><span class="o">.</span><span class="n">build_topo</span><span class="p">()</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_TRONCONS</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">b_export_connexion</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_CONNEXIONS</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_TRAFICS</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.update_TRONCONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_TRONCONS">[docs]</a>    <span class="k">def</span> <span class="nf">update_TRONCONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_TRONCONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRONCONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.update_CONNEXIONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_CONNEXIONS">[docs]</a>    <span class="k">def</span> <span class="nf">update_CONNEXIONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_CONNEXIONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_CONNEXIONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.update_TRAFICS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_TRAFICS">[docs]</a>    <span class="k">def</span> <span class="nf">update_TRAFICS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRAFICS</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.export"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update_symu</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">outfilename</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param filename:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">update_symu</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_SYMUVIA</span><span class="p">()</span>
+            <span class="c">#</span>
+            <span class="n">b_add_trafics</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_topo</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span><span class="o">.</span><span class="n">RESEAUX</span><span class="o">.</span><span class="n">RESEAU</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">TRONCONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_TRONCONS</span>
+                <span class="n">b_add_trafics</span> <span class="o">=</span> <span class="bp">True</span>
+
+            <span class="k">if</span> <span class="n">b_export_connexion</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span><span class="o">.</span><span class="n">RESEAUX</span><span class="o">.</span><span class="n">RESEAU</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">CONNEXIONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_CONNEXIONS</span>
+                    <span class="n">b_add_trafics</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="k">if</span> <span class="n">b_add_trafics</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span><span class="o">.</span><span class="n">TRAFICS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_ROOT</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span><span class="p">,</span>
+            <span class="n">outfilename</span> <span class="k">if</span> <span class="n">outfilename</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_outfilename</span>
+        <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.save_ROOT"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.save_ROOT">[docs]</a>    <span class="k">def</span> <span class="nf">save_ROOT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym_ROOT</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_SYMUVIA_Node</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">,</span> <span class="n">sym_ROOT</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.save_SYMUVIA_Node"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.save_SYMUVIA_Node">[docs]</a>    <span class="k">def</span> <span class="nf">save_SYMUVIA_Node</span><span class="p">(</span><span class="n">element_name</span><span class="p">,</span> <span class="n">sym_node</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">,</span> <span class="n">prettyxml</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param sym_node:</span>
+<span class="sd">        :param outfilename:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Write in file: </span><span class="si">%s</span><span class="s"> ...&quot;</span> <span class="o">%</span> <span class="n">outfilename</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outfilename</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">)</span>
+        <span class="n">str_xml</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">prettyxml</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dom</span> <span class="o">=</span> <span class="n">sym_node</span><span class="o">.</span><span class="n">toDOM</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">element_name</span><span class="o">=</span><span class="n">element_name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">pyxb</span><span class="o">.</span><span class="n">IncompleteElementContentError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;*** ERROR : IncompleteElementContentError&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;- Details error: &#39;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">details</span><span class="p">())</span>
+            <span class="k">except</span> <span class="n">pyxb</span><span class="o">.</span><span class="n">MissingAttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;*** ERROR : MissingAttributeError&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;- Details error: &#39;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">details</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">str_xml</span> <span class="o">=</span> <span class="n">dom</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">newl</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">str_xml</span> <span class="o">=</span> <span class="n">sym_node</span><span class="o">.</span><span class="n">toxml</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">element_name</span><span class="o">=</span><span class="n">element_name</span><span class="p">)</span>
+        <span class="c">#</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_xml</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Write in file: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="n">outfilename</span><span class="p">)</span>
+</div>
+    <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
+<div class="viewcode-block" id="trafipolluImp_EXPORT.export_TRONCONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.export_TRONCONS">[docs]</a>    <span class="k">def</span> <span class="nf">export_TRONCONS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sym_TRONCONS</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">pyxb_symuTRONCON</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">module_topo</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">sym_TRONCONS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyxb_symuTRONCON</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">pyxb</span><span class="o">.</span><span class="n">ValidationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&quot;Exception in &#39;export_TRONCONS&#39; - details: &quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">details</span><span class="p">())</span>
+        <span class="c">#</span>
+        <span class="k">return</span> <span class="n">sym_TRONCONS</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

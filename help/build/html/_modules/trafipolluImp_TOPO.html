@@ -1,0 +1,871 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trafipolluImp_TOPO &mdash; interactive_map_tracking 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for trafipolluImp_TOPO</h1><div class="highlight"><pre>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">LineString</span>
+<span class="kn">import</span> <span class="nn">pyxb</span>
+
+<span class="kn">import</span> <span class="nn">parser_symuvia_xsd_2_04_pyxb</span> <span class="kn">as</span> <span class="nn">symuvia_parser</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">create_namedtuple_on_globals</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">create_namedtuple</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">timer_decorator</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">build_logger</span>
+<span class="kn">import</span> <span class="nn">trafipolluImp_DUMP</span> <span class="kn">as</span> <span class="nn">tpi_DUMP</span>
+
+<span class="kn">from</span> <span class="nn">Config_Tools</span> <span class="kn">import</span> <span class="n">CConfig</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="n">NT_LANE_SG3_SYMU</span> <span class="o">=</span> <span class="n">create_namedtuple_on_globals</span><span class="p">(</span>
+    <span class="s">&#39;NT_LANE_SG3_SYMU&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s">&#39;symu_troncon&#39;</span><span class="p">,</span>
+        <span class="s">&#39;start_id_lane&#39;</span><span class="p">,</span>
+        <span class="s">&#39;nb_lanes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;lane_direction&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">NT_INTERCONNEXION</span> <span class="o">=</span> <span class="n">create_namedtuple_on_globals</span><span class="p">(</span>
+    <span class="s">&#39;NT_INTERCONNEXION&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s">&#39;lane_amont&#39;</span><span class="p">,</span>
+        <span class="s">&#39;lane_aval&#39;</span><span class="p">,</span>
+        <span class="s">&#39;geometry&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">NT_LANE_SYMU</span> <span class="o">=</span> <span class="n">create_namedtuple_on_globals</span><span class="p">(</span>
+    <span class="s">&#39;NT_LANE_SYMU&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s">&#39;symu_troncon&#39;</span><span class="p">,</span>
+        <span class="s">&#39;id_lane&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">NT_RESULT_BUILD_PYXB</span> <span class="o">=</span> <span class="n">create_namedtuple</span><span class="p">(</span>
+    <span class="s">&#39;NT_RESULT_BUILD_PYXB&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s">&#39;amont&#39;</span><span class="p">,</span>
+        <span class="s">&#39;aval&#39;</span><span class="p">,</span>
+        <span class="s">&#39;points_internes&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c"># creation de l&#39;objet logger qui va nous servir a ecrire dans les logs</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">build_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="trafipolluImp_TOPO"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO">[docs]</a><span class="k">class</span> <span class="nc">trafipolluImp_TOPO</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="trafipolluImp_TOPO.__init__"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;dict_edges&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;dict_nodes&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;dict_lanes&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_extremites</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;ENTREES&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;SORTIES&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+
+        <span class="c">##########</span>
+        <span class="c"># CONFIG #</span>
+        <span class="c">##########</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="n">CConfig</span><span class="o">.</span><span class="n">load_from_module</span><span class="p">(</span><span class="n">__name__</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+        <span class="c"># load une section du fichier config</span>
+        <span class="c"># TRONCONS</span>
+        <span class="n">configs</span><span class="o">.</span><span class="n">load_section</span><span class="p">(</span><span class="s">&#39;TRONCONS&#39;</span><span class="p">)</span>
+        <span class="n">configs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;TRONCONS&#39;</span><span class="p">],</span>
+            <span class="p">{</span>
+                <span class="s">&#39;add_points&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;add_points_internes&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+                <span class="s">&#39;use_simplification&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;use_simplification_for_points_internes&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="c"># INTERCONNEXIONS</span>
+        <span class="n">configs</span><span class="o">.</span><span class="n">load_section</span><span class="p">(</span><span class="s">&#39;INTERCONNEXIONS&#39;</span><span class="p">)</span>
+        <span class="n">configs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;INTERCONNEXIONS&#39;</span><span class="p">],</span>
+            <span class="p">{</span>
+                <span class="s">&#39;add_points&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;add_points_internes&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">),</span>
+                <span class="s">&#39;use_simplification&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;use_simplification_for_points_internes&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())))</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO.clear"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c">#</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_extremites</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;ENTREES&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;SORTIES&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_topo"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        On lance la constructin TOPOlogique pour:</span>
+<span class="sd">        - les troncons (SYMUVIA) a partir des edges (StreetGen)</span>
+<span class="sd">        - des interconnexions (SYMUVIA) a partir des node (StreetGen)</span>
+<span class="sd">        - des extremites du reseau SYMUVIA</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_for_troncons</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_for_interconnexions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_extrimites</span><span class="p">()</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_for_troncons"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_for_troncons">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_for_troncons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Lance la conversion TOPOlogique des edges StreetGEN (dumpees)</span>
+<span class="sd">        en troncons SYMUVIA (via PyXB)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># self.dict_edges:</span>
+        <span class="c"># - key: sur les id des edges</span>
+
+        <span class="c"># on parcourt l&#39;ensemble des id des edges disponibles</span>
+        <span class="k">for</span> <span class="n">sg3_edge_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="p">:</span>
+            <span class="c"># build d&#39;un troncon SYMUVIA a partir d&#39;un edge StreetGen</span>
+            <span class="n">pyxb_symutroncon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_pyxb_symutroncon_from_sg3_edge</span><span class="p">(</span><span class="n">sg3_edge_id</span><span class="p">)</span>
+
+            <span class="c"># on met a jour le dictionnaire de conversion TOPOlogique</span>
+            <span class="c"># entre les edges StreetGen et les entites TRONCONS Symuvia/PyXB</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pyxb_symutroncon</span><span class="p">)</span>
+
+        <span class="c">#######</span>
+        <span class="c"># LOG #</span>
+        <span class="c">#######</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s">&#39;convert_sg3_edges_to_pyxb_symutroncons - {0} troncons added&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c">#</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.update_dict_pyxb_symuTroncons"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.update_dict_pyxb_symuTroncons">[docs]</a>    <span class="k">def</span> <span class="nf">update_dict_pyxb_symuTroncons</span><span class="p">(</span><span class="n">dict_pyxb_symuTroncons</span><span class="p">,</span> <span class="n">pyxb_symuTroncon</span><span class="p">,</span> <span class="n">sg3_edge</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update de liste_troncon:</span>
+<span class="sd">            liste_troncon est le resultat de la fonction donc elle insere ou non des troncons dans le systeme</span>
+<span class="sd">            L&#39;update regarde si le troncon n&#39;a pas deja ete calculee (prealablement)</span>
+<span class="sd">            si oui: on met a jour les donnees sans rajouter un nouvel object (nouvelle adresse memoire)</span>
+<span class="sd">            si non: on rajoute l&#39;object (sym_TRONCON) dans la liste (instance de l&#39;object)</span>
+<span class="sd">            L&#39;update permet de garder une coherence avec les liens topologiques calcules pour les nodes/CAF</span>
+<span class="sd">            ps: a revoir, une forte impression que c&#39;est tres foireux (meme si impression de deja vu dans les</span>
+<span class="sd">            codes transmis par LICIT)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">list_pyxb_symuTRONCONS</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">pyxb_symuTroncon</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;sg3_to_symuvia&#39;</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c"># la cle &#39;sg3_to_symuvia&#39; n&#39;existe pas donc on est dans l&#39;init (premiere passe)</span>
+            <span class="n">dict_pyxb_symuTroncons</span><span class="p">[</span><span class="n">pyxb_symuTroncon</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pyxb_symuTroncon</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">list_pyxb_symuTRONCONS</span><span class="p">:</span>
+                <span class="c"># le troncon est deja present</span>
+                <span class="c"># TODO: il faudrait (plutot) updater le TRONCON (au lieu de le remplacer)</span>
+                <span class="n">pyxb_symuTroncon</span> <span class="o">=</span> <span class="n">list_pyxb_symuTRONCONS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c">#</span>
+            <span class="n">dict_pyxb_symuTroncons</span><span class="p">[</span><span class="n">pyxb_symuTroncon</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pyxb_symuTroncon</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO._build_pyxb_symutroncon_from_sg3_edge_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO._build_pyxb_symutroncon_from_sg3_edge_lane">[docs]</a>    <span class="k">def</span> <span class="nf">_build_pyxb_symutroncon_from_sg3_edge_lane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param args:</span>
+<span class="sd">            liste qui contient (dans l&#39;ordre)::</span>
+<span class="sd">                - sg3_edge</span>
+<span class="sd">                - sg3_edge_id</span>
+<span class="sd">                - python_lane_id</span>
+<span class="sd">                - nb_lanes</span>
+<span class="sd">                - func_build_pyxb_symutroncon</span>
+<span class="sd">        :type args: `list`</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># recuperation des arguments</span>
+            <span class="n">sg3_edge</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">,</span> <span class="n">func_build_pyxb_symutroncon</span> <span class="o">=</span> <span class="n">args</span>
+
+            <span class="c"># Construction TOPO d&#39;un symu TRONCON</span>
+            <span class="n">result_build</span> <span class="o">=</span> <span class="n">func_build_pyxb_symutroncon</span><span class="p">(</span>
+                <span class="n">sg3_edge</span><span class="o">=</span><span class="n">sg3_edge</span><span class="p">,</span>
+                <span class="n">sg3_edge_id</span><span class="o">=</span><span class="n">sg3_edge_id</span><span class="p">,</span>
+                <span class="n">python_lane_id</span><span class="o">=</span><span class="n">python_lane_id</span><span class="p">,</span>
+                <span class="n">nb_lanes</span><span class="o">=</span><span class="n">nb_lanes</span>
+            <span class="p">)</span>
+            <span class="n">symutroncon_amont</span><span class="p">,</span> <span class="n">symutroncon_aval</span><span class="p">,</span> <span class="n">symutroncon_points_internes</span> <span class="o">=</span> <span class="n">result_build</span>
+
+            <span class="c"># mise a jour des champs (debug LICIT)</span>
+            <span class="n">nom_rue_g</span> <span class="o">=</span> <span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;str_nom_rue_g&#39;</span><span class="p">]</span>
+            <span class="n">nom_rue_d</span> <span class="o">=</span> <span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;str_nom_rue_d&#39;</span><span class="p">]</span>
+            <span class="n">nom_rue</span> <span class="o">=</span> <span class="n">nom_rue_g</span>
+            <span class="k">if</span> <span class="n">nom_rue_g</span> <span class="o">!=</span> <span class="n">nom_rue_d</span><span class="p">:</span>
+                <span class="n">nom_rue</span> <span class="o">+=</span> <span class="s">&#39;-_-&#39;</span> <span class="o">+</span> <span class="n">nom_rue_d</span>
+
+            <span class="c"># construction de l&#39;objet PYXB pour export Symuvia TRONCON</span>
+            <span class="n">pyxb_symuTRONCON</span> <span class="o">=</span> <span class="n">symuvia_parser</span><span class="o">.</span><span class="n">typeTroncon</span><span class="p">(</span>
+                <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">build_id_for_TRONCON</span><span class="p">(</span><span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;str_ign_id&#39;</span><span class="p">],</span> <span class="n">python_lane_id</span><span class="p">),</span>
+                <span class="n">nom_axe</span><span class="o">=</span><span class="n">nom_rue</span><span class="p">,</span>
+                <span class="n">largeur_voie</span><span class="o">=</span><span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;f_road_width&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;ui_lane_number&#39;</span><span class="p">],</span>
+                <span class="n">id_eltamont</span><span class="o">=</span><span class="s">&quot;-1&quot;</span><span class="p">,</span>
+                <span class="n">id_eltaval</span><span class="o">=</span><span class="s">&quot;-1&quot;</span><span class="p">,</span>
+                <span class="n">extremite_amont</span><span class="o">=</span><span class="n">symutroncon_amont</span><span class="p">,</span>
+                <span class="n">extremite_aval</span><span class="o">=</span><span class="n">symutroncon_aval</span><span class="p">,</span>
+                <span class="n">nb_voie</span><span class="o">=</span><span class="n">nb_lanes</span>
+            <span class="p">)</span>
+
+            <span class="c"># transfert des POINTS_INTERNES</span>
+            <span class="c"># on test si l&#39;option transfert de point interne est active</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;TRONCONS&#39;</span><span class="p">][</span><span class="s">&#39;add_points&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">symutroncon_points_internes</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;TRONCONS&#39;</span><span class="p">][</span><span class="s">&#39;use_simplification&#39;</span><span class="p">]:</span>
+                        <span class="n">symutroncon_points_internes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimize_list_points</span><span class="p">(</span><span class="n">symutroncon_points_internes</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+                    <span class="n">pyxb_symuTRONCON</span><span class="o">.</span><span class="n">POINTS_INTERNES</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_pyxb_POINTS_INTERNES</span><span class="p">(</span><span class="n">symutroncon_points_internes</span><span class="p">)</span>
+
+            <span class="c"># MOG : probleme autour des sens edge, lanes, symuvia</span>
+            <span class="c"># lane_direction = self.dict_lanes[sg3_edge_id][&#39;informations&#39;][python_lane_id].lane_direction</span>
+            <span class="n">lane_direction</span> <span class="o">=</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">get_lane_direction_from_python_lane_id</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span><span class="p">,</span>
+                <span class="n">sg3_edge_id</span><span class="p">,</span>
+                <span class="n">python_lane_id</span>
+            <span class="p">)</span>
+
+            <span class="c"># LINK STREETGEN3 to SYMUVIA (TOPO)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build_link_from_sg3_to_symuvia_for_lane</span><span class="p">(</span>
+                <span class="n">pyxb_symuTRONCON</span><span class="p">,</span>
+                <span class="n">sg3_edge_id</span><span class="p">,</span>
+                <span class="n">python_lane_id</span><span class="p">,</span>
+                <span class="n">nb_lanes</span><span class="p">,</span>
+                <span class="n">lane_direction</span>
+            <span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;_build_pyxb_symutroncon_from_sg3_edge_lane - Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pyxb_symuTRONCON</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_symutroncon_from_sg3_edge"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_symutroncon_from_sg3_edge">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_symutroncon_from_sg3_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param sg3_edge_id:</span>
+<span class="sd">        :type sg3_edge_id: `str`.</span>
+
+<span class="sd">        :return: dictionnaire de correspondance entre une edge StreetGen et un/des troncons SYMUVIA</span>
+<span class="sd">        :rtype: `dict`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c"># dictionnaire de resultat</span>
+        <span class="n">dict_pyxb_symuTroncons</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c"># edge StreetGen (via l&#39;identifiant sg3_edge_id)</span>
+        <span class="n">sg3_edge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># on recupere les groupes de voies (homogenes) rattaches au troncon (edge)</span>
+            <span class="n">grouped_lanes</span> <span class="o">=</span> <span class="n">sg3_edge</span><span class="p">[</span><span class="s">&#39;grouped_lanes&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&quot;Exception: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="c"># Il y a des edge_sg3 sans voie(s) dans le reseau SG3 ... faudrait demander a Remi !</span>
+            <span class="c"># Peut etre des edges_sg3 aidant uniquement aux connexions/creation (de zones) d&#39;intersections</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&quot;!!! &#39;BUG&#39; with edge id: {0} - no &#39;group_lanes&#39; found !!!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sg3_edge_id</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># indice (python) sur les groupes de voies</span>
+            <span class="n">python_lane_id</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># on parcours la liste des groupes de voies (uni-directionnelles)</span>
+                <span class="k">for</span> <span class="n">nb_lanes_in_group</span> <span class="ow">in</span> <span class="n">grouped_lanes</span><span class="p">:</span>
+                    <span class="c">#  construction du TRONCON au sens SYMUVIA</span>
+                    <span class="n">pyxb_symuTRONCON</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_pyxb_symutroncon_from_sg3_edge_lane</span><span class="p">(</span>
+                        <span class="n">sg3_edge</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span>
+                        <span class="n">python_lane_id</span><span class="p">,</span>
+                        <span class="n">nb_lanes_in_group</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">build_pyxb_symuTroncon_with_lanes_in_groups</span>
+                    <span class="p">)</span>
+
+                    <span class="c"># Update list_troncon</span>
+                    <span class="c"># Il y a une strategie d&#39;update dans l&#39;appel de la methode pour gerer l&#39;accumulation de resultats</span>
+                    <span class="c"># de DUMP, TOPO etc ...</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">update_dict_pyxb_symuTroncons</span><span class="p">(</span><span class="n">dict_pyxb_symuTroncons</span><span class="p">,</span> <span class="n">pyxb_symuTRONCON</span><span class="p">,</span> <span class="n">sg3_edge</span><span class="p">)</span>
+
+                    <span class="c"># next lanes group</span>
+                    <span class="n">python_lane_id</span> <span class="o">+=</span> <span class="n">nb_lanes_in_group</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception as e: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dict_pyxb_symuTroncons</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_link_from_sg3_to_symuvia_for_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_link_from_sg3_to_symuvia_for_lane">[docs]</a>    <span class="k">def</span> <span class="nf">build_link_from_sg3_to_symuvia_for_lane</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">pyxb_symuTRONCON</span><span class="p">,</span>
+            <span class="n">sg3_edge_id</span><span class="p">,</span>
+            <span class="n">python_lane_id</span><span class="p">,</span>
+            <span class="n">nb_lanes</span><span class="p">,</span>
+            <span class="n">lane_direction</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Methode:</span>
+
+<span class="sd">        :param pyxb_symuTRONCON:</span>
+<span class="sd">        :type pyxb_symuTRONCON: `typeTroncon`</span>
+
+<span class="sd">        :param lane_direction:</span>
+<span class="sd">        :type lane_direction: `bool`</span>
+
+<span class="sd">        :param sg3_edge_id:</span>
+<span class="sd">        :type sg3_edge_id: `int`.</span>
+
+<span class="sd">        :param python_lane_id:</span>
+<span class="sd">        :type python_lane_id: .</span>
+
+<span class="sd">        :param nb_lanes:</span>
+<span class="sd">        :type nb_lanes: `int`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># recuperation de la liste des voies (Python) a partir d&#39;un indice (StreetGen) d&#39;edge</span>
+        <span class="n">symu_lanes</span> <span class="o">=</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">get_Symuvia_list_lanes_from_edge_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">)</span>
+
+        <span class="c">#</span>
+        <span class="k">for</span> <span class="n">python_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">python_lane_id</span><span class="p">,</span> <span class="n">python_lane_id</span> <span class="o">+</span> <span class="n">nb_lanes</span><span class="p">):</span>
+            <span class="n">symu_lanes</span><span class="p">[</span><span class="n">python_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">NT_LANE_SG3_SYMU</span><span class="p">(</span>
+                <span class="n">pyxb_symuTRONCON</span><span class="p">,</span>
+                <span class="n">python_lane_id</span><span class="p">,</span>
+                <span class="n">nb_lanes</span><span class="p">,</span>
+                <span class="n">lane_direction</span>
+            <span class="p">)</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_symuTroncon_with_lanes_in_groups"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_symuTroncon_with_lanes_in_groups">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_symuTroncon_with_lanes_in_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        1 Groupe de plusieurs voies (dans la meme direction) dans une serie de groupes (de voies) pour l&#39;edge_sg3</span>
+<span class="sd">        On recupere les coefficients 1D de projection de chaque point sur sa voie.</span>
+<span class="sd">        On rassemble tout ces coefficients et re-echantillone les voies (nombres de points d&#39;echantillon homogene entre</span>
+<span class="sd">        chaque voie). On moyenne tous les points de chaque voie pour former un axe (edge) mediant.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: NT_RESULT_BUILD_PYXB</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># recuperation des parametres</span>
+        <span class="n">sg3_edge_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;sg3_edge_id&#39;</span><span class="p">]</span>
+        <span class="n">python_lane_id</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;python_lane_id&#39;</span><span class="p">]</span>
+        <span class="n">nb_lanes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;nb_lanes&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+
+        <span class="n">shp_lanes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c"># transfert lane_center_axis for each lane in 2D</span>
+        <span class="n">list_1D_coefficients</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c"># on parcourt le groupe de &#39;voies&#39; dans le meme sens</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">id_lane</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">python_lane_id</span><span class="p">,</span> <span class="n">python_lane_id</span> <span class="o">+</span> <span class="n">nb_lanes</span><span class="p">):</span>
+                <span class="c"># get the linestring of the current lane</span>
+                <span class="n">sg3_lane_geometry</span> <span class="o">=</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">get_lane_geometry_from_python_lane_id</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span><span class="p">,</span>
+                    <span class="n">sg3_edge_id</span><span class="p">,</span>
+                    <span class="n">id_lane</span>
+                <span class="p">)</span>
+                <span class="n">shp_lane</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">sg3_lane_geometry</span><span class="p">)</span>
+                <span class="c"># project this linestring into 1D coefficients</span>
+                <span class="n">linestring_proj_1D_coefficients</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">shp_lane</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">point</span><span class="p">),</span> <span class="n">normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">shp_lane</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="c"># save the geometry lane</span>
+                <span class="n">shp_lanes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shp_lane</span><span class="p">)</span>
+                <span class="c"># save the 1D coefficients from the lane</span>
+                <span class="n">list_1D_coefficients</span> <span class="o">+=</span> <span class="n">linestring_proj_1D_coefficients</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+        <span class="c"># ##########################</span>
+        <span class="c"># clean the list of 1D coefficients</span>
+        <span class="c"># remove duplicate values</span>
+        <span class="c"># url: http://stackoverflow.com/questions/480214/how-do-you-remove-duplicates-from-a-list-in-python-whilst-preserving-order</span>
+        <span class="n">list_1D_coefficients</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">list_1D_coefficients</span><span class="p">))</span>
+        <span class="c"># sort the list of 1D coefficients</span>
+        <span class="n">list_1D_coefficients</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="c"># ##########################</span>
+
+        <span class="c"># Compute the troncon center axis</span>
+        <span class="c"># Methode: on utilise les coefficients 1D de chaque voie qui va composer ce troncon.</span>
+        <span class="c"># On retroprojete chaque coeffient (1D) sur l&#39;ensemble des voies (2D) et on effectue la moyenne des positions</span>
+        <span class="c"># On recupere &#39;une sorte d&#39;axe median&#39; des voies (du meme groupe)</span>
+        <span class="c">#</span>
+        <span class="n">lane_geometry</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># coefficient de normalisation depend du nombre de voies qu&#39;on utilise pour la moyenne</span>
+            <span class="n">norm_lanes_center_axis</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">shp_lanes</span><span class="p">)</span>
+            <span class="c"># pour chaque coefficient 1D</span>
+            <span class="k">for</span> <span class="n">coef_point</span> <span class="ow">in</span> <span class="n">list_1D_coefficients</span><span class="p">:</span>
+                <span class="c"># on calcule la moyenne des points sur les lanes pour ce coefficient</span>
+                <span class="n">np_point_for_troncon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="c"># pour chaque shapely lane</span>
+                <span class="k">for</span> <span class="n">shp_lane</span> <span class="ow">in</span> <span class="n">shp_lanes</span><span class="p">:</span>
+                    <span class="n">projected_point_on_lane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="n">shp_lane</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">coef_point</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="c"># on projete le coefficient et on somme le point</span>
+                    <span class="n">np_point_for_troncon</span> <span class="o">+=</span> <span class="n">projected_point_on_lane</span>
+                <span class="c"># on calcule la moyenne</span>
+                <span class="n">np_point_for_troncon</span> <span class="o">*=</span> <span class="n">norm_lanes_center_axis</span>
+                <span class="n">lane_geometry</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">np_point_for_troncon</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">id_vertice_for_amont</span><span class="p">,</span> <span class="n">id_vertice_for_aval</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+
+            <span class="c"># Comme la liste des coefficients 1D est triee,</span>
+            <span class="c"># on peut declarer le 1er et dernier point comme Amont/Aval</span>
+            <span class="k">return</span> <span class="n">NT_RESULT_BUILD_PYXB</span><span class="p">(</span>
+                <span class="n">lane_geometry</span><span class="p">[</span><span class="n">id_vertice_for_amont</span><span class="p">],</span>
+                <span class="n">lane_geometry</span><span class="p">[</span><span class="n">id_vertice_for_aval</span><span class="p">],</span>
+                <span class="n">lane_geometry</span>
+            <span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.update_pyxb_node"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.update_pyxb_node">[docs]</a>    <span class="k">def</span> <span class="nf">update_pyxb_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param kwargs:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">node</span><span class="o">.</span><span class="n">_setAttribute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_TRONCON"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_TRONCON">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_TRONCON</span><span class="p">(</span><span class="n">str_pyxb_symutroncon_id</span><span class="p">,</span> <span class="n">lane_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param pyxb_symuTRONCON:</span>
+<span class="sd">        :param lane_id:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">str_pyxb_symutroncon_id</span> <span class="o">+</span> <span class="s">&#39;_lane_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lane_id</span><span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_POINTS_INTERNES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_POINTS_INTERNES">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_POINTS_INTERNES</span><span class="p">(</span><span class="n">list_points</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param :</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pyxb_symuPOINTS_INTERNES</span> <span class="o">=</span> <span class="n">symuvia_parser</span><span class="o">.</span><span class="n">typePointsInternes</span><span class="p">()</span>
+
+        <span class="p">[</span><span class="n">pyxb_symuPOINTS_INTERNES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyxb</span><span class="o">.</span><span class="n">BIND</span><span class="p">(</span><span class="n">coordonnees</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_points</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pyxb_symuPOINTS_INTERNES</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.simplify_list_points"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.simplify_list_points">[docs]</a>    <span class="k">def</span> <span class="nf">simplify_list_points</span><span class="p">(</span>
+            <span class="n">list_points</span><span class="p">,</span>
+            <span class="n">tolerance_distance</span><span class="o">=</span><span class="mf">0.10</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param list_points: list des points a simplfier.</span>
+<span class="sd">                -&gt; A priori cette liste provient d&#39;une interconnexion SG3</span>
+<span class="sd">                donc elle possede (normalement) au moins 4 points (amont 2 points internes aval)</span>
+<span class="sd">        :param tolerance_distance:</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">shp_list_points</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">list_points</span><span class="p">)</span>
+        <span class="n">shp_simplify_list_points</span> <span class="o">=</span> <span class="n">shp_list_points</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">tolerance_distance</span><span class="p">,</span> <span class="n">preserve_topology</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shp_simplify_list_points</span><span class="p">)</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.optimize_list_points"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.optimize_list_points">[docs]</a>    <span class="k">def</span> <span class="nf">optimize_list_points</span><span class="p">(</span>
+            <span class="n">list_points</span><span class="p">,</span>
+            <span class="n">min_distance</span><span class="o">=</span><span class="mf">0.60</span><span class="p">,</span>
+            <span class="n">tolerance_distance</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
+            <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.05</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param list_points:</span>
+<span class="sd">        :type list_points: `list`</span>
+
+<span class="sd">        :param min_distance:</span>
+<span class="sd">        :type min_distance: `float`.</span>
+
+<span class="sd">        :param tolerance_distance:</span>
+<span class="sd">        :type tolerance_distance: `float`.</span>
+
+<span class="sd">        :param epsilon:</span>
+<span class="sd">        :type epsilon: `float`.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: `np.array`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">min_distance</span> <span class="o">+=</span> <span class="n">epsilon</span>
+        <span class="n">shp_list_points_optimized</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">shp_list_points</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">list_points</span><span class="p">)</span>
+            <span class="c"># resampling</span>
+            <span class="n">list_shp_points_resampled</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">shp_list_points</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">min_distance</span><span class="p">,</span>
+                                          <span class="n">shp_list_points</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="n">min_distance</span><span class="p">,</span>
+                                          <span class="n">min_distance</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">list_shp_points</span> <span class="o">=</span> <span class="n">list_shp_points_resampled</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">resample_shp_geometry</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">list_shp_points</span><span class="p">)</span>
+                <span class="n">shp_list_points_optimized</span> <span class="o">=</span> <span class="n">resample_shp_geometry</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span>
+                    <span class="n">tolerance_distance</span><span class="p">,</span>
+                    <span class="n">preserve_topology</span><span class="o">=</span><span class="bp">False</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shp_list_points_optimized</span><span class="p">)</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_for_interconnexions"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_for_interconnexions">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_for_interconnexions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Methode de conversion/construction TOPOlogique des interconnexions.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">list_remove_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dict_interconnexions</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">id_amont</span><span class="p">,</span> <span class="n">id_aval</span> <span class="o">=</span> <span class="n">interval_ids_amont_aval</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c"># pour chaque node SG3</span>
+        <span class="k">for</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">dict_values</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># liste des interconnexions presentes dans le &#39;node&#39; (connexion)</span>
+                <span class="n">node_list_interconnexions</span> <span class="o">=</span> <span class="n">dict_values</span><span class="p">[</span><span class="s">&#39;interconnexions&#39;</span><span class="p">]</span>
+                <span class="c"># liste des io des edges connectees au node</span>
+                <span class="n">set_id_edges</span> <span class="o">=</span> <span class="n">dict_values</span><span class="p">[</span><span class="s">&#39;set_id_edges&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">node_id: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">dict_node[{0}]: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">dict_values</span><span class="p">))</span>
+                <span class="c">#</span>
+                <span class="n">list_remove_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c"># On definit le type de la connection</span>
+                <span class="c"># &#39;REPARTITEUR&#39; ou &#39;CAF&#39;</span>
+                <span class="n">str_type_connexion</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                <span class="n">nb_edges_connected_on_this_node</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">set_id_edges</span><span class="p">)</span>
+                <span class="c"># Selon le nombre d&#39;edges connectees par le node/connexion:</span>
+                <span class="c"># == 2 =&gt; 1 connection amont/aval =&gt; &#39;REPARTITEUR&#39;</span>
+                <span class="c">#  &gt; 2 =&gt; potentiellement &#39;CAF&#39;</span>
+                <span class="c"># A noter que c&#39;est relativement &#39;arbitraire&#39; comme choix/decision ... [a revoir]</span>
+                <span class="k">if</span> <span class="n">nb_edges_connected_on_this_node</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">str_type_connexion</span> <span class="o">=</span> <span class="s">&#39;REPARTITEUR&#39;</span>
+                <span class="k">elif</span> <span class="n">nb_edges_connected_on_this_node</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="c"># potentiellement un CAF</span>
+                    <span class="n">str_type_connexion</span> <span class="o">=</span> <span class="s">&#39;CAF&#39;</span>
+
+                <span class="c"># parcourt de la liste des interconnexions</span>
+                <span class="k">for</span> <span class="n">interconnexion</span> <span class="ow">in</span> <span class="n">node_list_interconnexions</span><span class="p">:</span>
+                    <span class="n">symu_troncons</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">symu_troncons_lane_id</span> <span class="o">=</span> <span class="p">[]</span>
+
+                    <span class="c"># parcours sur les elements interconnectes (connexion amont -&gt; aval)</span>
+                    <span class="k">for</span> <span class="n">python_id</span> <span class="ow">in</span> <span class="n">interval_ids_amont_aval</span><span class="p">:</span>
+                        <span class="c"># Transfert id python -&gt; StreetGen</span>
+                        <span class="n">str_sg3_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">python_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="c"># On reconstruit l&#39;id de l&#39;edge</span>
+                        <span class="n">sg3_edge_id</span> <span class="o">=</span> <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;edge_id&#39;</span> <span class="o">+</span> <span class="n">str_sg3_id</span><span class="p">]</span>
+                        <span class="c"># On reconstruit l&#39;id de la voie ou son &#39;ordinality&#39; (sens StreetGen)</span>
+                        <span class="n">sg3_lane_ordinality</span> <span class="o">=</span> <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;lane_ordinality&#39;</span> <span class="o">+</span> <span class="n">str_sg3_id</span><span class="p">]</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="c"># recherche du troncon possedant la voie</span>
+                            <span class="n">symu_lane</span><span class="p">,</span> <span class="n">symu_lane_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_symu_troncon_lane</span><span class="p">(</span>
+                                <span class="n">sg3_edge_id</span><span class="p">,</span>
+                                <span class="n">sg3_lane_ordinality</span>
+                            <span class="p">)</span>
+                        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;# Find Symu_Troncon - EXCEPTION: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c">#</span>
+                            <span class="n">symu_troncons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">symu_lane</span><span class="o">.</span><span class="n">symu_troncon</span><span class="p">)</span>
+                            <span class="n">symu_troncons_lane_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">symu_lane_id</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">symu_troncons</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">dict_interconnexions</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="p">{</span>
+                            <span class="s">&#39;sg3_to_symuvia&#39;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s">&#39;type_connexion&#39;</span><span class="p">:</span> <span class="n">str_type_connexion</span><span class="p">,</span>
+                                <span class="s">&#39;list_interconnexions&#39;</span><span class="p">:</span> <span class="p">{}</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="p">)</span>
+
+                        <span class="c"># #################################################</span>
+                        <span class="c"># SIMPLIFICATION DES VOIES D&#39;INTERCONNEXIONS</span>
+                        <span class="c"># #################################################</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;INTERCONNEXIONS&#39;</span><span class="p">][</span><span class="s">&#39;add_points&#39;</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="p">[</span><span class="s">&#39;INTERCONNEXIONS&#39;</span><span class="p">][</span><span class="s">&#39;use_simplification&#39;</span><span class="p">]:</span>
+                                <span class="c"># permet de simplifier les lignes droites et eviter d&#39;exporter un noeud &#39;POINTS_INTERNES&#39;</span>
+                                <span class="c"># inutile dans ce cas pour SYMUVIA</span>
+                                <span class="n">sg3_interconnexion_geometry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simplify_list_points</span><span class="p">(</span>
+                                    <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;np_interconnexion&#39;</span><span class="p">],</span>
+                                    <span class="mf">0.10</span>
+                                <span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c"># les 1er et dernier points sont les amont/aval de l&#39;interconnexion/troncons</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">sg3_interconnexion_geometry</span> <span class="o">=</span> <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;np_interconnexion&#39;</span><span class="p">]</span>
+                            <span class="c">##################################################</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c"># obligation de definir des points internes pour l&#39;interconnexion</span>
+                            <span class="c"># en mode &#39;light&#39;, on ne rajoute que l&#39;amont/aval de la connection (segment lineaire)</span>
+                            <span class="n">sg3_interconnexion_geometry</span> <span class="o">=</span> <span class="p">(</span>
+                                <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;np_interconnexion&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>     <span class="c"># amont</span>
+                                <span class="n">interconnexion</span><span class="p">[</span><span class="s">&#39;np_interconnexion&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c"># aval</span>
+                            <span class="p">)</span>
+                        <span class="c">#</span>
+                        <span class="n">list_interconnexions</span> <span class="o">=</span> <span class="n">dict_interconnexions</span><span class="p">[</span><span class="n">node_id</span><span class="p">][</span><span class="s">&#39;sg3_to_symuvia&#39;</span><span class="p">][</span><span class="s">&#39;list_interconnexions&#39;</span><span class="p">]</span>
+
+                        <span class="c"># build key with id symu_troncon and the id lane</span>
+                        <span class="n">key_for_interconnexion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_id_for_interconnexion</span><span class="p">(</span>
+                            <span class="n">symu_troncons</span><span class="p">,</span>
+                            <span class="n">symu_troncons_lane_id</span><span class="p">,</span>
+                            <span class="n">id_amont</span>
+                        <span class="p">)</span>
+
+                        <span class="n">list_interconnexions</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key_for_interconnexion</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">NT_INTERCONNEXION</span><span class="p">(</span>
+                                <span class="n">lane_amont</span><span class="o">=</span><span class="n">NT_LANE_SYMU</span><span class="p">(</span><span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_amont</span><span class="p">],</span> <span class="n">symu_troncons_lane_id</span><span class="p">[</span><span class="n">id_amont</span><span class="p">]),</span>
+                                <span class="n">lane_aval</span><span class="o">=</span><span class="n">NT_LANE_SYMU</span><span class="p">(</span><span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_aval</span><span class="p">],</span> <span class="n">symu_troncons_lane_id</span><span class="p">[</span><span class="n">id_aval</span><span class="p">]),</span>
+                                <span class="n">geometry</span><span class="o">=</span><span class="n">sg3_interconnexion_geometry</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+
+                        <span class="c"># TODO -&gt; [TOPO] : FAKE TOPO pour CONNEXIONS/EXTREMITES</span>
+                        <span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_amont</span><span class="p">]</span><span class="o">.</span><span class="n">id_eltaval</span> <span class="o">=</span> <span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_aval</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+                        <span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_aval</span><span class="p">]</span><span class="o">.</span><span class="n">id_eltamont</span> <span class="o">=</span> <span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_amont</span><span class="p">]</span><span class="o">.</span><span class="n">id</span>
+
+                <span class="c"># s&#39;il n&#39;y a aucune interconnexion associee au node</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">dict_interconnexions</span><span class="p">[</span><span class="n">node_id</span><span class="p">][</span><span class="s">&#39;sg3_to_symuvia&#39;</span><span class="p">][</span><span class="s">&#39;list_interconnexions&#39;</span><span class="p">]:</span>
+                    <span class="c"># alors on retire le node de la liste des nodes (utiles pour l&#39;export SYMUVIA)</span>
+                    <span class="n">list_remove_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">id_node_to_remove</span> <span class="ow">in</span> <span class="n">list_remove_nodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">id_node_to_remove</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_interconnexions</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">list_remove_nodes</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;# build_topo_for_nodes - nb nodes_removed: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_remove_nodes</span><span class="p">)))</span>
+</div>
+<div class="viewcode-block" id="trafipolluImp_TOPO.find_symu_troncon_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.find_symu_troncon_lane">[docs]</a>    <span class="k">def</span> <span class="nf">find_symu_troncon_lane</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">sg3_edge_id</span><span class="p">,</span>
+            <span class="n">sg3_lane_ordinality</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="sd">        :param sg3_lane_ordinality:</span>
+<span class="sd">        :type sg3_lane_ordinality: `int`.</span>
+
+<span class="sd">        :param dict_lanes:</span>
+<span class="sd">        :type dict_lanes: `dict`.</span>
+
+<span class="sd">        :param sg3_edge_id:</span>
+<span class="sd">        :type sg3_edge_id: `int`.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: `tuple`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c">#</span>
+        <span class="n">python_lane_id</span> <span class="o">=</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">get_python_id_from_lane_ordinality</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span><span class="p">,</span>
+            <span class="n">sg3_edge_id</span><span class="p">,</span>
+            <span class="n">sg3_lane_ordinality</span>
+        <span class="p">)</span>
+
+        <span class="c"># troncon contenant la voie qu&#39;on recherche</span>
+        <span class="n">symu_troncon_containing_lane</span> <span class="o">=</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">get_symu_troncon_from_python_id</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dict_lanes</span><span class="p">,</span>
+            <span class="n">sg3_edge_id</span><span class="p">,</span>
+            <span class="n">python_lane_id</span>
+        <span class="p">)</span>
+
+        <span class="c"># indice interne de la voie par rapport aux indices de voies du troncon</span>
+        <span class="n">symu_lane_id</span> <span class="o">=</span> <span class="n">python_lane_id</span> <span class="o">-</span> <span class="n">symu_troncon_containing_lane</span><span class="o">.</span><span class="n">start_id_lane</span>
+
+        <span class="c"># #######################################################################</span>
+        <span class="c"># Conversion (TOPO) SG3/Python -&gt; SYMUVIA</span>
+        <span class="c"># On doit prendre en compte l&#39;orientation de la lane par rapport a l&#39;edge</span>
+        <span class="c"># #######################################################################</span>
+        <span class="k">if</span> <span class="n">symu_troncon_containing_lane</span><span class="o">.</span><span class="n">lane_direction</span><span class="p">:</span>
+            <span class="n">symu_lane_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">symu_troncon_containing_lane</span><span class="o">.</span><span class="n">nb_lanes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">symu_lane_id</span>
+        <span class="c"># #######################################################################</span>
+
+        <span class="k">return</span> <span class="n">symu_troncon_containing_lane</span><span class="p">,</span> <span class="n">symu_lane_id</span>
+</div>
+    <span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_extrimites"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_extrimites">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_extrimites</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">symu_troncon</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="c"># AVAL -&gt; SORTIE</span>
+                <span class="n">b_aval_not_connected</span> <span class="o">=</span> <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id_eltaval</span> <span class="o">==</span> <span class="s">&quot;-1&quot;</span>
+                <span class="k">if</span> <span class="n">b_aval_not_connected</span><span class="p">:</span>
+                    <span class="n">id_for_extrimite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_id_for_extremite</span><span class="p">(</span><span class="n">symu_troncon</span><span class="p">,</span> <span class="s">&#39;S_&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dict_extremites</span><span class="p">[</span><span class="s">&#39;SORTIES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">id_for_extrimite</span><span class="p">)</span>
+                    <span class="c"># update troncon id for aval</span>
+                    <span class="c"># TOPO : Link between TRONCON and EXTREMITE</span>
+                    <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id_eltaval</span> <span class="o">=</span> <span class="n">id_for_extrimite</span>
+                <span class="c"># AMONtT -&gt; ENTREE</span>
+                <span class="n">b_amont_not_connected</span> <span class="o">=</span> <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id_eltamont</span> <span class="o">==</span> <span class="s">&quot;-1&quot;</span>
+                <span class="k">if</span> <span class="n">b_amont_not_connected</span><span class="p">:</span>
+                    <span class="n">id_for_extrimite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_id_for_extremite</span><span class="p">(</span><span class="n">symu_troncon</span><span class="p">,</span> <span class="s">&#39;E_&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dict_extremites</span><span class="p">[</span><span class="s">&#39;ENTREES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">id_for_extrimite</span><span class="p">)</span>
+                    <span class="c"># update troncon id for aval</span>
+                    <span class="c"># TOPO : Link between TRONCON and EXTREMITE</span>
+                    <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id_eltamont</span> <span class="o">=</span> <span class="n">id_for_extrimite</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_extremite"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_extremite">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_extremite</span><span class="p">(</span><span class="n">symu_troncon</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param symu_troncon:</span>
+<span class="sd">        :param prefix:</span>
+<span class="sd">        :return:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id</span>
+</div>
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_interconnexion"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_interconnexion">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_interconnexion</span><span class="p">(</span>
+            <span class="n">symu_troncons</span><span class="p">,</span>
+            <span class="n">symu_troncons_lane_id</span><span class="p">,</span>
+            <span class="n">id_amont</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param symu_troncons:</span>
+<span class="sd">        :param symu_troncons_lane_id:</span>
+<span class="sd">        :param id_amont:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">symu_troncons</span><span class="p">[</span><span class="n">id_amont</span><span class="p">]</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s">&#39;_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">symu_troncons_lane_id</span><span class="p">[</span><span class="n">id_amont</span><span class="p">])</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

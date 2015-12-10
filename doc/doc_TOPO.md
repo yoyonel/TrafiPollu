@@ -74,3 +74,9 @@ def update_SYMUVIA(self):
           - SYMUVIA: l'uniité atomique est le troncon (qui possède un segment axe 2D). Les voies/lanes des troncons sont définies géomètriquement par le troncon auquel elles se rattachent.
 
 ### INTERCONNEXIONS
+
+- `build_topo_for_interconnexions`: Lance la conversion topologique des interconnexions. Les interconnexions au sens StreetGen/SYMUVIA sont les connexions présentes dans les zones d'intersections StreetGen/connexions SYMUVIA entre les amonts/avals des troncons/voies/edges connectés.
+
+On utilise `dict_nodes` pour récupérer les informations dumpées à propros des nodes.
+
+Dans la méthode, il y a une partie de simplification géométrique des connexions.

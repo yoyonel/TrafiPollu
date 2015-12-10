@@ -270,10 +270,10 @@ class trafipolluImp_TOPO(object):
         """
 
         :param sg3_edge_id:
-        :type sg3_edge_id: `str`
+        :type sg3_edge_id: `str`.
 
         :return: dictionnaire de correspondance entre une edge StreetGen et un/des troncons SYMUVIA
-        :rtype: `dict`
+        :rtype: `dict`.
         """
 
         # dictionnaire de resultat
@@ -335,13 +335,13 @@ class trafipolluImp_TOPO(object):
         :type lane_direction: `bool`
 
         :param sg3_edge_id:
-        :type sg3_edge_id: `int`
+        :type sg3_edge_id: `int`.
 
         :param python_lane_id:
-        :type python_lane_id: ``
+        :type python_lane_id: .
 
         :param nb_lanes:
-        :type nb_lanes: `int`
+        :type nb_lanes: `int`.
 
         """
         # recuperation de la liste des voies (Python) a partir d'un indice (StreetGen) d'edge
@@ -362,7 +362,7 @@ class trafipolluImp_TOPO(object):
         1 Groupe de plusieurs voies (dans la meme direction) dans une serie de groupes (de voies) pour l'edge_sg3
         On recupere les coefficients 1D de projection de chaque point sur sa voie.
         On rassemble tout ces coefficients et re-echantillone les voies (nombres de points d'echantillon homogene entre
-         chaque voie). On moyenne tous les points de chaque voie pour former un axe (edge) mediant.
+        chaque voie). On moyenne tous les points de chaque voie pour former un axe (edge) mediant.
 
         :return:
         :rtype: NT_RESULT_BUILD_PYXB
@@ -507,13 +507,13 @@ class trafipolluImp_TOPO(object):
         :type list_points: `list`
 
         :param min_distance:
-        :type min_distance: `float`
+        :type min_distance: `float`.
 
         :param tolerance_distance:
-        :type tolerance_distance: `float`
+        :type tolerance_distance: `float`.
 
         :param epsilon:
-        :type epsilon: `float`
+        :type epsilon: `float`.
 
         :return:
         :rtype: `np.array`
@@ -686,13 +686,13 @@ class trafipolluImp_TOPO(object):
 
 
         :param sg3_lane_ordinality:
-        :type sg3_lane_ordinality: `int`
+        :type sg3_lane_ordinality: `int`.
 
         :param dict_lanes:
-        :type dict_lanes: `dict`
+        :type dict_lanes: `dict`.
 
         :param sg3_edge_id:
-        :type sg3_edge_id: `int`
+        :type sg3_edge_id: `int`.
 
         :return:
         :rtype: `tuple`

@@ -147,7 +147,8 @@ def get_timestamp():
     """
 
     :return:
-    :rtype: ``
+    :rtype: .
+
     """
     # Python time
     return time.time()
@@ -180,9 +181,9 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
     :param timestamp:
     :type timestamp: .
     :param QtDateFormatString:
-    :type QtDateFormatString: `str`
+    :type QtDateFormatString: `str`.
     :return:
-    :rtype: ``
+    :rtype: .
     """
     # String Qt time
     return convert_timestamp_to_qdatetime(timestamp).toString(QtDateFormatString)
@@ -212,9 +213,9 @@ def get_timestamp_from_qt_string_format(QtDateFormatString=defaultQtDateFormatSt
     """
 
     :param QtDateFormatString:
-    :type QtDateFormatString: `str`
+    :type QtDateFormatString: `str`.
     :return:
-    :rtype: ``
+    :rtype: .
     """
     return convert_timestamp_to_qt_string_format(get_timestamp(), QtDateFormatString)
 
@@ -288,7 +289,7 @@ class TpTimer:
         """
 
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         return 0.0
 
@@ -296,7 +297,7 @@ class TpTimer:
         """
 
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         self.update_current_time()
         return self.currentTime[0]
@@ -319,7 +320,7 @@ class TpTimer:
         """
 
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         return self.currentTime[0] - self.currentTime[1]
 
@@ -327,9 +328,9 @@ class TpTimer:
         """
 
         :param key:
-        :type key: `str`
+        :type key: `str`.
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         list_times = self.__getitem__(key)
         return list_times[0] - list_times[1]
@@ -338,9 +339,9 @@ class TpTimer:
         """
 
         :param key:
-        :type key: `str`
+        :type key: `str`.
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         self.update_current_time()
         list_times = self.__getitem__(key)
@@ -350,9 +351,9 @@ class TpTimer:
         """
 
         :param key:
-        :type key: `str`
+        :type key: `str`.
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         self.update_current_time()
         list_times = self.__getitem__(key)
@@ -363,9 +364,9 @@ class TpTimer:
         """
 
         :param process_name:
-        :type process_name: `str`
+        :type process_name: `str`.
         :return:
-        :rtype: ``
+        :rtype: .
         """
         return self.dict_process_delay.setdefault(process_name, self.default_delay())
 
@@ -373,9 +374,9 @@ class TpTimer:
         """
 
         :param delay_name:
-        :type delay_name: `str`
+        :type delay_name: `str`.
         :param time_delay:
-        :type time_delay: `float`
+        :type time_delay: `float`.
 
         """
         self.dict_process_delay[delay_name] = time_delay
@@ -384,11 +385,11 @@ class TpTimer:
         """
 
         :param process_name:
-        :type process_name: `str`
+        :type process_name: `str`.
         :param delay_name:
-        :type delay_name: `str`
+        :type delay_name: `str`.
         :return:
-        :rtype: `float`
+        :rtype: `float`.
         """
         return self.delta_with_current_time(process_name) >= self.get_delay(delay_name)
 
@@ -398,11 +399,11 @@ def get_return_code_of_simple_cmd(cmd, stderr=STDOUT):
         Execute a simple external command and return its exit status.
 
     :param cmd:
-    :type cmd: `str`
+    :type cmd: `str`.
     :param stderr:
     :type stderr: .
     :return:
-    :rtype: ``
+    :rtype: .
     """
     args = shlex.split(cmd)
     return call(args, stdout=PIPE, stderr=stderr)
@@ -412,7 +413,7 @@ def is_network_alive(url="www.google.com"):
     """
 
     :param url:
-    :type url: `str`
+    :type url: `str`.
     :return:
     :rtype: bool.
     """
@@ -425,7 +426,7 @@ def isConnected(url):
     """
 
     :param url:
-    :type url: `str`
+    :type url: `str`.
     :return:
     :rtype: bool.
     """
@@ -445,7 +446,7 @@ def extent_equal(r1, r2, epsilon=DEFAULT_SEGMENT_EPSILON):
     :param r2:
     :type r2: QgsRectangle.
     :param epsilon:
-    :type epsilon: `float`
+    :type epsilon: `float`.
     :return:
     :rtype: bool.
     """
@@ -466,7 +467,7 @@ def save_gui_states_in_qsettings(dict_qobject_slot):
     """
 
     :param dict_qobject_slot:
-    :type dict_qobject_slot: `dict`
+    :type dict_qobject_slot: `dict`.
     """
     s = QSettings()
     #
@@ -482,7 +483,7 @@ def serialize_checkbox(checkbox):
     :param checkbox:
     :type checkbox: .
     :return:
-    :rtype: `dict`
+    :rtype: `dict`.
     """
     return {
         'isEnabled': checkbox.isEnabled(),
@@ -498,7 +499,7 @@ def serialize_list_checkbox(dlg, list_id_checkbox):
     :param list_id_checkbox:
     :type list_id_checkbox:
     :return:
-    :rtype: `dict`
+    :rtype: `dict`.
     """
     return_dict = {}
     for string_id_checkbox in list_id_checkbox:
@@ -516,7 +517,7 @@ def serialize_tabs_size(imt):
     :param imt:
     :type imt:
     :return:
-    :rtype: `dict`
+    :rtype: `dict`.
     """
     return imt.dict_tabs_size
 
@@ -574,7 +575,7 @@ def saves_states_in_qsettings_pickle(imt, pickle_name_in_qsettings=qsettings_id_
     :param imt:
     :type imt:
     :param pickle_name_in_qsettings:
-    :type pickle_name_in_qsettings: `str`
+    :type pickle_name_in_qsettings: `str`.
 
     """
     pickle_string_dump = ""
@@ -592,7 +593,7 @@ def restore_states_from_pickle(imt, pickle_name_in_qsettings=qsettings_id_pickle
     :param imt:
     :type imt: .
     :param pickle_name_in_qsettings:
-    :type pickle_name_in_qsettings: `str`
+    :type pickle_name_in_qsettings: `str`.
     """
 
     qsettings = imt.qsettings
@@ -646,7 +647,7 @@ def build_dict_id_qt_type(dlg, qt_type):
     :param qt_type:
     :type qt_type: .
     :return:
-    :rtype: `dict`
+    :rtype: `dict`.
     """
     dict_id_qt_type = {}
     list_id_for_qt_type = build_list_id_filter_by_qt_type(dlg, qt_type)
@@ -702,7 +703,7 @@ def build_list_member_name_filter_qcheckbox(dlg):
     :param dlg:
     :type dlg: .
     :return:
-    :rtype: ``
+    :rtype: .
     """
     return build_list_member_name_filter_by_qtypes(dlg, QCheckBox)
 
@@ -794,7 +795,7 @@ def print_group_name_values_in_qsettings(group_name=""):
     """
 
     :param group_name:
-    :type group_name: `str`
+    :type group_name: `str`.
 
     """
     qsettings = QSettings()
@@ -811,7 +812,7 @@ def get_itemData(combobox):
     :param combobox:
     :type combobox: .
     :return:
-    :rtype: ``
+    :rtype: .
     """
     return combobox.itemData(combobox.currentIndex())
 
@@ -822,7 +823,7 @@ def get_itemText(combobox):
     :param combobox:
     :type combobox: .
     :return:
-    :rtype: ``
+    :rtype: .
     """
     return combobox.itemText(combobox.currentIndex())
 
@@ -871,7 +872,7 @@ class Timer:
         """
 
         :return:
-        :rtype: ``
+        :rtype: .
         """
         self.start = time.clock()
         return self
@@ -934,10 +935,10 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
     :type f: `func`
 
     :param prefix:
-    :type prefix: `str`
+    :type prefix: `str`.
 
     :param postfix:
-    :type postfix: `str`
+    :type postfix: `str`.
 
     """
     @wraps(f)
@@ -945,13 +946,13 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
         """
 
         :param args:
-        :type args: ``
+        :type args: .
 
         :param kw:
-        :type kw: ``
+        :type kw: .
 
         :return:
-        :rtype: ``
+        :rtype: .
 
         """
         with Timer() as t:
@@ -971,7 +972,7 @@ def build_logger(logger_name, **kwargs):
     """
 
     :param logger_name:
-    :type logger_name: `str`
+    :type logger_name: `str`.
     :param kwargs:
         - list_handlers: ['stream', 'file', ...]
         - level: logging level of this logger
@@ -981,7 +982,7 @@ def build_logger(logger_name, **kwargs):
             - qgis_separate_tab[bool]:
     :type kwargs: .
     :return: logger.
-    :rtype: ``
+    :rtype: .
     """
     # filter logger name
     logger_name = filter_logger_name(logger_name)
@@ -1029,9 +1030,9 @@ def filter_logger_name(logger_name):
     """
 
     :param logger_name:
-    :type logger_name: `str`
+    :type logger_name: `str`.
     :return:
-    :rtype: `str`
+    :rtype: `str`.
     """
     try:
         logger_name = logger_name.split('.')[1]
@@ -1100,9 +1101,9 @@ def construct_filename_for_logger(logger_name):
     """
 
     :param logger_name:
-    :type logger_name: `str`
+    :type logger_name: `str`.
     :return:
-    :rtype: `str`
+    :rtype: `str`.
     """
     pathname = os.path.normcase(os.path.dirname(__file__))
     filename = pathname + '/' + '%s.log' % logger_name
@@ -1113,11 +1114,11 @@ def construct_qgis_tag(logger_name, **kwargs):
     """
 
     :param logger_name:
-    :type logger_name: `str`
+    :type logger_name: `str`.
     :param kwargs:
-    :type kwargs: `dict`
+    :type kwargs: `dict`.
     :return:
-    :rtype: `str`
+    :rtype: `str`.
     """
     tag = 'Plugins/TrafiPollu'
     tag += '/{0}'.format(logger_name) if kwargs.get('qgis_separate_tab', False) else ''
@@ -1128,7 +1129,7 @@ def config_stream_handler(**kwargs):
     """
 
     :param kwargs:
-    :type kwargs: `dict`
+    :type kwargs: `dict`.
     :return:
     :rtype: StreamHandler.
     """
@@ -1152,7 +1153,7 @@ class ReadOnlyDict(dict):
         :param args:
         :type args: list.
         :param kwargs:
-        :type kwargs: `dict`
+        :type kwargs: `dict`.
 
         """
         raise RuntimeError("Cannot modify ReadOnlyDict")
@@ -1171,9 +1172,9 @@ def build_networkx_graph(dict_nodes, dict_edges):
     """
 
     :param dict_nodes:
-    :type dict_nodes: `dict`
+    :type dict_nodes: `dict`.
     :param dict_edges:
-    :type dict_edges: `dict`
+    :type dict_edges: `dict`.
     :return:
     :rtype: nx.DiGraph.
     """

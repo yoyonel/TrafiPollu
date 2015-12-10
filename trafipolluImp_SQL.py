@@ -250,7 +250,7 @@ class trafipolluImp_SQL(object):
         Le resultat est transmis via un dictionnaire de parametres qui sera utilise par insertion dans les scripts SQL
 
         :return: Dictionnaire de parametres contenant un polygone PostGIS de l'extent QGIS
-        :rtype: `dict`
+        :rtype: `dict`.
         """
         mapCanvas = self._map_canvas
         mapCanvas_extent = mapCanvas.extent()
@@ -350,7 +350,7 @@ class trafipolluImp_SQL(object):
         :param b_update_def_zone_test_with_convex_hull_on_symuvia_network:
         :type b_update_def_zone_test_with_convex_hull_on_symuvia_network: bool
         :param kwargs: Dictionnaire de parametres (transmis)
-        :type kwargs: `dict`
+        :type kwargs: `dict`.
         :return:
         """
         gPolygonWkt = ''
@@ -459,7 +459,7 @@ class trafipolluImp_SQL(object):
             - meth_post_request: methode de post traitement apres la recuperation des informations
 
         :param kwargs: Dictionnaire de parametres (transmis)
-        :type kwargs: `dict`
+        :type kwargs: `dict`.
         :return:
 
         Code de retour::
@@ -468,7 +468,7 @@ class trafipolluImp_SQL(object):
             -1 -- pas de cursor disponible
             -2 -- probleme pendant le fetchall SQL
 
-        :rtype: `int`
+        :rtype: `int`.
         """
         try:
             cursor = kwargs["cursor"]
@@ -519,7 +519,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les rond-points dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les rond-points
-        :type results_dump: `dict`
+        :type results_dump: `dict`.
         :return:
         """
         dict_roundabouts = results_dump
@@ -565,7 +565,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les edges dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les edges
-        :type results_dump: `dict`
+        :type results_dump: `dict`.
         :return:
         """
         dict_edges = results_dump
@@ -600,7 +600,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les nodes dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les nodes
-        :type results_dump: `dict`
+        :type results_dump: `dict`.
         :return:
         """
         dict_nodes = results_dump
@@ -634,7 +634,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les interconnexions dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les interconnexions
-        :type results_dump: `dict`
+        :type results_dump: `dict`.
         :return:
         """
         dict_interconnexions, dict_set_id_edges = results_dump
@@ -656,7 +656,7 @@ class trafipolluImp_SQL(object):
         Voir: :py:func:`_request_for_entity`
 
         :param kwargs:
-        :type kwargs: `dict`
+        :type kwargs: `dict`.
         :return:
         :rtype: int
         """
@@ -676,7 +676,7 @@ class trafipolluImp_SQL(object):
         Transfert des donnees recuperees pour les lanes/voies dans les structures de donnees Python
 
         :param results_dump: Dictionnaire contenant le DUMP des informations SQL-StreetGen sur les lanes/voies
-        :type results_dump: `dict`
+        :type results_dump: `dict`.
         :return:
         """
         dict_lanes, dict_grouped_lanes = results_dump

@@ -1,0 +1,812 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>trafipolluImp_DUMP &mdash; interactive_map_tracking 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for trafipolluImp_DUMP</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">Module de gestion pour le DUMP des donnees DB-StreetGen vers Python</span>
+
+<span class="sd">.. warning::</span>
+<span class="sd">    Il y a une partie construction TOPOlogique aussi dans ce module</span>
+<span class="sd">    -&gt; Probleme de design a revoir !</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">groupby</span>
+
+<span class="kn">from</span> <span class="nn">shapely.wkb</span> <span class="kn">import</span> <span class="n">loads</span> <span class="k">as</span> <span class="n">sp_wkb_loads</span>
+
+<span class="kn">import</span> <span class="nn">imt_tools</span>
+<span class="kn">from</span> <span class="nn">imt_tools</span> <span class="kn">import</span> <span class="n">timer_decorator</span>
+
+<span class="c"># need to be in Globals for Pickled &#39;dict_edges&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">NT_LANE_INFORMATIONS</span> <span class="o">=</span> <span class="n">imt_tools</span><span class="o">.</span><span class="n">create_namedtuple_on_globals</span><span class="p">(</span>
+    <span class="s">&#39;NT_LANE_INFORMATIONS&#39;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s">&#39;lane_side&#39;</span><span class="p">,</span>
+        <span class="s">&#39;lane_direction&#39;</span><span class="p">,</span>
+        <span class="s">&#39;lane_center_axis&#39;</span><span class="p">,</span>
+        <span class="s">&#39;nb_lanes&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">str_ids_for_lanes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;SG3 Informations&#39;</span><span class="p">:</span> <span class="s">&quot;LANES - SG3 Informations&quot;</span><span class="p">,</span>
+    <span class="s">&#39;SG3 to SYMUVIA&#39;</span><span class="p">:</span> <span class="s">&quot;LANES - SG3 to SYMUVIA&quot;</span><span class="p">,</span>
+    <span class="s">&#39;SG3 to PYTHON&#39;</span><span class="p">:</span> <span class="s">&quot;LANES - SG3 to PYTHON&quot;</span>
+<span class="p">}</span>
+
+<span class="c"># creation de l&#39;objet logger qui va nous servir a ecrire dans les logs</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">imt_tools</span><span class="o">.</span><span class="n">build_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="dump_for_roundabouts"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.dump_for_roundabouts">[docs]</a><span class="k">def</span> <span class="nf">dump_for_roundabouts</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+
+<span class="sd">    :type objects_from_sql_request: psycopg2.extras.DictCursor.</span>
+<span class="sd">    :return: Dictionnaire d&#39;informations (converties) sur les ronds-points</span>
+<span class="sd">    :rtype: `dict`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_roundabouts</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">objects_from_sql_request</span><span class="p">:</span>
+        <span class="n">dict_sql_request</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">object_from_sql_request</span><span class="p">)</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_geom_buffers_with_shapely</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">))</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">load_arrays_with_numpely</span><span class="p">(</span>
+                <span class="n">dict_sql_request</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_centroid&#39;</span><span class="p">,</span> <span class="s">&#39;np_centroid&#39;</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">ra_id</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+        <span class="n">dict_roundabouts</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">ra_id</span><span class="p">:</span> <span class="n">dict_sql_request</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">dict_roundabouts</span>
+
+</div>
+<span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="dump_for_edges"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.dump_for_edges">[docs]</a><span class="k">def</span> <span class="nf">dump_for_edges</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+<span class="sd">    :type objects_from_sql_request: psycopg2.extras.DictCursor.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        Renvoie un DICTionnaire avec les donnees  des &#39;edges&#39;/&#39;troncons&quot;</span>
+<span class="sd">        DUMPees depuis la BD-SG vers Python en format &quot;compatibles&quot; (exploitables) par</span>
+<span class="sd">        Python, utilisation des formats:</span>
+
+<span class="sd">            * shapely.wkb</span>
+<span class="sd">            * numpy.array</span>
+<span class="sd">    :rtype: `dict`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_edges</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># url: http://stackoverflow.com/questions/10252247/how-do-i-get-a-list-of-column-names-from-a-psycopg2-cursor</span>
+    <span class="c"># column_names = [desc[0] for desc in cursor.description]</span>
+    <span class="k">for</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">objects_from_sql_request</span><span class="p">:</span>
+        <span class="c"># dict_sql_request = object_from_sql_request.copy()</span>
+        <span class="n">dict_sql_request</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">object_from_sql_request</span><span class="p">)</span>
+
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_geom_buffers_with_shapely</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">))</span>
+
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">load_arrays_with_numpely</span><span class="p">(</span>
+                <span class="n">dict_sql_request</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_amont&#39;</span><span class="p">,</span> <span class="s">&#39;np_amont&#39;</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_aval&#39;</span><span class="p">,</span> <span class="s">&#39;np_aval&#39;</span><span class="p">),</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_edge_center_axis&#39;</span><span class="p">,</span> <span class="s">&#39;np_edge_center_axis&#39;</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">edge_id</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_edge_id&#39;</span><span class="p">]</span>
+        <span class="n">dict_edges</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">edge_id</span><span class="p">:</span> <span class="n">dict_sql_request</span><span class="p">})</span>
+    <span class="c">#</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;nb edges added: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_edges</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="c">#</span>
+    <span class="k">return</span> <span class="n">dict_edges</span>
+
+</div>
+<span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="dump_for_nodes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.dump_for_nodes">[docs]</a><span class="k">def</span> <span class="nf">dump_for_nodes</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+
+<span class="sd">    :type objects_from_sql_request: psycopg2.extras.DictCursor.:</span>
+<span class="sd">    :return:</span>
+<span class="sd">        Renvoie un DICTionnaire avec les donnees  des &#39;nodes&#39;/&#39;intersections&quot;</span>
+<span class="sd">        DUMPees depuis la BD-SG vers Python en format &quot;compatibles&quot; (exploitables) par</span>
+<span class="sd">        Python, utilisation des formats:</span>
+
+<span class="sd">            * shapely.wkb</span>
+<span class="sd">            * numpy.array</span>
+<span class="sd">    :rtype: `dict`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># get values from SQL request</span>
+    <span class="k">for</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">objects_from_sql_request</span><span class="p">:</span>
+        <span class="c">#</span>
+        <span class="n">str_node_id</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_node_id&#39;</span><span class="p">]</span>
+        <span class="n">dict_sql_request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;array_str_edge_ids&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_edge_ids&#39;</span><span class="p">],</span>
+            <span class="s">&#39;wkb_geom&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;wkb_geom&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_geom_buffers_with_shapely</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">))</span>
+        <span class="c">#</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">load_arrays_with_numpely</span><span class="p">(</span>
+                <span class="n">dict_sql_request</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_geom&#39;</span><span class="p">,</span> <span class="s">&#39;np_geom&#39;</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c">#</span>
+        <span class="c"># print &#39;%s - dict_sql_request: %s&#39; % (str_node_id, dict_sql_request[&#39;np_geom&#39;])</span>
+        <span class="c">#</span>
+        <span class="n">dict_nodes</span><span class="p">[</span><span class="n">str_node_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">dict_sql_request</span>
+    <span class="c">#</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;nb nodes added: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+
+    <span class="c"># for k, v in dict_nodes.iteritems():</span>
+    <span class="c">#     print &#39;dict_nodes[%s].np_geom: %s&#39; % (k, v[&#39;np_geom&#39;])</span>
+    <span class="c">#</span>
+    <span class="k">return</span> <span class="n">dict_nodes</span>
+
+</div>
+<span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="dump_for_interconnexions"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.dump_for_interconnexions">[docs]</a><span class="k">def</span> <span class="nf">dump_for_interconnexions</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+
+<span class="sd">    :type objects_from_sql_request: psycopg2.extras.DictCursor.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        #.  Renvoie un DICTionnaire avec les donnees  des &#39;edges&#39;/&#39;troncons&quot;</span>
+<span class="sd">            DUMPees depuis la BD-SG vers Python en format &quot;compatibles&quot; (exploitables) par</span>
+<span class="sd">            Python, utilisation des formats:</span>
+
+<span class="sd">            * shapely.wkb</span>
+<span class="sd">            * numpy.array</span>
+<span class="sd">        #.  DICTionnaire de set ids des inrerconnexions:</span>
+
+<span class="sd">            * key: `str`.</span>
+<span class="sd">            * vallues: set().</span>
+<span class="sd">    :rtype: (dict, dict).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_interconnexions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">dict_set_id_edges</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">nb_total_interconnexion</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">objects_from_sql_request</span><span class="p">:</span>
+        <span class="c">#</span>
+        <span class="n">node_id</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_node_id&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+        <span class="n">dict_sql_request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;edge_id1&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_edge_id1&#39;</span><span class="p">],</span>
+            <span class="s">&#39;edge_id2&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_edge_id2&#39;</span><span class="p">],</span>
+            <span class="s">&#39;lane_ordinality1&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_lane_ordinality1&#39;</span><span class="p">],</span>
+            <span class="s">&#39;lane_ordinality2&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;str_lane_ordinality2&#39;</span><span class="p">],</span>
+            <span class="s">&#39;wkb_interconnexion&#39;</span><span class="p">:</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;wkb_interconnexion&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="c">#</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_geom_buffers_with_shapely</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">))</span>
+        <span class="c">#</span>
+        <span class="n">dict_sql_request</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">load_arrays_with_numpely</span><span class="p">(</span>
+                <span class="n">dict_sql_request</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="s">&#39;wkb_interconnexion&#39;</span><span class="p">,</span> <span class="s">&#39;np_interconnexion&#39;</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c">#</span>
+        <span class="n">dict_interconnexions</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">)</span>
+        <span class="c">#</span>
+        <span class="n">dict_set_id_edges</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">[</span><span class="s">&#39;edge_id1&#39;</span><span class="p">])</span>
+        <span class="n">dict_set_id_edges</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">[</span><span class="s">&#39;edge_id2&#39;</span><span class="p">])</span>
+        <span class="c">#</span>
+        <span class="n">nb_total_interconnexion</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c">#</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;nb interconnexions added: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">dict_interconnexions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;total interconnexions added: </span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">nb_total_interconnexion</span><span class="p">)</span>
+    <span class="c">#</span>
+    <span class="k">return</span> <span class="n">dict_interconnexions</span><span class="p">,</span> <span class="n">dict_set_id_edges</span>
+
+</div>
+<div class="viewcode-block" id="load_arrays_with_numpely"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.load_arrays_with_numpely">[docs]</a><span class="k">def</span> <span class="nf">load_arrays_with_numpely</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">,</span> <span class="n">list_params_to_convert</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_sql_request:</span>
+<span class="sd">        * key: .</span>
+<span class="sd">        * values: .</span>
+<span class="sd">    :type dict_sql_request: `dict`.</span>
+
+<span class="sd">    :param list_params_to_convert:</span>
+<span class="sd">    :type list_params_to_convert: list(tuples).</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        * key: .</span>
+<span class="sd">        * values: .</span>
+<span class="sd">    :rtype: `dict`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_arrays_loaded</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">list_params_to_convert</span><span class="p">:</span>
+        <span class="n">dict_arrays_loaded</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dict_sql_request</span><span class="p">[</span><span class="n">param_name</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dict_arrays_loaded</span>
+
+</div>
+<div class="viewcode-block" id="load_geom_buffers_with_shapely"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.load_geom_buffers_with_shapely">[docs]</a><span class="k">def</span> <span class="nf">load_geom_buffers_with_shapely</span><span class="p">(</span><span class="n">dict_objects_from_sql_request</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+
+<span class="sd">    :type dict_objects_from_sql_request: psycopg2.extras.DictCursor.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        * key: .</span>
+<span class="sd">        * values: .</span>
+<span class="sd">    :rtype: `dict`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_buffers_loaded</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># urls:</span>
+    <span class="c"># - http://toblerity.org/shapely/manual.html</span>
+    <span class="c"># - http://gis.stackexchange.com/questions/89323/postgis-parse-geometry-wkb-with-ogr</span>
+    <span class="c"># - https://docs.python.org/2/c-api/buffer.html</span>
+    <span class="k">for</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">dict_objects_from_sql_request</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">object_from_sql_request</span><span class="p">,</span> <span class="nb">buffer</span><span class="p">):</span>
+            <span class="n">dict_buffers_loaded</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp_wkb_loads</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">object_from_sql_request</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dict_buffers_loaded</span>
+
+</div>
+<div class="viewcode-block" id="generate_id_for_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.generate_id_for_lane">[docs]</a><span class="k">def</span> <span class="nf">generate_id_for_lane</span><span class="p">(</span><span class="n">object_sql_lane</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param object_sql_lane:</span>
+<span class="sd">    :type object_sql_lane: .</span>
+
+<span class="sd">    :param nb_lanes:</span>
+<span class="sd">    :type nb_lanes: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># lane_position = object_sql_lane[&#39;lane_position&#39;]</span>
+    <span class="c"># lane_side = object_sql_lane[&#39;lane_side&#39;]</span>
+    <span class="c"># # url: https://wiki.python.org/moin/BitManipulation</span>
+    <span class="c"># lambdas_generate_id = {</span>
+    <span class="c"># &#39;left&#39;: lambda nb_lanes_by_2, position, even: nb_lanes_by_2 - (position &gt;&gt; 1),</span>
+    <span class="c">#     &#39;right&#39;: lambda nb_lanes_by_2, position, even: nb_lanes_by_2 + (position &gt;&gt; 1) - even,</span>
+    <span class="c">#     &#39;center&#39;: lambda nb_lanes_by_2, position, even: nb_lanes_by_2</span>
+    <span class="c"># }</span>
+    <span class="c"># # update list sides for (grouping)</span>
+    <span class="c"># lambda_generate_id = lambdas_generate_id[lane_side]</span>
+    <span class="c"># nb_lanes_by_2 = nb_lanes &gt;&gt; 1</span>
+    <span class="c"># # test si l&#39;entier est pair ?</span>
+    <span class="c"># # revient a tester le bit de point faible</span>
+    <span class="c"># even = not (nb_lanes &amp; 1)</span>
+    <span class="c">#</span>
+    <span class="c"># return lambda_generate_id(nb_lanes_by_2, lane_position, even)</span>
+    <span class="k">return</span> <span class="n">convert_lane_ordinality_to_python_id</span><span class="p">(</span><span class="n">object_sql_lane</span><span class="p">[</span><span class="s">&#39;lane_ordinality&#39;</span><span class="p">],</span> <span class="n">nb_lanes</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="number_is_even"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.number_is_even">[docs]</a><span class="k">def</span> <span class="nf">number_is_even</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param number:</span>
+<span class="sd">    :type number: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: `int`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+</div>
+<div class="viewcode-block" id="count_number_odds"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.count_number_odds">[docs]</a><span class="k">def</span> <span class="nf">count_number_odds</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param number:</span>
+<span class="sd">    :type number: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: `int`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">((</span><span class="n">number</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="convert_lane_ordinality_to_python_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.convert_lane_ordinality_to_python_id">[docs]</a><span class="k">def</span> <span class="nf">convert_lane_ordinality_to_python_id</span><span class="p">(</span><span class="n">lane_ordinality</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param lane_ordinality:</span>
+<span class="sd">    :type lane_ordinality: `int`.</span>
+
+<span class="sd">    :param nb_lanes:</span>
+<span class="sd">    :type nb_lanes: `int`.</span>
+
+<span class="sd">    :return: IDentfiant (numerique) Python Index ([0 ... n-1])</span>
+<span class="sd">    :rtype: `int`.</span>
+
+<span class="sd">    [TEST]  Voir: :py:func:`test_convert_lane_ordinality_to_python_id`</span>
+
+<span class="sd">    &gt;&gt;&gt; test_convert_lane_ordinality_to_python_id()</span>
+<span class="sd">    [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3], [0, 1, 2, 3, 4]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nb_odds</span> <span class="o">=</span> <span class="n">count_number_odds</span><span class="p">(</span><span class="n">nb_lanes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">number_is_even</span><span class="p">(</span><span class="n">lane_ordinality</span><span class="p">):</span>
+        <span class="n">python_id</span> <span class="o">=</span> <span class="n">nb_odds</span> <span class="o">+</span> <span class="p">(</span><span class="n">lane_ordinality</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">python_id</span> <span class="o">=</span> <span class="n">nb_odds</span> <span class="o">-</span> <span class="p">(</span><span class="n">lane_ordinality</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">python_id</span>
+
+</div>
+<div class="viewcode-block" id="convert_python_id_to_lane_ordinality"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.convert_python_id_to_lane_ordinality">[docs]</a><span class="k">def</span> <span class="nf">convert_python_id_to_lane_ordinality</span><span class="p">(</span><span class="n">python_id</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param python_id:</span>
+<span class="sd">    :type python_id: `int`.</span>
+
+<span class="sd">    :param nb_lanes:</span>
+<span class="sd">    :type nb_lanes: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: `int`.</span>
+
+<span class="sd">    .. todo::</span>
+
+<span class="sd">        [TEST]  Voir: :py:func:`test_convert_python_id_to_lane_ordinality`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nb_odds</span> <span class="o">=</span> <span class="n">count_number_odds</span><span class="p">(</span><span class="n">nb_lanes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">nb_odds</span> <span class="o">-</span> <span class="n">python_id</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">python_id</span> <span class="o">&lt;</span> <span class="n">nb_odds</span> <span class="k">else</span> <span class="p">(</span><span class="n">python_id</span> <span class="o">-</span> <span class="n">nb_odds</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+
+</div>
+<span class="nd">@timer_decorator</span>
+<div class="viewcode-block" id="dump_lanes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.dump_lanes">[docs]</a><span class="k">def</span> <span class="nf">dump_lanes</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">,</span> <span class="n">dict_edges</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param objects_from_sql_request: Le type de l&#39;object depend du cursor utilise via psycopg2</span>
+
+<span class="sd">        Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]</span>
+
+<span class="sd">    :type objects_from_sql_request: psycopg2.extras.DictCursor.</span>
+
+<span class="sd">    :param dict_edges:</span>
+<span class="sd">    :type dict_edges: `dict`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: (dict, dict).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_lanes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># get sides informations for each &#39;edge&#39;/&#39;troncon&#39;</span>
+    <span class="k">for</span> <span class="n">object_from_sql_request</span> <span class="ow">in</span> <span class="n">objects_from_sql_request</span><span class="p">:</span>
+        <span class="c"># retieve informations/values from the SQL request</span>
+        <span class="n">sg3_edge_id</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;edge_id&#39;</span><span class="p">]</span>
+        <span class="n">lane_side</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;lane_side&#39;</span><span class="p">]</span>
+        <span class="n">lane_direction</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;lane_direction&#39;</span><span class="p">]</span>
+        <span class="n">lane_center_axis</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;lane_center_axis&#39;</span><span class="p">]</span>
+        <span class="n">lane_ordinality</span> <span class="o">=</span> <span class="n">object_from_sql_request</span><span class="p">[</span><span class="s">&#39;lane_ordinality&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+        <span class="n">nb_lanes</span> <span class="o">=</span> <span class="n">dict_edges</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="s">&#39;ui_lane_number&#39;</span><span class="p">]</span>
+        <span class="c">#</span>
+        <span class="n">dict_lanes</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">sg3_edge_id</span><span class="p">,</span>
+                              <span class="p">{</span>
+                                  <span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 Informations&#39;</span><span class="p">]:</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_lanes</span><span class="p">,</span>
+                                  <span class="c"># pre-allocate size for list,</span>
+                                  <span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 to SYMUVIA&#39;</span><span class="p">]:</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb_lanes</span><span class="p">,</span>  <span class="c"># pre-allocate size for list,</span>
+                                  <span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 to PYTHON&#39;</span><span class="p">]:</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">nb_lanes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                                  <span class="c"># pre-allocate size for list,</span>
+                              <span class="p">})</span>
+
+        <span class="c"># decompression des donnees a la main</span>
+        <span class="n">lane_center_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">sp_wkb_loads</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">lane_center_axis</span><span class="p">)))</span>
+
+        <span class="n">python_lane_id</span> <span class="o">=</span> <span class="n">generate_id_for_lane</span><span class="p">(</span><span class="n">object_from_sql_request</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">)</span>
+
+        <span class="n">set_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">lane_ordinality</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">)</span>
+
+        <span class="c"># Attention ici !</span>
+        <span class="c"># on places les lanes dans des listes pythons (avec ordre python) et non dans l&#39;ordre fournit par la requete</span>
+        <span class="c"># SQL (ce qui etait avant) et/ou l&#39;ordre fournit par SG3 (ordonality id)</span>
+        <span class="n">set_lane_informations</span><span class="p">(</span>
+            <span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">,</span>
+            <span class="n">NT_LANE_INFORMATIONS</span><span class="p">(</span><span class="n">lane_side</span><span class="p">,</span> <span class="n">lane_direction</span><span class="p">,</span> <span class="n">lane_center_axis</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c"># for future: http://stackoverflow.com/questions/8023306/get-key-by-value-in-dictionary</span>
+        <span class="c"># find a key with value</span>
+
+    <span class="c"># create the dict: dict_grouped_lanes</span>
+    <span class="c"># contain : for each edge_id list of lanes in same direction</span>
+    <span class="n">dict_grouped_lanes</span> <span class="o">=</span> <span class="n">build_dict_grouped_lanes</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">,</span> <span class="n">dict_grouped_lanes</span>
+
+</div>
+<div class="viewcode-block" id="build_dict_grouped_lanes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.build_dict_grouped_lanes">[docs]</a><span class="k">def</span> <span class="nf">build_dict_grouped_lanes</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">str_id_for_grouped_lanes</span><span class="o">=</span><span class="s">&#39;grouped_lanes&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    |   A partir d&#39;un dump des informations de &#39;voies&#39; (informations contenues dans les &#39;edges&#39; SG),</span>
+<span class="sd">        construction des groupes de voies homogenes au sens SYMUVIA (du terme).</span>
+<span class="sd">    |   Concretement si l&#39;edge SG contient plusieurs voies ou groupes de voies dans des sens contraires (amont -&gt; aval</span>
+<span class="sd">        ou aval -&gt; amont), la fonction identifie et decompose les groupes de voies (consecutives) dans le meme et cree</span>
+<span class="sd">        une liste de groupes de voies uni-directionnelles.</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param str_id_for_grouped_lanes:</span>
+<span class="sd">    :type str_id_for_grouped_lanes: `str`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">        Retourne un dictionnaire dont les::</span>
+<span class="sd">            - key: indice d&#39;une edge SG3</span>
+<span class="sd">            - value: liste de groupes de lanes dans le meme sens.</span>
+<span class="sd">                     Chaque element de la liste decrit le nombre de voies consecutives dans le meme sens.</span>
+<span class="sd">    :rtype: `dict`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_grouped_lanes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">dict_grouped_lanes</span><span class="o">.</span><span class="n">__setitem__</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">{</span><span class="n">str_id_for_grouped_lanes</span><span class="p">:</span> <span class="n">y</span><span class="p">}),</span>
+        <span class="n">dict_lanes</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">value_groupby</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">key_groupby</span><span class="p">,</span> <span class="n">value_groupby</span> <span class="ow">in</span>
+                <span class="n">groupby</span><span class="p">(</span><span class="n">get_list_lanes_informations_from_edge_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">lane_direction</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">sg3_edge_id</span> <span class="ow">in</span> <span class="n">dict_lanes</span>
+        <span class="p">])</span>
+    <span class="k">return</span> <span class="n">dict_grouped_lanes</span>
+
+</div>
+<div class="viewcode-block" id="set_lane_informations"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.set_lane_informations">[docs]</a><span class="k">def</span> <span class="nf">set_lane_informations</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">,</span> <span class="n">informations</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    :param informations:</span>
+<span class="sd">    :type informations: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">get_list_lanes_informations_from_edge_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">)[</span><span class="n">python_lane_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">informations</span>
+
+</div>
+<div class="viewcode-block" id="get_list_lanes_informations_from_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_list_lanes_informations_from_lane">[docs]</a><span class="k">def</span> <span class="nf">get_list_lanes_informations_from_lane</span><span class="p">(</span><span class="n">lane</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param lane:</span>
+<span class="sd">    :type lane: list.</span>
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">lane</span><span class="p">[</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 Informations&#39;</span><span class="p">]]</span>
+
+</div>
+<div class="viewcode-block" id="get_list_lanes_informations_from_edge_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_list_lanes_informations_from_edge_id">[docs]</a><span class="k">def</span> <span class="nf">get_list_lanes_informations_from_edge_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: list.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 Informations&#39;</span><span class="p">]]</span>
+
+</div>
+<div class="viewcode-block" id="get_lane_from_python_lane_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_lane_from_python_lane_id">[docs]</a><span class="k">def</span> <span class="nf">get_lane_from_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 Informations&#39;</span><span class="p">]][</span><span class="n">python_lane_id</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="get_lane_direction_from_python_lane_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_lane_direction_from_python_lane_id">[docs]</a><span class="k">def</span> <span class="nf">get_lane_direction_from_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_lane_from_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">)</span><span class="o">.</span><span class="n">lane_direction</span>
+
+</div>
+<div class="viewcode-block" id="get_lane_geometry_from_python_lane_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_lane_geometry_from_python_lane_id">[docs]</a><span class="k">def</span> <span class="nf">get_lane_geometry_from_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_lane_from_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">)</span><span class="o">.</span><span class="n">lane_center_axis</span>
+
+</div>
+<div class="viewcode-block" id="get_Symuvia_list_lanes_from_edge_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_Symuvia_list_lanes_from_edge_id">[docs]</a><span class="k">def</span> <span class="nf">get_Symuvia_list_lanes_from_edge_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 to SYMUVIA&#39;</span><span class="p">]]</span>
+
+</div>
+<div class="viewcode-block" id="get_symu_troncon_from_python_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_symu_troncon_from_python_id">[docs]</a><span class="k">def</span> <span class="nf">get_symu_troncon_from_python_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 to SYMUVIA&#39;</span><span class="p">]][</span><span class="n">python_lane_id</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="get_PYTHON_list_lanes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_PYTHON_list_lanes">[docs]</a><span class="k">def</span> <span class="nf">get_PYTHON_list_lanes</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">dict_lanes</span><span class="p">[</span><span class="n">sg3_edge_id</span><span class="p">][</span><span class="n">str_ids_for_lanes</span><span class="p">[</span><span class="s">&#39;SG3 to PYTHON&#39;</span><span class="p">]]</span>
+
+</div>
+<div class="viewcode-block" id="get_python_id_from_lane_ordinality"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.get_python_id_from_lane_ordinality">[docs]</a><span class="k">def</span> <span class="nf">get_python_id_from_lane_ordinality</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">lane_ordinality</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param lane_ordinality:</span>
+<span class="sd">    :type lane_ordinality: `int`.</span>
+
+<span class="sd">    :return:</span>
+<span class="sd">    :rtype: .</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_PYTHON_list_lanes</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">)[</span><span class="n">lane_ordinality</span><span class="p">]</span>
+
+</div>
+<div class="viewcode-block" id="set_python_lane_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.set_python_lane_id">[docs]</a><span class="k">def</span> <span class="nf">set_python_lane_id</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">,</span> <span class="n">lane_ordinality</span><span class="p">,</span> <span class="n">python_lane_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Methode:</span>
+
+<span class="sd">    :param dict_lanes:</span>
+<span class="sd">    :type dict_lanes: `dict`.</span>
+
+<span class="sd">    :param sg3_edge_id:</span>
+<span class="sd">    :type sg3_edge_id: `int`.</span>
+
+<span class="sd">    :param lane_ordinality:</span>
+<span class="sd">    :type lane_ordinality: `int`.</span>
+
+<span class="sd">    :param python_lane_id:</span>
+<span class="sd">    :type python_lane_id: `int`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">get_PYTHON_list_lanes</span><span class="p">(</span><span class="n">dict_lanes</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">)[</span><span class="n">lane_ordinality</span><span class="p">]</span> <span class="o">=</span> <span class="n">python_lane_id</span>
+
+
+<span class="c">#############################################</span>
+<span class="c"># TESTS</span>
+<span class="c">#############################################</span></div>
+<div class="viewcode-block" id="test_convert_lane_ordinality_to_python_id"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_DUMP.test_convert_lane_ordinality_to_python_id">[docs]</a><span class="k">def</span> <span class="nf">test_convert_lane_ordinality_to_python_id</span><span class="p">(</span><span class="n">max_nb_lanes</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Fonction test pour :py:func:`convert_lane_ordinality_to_python_id`</span>
+<span class="sd">    Utilise la fonction: :py:func:`convert_python_id_to_lane_ordinality`</span>
+
+<span class="sd">    -&gt; l&#39;integrite de ce test depend des deux fonctions (mentionnees)</span>
+
+<span class="sd">    On test la reversibilite du calcul d&#39;indices: SG3&lt;-&gt;PYTHON</span>
+
+<span class="sd">    :param max_nb_lanes: Nombre de groupes de voies. La taille des groupes de voies est egale a leur indice.</span>
+<span class="sd">    :type max_nb_lanes: `uint`</span>
+
+<span class="sd">    :return: List de listes d&#39;indices generes pour chaque groupes de voies. list[list[`int`]]</span>
+<span class="sd">    :rtype: `list`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">range_nb_lanes</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_nb_lanes</span><span class="p">)</span>
+    <span class="n">ranges_python_id</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_lanes</span><span class="p">)</span> <span class="k">for</span> <span class="n">nb_lanes</span> <span class="ow">in</span> <span class="n">range_nb_lanes</span><span class="p">]</span>
+    <span class="c"># on test la reversibilite du calcul d&#39;indices: SG3&lt;-&gt;PYTHON</span>
+    <span class="n">ranges_lane_ordinality</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="n">convert_python_id_to_lane_ordinality</span><span class="p">(</span><span class="n">python_id</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranges_python_id</span><span class="p">[</span><span class="n">nb_lanes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">python_id</span> <span class="ow">in</span> <span class="n">ranges_python_id</span><span class="p">[</span><span class="n">nb_lanes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">nb_lanes</span> <span class="ow">in</span> <span class="n">range_nb_lanes</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="n">convert_lane_ordinality_to_python_id</span><span class="p">(</span><span class="n">lane_ordinality</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">range_lane_ordinality</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">lane_ordinality</span> <span class="ow">in</span> <span class="n">range_lane_ordinality</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">range_lane_ordinality</span> <span class="ow">in</span> <span class="n">ranges_lane_ordinality</span>
+    <span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
