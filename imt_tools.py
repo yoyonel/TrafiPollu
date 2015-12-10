@@ -147,7 +147,7 @@ def get_timestamp():
     """
 
     :return:
-    :rtype: .
+    :rtype: ``
     """
     # Python time
     return time.time()
@@ -182,7 +182,7 @@ def convert_timestamp_to_qt_string_format(timestamp, QtDateFormatString=defaultQ
     :param QtDateFormatString:
     :type QtDateFormatString: `str`
     :return:
-    :rtype: .
+    :rtype: ``
     """
     # String Qt time
     return convert_timestamp_to_qdatetime(timestamp).toString(QtDateFormatString)
@@ -214,7 +214,7 @@ def get_timestamp_from_qt_string_format(QtDateFormatString=defaultQtDateFormatSt
     :param QtDateFormatString:
     :type QtDateFormatString: `str`
     :return:
-    :rtype: .
+    :rtype: ``
     """
     return convert_timestamp_to_qt_string_format(get_timestamp(), QtDateFormatString)
 
@@ -365,7 +365,7 @@ class TpTimer:
         :param process_name:
         :type process_name: `str`
         :return:
-        :rtype: .
+        :rtype: ``
         """
         return self.dict_process_delay.setdefault(process_name, self.default_delay())
 
@@ -402,7 +402,7 @@ def get_return_code_of_simple_cmd(cmd, stderr=STDOUT):
     :param stderr:
     :type stderr: .
     :return:
-    :rtype: .
+    :rtype: ``
     """
     args = shlex.split(cmd)
     return call(args, stdout=PIPE, stderr=stderr)
@@ -702,7 +702,7 @@ def build_list_member_name_filter_qcheckbox(dlg):
     :param dlg:
     :type dlg: .
     :return:
-    :rtype: .
+    :rtype: ``
     """
     return build_list_member_name_filter_by_qtypes(dlg, QCheckBox)
 
@@ -811,7 +811,7 @@ def get_itemData(combobox):
     :param combobox:
     :type combobox: .
     :return:
-    :rtype: .
+    :rtype: ``
     """
     return combobox.itemData(combobox.currentIndex())
 
@@ -822,7 +822,7 @@ def get_itemText(combobox):
     :param combobox:
     :type combobox: .
     :return:
-    :rtype: .
+    :rtype: ``
     """
     return combobox.itemText(combobox.currentIndex())
 
@@ -871,7 +871,7 @@ class Timer:
         """
 
         :return:
-        :rtype: .
+        :rtype: ``
         """
         self.start = time.clock()
         return self
@@ -981,7 +981,7 @@ def build_logger(logger_name, **kwargs):
             - qgis_separate_tab[bool]:
     :type kwargs: .
     :return: logger.
-    :rtype: .
+    :rtype: ``
     """
     # filter logger name
     logger_name = filter_logger_name(logger_name)

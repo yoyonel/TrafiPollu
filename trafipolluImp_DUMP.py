@@ -292,7 +292,7 @@ def generate_id_for_lane(object_sql_lane, nb_lanes):
     :type nb_lanes: `int`
 
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     # lane_position = object_sql_lane['lane_position']
@@ -461,8 +461,10 @@ def build_dict_grouped_lanes(dict_lanes, str_id_for_grouped_lanes='grouped_lanes
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param str_id_for_grouped_lanes:
     :type str_id_for_grouped_lanes: `str`
+
     :return:
         Retourne un dictionnaire dont les::
             - key: indice d'une edge SG3
@@ -490,10 +492,13 @@ def set_lane_informations(dict_lanes, sg3_edge_id, python_lane_id, informations)
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
+
     :param informations:
     :type informations: .
 
@@ -518,10 +523,13 @@ def get_list_lanes_informations_from_edge_id(dict_lanes, sg3_edge_id):
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :return:
     :rtype: list.
+
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 Informations']]
 
@@ -531,12 +539,16 @@ def get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id):
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
+
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 Informations']][python_lane_id]
 
@@ -546,12 +558,15 @@ def get_lane_direction_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     return get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id).lane_direction
@@ -562,12 +577,15 @@ def get_lane_geometry_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_i
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     return get_lane_from_python_lane_id(dict_lanes, sg3_edge_id, python_lane_id).lane_center_axis
@@ -578,10 +596,12 @@ def get_Symuvia_list_lanes_from_edge_id(dict_lanes, sg3_edge_id):
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']]
@@ -592,12 +612,15 @@ def get_symu_troncon_from_python_id(dict_lanes, sg3_edge_id, python_lane_id):
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to SYMUVIA']][python_lane_id]
@@ -608,10 +631,12 @@ def get_PYTHON_list_lanes(dict_lanes, sg3_edge_id):
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
 
     """
     return dict_lanes[sg3_edge_id][str_ids_for_lanes['SG3 to PYTHON']]
@@ -622,12 +647,15 @@ def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality)
 
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param lane_ordinality:
     :type lane_ordinality: `int`
+
     :return:
-    :rtype: .
+    :rtype: ``
     """
     return get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality]
 
@@ -635,16 +663,20 @@ def get_python_id_from_lane_ordinality(dict_lanes, sg3_edge_id, lane_ordinality)
 def set_python_lane_id(dict_lanes, sg3_edge_id, lane_ordinality, python_lane_id):
     """
 
+    Methode:
+
     :param dict_lanes:
     :type dict_lanes: `dict`
+
     :param sg3_edge_id:
     :type sg3_edge_id: `int`
+
     :param lane_ordinality:
     :type lane_ordinality: `int`
+
     :param python_lane_id:
     :type python_lane_id: `int`
-    :return:
-    :rtype: .
+
     """
     get_PYTHON_list_lanes(dict_lanes, sg3_edge_id)[lane_ordinality] = python_lane_id
 
@@ -664,8 +696,9 @@ def test_convert_lane_ordinality_to_python_id(max_nb_lanes=6):
 
     :param max_nb_lanes: Nombre de groupes de voies. La taille des groupes de voies est egale a leur indice.
     :type max_nb_lanes: `uint`
-    :return: List de listes d'indices generes pour chaque groupes de voies.
-    :rtype: list of list[`int`]
+
+    :return: List de listes d'indices generes pour chaque groupes de voies. list[list[`int`]]
+    :rtype: `list`
 
     """
     range_nb_lanes = range(1, max_nb_lanes)

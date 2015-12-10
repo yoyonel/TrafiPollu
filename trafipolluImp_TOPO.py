@@ -135,8 +135,9 @@ class trafipolluImp_TOPO(object):
     @timer_decorator
     def build_topo_for_troncons(self):
         """
-            Lance la conversion TOPOlogique des edges StreetGEN (dumpees)
-            en troncons SYMUVIA (via PyXB)
+
+        Lance la conversion TOPOlogique des edges StreetGEN (dumpees)
+        en troncons SYMUVIA (via PyXB)
 
         """
 
@@ -201,6 +202,7 @@ class trafipolluImp_TOPO(object):
 
         :return:
         :rtype:
+
         """
         try:
             # recuperation des arguments
@@ -268,7 +270,7 @@ class trafipolluImp_TOPO(object):
         """
 
         :param sg3_edge_id:
-        :type sg3_edge_id: ``
+        :type sg3_edge_id: `str`
 
         :return: dictionnaire de correspondance entre une edge StreetGen et un/des troncons SYMUVIA
         :rtype: `dict`
@@ -292,7 +294,7 @@ class trafipolluImp_TOPO(object):
             # indice (python) sur les groupes de voies
             python_lane_id = 0
             try:
-                # on parcours la liste des groupes de voies (homogenes)
+                # on parcours la liste des groupes de voies (uni-directionnelles)
                 for nb_lanes_in_group in grouped_lanes:
                     #  construction du TRONCON au sens SYMUVIA
                     pyxb_symuTRONCON = self._build_pyxb_symutroncon_from_sg3_edge_lane(
@@ -303,6 +305,8 @@ class trafipolluImp_TOPO(object):
                     )
 
                     # Update list_troncon
+                    # Il y a une strategie d'update dans l'appel de la methode pour gerer l'accumulation de resultats
+                    # de DUMP, TOPO etc ...
                     self.update_dict_pyxb_symuTroncons(dict_pyxb_symuTroncons, pyxb_symuTRONCON, sg3_edge)
 
                     # next lanes group
@@ -322,12 +326,22 @@ class trafipolluImp_TOPO(object):
     ):
         """
 
+        Methode:
+
         :param pyxb_symuTRONCON:
+        :type pyxb_symuTRONCON: `typeTroncon`
+
         :param lane_direction:
+        :type lane_direction: `bool`
+
         :param sg3_edge_id:
+        :type sg3_edge_id: `int`
+
         :param python_lane_id:
+        :type python_lane_id: ``
+
         :param nb_lanes:
-        :return:
+        :type nb_lanes: `int`
 
         """
         # recuperation de la liste des voies (Python) a partir d'un indice (StreetGen) d'edge
@@ -490,10 +504,20 @@ class trafipolluImp_TOPO(object):
         """
 
         :param list_points:
+        :type list_points: `list`
+
         :param min_distance:
+        :type min_distance: `float`
+
         :param tolerance_distance:
+        :type tolerance_distance: `float`
+
         :param epsilon:
+        :type epsilon: `float`
+
         :return:
+        :rtype: `np.array`
+
         """
         min_distance += epsilon
         shp_list_points_optimized = []
@@ -508,10 +532,8 @@ class trafipolluImp_TOPO(object):
                                           min_distance)
             ]
             list_shp_points = list_shp_points_resampled
-        # except Exception as e:
-        # logger.fatal('Exception: %s' % e)
-        except:
-            pass
+        except Exception as e:
+            logger.fatal('Exception: {0}'.format(e))
         else:
             try:
                 resample_shp_geometry = LineString(list_shp_points)
@@ -519,10 +541,8 @@ class trafipolluImp_TOPO(object):
                     tolerance_distance,
                     preserve_topology=False
                 )
-            # except Exception as e:
-            # logger.fatal('Exception: %s' % e)
-            except:
-                pass
+            except Exception as e:
+                logger.fatal('Exception: {0}'.format(e))
         finally:
             return np.array(shp_list_points_optimized)
 
@@ -530,7 +550,8 @@ class trafipolluImp_TOPO(object):
     def build_topo_for_interconnexions(self):
         """
 
-        :return:
+            Methode de conversion/construction TOPOlogique des interconnexions.
+
         """
         list_remove_nodes = []
         dict_interconnexions = {}
@@ -540,7 +561,9 @@ class trafipolluImp_TOPO(object):
         # pour chaque node SG3
         for node_id, dict_values in self.dict_nodes.iteritems():
             try:
+                # liste des interconnexions presentes dans le 'node' (connexion)
                 node_list_interconnexions = dict_values['interconnexions']
+                # liste des io des edges connectees au node
                 set_id_edges = dict_values['set_id_edges']
             except Exception as e:
                 logger.fatal('Exception: {0}'.format(e))
@@ -549,27 +572,35 @@ class trafipolluImp_TOPO(object):
                 #
                 list_remove_nodes.append(node_id)
             else:
-                #
+                # On definit le type de la connection
+                # 'REPARTITEUR' ou 'CAF'
                 str_type_connexion = ''
                 nb_edges_connected_on_this_node = len(set_id_edges)
+                # Selon le nombre d'edges connectees par le node/connexion:
+                # == 2 => 1 connection amont/aval => 'REPARTITEUR'
+                #  > 2 => potentiellement 'CAF'
+                # A noter que c'est relativement 'arbitraire' comme choix/decision ... [a revoir]
                 if nb_edges_connected_on_this_node == 2:
                     str_type_connexion = 'REPARTITEUR'
                 elif nb_edges_connected_on_this_node > 2:
                     # potentiellement un CAF
                     str_type_connexion = 'CAF'
 
-                # pour chaque interconnexion
+                # parcourt de la liste des interconnexions
                 for interconnexion in node_list_interconnexions:
                     symu_troncons = []
                     symu_troncons_lane_id = []
 
                     # parcours sur les elements interconnectes (connexion amont -> aval)
                     for python_id in interval_ids_amont_aval:
+                        # Transfert id python -> StreetGen
                         str_sg3_id = str(python_id + 1)
-                        #
+                        # On reconstruit l'id de l'edge
                         sg3_edge_id = interconnexion['edge_id' + str_sg3_id]
+                        # On reconstruit l'id de la voie ou son 'ordinality' (sens StreetGen)
                         sg3_lane_ordinality = interconnexion['lane_ordinality' + str_sg3_id]
                         try:
+                            # recherche du troncon possedant la voie
                             symu_lane, symu_lane_id = self.find_symu_troncon_lane(
                                 sg3_edge_id,
                                 sg3_lane_ordinality
@@ -633,7 +664,7 @@ class trafipolluImp_TOPO(object):
                         symu_troncons[id_amont].id_eltaval = symu_troncons[id_aval].id
                         symu_troncons[id_aval].id_eltamont = symu_troncons[id_amont].id
 
-                # si il n'y a aucune interconnexion associee au node
+                # s'il n'y a aucune interconnexion associee au node
                 if not dict_interconnexions[node_id]['sg3_to_symuvia']['list_interconnexions']:
                     # alors on retire le node de la liste des nodes (utiles pour l'export SYMUVIA)
                     list_remove_nodes.append(node_id)
@@ -655,34 +686,44 @@ class trafipolluImp_TOPO(object):
 
 
         :param sg3_lane_ordinality:
+        :type sg3_lane_ordinality: `int`
+
         :param dict_lanes:
+        :type dict_lanes: `dict`
+
         :param sg3_edge_id:
+        :type sg3_edge_id: `int`
+
         :return:
+        :rtype: `tuple`
 
         """
+        #
         python_lane_id = tpi_DUMP.get_python_id_from_lane_ordinality(
             self.dict_lanes,
             sg3_edge_id,
             sg3_lane_ordinality
         )
 
-        symu_lane = tpi_DUMP.get_symu_troncon_from_python_id(
+        # troncon contenant la voie qu'on recherche
+        symu_troncon_containing_lane = tpi_DUMP.get_symu_troncon_from_python_id(
             self.dict_lanes,
             sg3_edge_id,
             python_lane_id
         )
 
-        symu_lane_id = python_lane_id - symu_lane.start_id_lane
+        # indice interne de la voie par rapport aux indices de voies du troncon
+        symu_lane_id = python_lane_id - symu_troncon_containing_lane.start_id_lane
 
         # #######################################################################
-        # Conversion SG3/Python -> SYMUVIA
+        # Conversion (TOPO) SG3/Python -> SYMUVIA
         # On doit prendre en compte l'orientation de la lane par rapport a l'edge
         # #######################################################################
-        if symu_lane.lane_direction:
-            symu_lane_id = (symu_lane.nb_lanes - 1) - symu_lane_id
+        if symu_troncon_containing_lane.lane_direction:
+            symu_lane_id = (symu_troncon_containing_lane.nb_lanes - 1) - symu_lane_id
         # #######################################################################
 
-        return symu_lane, symu_lane_id
+        return symu_troncon_containing_lane, symu_lane_id
 
     @timer_decorator
     def build_topo_extrimites(self):

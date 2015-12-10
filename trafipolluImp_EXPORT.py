@@ -118,17 +118,18 @@ class trafipolluImp_EXPORT(
     def update_SYMUVIA(self):
         """
 
-        :return:
+        .. warning::
+            construction TOPO ici !
+
+        Il y a une feinte presente dans la construction topologique liee a une contrainte d'ordonnancement.
+        Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (
+        CONNEXIONS).
+        Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes
+        ids aux amonts/avals des interconnexions pour que le module extremites ne les prennent pas en compte.
+        Dans l'export des CONNEXIONS par la suite, ces ids amonts/avals d'interconnexions sont reattribuees pour
+        coincider au vrai lien topologiques (avec un CAF/REPARTITEUR ou un TRONCON)
 
         """
-        # TODO: construction TOPO ici !
-        # Ya une feinte presente dans la construction topologique liee a une contrainte d'ordonnancement.
-        # aval. Le probleme vient que les attributions des amonts/avals (liens par IDs) se font dans les exports (
-        # CONNEXIONS).
-        # Du coup pour esquiver le probleme, quand on calcule la topo pour les interconnexions, on affecte des fakes
-        # ids aux amonts/avals des interconnexions pour que le module extremites ne les prennent pas en compte.
-        # Dans l'export des CONNEXIONS par la suite, ces ids amonts/avals d'interconnexions sont reattribuees pour
-        # coincider au vrai lien topologiques (avec un CAF/REPARTITEUR ou un TRONCON)
         self.module_topo.build_topo()
         #
         self.update_TRONCONS()

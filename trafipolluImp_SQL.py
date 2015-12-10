@@ -656,7 +656,7 @@ class trafipolluImp_SQL(object):
         Voir: :py:func:`_request_for_entity`
 
         :param kwargs:
-        :type kwargs: str
+        :type kwargs: `dict`
         :return:
         :rtype: int
         """
