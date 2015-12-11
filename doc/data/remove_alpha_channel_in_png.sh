@@ -1,0 +1,1 @@
+convert TOPO_conversion_streetgen_symuvia.png -background white -flatten TOPO_conversion_streetgen_symuvia_without_alpha.png

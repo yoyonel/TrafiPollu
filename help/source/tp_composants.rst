@@ -9,7 +9,6 @@ Listes des principaux composants:
     - :ref:`trafipolluImp_EXPORT`.
         - :ref:`trafipolluImp_EXPORT_CONNEXIONS`.
         - :ref:`trafipolluImp_EXPORT_TRAFICS`.
-    - :ref:`imt_tools`
 
 
 .. _trafipolluImp:

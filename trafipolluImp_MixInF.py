@@ -1,8 +1,18 @@
 __author__ = 'latty'
 
+
 # url: https://github.com/brentpayne/learning-python/blob/master/MixInMultipleInheritance/mixin_multiple_inheritance.py
 class MixInF(object):
+    """
+
+    """
     def __init__(self, *args, **kwargs):
+        """
+
+        :param args:
+        :param kwargs:
+        :return:
+        """
         pass
 
     def transfer_arguments(self, list_args, **kwargs):

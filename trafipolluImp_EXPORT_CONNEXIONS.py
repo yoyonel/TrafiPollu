@@ -206,9 +206,13 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
     def export_CARREFOURSAFEUX(self, list_id_nodes, *args):
         """
 
-        :param node_id:
+        :param list_id_nodes:
+        :type list_id_nodes: `list`.
+
         :return:
-        # """
+        :rtype: .
+
+        """
         str_path_to_child, sym_CAFS = pyxbDecorator.get_path_instance(*args)
 
         for node_id in list_id_nodes:
@@ -271,7 +275,12 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
     def export_REPARTITEUR(self, *args):
         """
 
+        :param args:
+        :type args: `list`
+
         :return:
+        :rtype: .
+
         """
         sym_REPARTITEUR = None
 

@@ -255,9 +255,13 @@
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURSAFEUX"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURSAFEUX">[docs]</a>    <span class="k">def</span> <span class="nf">export_CARREFOURSAFEUX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_id_nodes</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        :param node_id:</span>
+<span class="sd">        :param list_id_nodes:</span>
+<span class="sd">        :type list_id_nodes: `list`.</span>
+
 <span class="sd">        :return:</span>
-<span class="sd">        # &quot;&quot;&quot;</span>
+<span class="sd">        :rtype: .</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_CAFS</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="n">list_id_nodes</span><span class="p">:</span>
@@ -320,7 +324,12 @@
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEUR"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEUR">[docs]</a>    <span class="k">def</span> <span class="nf">export_REPARTITEUR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="sd">        :param args:</span>
+<span class="sd">        :type args: `list`</span>
+
 <span class="sd">        :return:</span>
+<span class="sd">        :rtype: .</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sym_REPARTITEUR</span> <span class="o">=</span> <span class="bp">None</span>
 

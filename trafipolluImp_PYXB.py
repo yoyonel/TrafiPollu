@@ -88,6 +88,8 @@ class trafipolluImp_PYXB(object):
 
 pyxb_parser = trafipolluImp_PYXB(symuvia_parser)
 
+from functools import wraps
+
 
 class pyxbDecorator(object):
     """
@@ -101,7 +103,7 @@ class pyxbDecorator(object):
     def __call__(self, f):
         """
         """
-
+        @wraps(f)
         def wrapped_f(*args):
             """
             """
