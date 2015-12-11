@@ -80,3 +80,17 @@ def update_SYMUVIA(self):
 On utilise `dict_nodes` pour récupérer les informations dumpées à propros des nodes.
 
 Dans la méthode, il y a une partie de simplification géométrique des connexions.
+
+Il y a un commentaire: `# TODO -> [TOPO] : FAKE TOPO pour CONNEXIONS/EXTREMITES`
+La notion de FAKE est liée à un pb. d'ordonnancement des opérations, dans ce cas, liée à la gestion des `EXTREMITES`.
+Quand deux troncons sont reliés par `INTERCONNEXIONS`,
+je set (temporairement) leurs liens amont/aval en conséquences (pour qu'ils ne soient pas pris en compte dans la détection des `EXTREMITES`).
+
+### EXTREMITES
+
+- `build_topo_extrimites`: Lance la détection (TOPO) des extremités du réseau SYMUVIA qu'on est en train de créer.
+
+Les EXTREMITES pour le réseau SYVMUVIA sont des les entrées/sorties du réseau (une défintion des limites du reseau).
+Pour détecter ces EXTREMITES, je regarde pour tous les troncons si leurs amonts/avals de connexions à leurs voisins sont configurés (settés).
+Si un troncon possède des connections en amont/aval alors il est 'dans' le réseau.
+S'il manque une connection amont ou aval, c'est une EXTRIMITE (entrée ou sortie).
