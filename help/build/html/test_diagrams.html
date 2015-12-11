@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tests sur la génération de diagrammes &mdash; interactive_map_tracking 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="interactive_map_tracking 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tests-sur-la-generation-de-diagrammes">
+<h1>Tests sur la génération de diagrammes<a class="headerlink" href="#tests-sur-la-generation-de-diagrammes" title="Permalink to this headline">¶</a></h1>
+<p>BlockDiag:</p>
+<div><img height="120" src="_images/blockdiag-e15057bfa7c5e26ec8946f47cc0fe558b4b7877d.png" width="448" /></div><p>graphviz:</p>
+<p class="graphviz">
+<img src="_images/graphviz-fceb5dea1db0122168e5ced49f4e42ad062605c2.png" alt="digraph {
+   &quot;From&quot; -&gt; &quot;To&quot;;
+}" />
+</p>
+<p>PlantUML:</p>
+<p class="plantuml">
+<img src="_images/plantuml-b9a7b13c8eee5de66f91f962d73c407e113fcd4a.png" alt="&#64;startuml
+Alice -&gt; Bob: Hi!
+Alice &lt;- Bob: How are you?
+&#64;enduml" />
+</p>
+<p class="plantuml">
+<img src="_images/plantuml-7e9ebeec317fb6d3c26e043d4936205f762e1ab4.png" alt="&#64;startuml
+skinparam backgroundColor #EEEBDC
+
+ skinparam sequence {
+     ArrowColor DeepSkyBlue
+     ActorBorderColor DeepSkyBlue
+     LifeLineBorderColor blue
+     LifeLineBackgroundColor #A9DCDF
+
+     ParticipantBorderColor DeepSkyBlue
+     ParticipantBackgroundColor DodgerBlue
+     ParticipantFontName Impact
+     ParticipantFontSize 17
+     ParticipantFontColor #A9DCDF
+
+     ActorBackgroundColor aqua
+     ActorFontColor DeepSkyBlue
+     ActorFontSize 17
+     ActorFontName Aapex
+ }
+
+ actor Foo1
+ boundary Foo2
+ control Foo3
+ entity Foo4
+ database Foo5
+ Foo1 -&gt; Foo2 : To boundary
+ Foo1 -&gt; Foo3 : To control
+ Foo1 -&gt; Foo4 : To entity
+ Foo1 -&gt; Foo5 : To database
+
+ actor User
+ participant &quot;First Class&quot; as A
+ participant &quot;Second Class&quot; as B
+ participant &quot;Last Class&quot; as C
+
+ User -&gt; A: DoWork
+ activate A
+
+ A -&gt; B: Create Request
+ activate B
+
+ B -&gt; C: DoWork
+ activate C
+ C --&gt; B: WorkDone
+ destroy C
+
+ B --&gt; A: Request Created
+ deactivate B
+
+ A --&gt; User: Done
+ deactivate A
+
+&#64;enduml" />
+</p>
+<p>Salt:</p>
+<p class="plantuml">
+<img src="_images/plantuml-9cce67c0f97ade2e04551f48d75a851d24e729a5.png" alt="&#64;startsalt
+{+
+{/ &lt;b&gt;General | Fullscreen | Behavior | Saving }
+{
+    { Open image in: | ^Smart Mode^ }
+    [X] Smooth images when zoomed
+    [X] Confirm image deletion
+    [ ] Show hidden images
+}
+[Close]
+}
+&#64;endsalt" />
+</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/test_diagrams.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
