@@ -104,8 +104,8 @@ EXTRAS = \
     icon.png \
     metadata.txt \
     *.sql \
-    *.xml \
-    *.xsd \
+        *.xml \
+        *.xsd \
     *.ini
 
 COMPILED_RESOURCE_FILES = resources_rc.py

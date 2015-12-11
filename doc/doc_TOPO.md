@@ -1,5 +1,9 @@
 # TOPO
 
+## Schéma de conversion topologique
+
+![](data/TOPO_conversion_streetgen_symuvia_without_alpha.png)
+
 ## Appel au module TOPO
 - `trafiPolluImp.py`:
 ```python
