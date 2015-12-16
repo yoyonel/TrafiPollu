@@ -8,7 +8,7 @@
     
     <title>imt_tools &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for imt_tools</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
@@ -156,9 +156,9 @@
                     <span class="k">break</span>
                 <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
                     <span class="k">pass</span>
-        <span class="k">return</span> <span class="n">ip</span>
+        <span class="k">return</span> <span class="n">ip</span></div>
 
-</div>
+
 <div class="viewcode-block" id="find_index_field_by_name"><a class="viewcode-back" href="../tp_composants.html#imt_tools.find_index_field_by_name">[docs]</a><span class="k">def</span> <span class="nf">find_index_field_by_name</span><span class="p">(</span><span class="n">field_names</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -179,19 +179,19 @@
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="c"># field non trouve !</span>
         <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">return</span> <span class="n">id_for_user_id</span>
+    <span class="k">return</span> <span class="n">id_for_user_id</span></div>
 
 
-<span class="c"># url: http://stackoverflow.com/questions/117014/how-to-retrieve-name-of-current-windows-user-ad-or-local-using-python</span></div>
+<span class="c"># url: http://stackoverflow.com/questions/117014/how-to-retrieve-name-of-current-windows-user-ad-or-local-using-python</span>
 <div class="viewcode-block" id="get_os_username"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_os_username">[docs]</a><span class="k">def</span> <span class="nf">get_os_username</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="get_timestamp"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_timestamp">[docs]</a><span class="k">def</span> <span class="nf">get_timestamp</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -200,9 +200,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># Python time</span>
-    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="convert_timestamp_to_qdatetime"><a class="viewcode-back" href="../tp_composants.html#imt_tools.convert_timestamp_to_qdatetime">[docs]</a><span class="k">def</span> <span class="nf">convert_timestamp_to_qdatetime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -216,14 +216,14 @@
     <span class="n">qdatetime</span><span class="o">.</span><span class="n">setTime_t</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestamp_whole</span><span class="p">))</span>
     <span class="n">qdatetime</span> <span class="o">=</span> <span class="n">qdatetime</span><span class="o">.</span><span class="n">addMSecs</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestamp_frac</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
     <span class="c">#</span>
-    <span class="k">return</span> <span class="n">qdatetime</span>
+    <span class="k">return</span> <span class="n">qdatetime</span></div>
 
 
 <span class="c"># def convert_timestamp_to_qt_string_format(timestamp, QtDateFormat):</span>
 <span class="c"># # String Qt time</span>
 <span class="c"># return convert_timestamp_to_qdatetime(timestamp).toString(QtDateFormat)</span>
 
-</div>
+
 <div class="viewcode-block" id="convert_timestamp_to_qt_string_format"><a class="viewcode-back" href="../tp_composants.html#imt_tools.convert_timestamp_to_qt_string_format">[docs]</a><span class="k">def</span> <span class="nf">convert_timestamp_to_qt_string_format</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">QtDateFormatString</span><span class="o">=</span><span class="n">defaultQtDateFormatString</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -235,7 +235,7 @@
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># String Qt time</span>
-    <span class="k">return</span> <span class="n">convert_timestamp_to_qdatetime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="n">QtDateFormatString</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">convert_timestamp_to_qdatetime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">toString</span><span class="p">(</span><span class="n">QtDateFormatString</span><span class="p">)</span></div>
 
 
 <span class="c"># def get_timestamp_from_qt_string_format(QtDateFormat):</span>
@@ -257,7 +257,7 @@
 <span class="c">#     &quot;&quot;&quot;</span>
 <span class="c">#     return convert_timestamp_to_qt_string_format(get_timestamp(), QtDateFormat)</span>
 
-</div>
+
 <div class="viewcode-block" id="get_timestamp_from_qt_string_format"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_timestamp_from_qt_string_format">[docs]</a><span class="k">def</span> <span class="nf">get_timestamp_from_qt_string_format</span><span class="p">(</span><span class="n">QtDateFormatString</span><span class="o">=</span><span class="n">defaultQtDateFormatString</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -266,9 +266,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">convert_timestamp_to_qt_string_format</span><span class="p">(</span><span class="n">get_timestamp</span><span class="p">(),</span> <span class="n">QtDateFormatString</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">convert_timestamp_to_qt_string_format</span><span class="p">(</span><span class="n">get_timestamp</span><span class="p">(),</span> <span class="n">QtDateFormatString</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="construct_listpoints_from_extent"><a class="viewcode-back" href="../tp_composants.html#imt_tools.construct_listpoints_from_extent">[docs]</a><span class="k">def</span> <span class="nf">construct_listpoints_from_extent</span><span class="p">(</span><span class="n">_extent</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Construct a list of QGIS points from QGIS extent.</span>
 
@@ -290,9 +290,9 @@
             <span class="n">QgsPoint</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">),</span>
             <span class="n">QgsPoint</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">),</span>
             <span class="n">QgsPoint</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">y4</span><span class="p">),</span>
-            <span class="n">QgsPoint</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)]</span>
+            <span class="n">QgsPoint</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)]</span></div>
 
-</div>
+
 <div class="viewcode-block" id="find_layer_in_qgis_legend_interface"><a class="viewcode-back" href="../tp_composants.html#imt_tools.find_layer_in_qgis_legend_interface">[docs]</a><span class="k">def</span> <span class="nf">find_layer_in_qgis_legend_interface</span><span class="p">(</span><span class="n">_iface</span><span class="p">,</span> <span class="n">_layername</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -309,9 +309,9 @@
                           <span class="k">if</span> <span class="n">layer_searched</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">==</span> <span class="n">_layername</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">layer_searched</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">None</span></div>
 
-</div>
+
 <div class="viewcode-block" id="TpTimer"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer">[docs]</a><span class="k">class</span> <span class="nc">TpTimer</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -322,8 +322,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_timers</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_timeupdate</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span> <span class="o">=</span> <span class="p">{}</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span> <span class="o">=</span> <span class="p">{}</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TpTimer.default_timers"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.default_timers">[docs]</a>    <span class="k">def</span> <span class="nf">default_timers</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -331,8 +331,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype: list[float, float].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()]</span>
-</div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()]</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TpTimer.default_delay"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.default_delay">[docs]</a>    <span class="k">def</span> <span class="nf">default_delay</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -340,8 +340,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype: `float`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="mf">0.0</span>
-</div>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+
 <div class="viewcode-block" id="TpTimer.get_current_time"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.get_current_time">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -349,8 +349,8 @@
 <span class="sd">        :rtype: `float`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_current_time</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
     <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -363,16 +363,16 @@
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span> <span class="o">=</span> <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span></div>
+
 <div class="viewcode-block" id="TpTimer.delta_without_key"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.delta_without_key">[docs]</a>    <span class="k">def</span> <span class="nf">delta_without_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype: `float`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="TpTimer.delta"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.delta">[docs]</a>    <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -382,8 +382,8 @@
 <span class="sd">        :rtype: `float`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">list_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="TpTimer.delta_with_current_time"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.delta_with_current_time">[docs]</a>    <span class="k">def</span> <span class="nf">delta_with_current_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -394,8 +394,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_current_time</span><span class="p">()</span>
         <span class="n">list_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="TpTimer.update"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -407,8 +407,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">update_current_time</span><span class="p">()</span>
         <span class="n">list_times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_timeupdate</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">currentTime</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">list_times</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_timeupdate</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_timeupdate</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="TpTimer.get_delay"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.get_delay">[docs]</a>    <span class="k">def</span> <span class="nf">get_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -417,8 +417,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype: .</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">process_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_delay</span><span class="p">())</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">process_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_delay</span><span class="p">())</span></div>
+
 <div class="viewcode-block" id="TpTimer.set_delay"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.set_delay">[docs]</a>    <span class="k">def</span> <span class="nf">set_delay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay_name</span><span class="p">,</span> <span class="n">time_delay</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -428,8 +428,8 @@
 <span class="sd">        :type time_delay: `float`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span><span class="p">[</span><span class="n">delay_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_delay</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_process_delay</span><span class="p">[</span><span class="n">delay_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_delay</span></div>
+
 <div class="viewcode-block" id="TpTimer.is_time_to_update"><a class="viewcode-back" href="../tp_composants.html#imt_tools.TpTimer.is_time_to_update">[docs]</a>    <span class="k">def</span> <span class="nf">is_time_to_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_name</span><span class="p">,</span> <span class="n">delay_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -440,9 +440,9 @@
 <span class="sd">        :return:</span>
 <span class="sd">        :rtype: `float`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_with_current_time</span><span class="p">(</span><span class="n">process_name</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_delay</span><span class="p">(</span><span class="n">delay_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delta_with_current_time</span><span class="p">(</span><span class="n">process_name</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_delay</span><span class="p">(</span><span class="n">delay_name</span><span class="p">)</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="get_return_code_of_simple_cmd"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_return_code_of_simple_cmd">[docs]</a><span class="k">def</span> <span class="nf">get_return_code_of_simple_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">STDOUT</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Execute a simple external command and return its exit status.</span>
@@ -455,9 +455,9 @@
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">stderr</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="is_network_alive"><a class="viewcode-back" href="../tp_composants.html#imt_tools.is_network_alive">[docs]</a><span class="k">def</span> <span class="nf">is_network_alive</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s">&quot;www.google.com&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -468,9 +468,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c">#cmd = &quot;ping -c 1 &quot; + url</span>
     <span class="n">cmd</span> <span class="o">=</span> <span class="s">&quot;curl --output /dev/null --silent --head --fail&quot;</span> <span class="o">+</span> <span class="n">url</span>
-    <span class="k">return</span> <span class="n">get_return_code_of_simple_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">get_return_code_of_simple_cmd</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
-</div>
+
 <div class="viewcode-block" id="isConnected"><a class="viewcode-back" href="../tp_composants.html#imt_tools.isConnected">[docs]</a><span class="k">def</span> <span class="nf">isConnected</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -481,9 +481,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">socket</span> <span class="o">=</span> <span class="n">QTcpSocket</span><span class="p">()</span>
     <span class="n">socket</span><span class="o">.</span><span class="n">connectToHost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">waitForConnected</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">socket</span><span class="o">.</span><span class="n">waitForConnected</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span></div>
 
-</div>
+
 <span class="n">DEFAULT_SEGMENT_EPSILON</span> <span class="o">=</span> <span class="mf">1e-08</span>
 
 
@@ -502,9 +502,9 @@
     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">xMaximum</span><span class="p">()</span> <span class="o">-</span> <span class="n">r2</span><span class="o">.</span><span class="n">xMaximum</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">epsilon</span> <span class="ow">and</span> \
            <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">yMaximum</span><span class="p">()</span> <span class="o">-</span> <span class="n">r2</span><span class="o">.</span><span class="n">yMaximum</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">epsilon</span> <span class="ow">and</span> \
            <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">xMinimum</span><span class="p">()</span> <span class="o">-</span> <span class="n">r2</span><span class="o">.</span><span class="n">xMinimum</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">epsilon</span> <span class="ow">and</span> \
-           <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">yMinimum</span><span class="p">()</span> <span class="o">-</span> <span class="n">r2</span><span class="o">.</span><span class="n">yMinimum</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">epsilon</span>
+           <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">yMinimum</span><span class="p">()</span> <span class="o">-</span> <span class="n">r2</span><span class="o">.</span><span class="n">yMinimum</span><span class="p">())</span> <span class="o">&lt;=</span> <span class="n">epsilon</span></div>
 
-</div>
+
 <span class="n">qsettings_id_pickle</span> <span class="o">=</span> <span class="s">&quot;pickle&quot;</span>
 <span class="c">#</span>
 <span class="n">pickle_id_gui</span> <span class="o">=</span> <span class="s">&quot;GUI&quot;</span>
@@ -523,9 +523,9 @@
     <span class="k">for</span> <span class="n">qobject</span> <span class="ow">in</span> <span class="n">dict_qobject_slot</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">slot</span> <span class="o">=</span> <span class="n">dict_qobject_slot</span><span class="p">[</span><span class="n">qobject</span><span class="p">]</span>
         <span class="n">id_string</span> <span class="o">=</span> <span class="n">slot</span><span class="o">.</span><span class="n">__name__</span>
-        <span class="n">s</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">id_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">qobject</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()))</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">id_string</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">qobject</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="serialize_checkbox"><a class="viewcode-back" href="../tp_composants.html#imt_tools.serialize_checkbox">[docs]</a><span class="k">def</span> <span class="nf">serialize_checkbox</span><span class="p">(</span><span class="n">checkbox</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -537,9 +537,9 @@
     <span class="k">return</span> <span class="p">{</span>
         <span class="s">&#39;isEnabled&#39;</span><span class="p">:</span> <span class="n">checkbox</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">(),</span>
         <span class="s">&#39;isChecked&#39;</span><span class="p">:</span> <span class="n">checkbox</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span>
-    <span class="p">}</span>
+    <span class="p">}</span></div>
 
-</div>
+
 <div class="viewcode-block" id="serialize_list_checkbox"><a class="viewcode-back" href="../tp_composants.html#imt_tools.serialize_list_checkbox">[docs]</a><span class="k">def</span> <span class="nf">serialize_list_checkbox</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">list_id_checkbox</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -557,9 +557,9 @@
             <span class="n">string_id_checkbox</span><span class="p">:</span> <span class="n">serialize_checkbox</span><span class="p">(</span><span class="n">qt_checkbox</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="n">return_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_checkbox_id</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">return_dict</span>
+    <span class="k">return</span> <span class="n">return_dict</span></div>
 
-</div>
+
 <div class="viewcode-block" id="serialize_tabs_size"><a class="viewcode-back" href="../tp_composants.html#imt_tools.serialize_tabs_size">[docs]</a><span class="k">def</span> <span class="nf">serialize_tabs_size</span><span class="p">(</span><span class="n">imt</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -568,9 +568,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: `dict`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">imt</span><span class="o">.</span><span class="n">dict_tabs_size</span>
+    <span class="k">return</span> <span class="n">imt</span><span class="o">.</span><span class="n">dict_tabs_size</span></div>
 
-</div>
+
 <div class="viewcode-block" id="update_checkbox_from_serialization"><a class="viewcode-back" href="../tp_composants.html#imt_tools.update_checkbox_from_serialization">[docs]</a><span class="k">def</span> <span class="nf">update_checkbox_from_serialization</span><span class="p">(</span><span class="n">qobject</span><span class="p">,</span> <span class="n">id_qobject</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -583,13 +583,13 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qobject</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">pickle_id_gui</span><span class="p">][</span><span class="n">pickle_id_list_checkbox</span><span class="p">][</span><span class="n">id_qobject</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;isEnabled&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">))</span>
-    <span class="n">qobject</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">pickle_id_gui</span><span class="p">][</span><span class="n">pickle_id_list_checkbox</span><span class="p">][</span><span class="n">id_qobject</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;isChecked&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+    <span class="n">qobject</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">pickle_id_gui</span><span class="p">][</span><span class="n">pickle_id_list_checkbox</span><span class="p">][</span><span class="n">id_qobject</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;isChecked&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span></div>
     <span class="c">#</span>
     <span class="c"># print state[pickle_id_gui][pickle_id_list_checkbox][id_qobject], &#39; * &#39;, \</span>
     <span class="c"># id_qobject, &#39; * &#39;, \</span>
     <span class="c">#     state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault(&#39;isChecked&#39;, False)</span>
 
-</div>
+
 <div class="viewcode-block" id="update_list_checkbox_from_serialization"><a class="viewcode-back" href="../tp_composants.html#imt_tools.update_list_checkbox_from_serialization">[docs]</a><span class="k">def</span> <span class="nf">update_list_checkbox_from_serialization</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">list_string_id_checkbox</span><span class="p">,</span> <span class="n">pickle_state</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -603,9 +603,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">string_id_dlg</span> <span class="ow">in</span> <span class="n">list_string_id_checkbox</span><span class="p">:</span>
         <span class="n">qt_checkbox</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="n">string_id_dlg</span><span class="p">)</span>
-        <span class="n">update_checkbox_from_serialization</span><span class="p">(</span><span class="n">qt_checkbox</span><span class="p">,</span> <span class="n">string_id_dlg</span><span class="p">,</span> <span class="n">pickle_state</span><span class="p">)</span>
+        <span class="n">update_checkbox_from_serialization</span><span class="p">(</span><span class="n">qt_checkbox</span><span class="p">,</span> <span class="n">string_id_dlg</span><span class="p">,</span> <span class="n">pickle_state</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="update_tabs_size_from_serialization"><a class="viewcode-back" href="../tp_composants.html#imt_tools.update_tabs_size_from_serialization">[docs]</a><span class="k">def</span> <span class="nf">update_tabs_size_from_serialization</span><span class="p">(</span><span class="n">imt</span><span class="p">,</span> <span class="n">pickle_state</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -615,9 +615,9 @@
 <span class="sd">    :type pickle_state:</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">imt</span><span class="o">.</span><span class="n">dict_tabs_size</span> <span class="o">=</span> <span class="n">pickle_state</span><span class="p">[</span><span class="n">pickle_id_gui</span><span class="p">][</span><span class="n">pickle_id_list_tabs_size</span><span class="p">]</span>
+    <span class="n">imt</span><span class="o">.</span><span class="n">dict_tabs_size</span> <span class="o">=</span> <span class="n">pickle_state</span><span class="p">[</span><span class="n">pickle_id_gui</span><span class="p">][</span><span class="n">pickle_id_list_tabs_size</span><span class="p">]</span></div>
 
-</div>
+
 <div class="viewcode-block" id="saves_states_in_qsettings_pickle"><a class="viewcode-back" href="../tp_composants.html#imt_tools.saves_states_in_qsettings_pickle">[docs]</a><span class="k">def</span> <span class="nf">saves_states_in_qsettings_pickle</span><span class="p">(</span><span class="n">imt</span><span class="p">,</span> <span class="n">pickle_name_in_qsettings</span><span class="o">=</span><span class="n">qsettings_id_pickle</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -633,9 +633,9 @@
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">imt</span><span class="o">.</span><span class="n">qsettings</span><span class="o">.</span><span class="n">beginGroup</span><span class="p">(</span><span class="n">imt</span><span class="o">.</span><span class="n">qsettings_group_name</span><span class="p">)</span>
         <span class="n">imt</span><span class="o">.</span><span class="n">qsettings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">pickle_name_in_qsettings</span><span class="p">,</span> <span class="n">pickle_string_dump</span><span class="p">)</span>
-        <span class="n">imt</span><span class="o">.</span><span class="n">qsettings</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span>
+        <span class="n">imt</span><span class="o">.</span><span class="n">qsettings</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="restore_states_from_pickle"><a class="viewcode-back" href="../tp_composants.html#imt_tools.restore_states_from_pickle">[docs]</a><span class="k">def</span> <span class="nf">restore_states_from_pickle</span><span class="p">(</span><span class="n">imt</span><span class="p">,</span> <span class="n">pickle_name_in_qsettings</span><span class="o">=</span><span class="n">qsettings_id_pickle</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -662,14 +662,14 @@
     <span class="c"># update_list_checkbox_from_qsettings(imt)</span>
 
     <span class="c">#TODO: test on QT dump</span>
-    <span class="n">test_qt_dump</span><span class="p">(</span><span class="n">imt</span><span class="p">)</span>
+    <span class="n">test_qt_dump</span><span class="p">(</span><span class="n">imt</span><span class="p">)</span></div>
 
 
 <span class="c"># url: http://stackoverflow.com/questions/121396/accessing-object-memory-address</span>
 <span class="c"># url: https://docs.python.org/2/reference/datamodel.html#object.__repr__</span>
 <span class="c"># url: http://stackoverflow.com/questions/1810526/python-calling-a-method-of-an-instances-member-by-name-using-getattribute</span>
 <span class="c"># url: https://docs.python.org/2/library/functions.html#id</span>
-</div>
+
 <div class="viewcode-block" id="build_list_id_filter_by_qt_type"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_list_id_filter_by_qt_type">[docs]</a><span class="k">def</span> <span class="nf">build_list_id_filter_by_qt_type</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">qt_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -685,9 +685,9 @@
     <span class="k">for</span> <span class="n">qt_object</span> <span class="ow">in</span> <span class="n">list_children</span><span class="p">:</span>
         <span class="n">qt_object_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">qt_object</span><span class="p">)</span>
         <span class="n">list_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qt_object_id</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">list_id</span>
+    <span class="k">return</span> <span class="n">list_id</span></div>
 
-</div>
+
 <div class="viewcode-block" id="build_dict_id_qt_type"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_dict_id_qt_type">[docs]</a><span class="k">def</span> <span class="nf">build_dict_id_qt_type</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">qt_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -702,9 +702,9 @@
     <span class="n">list_id_for_qt_type</span> <span class="o">=</span> <span class="n">build_list_id_filter_by_qt_type</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">qt_type</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">qt_object_id</span> <span class="ow">in</span> <span class="n">list_id_for_qt_type</span><span class="p">:</span>
         <span class="n">dict_id_qt_type</span><span class="p">[</span><span class="n">qt_object_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">qt_type</span>
-    <span class="k">return</span> <span class="n">dict_id_qt_type</span>
+    <span class="k">return</span> <span class="n">dict_id_qt_type</span></div>
 
-</div>
+
 <div class="viewcode-block" id="build_list_member_name_filter_by_qtype"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_list_member_name_filter_by_qtype">[docs]</a><span class="k">def</span> <span class="nf">build_list_member_name_filter_by_qtype</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="o">*</span><span class="n">qt_types</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -726,9 +726,9 @@
             <span class="n">unique_id_qt_object</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">qt_object</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">unique_id_qt_object</span> <span class="ow">in</span> <span class="n">dict_id_qt_type</span><span class="p">:</span>
                 <span class="n">list_member_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dlg_id_string_member</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">list_member_name</span>
+    <span class="k">return</span> <span class="n">list_member_name</span></div>
 
-</div>
+
 <div class="viewcode-block" id="build_list_member_name_filter_by_qtypes"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_list_member_name_filter_by_qtypes">[docs]</a><span class="k">def</span> <span class="nf">build_list_member_name_filter_by_qtypes</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="o">*</span><span class="n">qt_types</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -743,9 +743,9 @@
     <span class="n">return_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">qt_type</span> <span class="ow">in</span> <span class="n">qt_types</span><span class="p">:</span>
         <span class="n">return_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">build_list_member_name_filter_by_qtype</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">qt_type</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">return_list</span>
+    <span class="k">return</span> <span class="n">return_list</span></div>
 
-</div>
+
 <div class="viewcode-block" id="build_list_member_name_filter_qcheckbox"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_list_member_name_filter_qcheckbox">[docs]</a><span class="k">def</span> <span class="nf">build_list_member_name_filter_qcheckbox</span><span class="p">(</span><span class="n">dlg</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -754,9 +754,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">build_list_member_name_filter_by_qtypes</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">QCheckBox</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">build_list_member_name_filter_by_qtypes</span><span class="p">(</span><span class="n">dlg</span><span class="p">,</span> <span class="n">QCheckBox</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="test_qt_dump"><a class="viewcode-back" href="../tp_composants.html#imt_tools.test_qt_dump">[docs]</a><span class="k">def</span> <span class="nf">test_qt_dump</span><span class="p">(</span><span class="n">imt</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -795,9 +795,9 @@
             <span class="n">qgis_log_tools</span><span class="o">.</span><span class="n">logMessageINFO</span><span class="p">(</span><span class="s">&quot;* From IMT Python class, find Qt element (in dlg)&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span>
                                           <span class="s">&quot;</span><span class="se">\t</span><span class="s">- Member name: &quot;</span> <span class="o">+</span> <span class="n">imt_dlg_id_string_member</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span>
                                           <span class="s">&quot;</span><span class="se">\t</span><span class="s">- Qt type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dict_id_qt_type</span><span class="p">[</span><span class="n">unique_id_qt_object</span><span class="p">])</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span>
-                                          <span class="s">&quot;</span><span class="se">\t</span><span class="s">-- isChecked: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">qt_object</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()))</span>
+                                          <span class="s">&quot;</span><span class="se">\t</span><span class="s">-- isChecked: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">qt_object</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()))</span></div>
 
-</div>
+
 <div class="viewcode-block" id="update_list_checkbox_from_qsettings"><a class="viewcode-back" href="../tp_composants.html#imt_tools.update_list_checkbox_from_qsettings">[docs]</a><span class="k">def</span> <span class="nf">update_list_checkbox_from_qsettings</span><span class="p">(</span><span class="n">imt</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -811,9 +811,9 @@
     <span class="n">s</span> <span class="o">=</span> <span class="n">imt</span><span class="o">.</span><span class="n">qsettings</span>
     <span class="n">s</span><span class="o">.</span><span class="n">beginGroup</span><span class="p">(</span><span class="n">imt</span><span class="o">.</span><span class="n">qsettings_group_name</span><span class="p">)</span>
     <span class="n">restore_gui_states_from_qsettings</span><span class="p">(</span><span class="n">imt</span><span class="p">)</span>
-    <span class="n">s</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span></div>
 
-</div>
+
 <div class="viewcode-block" id="restore_gui_states_from_qsettings"><a class="viewcode-back" href="../tp_composants.html#imt_tools.restore_gui_states_from_qsettings">[docs]</a><span class="k">def</span> <span class="nf">restore_gui_states_from_qsettings</span><span class="p">(</span><span class="n">imt</span><span class="p">,</span> <span class="n">b_launch_slot</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -835,11 +835,11 @@
         <span class="k">if</span> <span class="n">b_launch_slot</span><span class="p">:</span>
             <span class="n">slot</span> <span class="o">=</span> <span class="n">imt</span><span class="o">.</span><span class="n">signals_manager</span><span class="o">.</span><span class="n">get_slot</span><span class="p">(</span><span class="n">qobject</span><span class="p">,</span> <span class="n">id_slot</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">slot</span><span class="p">:</span>
-                <span class="n">slot</span><span class="p">()</span>
+                <span class="n">slot</span><span class="p">()</span></div>
                 <span class="c">#</span>
                 <span class="c"># print &quot;id_in_qsetting: &quot;, id_in_qsetting, &quot; - value: &quot;, s.value(id_in_qsetting, &quot;False&quot;)</span>
 
-</div>
+
 <div class="viewcode-block" id="print_group_name_values_in_qsettings"><a class="viewcode-back" href="../tp_composants.html#imt_tools.print_group_name_values_in_qsettings">[docs]</a><span class="k">def</span> <span class="nf">print_group_name_values_in_qsettings</span><span class="p">(</span><span class="n">group_name</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -850,11 +850,11 @@
     <span class="n">qsettings</span> <span class="o">=</span> <span class="n">QSettings</span><span class="p">()</span>
     <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qsettings</span><span class="o">.</span><span class="n">allKeys</span><span class="p">()</span> <span class="k">if</span> <span class="n">group_name</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">qsettings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">qsettings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">key</span><span class="p">))</span></div>
         <span class="c"># import qgis_log_tools</span>
         <span class="c"># qgis_log_tools.logMessageINFO(str(key)+&quot;: &quot;+str(qsettings.value(key)))</span>
 
-</div>
+
 <div class="viewcode-block" id="get_itemData"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_itemData">[docs]</a><span class="k">def</span> <span class="nf">get_itemData</span><span class="p">(</span><span class="n">combobox</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -863,9 +863,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">combobox</span><span class="o">.</span><span class="n">itemData</span><span class="p">(</span><span class="n">combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">combobox</span><span class="o">.</span><span class="n">itemData</span><span class="p">(</span><span class="n">combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">())</span></div>
 
-</div>
+
 <div class="viewcode-block" id="get_itemText"><a class="viewcode-back" href="../tp_composants.html#imt_tools.get_itemText">[docs]</a><span class="k">def</span> <span class="nf">get_itemText</span><span class="p">(</span><span class="n">combobox</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -874,9 +874,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: .</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">combobox</span><span class="o">.</span><span class="n">itemText</span><span class="p">(</span><span class="n">combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">combobox</span><span class="o">.</span><span class="n">itemText</span><span class="p">(</span><span class="n">combobox</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">())</span></div>
 
-</div>
+
 <div class="viewcode-block" id="create_named_tuple_from_names"><a class="viewcode-back" href="../tp_composants.html#imt_tools.create_named_tuple_from_names">[docs]</a><span class="k">def</span> <span class="nf">create_named_tuple_from_names</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">list_names</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -885,11 +885,11 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: namedtuple.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">namedtuple</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">list_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">namedtuple</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">list_names</span><span class="p">)</span></div>
 
 
 <span class="c"># url: http://stackoverflow.com/questions/16377215/how-to-pickle-a-namedtuple-instance-correctly</span>
-<span class="c"># url: https://docs.python.org/2/library/functions.html#globals</span></div>
+<span class="c"># url: https://docs.python.org/2/library/functions.html#globals</span>
 <div class="viewcode-block" id="create_namedtuple_on_globals"><a class="viewcode-back" href="../tp_composants.html#imt_tools.create_namedtuple_on_globals">[docs]</a><span class="k">def</span> <span class="nf">create_namedtuple_on_globals</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -900,9 +900,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">namedtupleClass</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="nb">globals</span><span class="p">()[</span><span class="n">namedtupleClass</span><span class="o">.</span><span class="n">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="n">namedtupleClass</span>
-    <span class="k">return</span> <span class="n">namedtupleClass</span>
+    <span class="k">return</span> <span class="n">namedtupleClass</span></div>
 
-</div>
+
 <div class="viewcode-block" id="create_namedtuple"><a class="viewcode-back" href="../tp_composants.html#imt_tools.create_namedtuple">[docs]</a><span class="k">def</span> <span class="nf">create_namedtuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -911,9 +911,9 @@
 <span class="sd">    :return:</span>
 <span class="sd">    :rtype: nametuple.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">collections</span><span class="o">.</span><span class="n">namedtuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="Timer"><a class="viewcode-back" href="../tp_composants.html#imt_tools.Timer">[docs]</a><span class="k">class</span> <span class="nc">Timer</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -933,7 +933,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span></div>
 
 
 <span class="c"># class timer_decorator(object):</span>
@@ -976,7 +976,7 @@
 <span class="c">#                 )</span>
 <span class="c">#</span>
 <span class="c">#         return wrapped_f</span>
-</div>
+
 <div class="viewcode-block" id="timer_decorator"><a class="viewcode-back" href="../tp_composants.html#imt_tools.timer_decorator">[docs]</a><span class="k">def</span> <span class="nf">timer_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;-&gt; TIMER</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">postfix</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1011,9 +1011,9 @@
                                                           <span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">,</span>
                                                           <span class="n">postfix</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
-    <span class="k">return</span> <span class="n">wrap</span>
+    <span class="k">return</span> <span class="n">wrap</span></div>
 
-</div>
+
 <span class="n">default_header_for_log</span> <span class="o">=</span> <span class="s">&#39;################## NEW SESSION ##################&#39;</span>
 
 
@@ -1072,9 +1072,9 @@
     <span class="n">header</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;header&#39;</span><span class="p">,</span> <span class="n">default_header_for_log</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">logger</span>
+    <span class="k">return</span> <span class="n">logger</span></div>
 
-</div>
+
 <div class="viewcode-block" id="filter_logger_name"><a class="viewcode-back" href="../tp_composants.html#imt_tools.filter_logger_name">[docs]</a><span class="k">def</span> <span class="nf">filter_logger_name</span><span class="p">(</span><span class="n">logger_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1088,9 +1088,9 @@
     <span class="k">except</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="n">logger_name</span> <span class="o">=</span> <span class="n">logger_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;trafipolluImp_&#39;</span><span class="p">,</span> <span class="s">&#39;tpi_&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">logger_name</span>
+    <span class="k">return</span> <span class="n">logger_name</span></div>
 
-</div>
+
 <div class="viewcode-block" id="config_file_handler"><a class="viewcode-back" href="../tp_composants.html#imt_tools.config_file_handler">[docs]</a><span class="k">def</span> <span class="nf">config_file_handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1118,9 +1118,9 @@
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="n">file_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">file_handler</span>
+    <span class="k">return</span> <span class="n">file_handler</span></div>
 
-</div>
+
 <div class="viewcode-block" id="construct_formatter_for_logger"><a class="viewcode-back" href="../tp_composants.html#imt_tools.construct_formatter_for_logger">[docs]</a><span class="k">def</span> <span class="nf">construct_formatter_for_logger</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1143,9 +1143,9 @@
     <span class="n">fs</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="si">%(funcName)s</span><span class="s">, </span><span class="si">%(levelname)s</span><span class="s">] </span><span class="si">%(message)s</span><span class="s">&quot;</span>
     <span class="n">dfs</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="c"># formatter = logging.Formatter(&#39;%(asctime)s :: %(levelname)s :: %(funcName)s :: %(message)s&#39;)</span>
-    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">dfs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">dfs</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="construct_filename_for_logger"><a class="viewcode-back" href="../tp_composants.html#imt_tools.construct_filename_for_logger">[docs]</a><span class="k">def</span> <span class="nf">construct_filename_for_logger</span><span class="p">(</span><span class="n">logger_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1156,9 +1156,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pathname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">pathname</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.log&#39;</span> <span class="o">%</span> <span class="n">logger_name</span>
-    <span class="k">return</span> <span class="n">filename</span>
+    <span class="k">return</span> <span class="n">filename</span></div>
 
-</div>
+
 <div class="viewcode-block" id="construct_qgis_tag"><a class="viewcode-back" href="../tp_composants.html#imt_tools.construct_qgis_tag">[docs]</a><span class="k">def</span> <span class="nf">construct_qgis_tag</span><span class="p">(</span><span class="n">logger_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1171,9 +1171,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tag</span> <span class="o">=</span> <span class="s">&#39;Plugins/TrafiPollu&#39;</span>
     <span class="n">tag</span> <span class="o">+=</span> <span class="s">&#39;/{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logger_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;qgis_separate_tab&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span> <span class="k">else</span> <span class="s">&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">tag</span>
+    <span class="k">return</span> <span class="n">tag</span></div>
 
-</div>
+
 <div class="viewcode-block" id="config_stream_handler"><a class="viewcode-back" href="../tp_composants.html#imt_tools.config_stream_handler">[docs]</a><span class="k">def</span> <span class="nf">config_stream_handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1187,10 +1187,10 @@
     <span class="n">stream_handler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
     <span class="k">if</span> <span class="s">&#39;formatter&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">stream_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;formatter&#39;</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">stream_handler</span>
+    <span class="k">return</span> <span class="n">stream_handler</span></div>
 
 
-<span class="c"># url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python</span></div>
+<span class="c"># url: http://stackoverflow.com/questions/19022868/how-to-make-dictionary-read-only-in-python</span>
 <div class="viewcode-block" id="ReadOnlyDict"><a class="viewcode-back" href="../tp_composants.html#imt_tools.ReadOnlyDict">[docs]</a><span class="k">class</span> <span class="nc">ReadOnlyDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1214,9 +1214,9 @@
     <span class="n">clear</span> <span class="o">=</span> <span class="n">__readonly__</span>
     <span class="n">update</span> <span class="o">=</span> <span class="n">__readonly__</span>
     <span class="n">setdefault</span> <span class="o">=</span> <span class="n">__readonly__</span>
-    <span class="k">del</span> <span class="n">__readonly__</span>
+    <span class="k">del</span> <span class="n">__readonly__</span></div>
 
-</div>
+
 <div class="viewcode-block" id="build_networkx_graph"><a class="viewcode-back" href="../tp_composants.html#imt_tools.build_networkx_graph">[docs]</a><span class="k">def</span> <span class="nf">build_networkx_graph</span><span class="p">(</span><span class="n">dict_nodes</span><span class="p">,</span> <span class="n">dict_edges</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1275,9 +1275,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -1294,7 +1294,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1303,13 +1303,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

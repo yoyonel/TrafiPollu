@@ -8,7 +8,7 @@
     
     <title>trafipolluImp_EXPORT_TRAFICS &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp_EXPORT_TRAFICS</h1><div class="highlight"><pre>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
@@ -70,7 +70,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">transfer_arguments</span><span class="p">([</span><span class="s">&#39;module_topo&#39;</span><span class="p">,</span> <span class="s">&#39;list_symu_connexions&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c">#</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT_TRAFICS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT_TRAFICS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="c"># Le decorator pyxbDecorator utilise les noms des methodes export_&lt;Type_PYXB&gt; pour retrouver les paths des types</span>
     <span class="c"># (complexes, ...) XML a construire/instancien.</span>
@@ -82,7 +82,7 @@
     <span class="c"># export_TRONCONS, export_TRONCON, ...</span>
     <span class="c"># La methode de resolution utilisee a ete de recreer un nouveau namespace &#39;local&#39; lie au noeud racine &#39;TRAFICS&#39;</span>
     <span class="c"># d&#39;ou l&#39;utilisation des methodes imbriquees (qui revient au meme en terme de namespace que l&#39;utilisation d&#39;un</span>
-    <span class="c"># system de classes imbriquees.</span></div>
+    <span class="c"># system de classes imbriquees.</span>
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_TRAFICS.export_TRAFICS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_TRAFICS.trafipolluImp_EXPORT_TRAFICS.export_TRAFICS">[docs]</a>    <span class="k">def</span> <span class="nf">export_TRAFICS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -212,9 +212,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -231,7 +231,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -240,13 +240,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

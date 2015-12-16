@@ -9,6 +9,7 @@ Listes des principaux composants:
     - :ref:`trafipolluImp_EXPORT`.
         - :ref:`trafipolluImp_EXPORT_CONNEXIONS`.
         - :ref:`trafipolluImp_EXPORT_TRAFICS`.
+        - :ref:`trafipolluImp_PYXB`.
 
 
 .. _trafipolluImp:
@@ -101,6 +102,20 @@ trafipolluImp_EXPORT_TRAFICS
 Détails de l'interface:
 
 .. automodule:: trafipolluImp_EXPORT_TRAFICS
+    :members:
+    :private-members:
+
+
+.. _trafipolluImp_PYXB:
+
+trafipolluImp_PYXB
+------------------
+
+Module orienté pour l'implémentation d'un parseur PYXB pour SYMUVIA.
+
+Détails de l'inferface:
+
+.. automodule:: trafipolluImp_PYXB
     :members:
     :private-members:
 

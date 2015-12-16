@@ -8,7 +8,7 @@
     
     <title>trafipolluImp &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot;Module d&#39;implementation principale du plugin: Interactive Map Tracking pour le project TrafiPollu</span>
@@ -159,12 +159,12 @@
         <span class="c">##############</span>
         <span class="c"># LOGS</span>
         <span class="c">##############</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Init&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Init&quot;</span><span class="p">)</span></div>
         <span class="c">##############</span>
 
     <span class="c">##############</span>
     <span class="c"># GUI</span>
-    <span class="c">##############</span></div>
+    <span class="c">##############</span>
 <div class="viewcode-block" id="TrafiPolluImp._init_signals_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._init_signals_">[docs]</a>    <span class="k">def</span> <span class="nf">_init_signals_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -182,13 +182,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">signals_manager</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">combobox_sql_scripts</span><span class="p">,</span>
                                  <span class="s">&quot;currentIndexChanged (int)&quot;</span><span class="p">,</span>
                                  <span class="bp">self</span><span class="o">.</span><span class="n">slot_currentIndexChanged_SQL</span><span class="p">,</span>
-                                 <span class="s">&quot;GUI&quot;</span><span class="p">)</span>
+                                 <span class="s">&quot;GUI&quot;</span><span class="p">)</span></div>
 
     <span class="c">##################</span>
     <span class="c">### GUI: SLOTS ###</span>
     <span class="c">##################</span>
     <span class="c"># Interface entre Qt-GUI et le plugin</span>
-    <span class="c"># a terme: Faudrait automatiser cette generation de code (l&#39;Interface)</span></div>
+    <span class="c"># a terme: Faudrait automatiser cette generation de code (l&#39;Interface)</span>
 <div class="viewcode-block" id="TrafiPolluImp.slot_clear"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_clear">[docs]</a>    <span class="k">def</span> <span class="nf">slot_clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -196,8 +196,8 @@
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_dump_topo_export"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_dump_topo_export">[docs]</a>    <span class="k">def</span> <span class="nf">slot_dump_topo_export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -205,8 +205,8 @@
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dump_topo_export_</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dump_topo_export_</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_Pickled_TrafiPollu"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_Pickled_TrafiPollu">[docs]</a>    <span class="k">def</span> <span class="nf">slot_Pickled_TrafiPollu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -214,8 +214,8 @@
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pickled_trafipollu_</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pickled_trafipollu_</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_execute_SQL_commands"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_execute_SQL_commands">[docs]</a>    <span class="k">def</span> <span class="nf">slot_execute_SQL_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -226,8 +226,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_execute_sql_commands</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">plainTextEdit_sql_script</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">(),</span>
             <span class="n">imt_tools</span><span class="o">.</span><span class="n">get_itemText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">combobox_sql_scripts</span><span class="p">)</span>
-        <span class="p">)</span>
-</div>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_refreshSqlScriptList"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_refreshSqlScriptList">[docs]</a>    <span class="k">def</span> <span class="nf">slot_refreshSqlScriptList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -235,8 +235,8 @@
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_sql_script_list</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_sql_script_list</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_currentIndexChanged_SQL"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_currentIndexChanged_SQL">[docs]</a>    <span class="k">def</span> <span class="nf">slot_currentIndexChanged_SQL</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_index</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -245,8 +245,8 @@
 <span class="sd">        :param id_index:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sql_filename</span> <span class="o">=</span> <span class="n">imt_tools</span><span class="o">.</span><span class="n">get_itemData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">combobox_sql_scripts</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">plainTextEdit_sql_script</span><span class="o">.</span><span class="n">setPlainText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sql_file</span><span class="p">(</span><span class="n">sql_filename</span><span class="p">))</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">plainTextEdit_sql_script</span><span class="o">.</span><span class="n">setPlainText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sql_file</span><span class="p">(</span><span class="n">sql_filename</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp.slot_export_to_symuvia"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.slot_export_to_symuvia">[docs]</a>    <span class="k">def</span> <span class="nf">slot_export_to_symuvia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -254,12 +254,12 @@
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
     <span class="c">##################</span>
 
     <span class="c">################################################################################</span>
     <span class="c">### PLUG/GUI: Implementations des methodes/fonctions utilisees par les SLOTS ###</span>
-    <span class="c">################################################################################</span></div>
+    <span class="c">################################################################################</span>
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TrafiPolluImp._enable_trafipollu_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._enable_trafipollu_">[docs]</a>    <span class="k">def</span> <span class="nf">_enable_trafipollu_</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -267,16 +267,16 @@
 <span class="sd">        Connection with QGIS interface</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-</div>
+        <span class="k">pass</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp._disable_trafipollu_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._disable_trafipollu_">[docs]</a>    <span class="k">def</span> <span class="nf">_disable_trafipollu_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Disconnection with QGIS interface</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">module_SQL</span><span class="o">.</span><span class="n">disconnect_sql_server</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_SQL</span><span class="o">.</span><span class="n">disconnect_sql_server</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp._execute_sql_commands"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._execute_sql_commands">[docs]</a>    <span class="k">def</span> <span class="nf">_execute_sql_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_file</span><span class="p">,</span> <span class="n">sql_choice_combobox</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -289,8 +289,8 @@
 <span class="sd">        :type sql_choice_combobox: str</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">module_SQL</span><span class="o">.</span><span class="n">execute_sql_commands</span><span class="p">(</span><span class="n">sql_file</span><span class="p">,</span> <span class="n">sql_choice_combobox</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_SQL</span><span class="o">.</span><span class="n">execute_sql_commands</span><span class="p">(</span><span class="n">sql_file</span><span class="p">,</span> <span class="n">sql_choice_combobox</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TrafiPolluImp.get_sql_filename"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.get_sql_filename">[docs]</a>    <span class="k">def</span> <span class="nf">get_sql_filename</span><span class="p">(</span><span class="n">sql_name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -303,8 +303,8 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normcase</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">sql_name</span> <span class="o">+</span> <span class="s">&#39;.sql&#39;</span>
-</div>
+        <span class="k">return</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">sql_name</span> <span class="o">+</span> <span class="s">&#39;.sql&#39;</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="TrafiPolluImp.get_sql_file"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp.get_sql_file">[docs]</a>    <span class="k">def</span> <span class="nf">get_sql_file</span><span class="p">(</span><span class="n">sql_filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -327,8 +327,8 @@
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Probleme de lecture du fichier sql: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sql_filename</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;-&gt; Exception: {0}&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">sql_file</span>
-</div>
+            <span class="k">return</span> <span class="n">sql_file</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp._refresh_sql_script_list"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._refresh_sql_script_list">[docs]</a>    <span class="k">def</span> <span class="nf">_refresh_sql_script_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -343,8 +343,8 @@
         <span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dlg</span><span class="o">.</span><span class="n">combobox_sql_scripts</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">i</span><span class="p">)[:</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">path</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">&#39;.sql&#39;</span><span class="p">)</span>
-        <span class="p">]</span>
-</div>
+        <span class="p">]</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp._dump_topo_export_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._dump_topo_export_">[docs]</a>    <span class="k">def</span> <span class="nf">_dump_topo_export_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -398,8 +398,8 @@
         <span class="c"># imt_tools.build_networkx_graph(self.__dict_nodes, self.__dict_edges)</span>
 
         <span class="c"># traitement de la requete d&#39;export [EXPORT]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="TrafiPolluImp._clear_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._clear_">[docs]</a>    <span class="k">def</span> <span class="nf">_clear_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -416,11 +416,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__dict_nodes</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="c"># On clear les donnees rattachees aux modules: TOPO, EXPORT</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">module_TOPO</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module_export</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
     <span class="c">#############################</span>
     <span class="c">### SERIALISATION: PICLKE ###</span>
-    <span class="c">#############################</span></div>
+    <span class="c">#############################</span>
 <div class="viewcode-block" id="TrafiPolluImp._pickled_trafipollu_"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp.TrafiPolluImp._pickled_trafipollu_">[docs]</a>    <span class="k">def</span> <span class="nf">_pickled_trafipollu_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -439,8 +439,8 @@
         <span class="n">infilename_for_pickle</span> <span class="o">=</span> <span class="n">qgis_plugins_directory</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="s">&quot;dump_pickle.p&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Pickle TrafiPollu in: </span><span class="si">%s</span><span class="s"> ...&quot;</span> <span class="o">%</span> <span class="n">infilename_for_pickle</span><span class="p">)</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">infilename_for_pickle</span><span class="p">,</span> <span class="s">&quot;wb&quot;</span><span class="p">))</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Pickle TrafiPollu in: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="n">infilename_for_pickle</span><span class="p">)</span>
-</div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Pickle TrafiPollu in: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="n">infilename_for_pickle</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -507,16 +507,16 @@
 <span class="sd">        :type states: pickle</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pickle_states</span> <span class="o">=</span> <span class="n">states</span>
-    <span class="c">#############################</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pickle_states</span> <span class="o">=</span> <span class="n">states</span></div>
+    <span class="c">#############################</span>
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -533,7 +533,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -542,13 +542,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

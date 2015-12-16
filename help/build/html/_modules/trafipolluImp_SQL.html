@@ -8,7 +8,7 @@
     
     <title>trafipolluImp_SQL &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp_SQL</h1><div class="highlight"><pre>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
@@ -171,8 +171,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b_connection_to_postgres_server</span> <span class="o">=</span> <span class="bp">False</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">connect_sql_server</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect_sql_server</span><span class="p">()</span></div>
+
     <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -189,7 +189,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_connection_to_postgres_server</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     <span class="c"># TODO: a tester avant de valider la suppression de ce code</span>
     <span class="c"># def get_value(self, name_server, option):</span>
@@ -202,7 +202,7 @@
     <span class="c">#     :return:</span>
     <span class="c">#     &quot;&quot;&quot;</span>
     <span class="c">#     return self.__dict__[&#39;sql_&#39; + name_server + &#39;_&#39; + option]</span>
-</div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL.connect_sql_server"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server">[docs]</a>    <span class="k">def</span> <span class="nf">connect_sql_server</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -239,8 +239,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_connection_to_postgres_server</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Impossible de se connecter a un serveur !&#39;</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_connection_to_postgres_server</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">b_connection_to_postgres_server</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL.connect_sql_server_log"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.connect_sql_server_log">[docs]</a>    <span class="k">def</span> <span class="nf">connect_sql_server_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_server</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -258,8 +258,8 @@
                 <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s">&#39;- &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_dict_params_server</span><span class="p">[</span><span class="n">name_server</span><span class="p">]</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span>
             <span class="p">)</span>
-        <span class="p">)</span>
-</div>
+        <span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_SQL._update_tables_from_qgis"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._update_tables_from_qgis">[docs]</a>    <span class="k">def</span> <span class="nf">_update_tables_from_qgis</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -288,8 +288,8 @@
                 <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Probleme au moment du commit ! -&gt; {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                <span class="k">pass</span>
-</div>
+                <span class="k">pass</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL.build_sql_parameters_with_map_extent"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent">[docs]</a>    <span class="k">def</span> <span class="nf">build_sql_parameters_with_map_extent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -334,8 +334,8 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;extent_src_crs.postgisSrid: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">extent_src_crs</span><span class="o">.</span><span class="n">postgisSrid</span><span class="p">())</span>
         <span class="c">#######</span>
 
-        <span class="k">return</span> <span class="n">dict_parameters</span>
-</div>
+        <span class="k">return</span> <span class="n">dict_parameters</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL.build_sql_parameters_with_map_extent_for_roundabouts"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_map_extent_for_roundabouts">[docs]</a>    <span class="k">def</span> <span class="nf">build_sql_parameters_with_map_extent_for_roundabouts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        idem que &#39;build_sql_parameters_with_map_extent&#39;</span>
@@ -374,8 +374,8 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;* extent_postgisSrid: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">extent_postgisSrid</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;extent_src_crs.postgisSrid: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">extent_src_crs</span><span class="o">.</span><span class="n">postgisSrid</span><span class="p">())</span>
 
-        <span class="k">return</span> <span class="n">dict_parameters</span>
-</div>
+        <span class="k">return</span> <span class="n">dict_parameters</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_SQL.build_sql_parameters_with_update_def_zone_test"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.build_sql_parameters_with_update_def_zone_test">[docs]</a>    <span class="k">def</span> <span class="nf">build_sql_parameters_with_update_def_zone_test</span><span class="p">(</span>
             <span class="n">b_update_def_zone_test_with_convex_hull_on_symuvia_network</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
@@ -421,8 +421,8 @@
             <span class="s">&#39;gPolygonSRID&#39;</span><span class="p">:</span> <span class="n">gPolygonSRID</span>
         <span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">dict_parameters</span>
-</div>
+        <span class="k">return</span> <span class="n">dict_parameters</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL.execute_sql_commands"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL.execute_sql_commands">[docs]</a>    <span class="k">def</span> <span class="nf">execute_sql_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sql_file</span><span class="p">,</span> <span class="n">id_sql_method</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -494,9 +494,9 @@
 
                         <span class="n">sql_method</span><span class="p">(</span><span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">connection</span><span class="p">,</span> <span class="n">cursor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="p">)</span>
                 <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span>
-                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Command skipped: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;Command skipped: </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span></div>
                     <span class="c">#</span>
-</div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_entity"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_entity">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -538,8 +538,8 @@
                     <span class="n">post_resquest_for_entity</span><span class="p">(</span><span class="n">dump_for_entity</span><span class="p">(</span><span class="n">objects_from_sql_request</span><span class="p">))</span>
                 <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Pb! -&gt; {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-                <span class="k">return</span> <span class="mi">1</span>
-</div>
+                <span class="k">return</span> <span class="mi">1</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_roundabouts"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_roundabouts">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_roundabouts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -558,8 +558,8 @@
                 <span class="s">&#39;func_for_dumping&#39;</span><span class="p">:</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">dump_for_roundabouts</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._post_request_for_roundabouts"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_roundabouts">[docs]</a>    <span class="k">def</span> <span class="nf">_post_request_for_roundabouts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dump</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -583,8 +583,8 @@
                 <span class="k">if</span> <span class="n">edge_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="p">[</span><span class="n">edge_id</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;roundabouts&#39;</span><span class="p">:</span> <span class="n">ra_id</span><span class="p">})</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">dict_roundabouts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_roundabouts</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_roundabouts</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_roundabouts</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_edges"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_edges">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -604,8 +604,8 @@
                 <span class="s">&#39;func_for_dumping&#39;</span><span class="p">:</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">dump_for_edges</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._post_request_for_edges"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_edges">[docs]</a>    <span class="k">def</span> <span class="nf">_post_request_for_edges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dump</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -618,8 +618,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dict_edges</span> <span class="o">=</span> <span class="n">results_dump</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_edges</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_edges</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_nodes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -639,8 +639,8 @@
                 <span class="s">&#39;func_for_dumping&#39;</span><span class="p">:</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">dump_for_nodes</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._post_request_for_nodes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_nodes">[docs]</a>    <span class="k">def</span> <span class="nf">_post_request_for_nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dump</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -653,8 +653,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dict_nodes</span> <span class="o">=</span> <span class="n">results_dump</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_nodes</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_nodes</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_interconnexions"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_interconnexions">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_interconnexions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -673,8 +673,8 @@
                 <span class="s">&#39;func_for_dumping&#39;</span><span class="p">:</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">dump_for_interconnexions</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._post_request_for_interconnexions"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_interconnexions">[docs]</a>    <span class="k">def</span> <span class="nf">_post_request_for_interconnexions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dump</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -695,8 +695,8 @@
                     <span class="s">&#39;interconnexions&#39;</span><span class="p">:</span> <span class="n">interconnexions</span><span class="p">,</span>
                     <span class="s">&#39;set_id_edges&#39;</span><span class="p">:</span> <span class="n">dict_set_id_edges</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>
                 <span class="p">}</span>
-            <span class="p">)</span>
-</div>
+            <span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._request_for_lanes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._request_for_lanes">[docs]</a>    <span class="k">def</span> <span class="nf">_request_for_lanes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -715,8 +715,8 @@
                 <span class="s">&#39;func_for_dumping&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tpi_DUMP</span><span class="o">.</span><span class="n">dump_lanes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_edges</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_request_for_entity</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_SQL._post_request_for_lanes"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_SQL.trafipolluImp_SQL._post_request_for_lanes">[docs]</a>    <span class="k">def</span> <span class="nf">_post_request_for_lanes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">results_dump</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -739,9 +739,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -758,7 +758,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -767,13 +767,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

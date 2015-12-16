@@ -8,7 +8,7 @@
     
     <title>trafipolluImp_EXPORT &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp_EXPORT</h1><div class="highlight"><pre>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
@@ -141,15 +141,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s">&#39;list_symu_connexions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span><span class="p">})</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.clear"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span> <span class="o">=</span> <span class="p">[]</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span> <span class="o">=</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.generate_filename"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.generate_filename">[docs]</a>    <span class="k">def</span> <span class="nf">generate_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -161,8 +161,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_path&#39;</span><span class="p">)]</span> <span class="o">+</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_filename&#39;</span><span class="p">)]</span> <span class="o">+</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;xsd_prefix&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="s">&#39;xsd_version&#39;</span><span class="p">]</span> <span class="o">+</span> \
-            <span class="s">&#39;.&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_ext&#39;</span><span class="p">)]</span>
-</div>
+            <span class="s">&#39;.&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s">&#39;symuvia_&#39;</span> <span class="o">+</span> <span class="n">target</span> <span class="o">+</span> <span class="s">&#39;_ext&#39;</span><span class="p">)]</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT.update_SYMUVIA"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_SYMUVIA">[docs]</a>    <span class="k">def</span> <span class="nf">update_SYMUVIA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -185,29 +185,29 @@
 
         <span class="k">if</span> <span class="n">b_export_connexion</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update_CONNEXIONS</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">update_TRAFICS</span><span class="p">()</span>
-</div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_TRAFICS</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.update_TRONCONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_TRONCONS">[docs]</a>    <span class="k">def</span> <span class="nf">update_TRONCONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_TRONCONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRONCONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_TRONCONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRONCONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.update_CONNEXIONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_CONNEXIONS">[docs]</a>    <span class="k">def</span> <span class="nf">update_CONNEXIONS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_CONNEXIONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_CONNEXIONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_RESEAU_CONNEXIONS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_CONNEXIONS</span><span class="p">(</span><span class="s">&#39;RESEAU&#39;</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.update_TRAFICS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.update_TRAFICS">[docs]</a>    <span class="k">def</span> <span class="nf">update_TRAFICS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRAFICS</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">)</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT_TRAFICS</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRAFICS</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">)</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT.export"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update_symu</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">outfilename</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -234,15 +234,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">save_ROOT</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">symu_ROOT</span><span class="p">,</span>
             <span class="n">outfilename</span> <span class="k">if</span> <span class="n">outfilename</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">symuvia_outfilename</span>
-        <span class="p">)</span>
-</div>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT.save_ROOT"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.save_ROOT">[docs]</a>    <span class="k">def</span> <span class="nf">save_ROOT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym_ROOT</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_SYMUVIA_Node</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">,</span> <span class="n">sym_ROOT</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_SYMUVIA_Node</span><span class="p">(</span><span class="s">&#39;ROOT_SYMUBRUIT&#39;</span><span class="p">,</span> <span class="n">sym_ROOT</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT.save_SYMUVIA_Node"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.save_SYMUVIA_Node">[docs]</a>    <span class="k">def</span> <span class="nf">save_SYMUVIA_Node</span><span class="p">(</span><span class="n">element_name</span><span class="p">,</span> <span class="n">sym_node</span><span class="p">,</span> <span class="n">outfilename</span><span class="p">,</span> <span class="n">prettyxml</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -270,8 +270,8 @@
         <span class="c">#</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_xml</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Write in file: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="n">outfilename</span><span class="p">)</span>
-</div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Write in file: </span><span class="si">%s</span><span class="s"> [DONE]&quot;</span> <span class="o">%</span> <span class="n">outfilename</span><span class="p">)</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT.export_TRONCONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT.trafipolluImp_EXPORT.export_TRONCONS">[docs]</a>    <span class="k">def</span> <span class="nf">export_TRONCONS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -292,9 +292,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -311,7 +311,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -320,13 +320,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

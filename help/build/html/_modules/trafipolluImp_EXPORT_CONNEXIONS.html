@@ -8,7 +8,7 @@
     
     <title>trafipolluImp_EXPORT_CONNEXIONS &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp_EXPORT_CONNEXIONS</h1><div class="highlight"><pre>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
@@ -90,8 +90,8 @@
             <span class="s">&#39;sg3_ra&#39;</span><span class="p">:</span> <span class="bp">None</span>
         <span class="p">}</span>
         <span class="c">#</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</div>
+        <span class="nb">super</span><span class="p">(</span><span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_CONNEXIONS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_CONNEXIONS">[docs]</a>    <span class="k">def</span> <span class="nf">export_CONNEXIONS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -140,8 +140,8 @@
                 <span class="n">str_path_to_child</span>
             <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_CONNEXIONS</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_CONNEXIONS</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_GIRATOIRES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_GIRATOIRES">[docs]</a>    <span class="k">def</span> <span class="nf">export_GIRATOIRES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_id_nodes</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -162,8 +162,8 @@
             <span class="n">sym_GIRATOIRES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_GIRATOIRE</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_GIRATOIRE</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_GIRATOIRES</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_GIRATOIRES</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_GIRATOIRE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_GIRATOIRE">[docs]</a>    <span class="k">def</span> <span class="nf">export_GIRATOIRE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -195,8 +195,8 @@
 
                 <span class="c"># sym_GIRATOIRE.TRONCONS_INTERNES = self.export_TRONCONS_INTERNES(str_path_to_child)</span>
 
-        <span class="k">return</span> <span class="n">sym_GIRATOIRE</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_GIRATOIRE</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_TRONCONS_INTERNES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_TRONCONS_INTERNES">[docs]</a>    <span class="k">def</span> <span class="nf">export_TRONCONS_INTERNES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -207,8 +207,8 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_TRONCONS_INTERNES</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">troncon_interne</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_TRONCON_INTERNE</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">):</span>
             <span class="n">sym_TRONCONS_INTERNES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">troncon_interne</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sym_TRONCONS_INTERNES</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_TRONCONS_INTERNES</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_TRONCON_INTERNE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_TRONCON_INTERNE">[docs]</a>    <span class="k">def</span> <span class="nf">export_TRONCON_INTERNE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -249,8 +249,8 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Exception: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">list_TRONCON_INTERNE</span>
-</div>
+        <span class="k">return</span> <span class="n">list_TRONCON_INTERNE</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURSAFEUX"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURSAFEUX">[docs]</a>    <span class="k">def</span> <span class="nf">export_CARREFOURSAFEUX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_id_nodes</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -272,8 +272,8 @@
             <span class="n">sym_CAFS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_CAF</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_CAF</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_CAFS</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_CAFS</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURAFEUX"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_CARREFOURAFEUX">[docs]</a>    <span class="k">def</span> <span class="nf">export_CARREFOURAFEUX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -298,8 +298,8 @@
             <span class="n">sym_CARREFOURAFEUX</span><span class="o">.</span><span class="n">MOUVEMENTS_AUTORISES</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_MOUVEMENTS_AUTORISES</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">)</span>
             <span class="n">sym_CARREFOURAFEUX</span><span class="o">.</span><span class="n">ENTREES_CAF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_ENTREES_CAF</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_CARREFOURAFEUX</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_CARREFOURAFEUX</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEURS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEURS">[docs]</a>    <span class="k">def</span> <span class="nf">export_REPARTITEURS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_id_nodes</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -318,17 +318,17 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">list_symu_connexions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_REPARTITEUR</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_REPARTITEURS</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_REPARTITEURS</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEUR"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_REPARTITEUR">[docs]</a>    <span class="k">def</span> <span class="nf">export_REPARTITEUR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param args:</span>
-<span class="sd">        :type args: `list`</span>
+<span class="sd">        :type args: `*list`.</span>
 
 <span class="sd">        :return:</span>
-<span class="sd">        :rtype: .</span>
+<span class="sd">        :rtype:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sym_REPARTITEUR</span> <span class="o">=</span> <span class="bp">None</span>
@@ -347,8 +347,8 @@
             <span class="c">#</span>
             <span class="n">sym_REPARTITEUR</span><span class="o">.</span><span class="n">MOUVEMENTS_AUTORISES</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_MOUVEMENTS_AUTORISES</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">sym_REPARTITEUR</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_REPARTITEUR</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENTS_AUTORISES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENTS_AUTORISES">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENTS_AUTORISES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -359,9 +359,9 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_MOUVEMENTS_AUTORISES</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">mouvement_autorise</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_MOUVEMENT_AUTORISE</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">):</span>
             <span class="n">sym_MOUVEMENTS_AUTORISES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mouvement_autorise</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sym_MOUVEMENTS_AUTORISES</span>
+        <span class="k">return</span> <span class="n">sym_MOUVEMENTS_AUTORISES</span></div>
 
-</div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_SORTIES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_SORTIES">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENT_SORTIES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -372,8 +372,8 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_MOUVEMENT_SORTIES</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">mvt_sortie</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_MOUVEMENT_SORTIE</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">):</span>
             <span class="n">sym_MOUVEMENT_SORTIES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mvt_sortie</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sym_MOUVEMENT_SORTIES</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_MOUVEMENT_SORTIES</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_ENTREES_CAF"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_ENTREES_CAF">[docs]</a>    <span class="k">def</span> <span class="nf">export_ENTREES_CAF</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -385,8 +385,8 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_ENTREES_CAF</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">entree_caf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_ENTREE_CAF</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">):</span>
             <span class="n">sym_ENTREES_CAF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entree_caf</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sym_ENTREES_CAF</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_ENTREES_CAF</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENTS"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENTS">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENTS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -397,11 +397,11 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_MOUVEMENTS</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">mouvement</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_MOUVEMENT</span><span class="p">(</span><span class="n">str_path_to_child</span><span class="p">):</span>
             <span class="n">sym_MOUVEMENTS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mouvement</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">sym_MOUVEMENTS</span>
+        <span class="k">return</span> <span class="n">sym_MOUVEMENTS</span></div>
 
     <span class="c"># ########################################################################################################</span>
     <span class="c">## Version avec les interconnexions SG3</span>
-    <span class="c">#########################################################################################################</span></div>
+    <span class="c">#########################################################################################################</span>
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_AUTORISE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_AUTORISE">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENT_AUTORISE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -449,8 +449,8 @@
                 <span class="c">#</span>
                 <span class="n">list_MOUVEMENT_AUTORISE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_MOUVEMENT_AUTORISE</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">list_MOUVEMENT_AUTORISE</span>
-</div>
+        <span class="k">return</span> <span class="n">list_MOUVEMENT_AUTORISE</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_SORTIE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT_SORTIE">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENT_SORTIE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -489,8 +489,8 @@
                 <span class="c">#</span>
                 <span class="n">list_MOUVEMENT_SORTIE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_MOUVEMENT_SORTIE</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">list_MOUVEMENT_SORTIE</span>
-</div>
+        <span class="k">return</span> <span class="n">list_MOUVEMENT_SORTIE</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_ENTREE_CAF"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_ENTREE_CAF">[docs]</a>    <span class="k">def</span> <span class="nf">export_ENTREE_CAF</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -535,8 +535,8 @@
                 <span class="c">#</span>
                 <span class="n">list_ENTREE_CAF</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_ENTREE_CAF</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">list_ENTREE_CAF</span>
-</div>
+        <span class="k">return</span> <span class="n">list_ENTREE_CAF</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_MOUVEMENT">[docs]</a>    <span class="k">def</span> <span class="nf">export_MOUVEMENT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -577,8 +577,8 @@
                 <span class="c">#</span>
                 <span class="n">list_MOUVEMENT</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sym_MOUVEMENT</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">list_MOUVEMENT</span>
-</div>
+        <span class="k">return</span> <span class="n">list_MOUVEMENT</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_EXTREMITES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_EXTREMITES">[docs]</a>    <span class="k">def</span> <span class="nf">export_EXTREMITES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_extremites</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -591,8 +591,8 @@
         <span class="n">str_path_to_child</span><span class="p">,</span> <span class="n">sym_EXTREMITES</span> <span class="o">=</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_path_instance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">id_extremite</span> <span class="ow">in</span> <span class="n">list_extremites</span><span class="p">:</span>
             <span class="n">sym_EXTREMITES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">export_EXTREMITE</span><span class="p">(</span><span class="n">id_extremite</span><span class="p">,</span> <span class="n">str_path_to_child</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">sym_EXTREMITES</span>
-</div>
+        <span class="k">return</span> <span class="n">sym_EXTREMITES</span></div>
+
     <span class="nd">@pyxbDecorator</span><span class="p">(</span><span class="n">pyxb_parser</span><span class="p">)</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.export_EXTREMITE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.export_EXTREMITE">[docs]</a>    <span class="k">def</span> <span class="nf">export_EXTREMITE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_extremite</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -604,16 +604,16 @@
         <span class="k">return</span> <span class="n">pyxbDecorator</span><span class="o">.</span><span class="n">get_instance</span><span class="p">(</span>
             <span class="o">*</span><span class="n">args</span><span class="p">,</span>
             <span class="nb">id</span><span class="o">=</span><span class="n">id_extremite</span>
-        <span class="p">)</span>
-</div>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.select_node"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.select_node">[docs]</a>    <span class="k">def</span> <span class="nf">select_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param node_id:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;node_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sg3_node&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sg3_node&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.select_ra"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.select_ra">[docs]</a>    <span class="k">def</span> <span class="nf">select_ra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ra_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -621,23 +621,23 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;ra_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ra_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sg3_ra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_roundabouts</span><span class="p">[</span><span class="n">ra_id</span><span class="p">]</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sg3_ra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_roundabouts</span><span class="p">[</span><span class="n">ra_id</span><span class="p">]</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.select_CONNEXION"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.select_CONNEXION">[docs]</a>    <span class="k">def</span> <span class="nf">select_CONNEXION</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym_CONNEXION</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :param sym_CONNEXION:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sym_CONNEXION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sym_CONNEXION</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sym_CONNEXION&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sym_CONNEXION</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.get_CONNEXION"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.get_CONNEXION">[docs]</a>    <span class="k">def</span> <span class="nf">get_CONNEXION</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sym_CONNEXION&#39;</span><span class="p">]</span>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor_symuvia</span><span class="p">[</span><span class="s">&#39;sym_CONNEXION&#39;</span><span class="p">]</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.build_id_for_CONNEXION"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.build_id_for_CONNEXION">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_CONNEXION</span><span class="p">(</span><span class="n">str_id_connexion</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -646,8 +646,8 @@
 <span class="sd">        :param node_id:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">str_id_connexion</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">str_id_connexion</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.build_id_for_CAF"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.build_id_for_CAF">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_CAF</span><span class="p">(</span><span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -655,8 +655,8 @@
 <span class="sd">        :param node_id:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="o">.</span><span class="n">build_id_for_CONNEXION</span><span class="p">(</span><span class="s">&#39;CAF_&#39;</span><span class="p">,</span> <span class="n">node_id</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="o">.</span><span class="n">build_id_for_CONNEXION</span><span class="p">(</span><span class="s">&#39;CAF_&#39;</span><span class="p">,</span> <span class="n">node_id</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.build_id_for_REPARTITEUR"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.build_id_for_REPARTITEUR">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_REPARTITEUR</span><span class="p">(</span><span class="n">node_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -664,8 +664,8 @@
 <span class="sd">        :param node_id:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="o">.</span><span class="n">build_id_for_CONNEXION</span><span class="p">(</span><span class="s">&#39;REP_&#39;</span><span class="p">,</span> <span class="n">node_id</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">trafipolluImp_EXPORT_CONNEXIONS</span><span class="o">.</span><span class="n">build_id_for_CONNEXION</span><span class="p">(</span><span class="s">&#39;REP_&#39;</span><span class="p">,</span> <span class="n">node_id</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.build_id_python_to_symuvia"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.build_id_python_to_symuvia">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_python_to_symuvia</span><span class="p">(</span><span class="n">python_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -674,8 +674,8 @@
 <span class="sd">        :return:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">python_id</span> <span class="o">+</span> <span class="mi">1</span>
-</div>
+        <span class="k">return</span> <span class="n">python_id</span> <span class="o">+</span> <span class="mi">1</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_EXPORT_CONNEXIONS.build_id_for_GIRATOIRE"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_EXPORT_CONNEXIONS.trafipolluImp_EXPORT_CONNEXIONS.build_id_for_GIRATOIRE">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_GIRATOIRE</span><span class="p">(</span>
             <span class="n">ra_id</span><span class="p">,</span>
@@ -686,15 +686,18 @@
 <span class="sd">        :param ra_id:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ra_id</span><span class="p">)</span>
-</pre></div></div></div>
+        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ra_id</span><span class="p">)</span></div></div>
+
+
+
+</pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -711,7 +714,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -720,13 +723,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

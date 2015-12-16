@@ -8,7 +8,7 @@
     
     <title>trafipolluImp_TOPO &mdash; interactive_map_tracking 1.0 documentation</title>
     
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,8 +26,8 @@
     <link rel="top" title="interactive_map_tracking 1.0 documentation" href="../index.html" />
     <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -36,15 +36,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for trafipolluImp_TOPO</h1><div class="highlight"><pre>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;latty&#39;</span>
@@ -152,8 +152,8 @@
 
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())))</span>
-</div>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dict_configs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())))</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO.clear"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -165,8 +165,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dict_extremites</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s">&#39;ENTREES&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s">&#39;SORTIES&#39;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="p">}</span>
-</div>
+        <span class="p">}</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_topo"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -179,8 +179,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_for_troncons</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_for_interconnexions</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_extrimites</span><span class="p">()</span>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_topo_extrimites</span><span class="p">()</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_for_troncons"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_for_troncons">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_for_troncons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -209,9 +209,9 @@
             <span class="s">&#39;convert_sg3_edges_to_pyxb_symutroncons - {0} troncons added&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict_pyxb_symutroncons</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
         <span class="c">#</span>
-</div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.update_dict_pyxb_symuTroncons"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.update_dict_pyxb_symuTroncons">[docs]</a>    <span class="k">def</span> <span class="nf">update_dict_pyxb_symuTroncons</span><span class="p">(</span><span class="n">dict_pyxb_symuTroncons</span><span class="p">,</span> <span class="n">pyxb_symuTroncon</span><span class="p">,</span> <span class="n">sg3_edge</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -235,8 +235,8 @@
                 <span class="c"># TODO: il faudrait (plutot) updater le TRONCON (au lieu de le remplacer)</span>
                 <span class="n">pyxb_symuTroncon</span> <span class="o">=</span> <span class="n">list_pyxb_symuTRONCONS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="c">#</span>
-            <span class="n">dict_pyxb_symuTroncons</span><span class="p">[</span><span class="n">pyxb_symuTroncon</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pyxb_symuTroncon</span>
-</div>
+            <span class="n">dict_pyxb_symuTroncons</span><span class="p">[</span><span class="n">pyxb_symuTroncon</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">pyxb_symuTroncon</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO._build_pyxb_symutroncon_from_sg3_edge_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO._build_pyxb_symutroncon_from_sg3_edge_lane">[docs]</a>    <span class="k">def</span> <span class="nf">_build_pyxb_symutroncon_from_sg3_edge_lane</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -313,8 +313,8 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;_build_pyxb_symutroncon_from_sg3_edge_lane - Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pyxb_symuTRONCON</span>
-</div>
+            <span class="k">return</span> <span class="n">pyxb_symuTRONCON</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_symutroncon_from_sg3_edge"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_symutroncon_from_sg3_edge">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_symutroncon_from_sg3_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg3_edge_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -363,8 +363,8 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception as e: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">dict_pyxb_symuTroncons</span>
-</div>
+            <span class="k">return</span> <span class="n">dict_pyxb_symuTroncons</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_link_from_sg3_to_symuvia_for_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_link_from_sg3_to_symuvia_for_lane">[docs]</a>    <span class="k">def</span> <span class="nf">build_link_from_sg3_to_symuvia_for_lane</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">pyxb_symuTRONCON</span><span class="p">,</span>
@@ -403,8 +403,8 @@
                 <span class="n">python_lane_id</span><span class="p">,</span>
                 <span class="n">nb_lanes</span><span class="p">,</span>
                 <span class="n">lane_direction</span>
-            <span class="p">)</span>
-</div>
+            <span class="p">)</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_symuTroncon_with_lanes_in_groups"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_symuTroncon_with_lanes_in_groups">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_symuTroncon_with_lanes_in_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -490,8 +490,8 @@
                 <span class="n">lane_geometry</span><span class="p">[</span><span class="n">id_vertice_for_amont</span><span class="p">],</span>
                 <span class="n">lane_geometry</span><span class="p">[</span><span class="n">id_vertice_for_aval</span><span class="p">],</span>
                 <span class="n">lane_geometry</span>
-            <span class="p">)</span>
-</div>
+            <span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.update_pyxb_node"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.update_pyxb_node">[docs]</a>    <span class="k">def</span> <span class="nf">update_pyxb_node</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -500,8 +500,8 @@
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="n">node</span><span class="o">.</span><span class="n">_setAttribute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-</div>
+            <span class="n">node</span><span class="o">.</span><span class="n">_setAttribute</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_TRONCON"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_TRONCON">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_TRONCON</span><span class="p">(</span><span class="n">str_pyxb_symutroncon_id</span><span class="p">,</span> <span class="n">lane_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -510,8 +510,8 @@
 <span class="sd">        :param lane_id:</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">str_pyxb_symutroncon_id</span> <span class="o">+</span> <span class="s">&#39;_lane_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lane_id</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">str_pyxb_symutroncon_id</span> <span class="o">+</span> <span class="s">&#39;_lane_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lane_id</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_pyxb_POINTS_INTERNES"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_pyxb_POINTS_INTERNES">[docs]</a>    <span class="k">def</span> <span class="nf">build_pyxb_POINTS_INTERNES</span><span class="p">(</span><span class="n">list_points</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -523,8 +523,8 @@
         <span class="n">pyxb_symuPOINTS_INTERNES</span> <span class="o">=</span> <span class="n">symuvia_parser</span><span class="o">.</span><span class="n">typePointsInternes</span><span class="p">()</span>
 
         <span class="p">[</span><span class="n">pyxb_symuPOINTS_INTERNES</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyxb</span><span class="o">.</span><span class="n">BIND</span><span class="p">(</span><span class="n">coordonnees</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">list_points</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">pyxb_symuPOINTS_INTERNES</span>
-</div>
+        <span class="k">return</span> <span class="n">pyxb_symuPOINTS_INTERNES</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.simplify_list_points"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.simplify_list_points">[docs]</a>    <span class="k">def</span> <span class="nf">simplify_list_points</span><span class="p">(</span>
             <span class="n">list_points</span><span class="p">,</span>
@@ -541,8 +541,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">shp_list_points</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">(</span><span class="n">list_points</span><span class="p">)</span>
         <span class="n">shp_simplify_list_points</span> <span class="o">=</span> <span class="n">shp_list_points</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">tolerance_distance</span><span class="p">,</span> <span class="n">preserve_topology</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shp_simplify_list_points</span><span class="p">)</span>
-</div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shp_simplify_list_points</span><span class="p">)</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.optimize_list_points"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.optimize_list_points">[docs]</a>    <span class="k">def</span> <span class="nf">optimize_list_points</span><span class="p">(</span>
             <span class="n">list_points</span><span class="p">,</span>
@@ -593,8 +593,8 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shp_list_points_optimized</span><span class="p">)</span>
-</div>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shp_list_points_optimized</span><span class="p">)</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_for_interconnexions"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_for_interconnexions">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_for_interconnexions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -724,8 +724,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dict_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dict_interconnexions</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">list_remove_nodes</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;# build_topo_for_nodes - nb nodes_removed: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_remove_nodes</span><span class="p">)))</span>
-</div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;# build_topo_for_nodes - nb nodes_removed: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_remove_nodes</span><span class="p">)))</span></div>
+
 <div class="viewcode-block" id="trafipolluImp_TOPO.find_symu_troncon_lane"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.find_symu_troncon_lane">[docs]</a>    <span class="k">def</span> <span class="nf">find_symu_troncon_lane</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">sg3_edge_id</span><span class="p">,</span>
@@ -772,8 +772,8 @@
             <span class="n">symu_lane_id</span> <span class="o">=</span> <span class="p">(</span><span class="n">symu_troncon_containing_lane</span><span class="o">.</span><span class="n">nb_lanes</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">symu_lane_id</span>
         <span class="c"># #######################################################################</span>
 
-        <span class="k">return</span> <span class="n">symu_troncon_containing_lane</span><span class="p">,</span> <span class="n">symu_lane_id</span>
-</div>
+        <span class="k">return</span> <span class="n">symu_troncon_containing_lane</span><span class="p">,</span> <span class="n">symu_lane_id</span></div>
+
     <span class="nd">@timer_decorator</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_topo_extrimites"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_topo_extrimites">[docs]</a>    <span class="k">def</span> <span class="nf">build_topo_extrimites</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -799,8 +799,8 @@
                     <span class="c"># TOPO : Link between TRONCON and EXTREMITE</span>
                     <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id_eltamont</span> <span class="o">=</span> <span class="n">id_for_extrimite</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-</div>
+            <span class="n">logger</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span><span class="s">&#39;Exception: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_extremite"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_extremite">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_extremite</span><span class="p">(</span><span class="n">symu_troncon</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -810,8 +810,8 @@
 <span class="sd">        :return:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id</span>
-</div>
+        <span class="k">return</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">symu_troncon</span><span class="o">.</span><span class="n">id</span></div>
+
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="trafipolluImp_TOPO.build_id_for_interconnexion"><a class="viewcode-back" href="../tp_composants.html#trafipolluImp_TOPO.trafipolluImp_TOPO.build_id_for_interconnexion">[docs]</a>    <span class="k">def</span> <span class="nf">build_id_for_interconnexion</span><span class="p">(</span>
             <span class="n">symu_troncons</span><span class="p">,</span>
@@ -831,9 +831,9 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
@@ -850,7 +850,7 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -859,13 +859,13 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
-          <li><a href="index.html" >Module code</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">interactive_map_tracking 1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2013, Lionel Atty, IGN, SIDT.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>

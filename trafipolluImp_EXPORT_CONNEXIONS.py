@@ -276,10 +276,10 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         """
 
         :param args:
-        :type args: `list`
+        :type args: `*list`.
 
         :return:
-        :rtype: .
+        :rtype:
 
         """
         sym_REPARTITEUR = None
@@ -304,8 +304,11 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
     def export_MOUVEMENTS_AUTORISES(self, *args):
         """
 
-        :param node_id:
+        :param args:
+         :type args: `list`.
+
         :return:
+        :rtype: ``.
         """
         str_path_to_child, sym_MOUVEMENTS_AUTORISES = pyxbDecorator.get_path_instance(*args)
         for mouvement_autorise in self.export_MOUVEMENT_AUTORISE(str_path_to_child):

@@ -11,13 +11,15 @@ logger = build_logger(__name__)
 class trafipolluImp_PYXB(object):
     """
 
-    """
+        Classe d'implementation d'un parseur PYXB pour SYMUVIA.
 
+    """
     def __init__(self, parser):
         """
 
         :param parser:
-        :return:
+        :type parser: `PyXB parser`
+
         """
         self.pyxb_tree_ctd = {}
         #
@@ -27,9 +29,15 @@ class trafipolluImp_PYXB(object):
     def dump_pyxb_tree(self, tuple_Name_CTD, prefix=""):
         """
 
-        :param root:
+        Methode de dump d'un arbre PyXB
+        -> Met a jour le membre: `pyxb_tree_ctd`
+
+        :param tuple_Name_CTD:
+        :type tuple_Name_CTD: `tuple(str, CTD)`
+
         :param prefix:
-        :return:
+        :type prefix: `str`
+
         """
         #
         node_parent = tuple_Name_CTD[1]
@@ -47,7 +55,14 @@ class trafipolluImp_PYXB(object):
         """
 
         :param path_to_CTD:
+        :type path_to_CTD: `str`.
+
+        :param update_dict:
+        :type update_dict: `bool`.
+
         :return:
+        :rtype: .
+
         """
         try:
             return self.pyxb_tree_ctd[path_to_CTD]
@@ -76,8 +91,16 @@ class trafipolluImp_PYXB(object):
         """
 
         :param path_to_CTD:
+        :type path_to_CTD: `str`
+
         :param update_dict:
+        :type update_dict: `bool`
+
+        :param kwargs:
+        :type kwargs: `**dict`
+
         :return:
+        :rtype: `CTD`
         """
         try:
             CTD = self.get_CTD(path_to_CTD, update_dict)
@@ -85,7 +108,9 @@ class trafipolluImp_PYXB(object):
         except:
             return None
 
-
+"""
+    pyxb_parser:
+"""
 pyxb_parser = trafipolluImp_PYXB(symuvia_parser)
 
 from functools import wraps
@@ -94,18 +119,47 @@ from functools import wraps
 class pyxbDecorator(object):
     """
 
+        Class decorateur pour la gestion du parse XML
+
     """
 
     def __init__(self, parser_pyxb):
+        """
+
+        Initialisation de la classe Decorateur.
+        On lui transmet (a l'initialisation) un parseur PyXB (parseur SYMUVIA) issu d'un XSD (decrivant un reseau
+        SYMUVIA).
+
+        :param parser_pyxb: parseur PyXB d'un reseau SYMUVIA (lie a un XSD)
+        :type parser_pyxb: `trafipolluImp_PYXB`
+
+        """
         self.parser_pyxb = parser_pyxb
         self.pyxb_result = ()
 
     def __call__(self, f):
         """
+
+        :param f:
+        :type f: `func`.
+
+        :return:
+        :rtype: `rtype(f)`.
+
         """
         @wraps(f)
         def wrapped_f(*args):
             """
+
+            (Decorateur) Wrapper utilise pour la generation (automatique) de path d'acces aux elements
+            de l'arbre XML (d'un parseur issu d'un XSD)
+
+            :param args:
+            :type args: `*list`
+
+            :return:
+            :rtype: `rtype(f)`
+
             """
             if self.pyxb_result == ():
                 str_child_name = f.__name__[7:]  # 7 = len('export_')
@@ -127,12 +181,29 @@ class pyxbDecorator(object):
     @staticmethod
     def get_path(*args):
         """
+
+        :param args:
+        :type args: `*list`
+
+        :return:
+        :rtype: `str`
+
         """
         return args[-2] + '/' + args[-1][0]
 
     @staticmethod
     def get_instance(*args, **kwargs):
         """
+
+        :param args:
+        :type args: `*list`
+
+        :param kwargs:
+        :type kwargs: `**dict`
+
+        :return:
+        :rtype: .
+
         """
         return pyxb_parser.get_instance(pyxbDecorator.get_path(*args), **kwargs)
 
@@ -141,16 +212,25 @@ class pyxbDecorator(object):
         """
 
         :param args:
-        :param kwargs:
-        """
-        str_parent = args[-2]
-        str_child = args[-1][0]
-        str_path_to_child = str_parent + '/' + str_child
-        sym_NODE = pyxb_parser.get_instance(str_path_to_child, **kwargs)
-        return str_path_to_child, sym_NODE
+        :type args: `*list`
 
-    @staticmethod
-    def get_path_from_args(*args):
+        :param kwargs:
+        :type kwargs: `**dict`
+
+        :return:
+        :rtype: `tuple(str, )`
+
         """
-        """
-        return args[-1]
+        # on recupere les informations sauvegardees
+        # str_parent = args[-2]
+        # str_child = args[-1][0]
+        # on construit le path vers l'instance
+        # str_path_to_child = str_parent + '/' + str_child
+        # TODO: a tester !
+        str_path_to_child = pyxbDecorator.get_path(*args)
+
+        # on recupere l'instance
+        sym_NODE = pyxb_parser.get_instance(str_path_to_child, **kwargs)
+
+        # renvoie les resultats
+        return str_path_to_child, sym_NODE
