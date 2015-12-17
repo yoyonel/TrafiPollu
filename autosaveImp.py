@@ -8,7 +8,6 @@ from signalsmanager import SignalsManager
 from decorators import DecoratorsForQt
 
 
-
 # super() fails with error: TypeError "argument 1 must be type, not classobj"
 # url: http://stackoverflow.com/questions/1713038/super-fails-with-error-typeerror-argument-1-must-be-type-not-classobj
 class AutoSaveImp(object):

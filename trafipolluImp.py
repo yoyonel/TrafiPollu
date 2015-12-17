@@ -99,6 +99,16 @@ class TrafiPolluImp(object):
                 'EXPORT_raise_exceptions': ('EXPORT_raise_exceptions', True)
             }
         )
+        configs.load_section('DTE')
+        configs.update(
+            self.__dict__,
+            {
+                # DTE: Dump Topo Export
+                'use_qgis_extent': ('use_qgis_extent', True)
+            }
+        )
+        self.dlg.tf_use_qgis_extent.setChecked(self.__dict__['use_qgis_extent'])
+
         # logger.info(
         #     "self._dict_params_server['EXCEPTIONS']['global_raise_exceptions']: {0} - type: {1}".
         #     format(
@@ -127,8 +137,10 @@ class TrafiPolluImp(object):
         self.signals_manager.add_clicked(self.dlg.refreshSqlScriptList, self.slot_refreshSqlScriptList, "GUI")
         self.signals_manager.add_clicked(self.dlg.pickle_trafipollu, self.slot_Pickled_TrafiPollu, "GUI")
         self.signals_manager.add_clicked(self.dlg.export_to_symuvia, self.slot_export_to_symuvia, "GUI")
+        #
         self.signals_manager.add_clicked(self.dlg.tf_dump_topo_export, self.slot_dump_topo_export, "GUI")
         self.signals_manager.add_clicked(self.dlg.tf_clear, self.slot_clear, "GUI")
+        self.signals_manager.add_clicked(self.dlg.tf_use_qgis_extent, self.slot_use_qgis_extent, "GUI")
         #
         self.signals_manager.add(self.dlg.combobox_sql_scripts,
                                  "currentIndexChanged (int)",
@@ -145,7 +157,6 @@ class TrafiPolluImp(object):
 
         Interface GUI-Plugin: 'clear'
 
-        :return:
         """
         self._clear_()
 
@@ -154,9 +165,14 @@ class TrafiPolluImp(object):
 
         Interface GUI-Plugin: 'Dump Topo Export'
 
-        :return:
         """
         self._dump_topo_export_()
+
+    def slot_use_qgis_extent(self):
+        """
+
+        """
+        self._use_qgis_extent(self.dlg.tf_use_qgis_extent.isChecked())
 
     def slot_Pickled_TrafiPollu(self):
         """
@@ -316,24 +332,46 @@ class TrafiPolluImp(object):
 
         """
         #
-        list_sql_commands = [
-            # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
-            # -> utilise un polygone statique pour definir def_zone_test
-            # 'update_def_zone_test',
-            # -> utilise le mapcanvas de qgis (viewport) pour definir la zone d'export
-            'update_table_edges_from_qgis',
-            # -> utliise la couche layer 'def_zone_test' pour extraire un polygon et definir la zone d'export
-            # ne fonctionne pas/plus ... je ne sais pas pourquoi ...
-            # 'update_tables_from_def_zone_test',
+        list_sql_commands = []
+        #
+        if self.__dict__['use_qgis_extent']:
+            list_sql_commands.append('update_table_edges_from_qgis')
+        else:
+            list_sql_commands.append('update_tables_from_def_zone_test')
+        #
+        list_sql_commands.extend(
+            [
+                'dump_informations_from_edges',
+                'dump_sides_from_edges',
+                'dump_informations_from_nodes',
+                'dump_informations_from_lane_interconnexion',
+                # TODO: travail sur les rond-points [desactiver]
+                # 'dump_roundabouts',
+            ]
+        )
 
-            #
-            'dump_informations_from_edges',
-            'dump_sides_from_edges',
-            'dump_informations_from_nodes',
-            'dump_informations_from_lane_interconnexion',
-            # TODO: travail sur les rond-points [desactiver]
-            # 'dump_roundabouts',
-        ]
+        # list_sql_commands = [
+        #     #
+        #     # probleme avec la lib psycopg2 : https://github.com/philipsoutham/py-mysql2pgsql/issues/80
+        #     # -> utilise un polygone statique pour definir def_zone_test
+        #     # 'update_def_zone_test',
+        #     #
+        #     # -> utilise le mapcanvas de qgis (viewport) pour definir la zone d'export
+        #     'update_table_edges_from_qgis',
+        #     #
+        #     # -> utliise la couche layer 'def_zone_test' pour extraire un polygon et definir la zone d'export
+        #     # ne fonctionne pas/plus ... je ne sais pas pourquoi ...
+        #     # 'update_tables_from_def_zone_test',
+        #     #
+        #     #
+        #     'dump_informations_from_edges',
+        #     'dump_sides_from_edges',
+        #     'dump_informations_from_nodes',
+        #     'dump_informations_from_lane_interconnexion',
+        #     # TODO: travail sur les rond-points [desactiver]
+        #     # 'dump_roundabouts',
+        # ]
+
         # boucle sur les operations SQL a traiter (pour le DUMP)
         for sql_command in list_sql_commands:
             # Selon l'operation SQL, on recupere le fichier script .sql (correspondant)
@@ -368,6 +406,13 @@ class TrafiPolluImp(object):
         # On clear les donnees rattachees aux modules: TOPO, EXPORT
         self.module_TOPO.clear()
         self.module_export.clear()
+
+    def _use_qgis_extent(self, b_is_checked):
+        """
+
+        """
+        self.__dict__['use_qgis_extent'] = b_is_checked
+        logger.info("set 'use_qgis_extent' to {0}".format(self.__dict__['use_qgis_extent']))
 
     #############################
     ### SERIALISATION: PICLKE ###

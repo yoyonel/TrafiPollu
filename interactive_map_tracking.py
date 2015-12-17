@@ -541,6 +541,11 @@ class interactive_map_tracking:
         self.dlg.enablePlugin.setEnabled(True)
 
         # load GUI state in QSettings with pickle serialize module
+        # TODO: probleme avec le restore state (changement de l'ui)
+        # le probleme intervient quand on met a jour l'interface .ui
+        # la version pickle dump sauvegardee dans QSettings n'est plus synchrone
+        # avec la nouvelle version (nouvelle interface).
+        # faut reflechir a une strategie pour resoudre ca ...
         imt_tools.restore_states_from_pickle(self)
 
         self.slot_returnPressed_threshold()
