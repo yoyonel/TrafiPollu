@@ -464,6 +464,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item row="2" column="0" colspan="2">
         <layout class="QFormLayout" name="formLayout_3">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
          <item row="1" column="0">
           <widget class="QPushButton" name="tf_dump_topo_export">
            <property name="text">

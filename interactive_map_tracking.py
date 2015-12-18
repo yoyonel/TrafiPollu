@@ -70,9 +70,10 @@ class interactive_map_tracking:
         """
         current_time = time.time()
 
-        # Clean QSettings
+        # Get QSetting from Qt env.
         self.qsettings = QSettings()
 
+        # Clean QSettings
         # self.clean_qsettings()
         # imt_tools.print_group_name_values_in_qsettings(self.qsettings_group_name)
 

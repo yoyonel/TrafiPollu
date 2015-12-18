@@ -533,12 +533,19 @@ def update_checkbox_from_serialization(qobject, id_qobject, state):
     :type state:
 
     """
-    qobject.setEnabled(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isEnabled', True))
-    qobject.setChecked(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False))
-    #
-    # print state[pickle_id_gui][pickle_id_list_checkbox][id_qobject], ' * ', \
-    # id_qobject, ' * ', \
-    #     state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False)
+    try:
+        qobject.setEnabled(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isEnabled', True))
+        qobject.setChecked(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False))
+    except KeyError:
+        logging.warning("Desynchronisation entre l'interface Qt (ui) du plugin et la derniere version serialisee dans les QSettings (via Pickle)")
+        logging.warning("-> Ce probleme devrait disparaitre a la prochaine restauration du plug.")
+    finally:
+        #
+        # print state[pickle_id_gui][pickle_id_list_checkbox][id_qobject], ' * ', \
+        # id_qobject, ' * ', \
+        #     state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False)
+        pass
+
 
 
 def update_list_checkbox_from_serialization(dlg, list_string_id_checkbox, pickle_state):
@@ -590,6 +597,10 @@ def saves_states_in_qsettings_pickle(imt, pickle_name_in_qsettings=qsettings_id_
 def restore_states_from_pickle(imt, pickle_name_in_qsettings=qsettings_id_pickle):
     """
 
+    Methode de restauration de l'etat du GUI (fenetre QT du plugin).
+    On utilise les QSettings (variables d'environnement Qt) pour stocker une serialisation (via Pickle) du
+    GUI Qt.
+
     :param imt:
     :type imt: .
     :param pickle_name_in_qsettings:
@@ -612,7 +623,7 @@ def restore_states_from_pickle(imt, pickle_name_in_qsettings=qsettings_id_pickle
     # else:
     # update_list_checkbox_from_qsettings(imt)
 
-    #TODO: test on QT dump
+    # TODO: test on QT dump
     test_qt_dump(imt)
 
 
@@ -700,10 +711,14 @@ def build_list_member_name_filter_by_qtypes(dlg, *qt_types):
 def build_list_member_name_filter_qcheckbox(dlg):
     """
 
+    Renvoie la liste des ids des elements presents dans dlg qui sont de type `QCheckBox`
+
     :param dlg:
-    :type dlg: .
+    :type dlg: `QtGui.QDialog`
+
     :return:
-    :rtype: .
+    :rtype: `list`
+
     """
     return build_list_member_name_filter_by_qtypes(dlg, QCheckBox)
 
