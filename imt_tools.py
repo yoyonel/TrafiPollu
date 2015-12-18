@@ -53,7 +53,7 @@ import matplotlib.pyplot as plt
 
 import time
 from functools import wraps
-#from time import time
+# from time import time
 
 from PyQt4.QtCore import QDateTime
 from math import modf
@@ -267,6 +267,7 @@ class TpTimer:
     """
 
     """
+
     def __init__(self):
         """
 
@@ -496,10 +497,13 @@ def serialize_list_checkbox(dlg, list_id_checkbox):
 
     :param dlg:
     :type dlg:
+
     :param list_id_checkbox:
     :type list_id_checkbox:
+
     :return:
     :rtype: `dict`.
+
     """
     return_dict = {}
     for string_id_checkbox in list_id_checkbox:
@@ -537,7 +541,8 @@ def update_checkbox_from_serialization(qobject, id_qobject, state):
         qobject.setEnabled(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isEnabled', True))
         qobject.setChecked(state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False))
     except KeyError:
-        logging.warning("Desynchronisation entre l'interface Qt (ui) du plugin et la derniere version serialisee dans les QSettings (via Pickle)")
+        logging.warning(
+            "Desynchronisation entre l'interface Qt (ui) du plugin et la derniere version serialisee dans les QSettings (via Pickle)")
         logging.warning("-> Ce probleme devrait disparaitre a la prochaine restauration du plug.")
     finally:
         #
@@ -545,7 +550,6 @@ def update_checkbox_from_serialization(qobject, id_qobject, state):
         # id_qobject, ' * ', \
         #     state[pickle_id_gui][pickle_id_list_checkbox][id_qobject].setdefault('isChecked', False)
         pass
-
 
 
 def update_list_checkbox_from_serialization(dlg, list_string_id_checkbox, pickle_state):
@@ -883,6 +887,7 @@ def create_namedtuple(*args):
 class Timer:
     """
     """
+
     def __enter__(self):
         """
 
@@ -956,6 +961,7 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
     :type postfix: `str`.
 
     """
+
     @wraps(f)
     def wrap(*args, **kw):
         """
@@ -977,6 +983,7 @@ def timer_decorator(f, prefix="-> TIMER\n\t", postfix=""):
                                                           t.interval,
                                                           postfix)
         return result
+
     return wrap
 
 
@@ -1161,6 +1168,7 @@ class ReadOnlyDict(dict):
     """
 
     """
+
     @staticmethod
     def __readonly__(*args, **kwargs):
         """
