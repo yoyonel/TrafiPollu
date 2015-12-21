@@ -50,15 +50,17 @@ def dump_for_roundabouts(objects_from_sql_request):
     :param objects_from_sql_request: Le type de l'object depend du cursor utilise via psycopg2
 
         Voir dans: :py:class:`trafipolluImp_SQL` [function: connect_sql_server]
-
     :type objects_from_sql_request: psycopg2.extras.DictCursor.
+
     :return: Dictionnaire d'informations (converties) sur les ronds-points
     :rtype: `dict`.
     """
     dict_roundabouts = {}
 
     for object_from_sql_request in objects_from_sql_request:
+        # on transfert le contenu du DictCursor
         dict_sql_request = dict(object_from_sql_request)
+        # on transfert les donnees geometriques (en memoire)
         dict_sql_request.update(load_geom_buffers_with_shapely(dict_sql_request))
         dict_sql_request.update(
             load_arrays_with_numpely(
@@ -69,7 +71,11 @@ def dump_for_roundabouts(objects_from_sql_request):
             )
         )
         ra_id = object_from_sql_request['id']
-        dict_roundabouts.update({ra_id: dict_sql_request})
+        dict_roundabouts.update(
+            {
+                ra_id: dict_sql_request
+            }
+        )
 
     return dict_roundabouts
 

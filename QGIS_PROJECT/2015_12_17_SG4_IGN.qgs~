@@ -47,9 +47,9 @@
       <layer-tree-layer expanded="0" checked="Qt::Unchecked" id="node20140704145850621" name="node">
         <customproperties/>
       </layer-tree-layer>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="surface">
+      <layer-tree-group expanded="1" checked="Qt::Checked" name="surface">
         <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="editing_radius20150304150515122" name="editing_radius">
+        <layer-tree-layer expanded="1" checked="Qt::Checked" id="editing_radius20150304150515122" name="editing_radius">
           <customproperties/>
         </layer-tree-layer>
         <layer-tree-layer expanded="1" checked="Qt::Checked" id="user_defined_curbstone20150206123834409" name="user_defined_curbstone">
@@ -69,17 +69,6 @@
         </layer-tree-layer>
         <layer-tree-layer expanded="0" checked="Qt::Checked" id="editing_lane_interconnection20150518120523140" name="editing_lane_interconnection">
           <customproperties/>
-        </layer-tree-layer>
-      </layer-tree-group>
-      <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="roundabouts">
-        <customproperties/>
-        <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="potential_roundabout_mixed20151221164600367" name="potential_roundabout_mixed">
-          <customproperties/>
-        </layer-tree-layer>
-        <layer-tree-layer expanded="1" checked="Qt::Checked" id="possible_roundabouts_from_topo20151221164317181" name="possible_roundabouts_from_topo">
-          <customproperties>
-            <property key="showFeatureCount" value="1"/>
-          </customproperties>
         </layer-tree-layer>
       </layer-tree-group>
     </layer-tree-group>
@@ -220,10 +209,10 @@
   <mapcanvas>
     <units>meters</units>
     <extent>
-      <xmin>12414.51626735032186843</xmin>
-      <ymin>21129.5986508214919013</ymin>
-      <xmax>13674.93626735071302392</xmax>
-      <ymax>22676.14365082328004064</ymax>
+      <xmin>14242.35807740460404602</xmin>
+      <ymin>21265.39876721386463032</ymin>
+      <xmax>14920.69707615340848861</xmax>
+      <ymax>21600.89019023796208785</ymax>
     </extent>
     <rotation>0</rotation>
     <projections>1</projections>
@@ -253,7 +242,6 @@
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_220150911104232484"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="visu_result_intersection20140804192742933"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="IGNF:LAMB1" srcDatumTransform="-1" destDatumTransform="-1" layerid="result_arc_of_circle_detection20140725120059421"/>
-      <layer_coordinate_transform destAuthId="USER:100001" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="potential_roundabout_mixed20151221164600367"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="visu_result_lane_interconnexion20150511185525992"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="editing_street_object_pedestrian20150902125028828"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="editing_street_object20150831111936523"/>
@@ -261,7 +249,6 @@
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="IGNF:LAMB1" srcDatumTransform="-1" destDatumTransform="-1" layerid="volume_non_bati20140804195152126"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_720150911104232656"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_120150911104232437"/>
-      <layer_coordinate_transform destAuthId="USER:100001" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="possible_roundabouts_from_topo20151221164317181"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="edge_editing20150708103109940"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="edge_data20140704145847981"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="IGNF:LAMB93" srcDatumTransform="-1" destDatumTransform="-1" layerid="road_editing20150209175536296"/>
@@ -269,8 +256,8 @@
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_520150911104232593"/>
       <layer_coordinate_transform destAuthId="USER:100001" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="visu_result_lane20140804180136318"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100003" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_120150908164744437"/>
-      <layer_coordinate_transform destAuthId="USER:100001" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="face20140805110818179"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="visu_result_arc20140804193309966"/>
+      <layer_coordinate_transform destAuthId="USER:100001" srcAuthId="USER:100001" srcDatumTransform="-1" destDatumTransform="-1" layerid="face20140805110818179"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100010" srcDatumTransform="-1" destDatumTransform="-1" layerid="LilleAll_ortho20150904154818812"/>
       <layer_coordinate_transform destAuthId="USER:100000" srcAuthId="USER:100000" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_320150911104232515"/>
       <layer_coordinate_transform destAuthId="USER:100003" srcAuthId="USER:100003" srcDatumTransform="-1" destDatumTransform="-1" layerid="QuickWKT_220150908165150687"/>
@@ -328,8 +315,6 @@
       <item>objects_nomenclature20150827184725390</item>
       <item>street_object20150827185153953</item>
       <item>def_zone_test20151217163923657</item>
-      <item>possible_roundabouts_from_topo20151221164317181</item>
-      <item>potential_roundabout_mixed20151221164600367</item>
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="false">
@@ -391,10 +376,10 @@
           <legendlayerfile isInOverview="0" layerid="node20140704145850621" visible="0"/>
         </filegroup>
       </legendlayer>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="surface">
-        <legendlayer drawingOrder="12" open="true" checked="Qt::Unchecked" name="editing_radius" showFeatureCount="0">
+      <legendgroup open="true" checked="Qt::Checked" name="surface">
+        <legendlayer drawingOrder="12" open="true" checked="Qt::Checked" name="editing_radius" showFeatureCount="0">
           <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="editing_radius20150304150515122" visible="0"/>
+            <legendlayerfile isInOverview="0" layerid="editing_radius20150304150515122" visible="1"/>
           </filegroup>
         </legendlayer>
         <legendlayer drawingOrder="13" open="true" checked="Qt::Checked" name="user_defined_curbstone" showFeatureCount="0">
@@ -422,18 +407,6 @@
         <legendlayer drawingOrder="10" open="false" checked="Qt::Checked" name="editing_lane_interconnection" showFeatureCount="0">
           <filegroup open="false" hidden="false">
             <legendlayerfile isInOverview="0" layerid="editing_lane_interconnection20150518120523140" visible="1"/>
-          </filegroup>
-        </legendlayer>
-      </legendgroup>
-      <legendgroup open="true" checked="Qt::PartiallyChecked" name="roundabouts">
-        <legendlayer drawingOrder="41" open="true" checked="Qt::Unchecked" name="potential_roundabout_mixed" showFeatureCount="0">
-          <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="potential_roundabout_mixed20151221164600367" visible="0"/>
-          </filegroup>
-        </legendlayer>
-        <legendlayer drawingOrder="40" open="true" checked="Qt::Checked" name="possible_roundabouts_from_topo" showFeatureCount="1">
-          <filegroup open="true" hidden="false">
-            <legendlayerfile isInOverview="0" layerid="possible_roundabouts_from_topo20151221164317181" visible="1"/>
           </filegroup>
         </legendlayer>
       </legendgroup>
@@ -802,7 +775,7 @@
       <customproperties/>
     </Composition>
   </Composer>
-  <projectlayers layercount="42">
+  <projectlayers layercount="40">
     <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
       <id>def_zone_test20151217163923657</id>
       <datasource>dbname='street_gen_4' host=172.16.3.50 port=5432 user='streetgen' password='streetgen' sslmode=disable key='gid' srid=931008 type=Polygon table="street_amp"."def_zone_test" (geom) sql=</datasource>
@@ -1037,14 +1010,13 @@
       <SingleCategoryDiagramRenderer diagramType="Pie">
         <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="-4.65661e-10">
           <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
-          <attribute field="" color="#000000" label=""/>
         </DiagramCategory>
       </SingleCategoryDiagramRenderer>
       <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" showAll="1"/>
-      <editform>.</editform>
+      <editform></editform>
       <editforminit/>
       <featformsuppress>0</featformsuppress>
-      <annotationform>.</annotationform>
+      <annotationform></annotationform>
       <editorlayout>generatedlayout</editorlayout>
       <excludeAttributesWMS/>
       <excludeAttributesWFS/>
@@ -4639,546 +4611,6 @@
           <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
         </edittype>
         <edittype widgetv2type="TextEdit" name="category">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-      </edittypes>
-    </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>possible_roundabouts_from_topo20151221164317181</id>
-      <datasource>dbname='street_gen_4' host=172.16.3.50 port=5432 user='streetgen' password='streetgen' sslmode=disable key='tid' srid=932011 type=Polygon table="analysis_roundabout_bdtopo"."possible_roundabouts_from_topo" (face_geom) sql=</datasource>
-      <title></title>
-      <abstract></abstract>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>possible_roundabouts_from_topo</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=lcc +lat_1=44 +lat_2=49 +lat_0=46.5 +lon_0=3 +x_0=51000 +y_0=-240000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
-          <srid>0</srid>
-          <authid>USER:100001</authid>
-          <description> * Generated CRS (+proj=lcc +lat_1=44 +lat_2=49 +lat_0=46.5 +lon_0=3 +x_0=51000 +y_0=-240000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs)</description>
-          <projectionacronym>lcc</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <provider encoding="System">postgres</provider>
-      <previewExpression></previewExpression>
-      <vectorjoins/>
-      <expressionfields/>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="face_id">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="nrues">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-      </edittypes>
-      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol">
-        <symbols>
-          <symbol alpha="1" clip_to_extent="1" type="fill" name="0">
-            <layer pass="0" class="SimpleFill" locked="0">
-              <prop k="border_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="color" v="59,175,94,255"/>
-              <prop k="joinstyle" v="bevel"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0.26"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="style" v="solid"/>
-            </layer>
-            <layer pass="0" class="CentroidFill" locked="0">
-              <prop k="point_on_surface" v="0"/>
-              <symbol alpha="1" clip_to_extent="1" type="marker" name="@0@1">
-                <layer pass="0" class="SimpleMarker" locked="0">
-                  <prop k="angle" v="0"/>
-                  <prop k="color" v="227,26,28,255"/>
-                  <prop k="horizontal_anchor_point" v="1"/>
-                  <prop k="name" v="regular_star"/>
-                  <prop k="offset" v="0,0"/>
-                  <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-                  <prop k="offset_unit" v="MM"/>
-                  <prop k="outline_color" v="0,0,0,255"/>
-                  <prop k="outline_style" v="solid"/>
-                  <prop k="outline_width" v="0"/>
-                  <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
-                  <prop k="outline_width_unit" v="MM"/>
-                  <prop k="scale_method" v="area"/>
-                  <prop k="size" v="4"/>
-                  <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
-                  <prop k="size_unit" v="MM"/>
-                  <prop k="vertical_anchor_point" v="1"/>
-                </layer>
-              </symbol>
-            </layer>
-          </symbol>
-        </symbols>
-        <rotation/>
-        <sizescale scalemethod="diameter"/>
-      </renderer-v2>
-      <labeling type="simple"/>
-      <customproperties>
-        <property key="labeling" value="pal"/>
-        <property key="labeling/addDirectionSymbol" value="false"/>
-        <property key="labeling/angleOffset" value="0"/>
-        <property key="labeling/blendMode" value="0"/>
-        <property key="labeling/bufferBlendMode" value="0"/>
-        <property key="labeling/bufferColorA" value="255"/>
-        <property key="labeling/bufferColorB" value="255"/>
-        <property key="labeling/bufferColorG" value="255"/>
-        <property key="labeling/bufferColorR" value="255"/>
-        <property key="labeling/bufferDraw" value="false"/>
-        <property key="labeling/bufferJoinStyle" value="64"/>
-        <property key="labeling/bufferNoFill" value="false"/>
-        <property key="labeling/bufferSize" value="1"/>
-        <property key="labeling/bufferSizeInMapUnits" value="false"/>
-        <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/bufferTransp" value="0"/>
-        <property key="labeling/centroidInside" value="false"/>
-        <property key="labeling/centroidWhole" value="false"/>
-        <property key="labeling/decimals" value="3"/>
-        <property key="labeling/displayAll" value="false"/>
-        <property key="labeling/dist" value="0"/>
-        <property key="labeling/distInMapUnits" value="false"/>
-        <property key="labeling/distMapUnitMaxScale" value="0"/>
-        <property key="labeling/distMapUnitMinScale" value="0"/>
-        <property key="labeling/drawLabels" value="false"/>
-        <property key="labeling/enabled" value="false"/>
-        <property key="labeling/fieldName" value=""/>
-        <property key="labeling/fitInPolygonOnly" value="false"/>
-        <property key="labeling/fontCapitals" value="0"/>
-        <property key="labeling/fontFamily" value="Ubuntu"/>
-        <property key="labeling/fontItalic" value="false"/>
-        <property key="labeling/fontLetterSpacing" value="0"/>
-        <property key="labeling/fontLimitPixelSize" value="false"/>
-        <property key="labeling/fontMaxPixelSize" value="10000"/>
-        <property key="labeling/fontMinPixelSize" value="3"/>
-        <property key="labeling/fontSize" value="11"/>
-        <property key="labeling/fontSizeInMapUnits" value="false"/>
-        <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/fontStrikeout" value="false"/>
-        <property key="labeling/fontUnderline" value="false"/>
-        <property key="labeling/fontWeight" value="50"/>
-        <property key="labeling/fontWordSpacing" value="0"/>
-        <property key="labeling/formatNumbers" value="false"/>
-        <property key="labeling/isExpression" value="true"/>
-        <property key="labeling/labelOffsetInMapUnits" value="true"/>
-        <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/labelPerPart" value="false"/>
-        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
-        <property key="labeling/limitNumLabels" value="false"/>
-        <property key="labeling/maxCurvedCharAngleIn" value="20"/>
-        <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
-        <property key="labeling/maxNumLabels" value="2000"/>
-        <property key="labeling/mergeLines" value="false"/>
-        <property key="labeling/minFeatureSize" value="0"/>
-        <property key="labeling/multilineAlign" value="0"/>
-        <property key="labeling/multilineHeight" value="1"/>
-        <property key="labeling/namedStyle" value="Medium"/>
-        <property key="labeling/obstacle" value="true"/>
-        <property key="labeling/obstacleFactor" value="1"/>
-        <property key="labeling/obstacleType" value="0"/>
-        <property key="labeling/placeDirectionSymbol" value="0"/>
-        <property key="labeling/placement" value="1"/>
-        <property key="labeling/placementFlags" value="10"/>
-        <property key="labeling/plussign" value="false"/>
-        <property key="labeling/preserveRotation" value="true"/>
-        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
-        <property key="labeling/priority" value="5"/>
-        <property key="labeling/quadOffset" value="4"/>
-        <property key="labeling/repeatDistance" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
-        <property key="labeling/repeatDistanceUnit" value="1"/>
-        <property key="labeling/reverseDirectionSymbol" value="false"/>
-        <property key="labeling/rightDirectionSymbol" value=">"/>
-        <property key="labeling/scaleMax" value="10000000"/>
-        <property key="labeling/scaleMin" value="1"/>
-        <property key="labeling/scaleVisibility" value="false"/>
-        <property key="labeling/shadowBlendMode" value="6"/>
-        <property key="labeling/shadowColorB" value="0"/>
-        <property key="labeling/shadowColorG" value="0"/>
-        <property key="labeling/shadowColorR" value="0"/>
-        <property key="labeling/shadowDraw" value="false"/>
-        <property key="labeling/shadowOffsetAngle" value="135"/>
-        <property key="labeling/shadowOffsetDist" value="1"/>
-        <property key="labeling/shadowOffsetGlobal" value="true"/>
-        <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/shadowOffsetUnits" value="1"/>
-        <property key="labeling/shadowRadius" value="1.5"/>
-        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
-        <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
-        <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
-        <property key="labeling/shadowRadiusUnits" value="1"/>
-        <property key="labeling/shadowScale" value="100"/>
-        <property key="labeling/shadowTransparency" value="30"/>
-        <property key="labeling/shadowUnder" value="0"/>
-        <property key="labeling/shapeBlendMode" value="0"/>
-        <property key="labeling/shapeBorderColorA" value="255"/>
-        <property key="labeling/shapeBorderColorB" value="128"/>
-        <property key="labeling/shapeBorderColorG" value="128"/>
-        <property key="labeling/shapeBorderColorR" value="128"/>
-        <property key="labeling/shapeBorderWidth" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeBorderWidthUnits" value="1"/>
-        <property key="labeling/shapeDraw" value="false"/>
-        <property key="labeling/shapeFillColorA" value="255"/>
-        <property key="labeling/shapeFillColorB" value="255"/>
-        <property key="labeling/shapeFillColorG" value="255"/>
-        <property key="labeling/shapeFillColorR" value="255"/>
-        <property key="labeling/shapeJoinStyle" value="64"/>
-        <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeOffsetUnits" value="1"/>
-        <property key="labeling/shapeOffsetX" value="0"/>
-        <property key="labeling/shapeOffsetY" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeRadiiUnits" value="1"/>
-        <property key="labeling/shapeRadiiX" value="0"/>
-        <property key="labeling/shapeRadiiY" value="0"/>
-        <property key="labeling/shapeRotation" value="0"/>
-        <property key="labeling/shapeRotationType" value="0"/>
-        <property key="labeling/shapeSVGFile" value=""/>
-        <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeSizeType" value="0"/>
-        <property key="labeling/shapeSizeUnits" value="1"/>
-        <property key="labeling/shapeSizeX" value="0"/>
-        <property key="labeling/shapeSizeY" value="0"/>
-        <property key="labeling/shapeTransparency" value="0"/>
-        <property key="labeling/shapeType" value="0"/>
-        <property key="labeling/textColorA" value="255"/>
-        <property key="labeling/textColorB" value="0"/>
-        <property key="labeling/textColorG" value="0"/>
-        <property key="labeling/textColorR" value="0"/>
-        <property key="labeling/textTransp" value="0"/>
-        <property key="labeling/upsidedownLabels" value="0"/>
-        <property key="labeling/wrapChar" value=""/>
-        <property key="labeling/xOffset" value="0"/>
-        <property key="labeling/yOffset" value="0"/>
-        <property key="variableNames" value="_fields_"/>
-        <property key="variableValues" value=""/>
-      </customproperties>
-      <blendMode>0</blendMode>
-      <featureBlendMode>0</featureBlendMode>
-      <layerTransparency>0</layerTransparency>
-      <displayfield>face_id</displayfield>
-      <label>0</label>
-      <labelattributes>
-        <label fieldname="" text="Label"/>
-        <family fieldname="" name="Ubuntu"/>
-        <size fieldname="" units="pt" value="12"/>
-        <bold fieldname="" on="0"/>
-        <italic fieldname="" on="0"/>
-        <underline fieldname="" on="0"/>
-        <strikeout fieldname="" on="0"/>
-        <color fieldname="" red="0" blue="0" green="0"/>
-        <x fieldname=""/>
-        <y fieldname=""/>
-        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
-        <angle fieldname="" value="0" auto="0"/>
-        <alignment fieldname="" value="center"/>
-        <buffercolor fieldname="" red="255" blue="255" green="255"/>
-        <buffersize fieldname="" units="pt" value="1"/>
-        <bufferenabled fieldname="" on=""/>
-        <multilineenabled fieldname="" on=""/>
-        <selectedonly on=""/>
-      </labelattributes>
-      <SingleCategoryDiagramRenderer diagramType="Pie">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="-4.65661e-10">
-          <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
-        </DiagramCategory>
-      </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" showAll="1"/>
-      <editform></editform>
-      <editforminit/>
-      <featformsuppress>0</featformsuppress>
-      <annotationform></annotationform>
-      <editorlayout>generatedlayout</editorlayout>
-      <excludeAttributesWMS/>
-      <excludeAttributesWFS/>
-      <attributeactions/>
-      <conditionalstyles>
-        <rowstyles/>
-        <fieldstyles/>
-      </conditionalstyles>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="face_id">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-        <edittype widgetv2type="TextEdit" name="nrues">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-      </edittypes>
-    </maplayer>
-    <maplayer minimumScale="-4.65661e-10" maximumScale="1e+08" simplifyDrawingHints="0" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Point" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>potential_roundabout_mixed20151221164600367</id>
-      <datasource>dbname='street_gen_4' host=172.16.3.50 port=5432 user='streetgen' password='streetgen' sslmode=disable key='tid' srid=932011 type=Point table="analysis_roundabout_bdtopo"."potential_roundabout_mixed" (potential_roundabout) sql=</datasource>
-      <title></title>
-      <abstract></abstract>
-      <keywordList>
-        <value></value>
-      </keywordList>
-      <layername>potential_roundabout_mixed</layername>
-      <srs>
-        <spatialrefsys>
-          <proj4>+proj=lcc +lat_1=44 +lat_2=49 +lat_0=46.5 +lon_0=3 +x_0=51000 +y_0=-240000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
-          <srsid>100001</srsid>
-          <srid>0</srid>
-          <authid>USER:100001</authid>
-          <description> * Generated CRS (+proj=lcc +lat_1=44 +lat_2=49 +lat_0=46.5 +lon_0=3 +x_0=51000 +y_0=-240000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs)</description>
-          <projectionacronym>lcc</projectionacronym>
-          <ellipsoidacronym>GRS80</ellipsoidacronym>
-          <geographicflag>false</geographicflag>
-        </spatialrefsys>
-      </srs>
-      <provider encoding="System">postgres</provider>
-      <previewExpression></previewExpression>
-      <vectorjoins/>
-      <expressionfields/>
-      <map-layer-style-manager current="">
-        <map-layer-style name=""/>
-      </map-layer-style-manager>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="gid">
-          <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
-        </edittype>
-      </edittypes>
-      <renderer-v2 forceraster="0" symbollevels="0" type="singleSymbol">
-        <symbols>
-          <symbol alpha="1" clip_to_extent="1" type="marker" name="0">
-            <layer pass="0" class="SimpleMarker" locked="0">
-              <prop k="angle" v="0"/>
-              <prop k="color" v="227,26,28,255"/>
-              <prop k="horizontal_anchor_point" v="1"/>
-              <prop k="name" v="regular_star"/>
-              <prop k="offset" v="0,0"/>
-              <prop k="offset_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="offset_unit" v="MM"/>
-              <prop k="outline_color" v="0,0,0,255"/>
-              <prop k="outline_style" v="solid"/>
-              <prop k="outline_width" v="0"/>
-              <prop k="outline_width_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="outline_width_unit" v="MM"/>
-              <prop k="scale_method" v="diameter"/>
-              <prop k="size" v="10"/>
-              <prop k="size_map_unit_scale" v="0,0,0,0,0,0"/>
-              <prop k="size_unit" v="MM"/>
-              <prop k="vertical_anchor_point" v="1"/>
-            </layer>
-          </symbol>
-        </symbols>
-        <rotation/>
-        <sizescale scalemethod="diameter"/>
-      </renderer-v2>
-      <labeling type="simple"/>
-      <customproperties>
-        <property key="labeling" value="pal"/>
-        <property key="labeling/addDirectionSymbol" value="false"/>
-        <property key="labeling/angleOffset" value="0"/>
-        <property key="labeling/blendMode" value="0"/>
-        <property key="labeling/bufferBlendMode" value="0"/>
-        <property key="labeling/bufferColorA" value="255"/>
-        <property key="labeling/bufferColorB" value="255"/>
-        <property key="labeling/bufferColorG" value="255"/>
-        <property key="labeling/bufferColorR" value="255"/>
-        <property key="labeling/bufferDraw" value="false"/>
-        <property key="labeling/bufferJoinStyle" value="64"/>
-        <property key="labeling/bufferNoFill" value="false"/>
-        <property key="labeling/bufferSize" value="1"/>
-        <property key="labeling/bufferSizeInMapUnits" value="false"/>
-        <property key="labeling/bufferSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/bufferSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/bufferTransp" value="0"/>
-        <property key="labeling/centroidInside" value="false"/>
-        <property key="labeling/centroidWhole" value="false"/>
-        <property key="labeling/decimals" value="3"/>
-        <property key="labeling/displayAll" value="false"/>
-        <property key="labeling/dist" value="0"/>
-        <property key="labeling/distInMapUnits" value="false"/>
-        <property key="labeling/distMapUnitMaxScale" value="0"/>
-        <property key="labeling/distMapUnitMinScale" value="0"/>
-        <property key="labeling/drawLabels" value="false"/>
-        <property key="labeling/enabled" value="false"/>
-        <property key="labeling/fieldName" value="gid"/>
-        <property key="labeling/fitInPolygonOnly" value="false"/>
-        <property key="labeling/fontCapitals" value="0"/>
-        <property key="labeling/fontFamily" value="Ubuntu"/>
-        <property key="labeling/fontItalic" value="false"/>
-        <property key="labeling/fontLetterSpacing" value="0"/>
-        <property key="labeling/fontLimitPixelSize" value="false"/>
-        <property key="labeling/fontMaxPixelSize" value="10000"/>
-        <property key="labeling/fontMinPixelSize" value="3"/>
-        <property key="labeling/fontSize" value="11"/>
-        <property key="labeling/fontSizeInMapUnits" value="false"/>
-        <property key="labeling/fontSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/fontSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/fontStrikeout" value="false"/>
-        <property key="labeling/fontUnderline" value="false"/>
-        <property key="labeling/fontWeight" value="50"/>
-        <property key="labeling/fontWordSpacing" value="0"/>
-        <property key="labeling/formatNumbers" value="false"/>
-        <property key="labeling/isExpression" value="false"/>
-        <property key="labeling/labelOffsetInMapUnits" value="true"/>
-        <property key="labeling/labelOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/labelOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/labelPerPart" value="false"/>
-        <property key="labeling/leftDirectionSymbol" value="&lt;"/>
-        <property key="labeling/limitNumLabels" value="false"/>
-        <property key="labeling/maxCurvedCharAngleIn" value="20"/>
-        <property key="labeling/maxCurvedCharAngleOut" value="-20"/>
-        <property key="labeling/maxNumLabels" value="2000"/>
-        <property key="labeling/mergeLines" value="false"/>
-        <property key="labeling/minFeatureSize" value="0"/>
-        <property key="labeling/multilineAlign" value="0"/>
-        <property key="labeling/multilineHeight" value="1"/>
-        <property key="labeling/namedStyle" value="Medium"/>
-        <property key="labeling/obstacle" value="true"/>
-        <property key="labeling/obstacleFactor" value="1"/>
-        <property key="labeling/obstacleType" value="0"/>
-        <property key="labeling/placeDirectionSymbol" value="0"/>
-        <property key="labeling/placement" value="0"/>
-        <property key="labeling/placementFlags" value="10"/>
-        <property key="labeling/plussign" value="false"/>
-        <property key="labeling/preserveRotation" value="true"/>
-        <property key="labeling/previewBkgrdColor" value="#ffffff"/>
-        <property key="labeling/priority" value="5"/>
-        <property key="labeling/quadOffset" value="4"/>
-        <property key="labeling/repeatDistance" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitMaxScale" value="0"/>
-        <property key="labeling/repeatDistanceMapUnitMinScale" value="0"/>
-        <property key="labeling/repeatDistanceUnit" value="1"/>
-        <property key="labeling/reverseDirectionSymbol" value="false"/>
-        <property key="labeling/rightDirectionSymbol" value=">"/>
-        <property key="labeling/scaleMax" value="10000000"/>
-        <property key="labeling/scaleMin" value="1"/>
-        <property key="labeling/scaleVisibility" value="false"/>
-        <property key="labeling/shadowBlendMode" value="6"/>
-        <property key="labeling/shadowColorB" value="0"/>
-        <property key="labeling/shadowColorG" value="0"/>
-        <property key="labeling/shadowColorR" value="0"/>
-        <property key="labeling/shadowDraw" value="false"/>
-        <property key="labeling/shadowOffsetAngle" value="135"/>
-        <property key="labeling/shadowOffsetDist" value="1"/>
-        <property key="labeling/shadowOffsetGlobal" value="true"/>
-        <property key="labeling/shadowOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/shadowOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/shadowOffsetUnits" value="1"/>
-        <property key="labeling/shadowRadius" value="1.5"/>
-        <property key="labeling/shadowRadiusAlphaOnly" value="false"/>
-        <property key="labeling/shadowRadiusMapUnitMaxScale" value="0"/>
-        <property key="labeling/shadowRadiusMapUnitMinScale" value="0"/>
-        <property key="labeling/shadowRadiusUnits" value="1"/>
-        <property key="labeling/shadowScale" value="100"/>
-        <property key="labeling/shadowTransparency" value="30"/>
-        <property key="labeling/shadowUnder" value="0"/>
-        <property key="labeling/shapeBlendMode" value="0"/>
-        <property key="labeling/shapeBorderColorA" value="255"/>
-        <property key="labeling/shapeBorderColorB" value="128"/>
-        <property key="labeling/shapeBorderColorG" value="128"/>
-        <property key="labeling/shapeBorderColorR" value="128"/>
-        <property key="labeling/shapeBorderWidth" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeBorderWidthMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeBorderWidthUnits" value="1"/>
-        <property key="labeling/shapeDraw" value="false"/>
-        <property key="labeling/shapeFillColorA" value="255"/>
-        <property key="labeling/shapeFillColorB" value="255"/>
-        <property key="labeling/shapeFillColorG" value="255"/>
-        <property key="labeling/shapeFillColorR" value="255"/>
-        <property key="labeling/shapeJoinStyle" value="64"/>
-        <property key="labeling/shapeOffsetMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeOffsetMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeOffsetUnits" value="1"/>
-        <property key="labeling/shapeOffsetX" value="0"/>
-        <property key="labeling/shapeOffsetY" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeRadiiMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeRadiiUnits" value="1"/>
-        <property key="labeling/shapeRadiiX" value="0"/>
-        <property key="labeling/shapeRadiiY" value="0"/>
-        <property key="labeling/shapeRotation" value="0"/>
-        <property key="labeling/shapeRotationType" value="0"/>
-        <property key="labeling/shapeSVGFile" value=""/>
-        <property key="labeling/shapeSizeMapUnitMaxScale" value="0"/>
-        <property key="labeling/shapeSizeMapUnitMinScale" value="0"/>
-        <property key="labeling/shapeSizeType" value="0"/>
-        <property key="labeling/shapeSizeUnits" value="1"/>
-        <property key="labeling/shapeSizeX" value="0"/>
-        <property key="labeling/shapeSizeY" value="0"/>
-        <property key="labeling/shapeTransparency" value="0"/>
-        <property key="labeling/shapeType" value="0"/>
-        <property key="labeling/textColorA" value="255"/>
-        <property key="labeling/textColorB" value="0"/>
-        <property key="labeling/textColorG" value="0"/>
-        <property key="labeling/textColorR" value="0"/>
-        <property key="labeling/textTransp" value="0"/>
-        <property key="labeling/upsidedownLabels" value="0"/>
-        <property key="labeling/wrapChar" value=""/>
-        <property key="labeling/xOffset" value="0"/>
-        <property key="labeling/yOffset" value="0"/>
-        <property key="variableNames" value="_fields_"/>
-        <property key="variableValues" value=""/>
-      </customproperties>
-      <blendMode>0</blendMode>
-      <featureBlendMode>0</featureBlendMode>
-      <layerTransparency>0</layerTransparency>
-      <displayfield>gid</displayfield>
-      <label>0</label>
-      <labelattributes>
-        <label fieldname="" text="Label"/>
-        <family fieldname="" name="Ubuntu"/>
-        <size fieldname="" units="pt" value="12"/>
-        <bold fieldname="" on="0"/>
-        <italic fieldname="" on="0"/>
-        <underline fieldname="" on="0"/>
-        <strikeout fieldname="" on="0"/>
-        <color fieldname="" red="0" blue="0" green="0"/>
-        <x fieldname=""/>
-        <y fieldname=""/>
-        <offset x="0" y="0" units="pt" yfieldname="" xfieldname=""/>
-        <angle fieldname="" value="0" auto="0"/>
-        <alignment fieldname="" value="center"/>
-        <buffercolor fieldname="" red="255" blue="255" green="255"/>
-        <buffersize fieldname="" units="pt" value="1"/>
-        <bufferenabled fieldname="" on=""/>
-        <multilineenabled fieldname="" on=""/>
-        <selectedonly on=""/>
-      </labelattributes>
-      <SingleCategoryDiagramRenderer diagramType="Pie">
-        <DiagramCategory penColor="#000000" labelPlacementMethod="XHeight" penWidth="0" diagramOrientation="Up" minimumSize="0" barWidth="5" penAlpha="255" maxScaleDenominator="1e+08" backgroundColor="#ffffff" transparency="0" width="15" scaleDependency="Area" backgroundAlpha="255" angleOffset="1440" scaleBasedVisibility="0" enabled="0" height="15" sizeType="MM" minScaleDenominator="-4.65661e-10">
-          <fontProperties description="Ubuntu,11,-1,5,50,0,0,0,0,0" style=""/>
-        </DiagramCategory>
-      </SingleCategoryDiagramRenderer>
-      <DiagramLayerSettings yPosColumn="-1" linePlacementFlags="10" placement="0" dist="0" xPosColumn="-1" priority="0" obstacle="0" showAll="1"/>
-      <editform></editform>
-      <editforminit/>
-      <featformsuppress>0</featformsuppress>
-      <annotationform></annotationform>
-      <editorlayout>generatedlayout</editorlayout>
-      <excludeAttributesWMS/>
-      <excludeAttributesWFS/>
-      <attributeactions/>
-      <conditionalstyles>
-        <rowstyles/>
-        <fieldstyles/>
-      </conditionalstyles>
-      <edittypes>
-        <edittype widgetv2type="TextEdit" name="gid">
           <widgetv2config IsMultiline="0" fieldEditable="1" UseHtml="0" labelOnTop="0"/>
         </edittype>
       </edittypes>
@@ -12056,7 +11488,6 @@
     <Digitizing>
       <DefaultSnapToleranceUnit type="int">2</DefaultSnapToleranceUnit>
       <LayerSnappingList type="QStringList">
-        <value>def_zone_test20151217163923657</value>
         <value>edge_data20140704145847981</value>
         <value>edge_editing20150708103109940</value>
         <value>editing_lane20150507170130703</value>
@@ -12095,10 +11526,9 @@
         <value>visu_result_lane20140804180136318</value>
         <value>visu_result_lane20140804180136553</value>
         <value>visu_result_lane_interconnexion20150511185525992</value>
-        <value>possible_roundabouts_from_topo20151221164317181</value>
+        <value>def_zone_test20151217163923657</value>
       </LayerSnappingList>
       <LayerSnappingEnabledList type="QStringList">
-        <value>disabled</value>
         <value>enabled</value>
         <value>enabled</value>
         <value>disabled</value>
@@ -12143,7 +11573,6 @@
       <AvoidIntersectionsList type="QStringList"/>
       <IntersectionSnapping type="bool">true</IntersectionSnapping>
       <LayerSnappingToleranceUnitList type="QStringList">
-        <value>2</value>
         <value>0</value>
         <value>0</value>
         <value>1</value>
@@ -12188,7 +11617,6 @@
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
-        <value>to_vertex_and_segment</value>
         <value>to_vertex</value>
         <value>to_vertex_and_segment</value>
         <value>to_vertex_and_segment</value>
@@ -12229,7 +11657,6 @@
       <DefaultSnapType type="QString">off</DefaultSnapType>
       <DefaultSnapTolerance type="double">0</DefaultSnapTolerance>
       <LayerSnappingToleranceList type="QStringList">
-        <value>0.000000</value>
         <value>0.100000</value>
         <value>1.000000</value>
         <value>0.000000</value>

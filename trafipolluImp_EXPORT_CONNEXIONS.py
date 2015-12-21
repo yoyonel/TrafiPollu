@@ -120,6 +120,8 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         """
 
         :return:
+        :rtype: `typeGiratoire`.
+
         """
         sym_GIRATOIRE = None
 
@@ -572,7 +574,8 @@ class trafipolluImp_EXPORT_CONNEXIONS(MixInF):
         """
 
         :param ra_id:
-        :return:
+        :type ra_id: `int`.
+
         """
         self.cursor_symuvia['ra_id'] = ra_id
         self.cursor_symuvia['sg3_ra'] = self.dict_roundabouts[ra_id]

@@ -345,8 +345,10 @@ class TrafiPolluImp(object):
                 'dump_sides_from_edges',
                 'dump_informations_from_nodes',
                 'dump_informations_from_lane_interconnexion',
+                #
                 # TODO: travail sur les rond-points [desactiver]
-                # 'dump_roundabouts',
+                'dump_roundabouts',
+                #
             ]
         )
 

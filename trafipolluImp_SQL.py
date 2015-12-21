@@ -73,8 +73,10 @@ class trafipolluImp_SQL(object):
             'dump_sides_from_edges': self._request_for_lanes,
             'dump_informations_from_nodes': self._request_for_nodes,
             'dump_informations_from_lane_interconnexion': self._request_for_interconnexions,
+            #
             # TODO: travail sur les rond points [desactiver]
-            # 'dump_roundabouts': self._request_for_roundabouts
+            'dump_roundabouts': self._request_for_roundabouts
+            #
         }
 
         ##########
@@ -499,9 +501,11 @@ class trafipolluImp_SQL(object):
         Voir: :py:func:`_request_for_entity`
 
         :param kwargs:
-        :type kwargs: str
+        :type kwargs: **dict
+
         :return:
         :rtype: int
+
         """
         kwargs.update(
             {
@@ -528,13 +532,15 @@ class trafipolluImp_SQL(object):
             # ajouter les informations aux 'nodes'
             for node_id in ra_dump['list_nodes']:
                 if node_id in self.dict_nodes:
-                    self.dict_nodes[node_id].update({'roundabouts': ra_id})
+                    self.dict_nodes[node_id].update({'roundabout': ra_id})
             # ajouter les informations aux 'edges'
             for edge_id in ra_dump['list_edges']:
                 if edge_id in self.dict_edges:
-                    self.dict_edges[edge_id].update({'roundabouts': ra_id})
+                    self.dict_edges[edge_id].update({'roundabout': ra_id})
 
         self.dict_roundabouts.update(dict_roundabouts)
+
+        logger.info("dict_roundabouts: {0}".format(self.dict_roundabouts))
 
     def _request_for_edges(self, **kwargs):
         """
